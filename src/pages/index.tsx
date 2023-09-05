@@ -1,8 +1,8 @@
 export default function Home() {
   return (
-    <main className="godown">
+    <main>
       {/* // tech-debt: should <main> be used over div etc? */}
-      <div>hello world</div>
+      <div>Home main page</div>
     </main>
   );
 }

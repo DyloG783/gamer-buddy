@@ -1,7 +1,7 @@
 import React from "react";
 
 const Connections = () => {
-    return <div className="godown">Connections</div>;
+    return <div>Connections</div>;
     
 };
 
