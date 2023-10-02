@@ -4,7 +4,9 @@ import NavBar from "./navigation/NavBar"
 export default function Layout({ children }: PropsWithChildren) {
     return (
         <>
-            <NavBar />
+            <header>
+                <NavBar />
+            </header>
             {children}
         </>
     );

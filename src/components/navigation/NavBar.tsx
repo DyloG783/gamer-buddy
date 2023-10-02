@@ -1,23 +1,32 @@
+import React, { useState } from "react"
+import Image from 'next/image';
+import Link from "next/link";
 import NavLink from "./NavLink";
-import React from "react"
+import HamburgerMenu from "./HamburgerMenu";
 
 export default function NavBar() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const onClick = () => {
+        setMenuOpen(!menuOpen)
+    };
+
     return (
-        <nav className="bg-slate-400 text-white h-14 sticky top-0 ">
-            <ul className="flex h-full">
-                <li className="flex w-full">
-                    <NavLink destination={"/"}>Home</NavLink>
+        <nav className="flex justify-between items-center flex-col md:flex-row bg-slate-400 shadow-lg">
+            <Link href="/home" className="hover:bg-slate-600 p-4 shadow-lg">
+                <Image priority src="./next.svg" height={0} width={0} alt="Home page link" className="w-16 md:w-32 lg:48" />
+            </Link>
+
+            <ul className="flex flex-wrap md:flex-nowrap">
+                <li className="w-full md:w-32 shadow-lg">
+                    <NavLink link={"/games"}>Games</NavLink>
                 </li>
-                <li className="flex w-full">
-                    <NavLink destination={"/games"}>Games</NavLink>
-                </li>
-                <li className="flex w-full">
-                    <NavLink destination={"/connections"}>Connections</NavLink>
-                </li>
-                <li className="flex w-full">
-                    <NavLink destination={"/profile"}>Profile</NavLink>
+                <li className="w-full md:w-32 shadow-lg">
+                    <NavLink link={"/connections"}>Connections</NavLink>
                 </li>
             </ul>
+
+            <HamburgerMenu onClick={onClick} menuOpen={menuOpen} />
         </nav>
     )
 }
