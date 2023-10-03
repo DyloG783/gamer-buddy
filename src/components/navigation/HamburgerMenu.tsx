@@ -2,10 +2,10 @@ import React from "react";
 
 export default function HamburgerMenu({ onClick, menuOpen }: { onClick: any, menuOpen: boolean }) {
     return (
-        <div className="flex shadow-lg text-white hover:bg-slate-600">
+        <div className="block lg:hidden">
             <button
                 onClick={onClick}
-                className="flex justify-center w-full p-4 md:w-32"
+                className="flex items-center px-3 py-2 rounded text-black-500 hover:text-black-400"
             >
                 {/* text */}
                 <svg
