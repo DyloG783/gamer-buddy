@@ -1,32 +1,31 @@
 import React, { useState } from "react"
 import Image from 'next/image';
 import Link from "next/link";
-import NavLink from "./NavLink";
-import HamburgerMenu from "./HamburgerMenu";
+import { MainNavItems } from "./MenuItems";
+import UserMenu from "./UserMenu";
 
 export default function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const onClick = () => {
+    const toggleMenu = () => {
         setMenuOpen(!menuOpen)
     };
 
+    const closeMenu = () => {
+        setMenuOpen(false)
+    };
+
     return (
-        <nav className="flex justify-between items-center flex-col md:flex-row bg-slate-400 shadow-lg">
-            <Link href="/home" className="hover:bg-slate-600 p-4 shadow-lg">
-                <Image priority src="./next.svg" height={0} width={0} alt="Home page link" className="w-16 md:w-32 lg:48" />
+        <nav className="flex justify-between items-center sticky top-0 md:h-[10vh] flex-col md:flex-row bg-slate-400">
+            <Link href="/home" onClick={closeMenu} className="hover:bg-slate-600 h-full flex p-2">
+                <Image src="./next.svg" height={0} width={0} alt="Home page link" className="w-16 md:w-32 lg:w-48 " />
             </Link>
 
-            <ul className="flex flex-wrap md:flex-nowrap">
-                <li className="w-full md:w-32 shadow-lg">
-                    <NavLink link={"/games"}>Games</NavLink>
-                </li>
-                <li className="w-full md:w-32 shadow-lg">
-                    <NavLink link={"/connections"}>Connections</NavLink>
-                </li>
+            <ul className="grid gap-1 sm:grid-flow-col sm:auto-cols-fr h-full ">
+                <MainNavItems closeMenu={closeMenu} />
             </ul>
 
-            <HamburgerMenu onClick={onClick} menuOpen={menuOpen} />
+            <UserMenu toggleMenu={toggleMenu} closeMenu={closeMenu} menuOpen={menuOpen} />
         </nav>
     )
 }
