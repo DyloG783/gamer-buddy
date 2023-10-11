@@ -20,7 +20,7 @@ export default function NavBar() {
 
     return (
         <nav className="flex justify-between items-center sticky top-0 md:h-[10vh] flex-col md:flex-row bg-slate-400">
-            <Link href="/home" onClick={closeMenu} className={`link ${pathname === '/home' ? 'bg-slate-600' : ''} hover:bg-slate-600 h-full flex p-2`}>
+            <Link href="/" onClick={closeMenu} className={`link ${pathname === '/' ? 'bg-slate-500' : ''} hover:bg-slate-600 h-full flex p-2`}>
                 <Image src="./next.svg" height={0} width={0} alt="Home page link" className="w-16 md:w-32 lg:w-48 " />
             </Link>
 
