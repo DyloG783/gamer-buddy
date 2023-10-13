@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { UserMenuItems } from "./MenuItems";
 
+// techdebt - typing any (below)
 export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
     return (
         <div className="relative h-full">

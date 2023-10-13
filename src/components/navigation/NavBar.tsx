@@ -6,7 +6,7 @@ import { MainNavItems } from "./MenuItems";
 import UserMenu from "./UserMenu";
 
 export default function NavBar() {
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen)

@@ -11,8 +11,8 @@ export function MainNavItems({ closeMenu }: any) {
     return (
         <>
             {mainNavItems.map((navItem, index) => (
-                <li className="flex">
-                    <Link key={index} href={navItem.link} onClick={closeMenu}
+                <li key={index} className="flex">
+                    <Link href={navItem.link} onClick={closeMenu}
                         className={`link ${pathname === navItem.link ? 'bg-slate-500' : ''}
                         text-sm md:text-base lg:text-lg flex items-center w-full p-2 hover:bg-slate-600 text-white`}>
                         {navItem.name}
@@ -26,14 +26,14 @@ export function MainNavItems({ closeMenu }: any) {
 export function UserMenuItems({ closeMenu }: any) {
     const userMenuItems = [
         { name: 'Profile', link: '/profile' },
-        { name: 'Sign out', link: '/signout' }
+        { name: 'Sign out', link: '/api/auth/signout' }
     ]
     const pathname = usePathname();
     return (
         <>
             {userMenuItems.map((userMenuItem, index) => (
-                <li>
-                    <Link key={index} href={userMenuItem.link} onClick={closeMenu} className={` block w-full p-0.5 md:p-3 text-sm md:text-base lg:text-lg hover:bg-slate-600 text-white ${pathname === userMenuItem.link ? 'bg-slate-500' : ''}`} >{userMenuItem.name}</Link>
+                <li key={index}>
+                    <Link href={userMenuItem.link} onClick={closeMenu} className={` block w-full p-0.5 md:p-3 text-sm md:text-base lg:text-lg hover:bg-slate-600 text-white ${pathname === userMenuItem.link ? 'bg-slate-500' : ''}`} >{userMenuItem.name}</Link>
                 </li>
             ))}
         </>
