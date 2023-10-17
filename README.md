@@ -2,7 +2,19 @@ Techdebt: Installed faunadb and nodemailer from auth tutorial but I suspect they
 
 View prisma dashboard in browser command: npx prisma studio
 
+Run postgres db command: dont need to?
+
+Need help with:
+
+- Responsive nav view items not lining up???
+- "any" ts types
+- Unused sessoin in useSession()
+
 ---
+
+alt accounts;
+
+dylantest679@gmail.com, C0mplexPassword!
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

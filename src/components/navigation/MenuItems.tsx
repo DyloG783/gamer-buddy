@@ -1,13 +1,22 @@
 import React from "react";
 import Link from "next/link";
-import { usePathname } from 'next/navigation'
+import { useSession } from "next-auth/react";
+import { usePathname } from 'next/navigation';
 
 export function MainNavItems({ closeMenu }: any) {
-    const mainNavItems = [
-        { name: 'Games', link: '/games' },
-        { name: 'Connections', link: '/connections' }
-    ];
+    const { data: session, status } = useSession()
     const pathname = usePathname();
+    const mainNavItems: { name: string; link: string; }[] = [];
+    // const mainNavItems = [
+    //     { name: 'Games', link: '/games' },
+    //     { name: 'Connections', link: '/connections' }
+    // ];
+    // techdebt: is there a more elegant way to map conditionally if user is authenticated?
+    mainNavItems.push({ name: 'Games', link: '/games' })
+    if (status === "authenticated") {
+        mainNavItems.push({ name: 'Connections', link: '/connections' })
+    }
+
     return (
         <>
             {mainNavItems.map((navItem, index) => (
@@ -28,7 +37,9 @@ export function UserMenuItems({ closeMenu }: any) {
         { name: 'Profile', link: '/profile' },
         { name: 'Sign out', link: '/api/auth/signout' }
     ]
+
     const pathname = usePathname();
+
     return (
         <>
             {userMenuItems.map((userMenuItem, index) => (

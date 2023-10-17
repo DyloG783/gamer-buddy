@@ -1,8 +1,21 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { useSession } from "next-auth/react";
 import { UserMenuItems } from "./MenuItems";
+
 
 // techdebt - typing any (below)
 export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
+
+    const { data: session, status } = useSession()
+
+    if (status === "unauthenticated") {
+        return (
+            <div className="flex h-full ">
+                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex items-center w-full p-2 hover:bg-slate-600 text-white'>Sign in</Link>
+            </div>
+        )
+    }
     return (
         <div className="relative h-full">
             <button
