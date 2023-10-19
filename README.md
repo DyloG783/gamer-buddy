@@ -1,4 +1,7 @@
-Techdebt: Installed faunadb and nodemailer from auth tutorial but I suspect they are not used: https://www.freecodecamp.org/news/how-to-authenticate-users-with-nextauth-in-nextjs-app-and-pages-router/
+Techdebt:
+Installed faunadb and nodemailer from auth tutorial but I suspect they are not used: https://www.freecodecamp.org/news/how-to-authenticate-users-with-nextauth-in-nextjs-app-and-pages-router/
+
+---
 
 View prisma dashboard in browser command: npx prisma studio
 
@@ -6,15 +9,19 @@ Run postgres db command: dont need to?
 
 Need help with:
 
-- Responsive nav view items not lining up???
+- Responsive nav view items not lining up?
 - "any" ts types
-- Unused sessoin in useSession()
+- delay in checking session displaying signed in usermenu state
+- should I use global css at all with tailwind?
+- setting nav bar height as 10% view port?
 
 ---
 
 alt accounts;
 
 dylantest679@gmail.com, C0mplexPassword!
+
+---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

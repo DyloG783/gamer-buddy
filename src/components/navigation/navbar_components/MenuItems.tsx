@@ -23,7 +23,7 @@ export function MainNavItems({ closeMenu }: any) {
                 <li key={index} className="flex">
                     <Link href={navItem.link} onClick={closeMenu}
                         className={`link ${pathname === navItem.link ? 'bg-slate-500' : ''}
-                        text-sm md:text-base lg:text-lg flex items-center w-full p-2 hover:bg-slate-600 text-white`}>
+                        text-sm md:text-base lg:text-lg flex items-center w-full px-0 py-1 md:px-2 md:py-0  hover:bg-slate-600 text-white`}>
                         {navItem.name}
                     </Link>
                 </li>

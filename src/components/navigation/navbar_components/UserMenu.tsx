@@ -4,10 +4,10 @@ import { useSession } from "next-auth/react";
 import { UserMenuItems } from "./MenuItems";
 
 
-// techdebt - typing any (below)
+// techdebt - typing any
 export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
 
-    const { data: session, status } = useSession()
+    const { status } = useSession()
 
     if (status === "unauthenticated") {
         return (
@@ -21,7 +21,7 @@ export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
             <button
                 onClick={toggleMenu}
                 aria-label="User or profile drop down menu"
-                className={`flex gap-2 h-full items-center p-2 hover:bg-slate-600 ${menuOpen ? "bg-slate-500" : ""}`}
+                className={`flex gap-2 h-full items-center p-1 md:p-2 hover:bg-slate-600`}
             >
                 <Image src="./vercel.svg" height={0} width={0} alt="Profile Avatar" className={`w-14 md:w-24 lg:w-32`} />
                 <svg
