@@ -15,6 +15,9 @@ Need help with:
 - should I use global css at all with tailwind?
 - setting nav bar height as 10% view port?
 
+- having main pages server components while keeping route security which needs "use client"?
+- https://www.freecodecamp.org/news/secure-routes-in-next-js/
+
 ---
 
 alt accounts;
@@ -61,8 +64,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-My questions for Casey:
-
-1. should I be loading my css into the global.css file or should that be extracted out and imported locally per component?
-2. NavBar.tsx/global.css can't get navigation link text to centre vertically

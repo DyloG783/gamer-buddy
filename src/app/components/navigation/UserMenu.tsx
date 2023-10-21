@@ -1,7 +1,10 @@
+"use client"
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from "next-auth/react";
 import { UserMenuItems } from "./MenuItems";
+import { usePathname } from 'next/navigation';
 
 
 // techdebt - typing any
@@ -12,7 +15,7 @@ export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
     if (status === "unauthenticated") {
         return (
             <div className="flex h-full ">
-                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex items-center w-full p-2 hover:bg-slate-600 text-white'>Sign in</Link>
+                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex items-center w-full p-2 hover:shadow-lg text-white'>Sign in</Link>
             </div>
         )
     }
@@ -21,7 +24,7 @@ export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
             <button
                 onClick={toggleMenu}
                 aria-label="User or profile drop down menu"
-                className={`flex gap-2 h-full items-center p-1 md:p-2 hover:bg-slate-600`}
+                className={`flex gap-2 h-full items-center p-1 md:p-2 hover:shadow-lg`}
             >
                 <Image src="./vercel.svg" height={0} width={0} alt="Profile Avatar" className={`w-14 md:w-24 lg:w-32`} />
                 <svg
