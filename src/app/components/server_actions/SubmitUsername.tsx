@@ -2,19 +2,25 @@
 
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from 'next/cache'
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+
+// try updating session: https://next-auth.js.org/getting-started/client#updating-the-session
 
 export default async function SubmitUsername(prevState: any, formData: FormData) {
 
   const prisma = new PrismaClient();
+  const input = formData.get("usernameform") as string;
 
-  const input = formData.get("usernameform")
+  const session = await getServerSession(authOptions);
+  const userEmail = session?.user?.email as string;
 
   await prisma.user.update({
     where: {
-      email: "dylantest679@gmail.com",
+      email: userEmail,
     },
     data: {
-      name: input as string,
+      name: input,
     },
   }).then(async () => {
     await prisma.$disconnect();
@@ -24,5 +30,7 @@ export default async function SubmitUsername(prevState: any, formData: FormData)
       await prisma.$disconnect();
       process.exit(1);
     });
-  revalidatePath('/')
+
+
+  revalidatePath('/');
 }

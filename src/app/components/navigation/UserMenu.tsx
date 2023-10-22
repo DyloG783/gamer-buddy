@@ -3,15 +3,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from "next-auth/react";
-import { UserMenuItems } from "./MenuItems";
 import { usePathname } from 'next/navigation';
 
-
 // techdebt - typing any
-export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
+export default function UserMenu({ setMenuOpen, menuOpen }: { setMenuOpen: any, menuOpen: boolean }) {
 
+    // auth check for active session redirecting to sign in if not
     const { status } = useSession()
-
     if (status === "unauthenticated") {
         return (
             <div className="flex h-full ">
@@ -19,10 +17,19 @@ export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
             </div>
         )
     }
+
+    // usermenu dropdown links mapped over below
+    const userMenuItems = [
+        { name: 'Profile', link: '/profile' },
+        { name: 'Sign out', link: '/api/auth/signout' }
+    ]
+
+    const pathname = usePathname();
+
     return (
         <div className="relative h-full">
             <button
-                onClick={toggleMenu}
+                onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="User or profile drop down menu"
                 className={`flex gap-2 h-full items-center p-1 md:p-2 hover:shadow-lg`}
             >
@@ -44,7 +51,18 @@ export default function UserMenu({ toggleMenu, closeMenu, menuOpen }: any) {
             </button>
             <div className={`w-full bg-slate-400 ${menuOpen ? "absolute" : "hidden"}`}>
                 <ul>
-                    <UserMenuItems closeMenu={closeMenu} />
+                    {userMenuItems.map((userMenuItem, index) => (
+                        <li key={index}>
+                            <Link href={userMenuItem.link}
+                                className={`block w-full p-0.5 md:p-3 text-sm md:text-base 
+                                    lg:text-lg hover:shadow-lg text-white 
+                                    ${pathname === userMenuItem.link ? 'shadow-lg' : ''}`}
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                {userMenuItem.name}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>
