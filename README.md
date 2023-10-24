@@ -10,19 +10,17 @@ Run postgres db command: dont need to?
 Need help with:
 
 - Responsive nav view items not lining up?
+- setting nav height as %viewport bad idea?
 - "any" ts types
-- delay in checking session displaying signed in usermenu state
 - should I use global css at all with tailwind?
-- setting nav bar height as 10% view port?
-
-- having main pages server components while keeping route security which needs "use client"?
-- https://www.freecodecamp.org/news/secure-routes-in-next-js/
 
 ---
 
 alt accounts;
 
+Google(https://console.cloud.google.com/)
 dylantest679@gmail.com, C0mplexPassword!
+dgdevelopment65@gmail.com, C0mplexPassword! (new main for managing google logins)
 
 ---
 

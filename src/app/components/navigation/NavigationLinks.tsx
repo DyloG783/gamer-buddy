@@ -2,7 +2,8 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname } from 'next/navigation';
 
-export function MainNavItems({ setMenuOpen }: { setMenuOpen: any }) {
+// mapping function to apply repeated css over multiple elements
+export default function NavigationLinks({ setUserMenuOpen }: { setUserMenuOpen: any }) {
     const { status } = useSession()
     const pathname = usePathname();
     const mainNavItems: { name: string; link: string; }[] = [];
@@ -15,13 +16,18 @@ export function MainNavItems({ setMenuOpen }: { setMenuOpen: any }) {
     return (
         <>
             {mainNavItems.map((navItem, index) => (
-                <li key={index} className="block h-full w-full">
+                <li key={index}>
                     <Link
                         href={navItem.link}
-                        className={`flex items-center text-sm md:text-base lg:text-lg px-0 h-full w-full
-                            py-1 md:px-2 md:py-0 hover:shadow-lg text-white
+                        // className={`h-full w-full flex items-center justify-around p-2
+                        //     text-sm md:text-base lg:text-lg 
+                        //     hover:shadow-lg text-white border-gray-700 border-2 border-dotted
+                        //     ${pathname === navItem.link ? 'shadow-lg' : ''}`}
+                        className={`flex items-center justify-around h-full p-0.5 md:p-2
+                            text-sm md:text-base lg:text-lg 
+                            hover:shadow-lg text-white
                             ${pathname === navItem.link ? 'shadow-lg' : ''}`}
-                        onClick={() => setMenuOpen(false)}
+                        onClick={() => setUserMenuOpen(false)}
                     >
                         {navItem.name}
                     </Link>
