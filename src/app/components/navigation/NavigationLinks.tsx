@@ -1,9 +1,11 @@
+"use client"
+
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname } from 'next/navigation';
 
 // mapping function to apply repeated css over multiple elements
-export default function NavigationLinks({ setUserMenuOpen }: { setUserMenuOpen: any }) {
+export default function NavigationLinks() {
     const { status } = useSession()
     const pathname = usePathname();
     const mainNavItems: { name: string; link: string; }[] = [];
@@ -14,7 +16,7 @@ export default function NavigationLinks({ setUserMenuOpen }: { setUserMenuOpen: 
         mainNavItems.push({ name: 'Connections', link: '/connections' })
     }
     return (
-        <>
+        <ul className="grid grid-flow-row auto-cols-fr md:grid-flow-col">
             {mainNavItems.map((navItem, index) => (
                 <li key={index}>
                     <Link
@@ -27,12 +29,11 @@ export default function NavigationLinks({ setUserMenuOpen }: { setUserMenuOpen: 
                             text-sm md:text-base lg:text-lg 
                             hover:shadow-lg text-white
                             ${pathname === navItem.link ? 'shadow-lg' : ''}`}
-                        onClick={() => setUserMenuOpen(false)}
                     >
                         {navItem.name}
                     </Link>
                 </li>
             ))}
-        </>
+        </ul>
     );
 }

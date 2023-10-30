@@ -1,6 +1,3 @@
-Techdebt:
-Installed faunadb and nodemailer from auth tutorial but I suspect they are not used: https://www.freecodecamp.org/news/how-to-authenticate-users-with-nextauth-in-nextjs-app-and-pages-router/
-
 ---
 
 View prisma dashboard in browser command: npx prisma studio
@@ -9,10 +6,10 @@ Run postgres db command: dont need to?
 
 Need help with:
 
-- Responsive nav view items not lining up?
 - setting nav height as %viewport bad idea?
 - "any" ts types
 - should I use global css at all with tailwind?
+- front end validation approach?
 
 ---
 

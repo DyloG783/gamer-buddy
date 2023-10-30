@@ -4,16 +4,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from "next-auth/react";
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 
 // techdebt - typing any
-export default function UserMenu({ setUserMenuOpen, userMenuOpen }: { setUserMenuOpen: any, userMenuOpen: boolean }) {
+export default function UserMenu() {
+
+    // what path am I on? used to add effect in css to show active link
+    const pathname = usePathname();
+
+    // state for toggling user menu drop down
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+    // closes usermenu dropdown if user navigates to another page
+    useEffect(() => {
+        setUserMenuOpen(false);
+    }, [pathname])
 
     // auth check for active session redirecting to sign in if not
     const { status } = useSession()
     if (status === "unauthenticated") {
         return (
             <div className="flex h-full ">
-                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex items-center w-full p-3 hover:shadow-lg text-white'>Sign in</Link>
+                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex justify-around items-center w-full p-3 hover:shadow-lg text-white'>Sign in</Link>
             </div>
         )
     }
@@ -24,19 +37,18 @@ export default function UserMenu({ setUserMenuOpen, userMenuOpen }: { setUserMen
         { name: 'Sign out', link: '/api/auth/signout' }
     ]
 
-    // what path am I on? used to add effect in css to show active link
-    const pathname = usePathname();
-
     return (
-        <div className="relative mx-auto md:mx-0">
+        <div className="relative">
+            {/* <div className="relative mx-auto md:mx-0"></div> */}
             <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 aria-label="User or profile drop down menu"
                 className={`flex items-center h-full gap-2 p-2 w-full
                 hover:shadow-lg`}
             >
-                <Image src="./vercel.svg" height={0} width={0} alt="Profile Avatar"
-                    className={`w-20 md:w-34 lg:w-40 `}
+                {/* <Image src={profileImageURL} height={0} width={80} alt="Profile Avatar" /> */}
+                <Image src={"vercel.svg"} height={0} width={0} alt="Profile Avatar"
+                    className='w-20 md:w-28 lg:w-36 mx-auto'
                 />
                 <div className={`${userMenuOpen ? "hidden" : ""} mb-auto`}>
                     <svg className={`w-3 md:w-4 lg:w-5 `}
@@ -57,16 +69,13 @@ export default function UserMenu({ setUserMenuOpen, userMenuOpen }: { setUserMen
                 </div>
             </button>
             <div className={`${userMenuOpen ? "absolute" : "hidden"}
-                w-full bg-slate-400`}
+                w-full`}
             >
-                <ul className="flex flex-col gap-1">
+                <ul className="bg-slate-400">
                     {userMenuItems.map((userMenuItem, index) => (
-                        <li key={index}>
+                        <li key={index} className={`w-full p-0.5 md:p-3 hover:shadow-lg ${pathname === userMenuItem.link ? 'shadow-lg' : ''}`}>
                             <Link href={userMenuItem.link}
-                                className={`block w-full p-0.5 md:p-3 
-                                    text-sm md:text-base lg:text-lg 
-                                    hover:shadow-lg text-white 
-                                    ${pathname === userMenuItem.link ? 'shadow-lg' : ''}`}
+                                className={`flex justify-around w-full text-sm md:text-base lg:text-lg text-white`}
                                 onClick={() => setUserMenuOpen(false)}
                             >
                                 {userMenuItem.name}
