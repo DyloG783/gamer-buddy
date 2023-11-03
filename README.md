@@ -2,6 +2,10 @@
 
 View prisma dashboard in browser command: npx prisma studio
 
+Update Prisma after changing schema: 
+1. npx prisma db pull
+2. npx prisma generate
+
 Run postgres db command: dont need to?
 
 Need help with:
@@ -10,6 +14,8 @@ Need help with:
 - "any" ts types
 - should I use global css at all with tailwind?
 - front end validation approach?
+- can't get select form to pass selected option to formdata if it contains an image inside
+- 
 
 ---
 

@@ -15,7 +15,10 @@ export default function HomeLink() {
                 flex justify-around
                 p-2 hover:shadow-md border-dotted`}
             >
-                <Image src="./next.svg" height={0} width={0} alt="Home page link" className="w-20 md:w-32 lg:w-48 border-gray-700" />
+                <Image src="./next.svg" height={0} width={0} alt="Home page link"
+                    className="w-20 md:w-32 lg:w-48 border-gray-700"
+                    priority
+                />
             </Link>
         </>
     )
