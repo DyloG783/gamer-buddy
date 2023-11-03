@@ -1,12 +1,15 @@
 ---
 
-View prisma dashboard in browser command: npx prisma studio
+View prisma dashboard in browser command: 
+npx prisma studio
 
 Update Prisma after changing schema: 
 1. npx prisma db pull
 2. npx prisma generate
 
-Run postgres db command: dont need to?
+Run postgres db command:
+dont need to run in with app. Use PSQL command tool for console access
+
 
 Need help with:
 
@@ -14,18 +17,33 @@ Need help with:
 - "any" ts types
 - should I use global css at all with tailwind?
 - front end validation approach?
-- can't get select form to pass selected option to formdata if it contains an image inside
-- 
+- paginating api responses. getting into db
 
-Cover letter:
-- https://app.enhancv.com/share/0d57df62/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic
----
-
-alt accounts;
-
+alt accounts:
 Google(https://console.cloud.google.com/)
 dylantest679@gmail.com, C0mplexPassword!
 dgdevelopment65@gmail.com, C0mplexPassword! (new main for managing google logins)
+
+postman:
+dgdevelopment65@gmail.com
+
+auth;
+POST https://id.twitch.tv/oauth2/token?client_id=t86e9gszh18045kpdlg7r5lv1c9ykq&client_secret=347folsyh0cl57ich7kb6gmloelgh6&grant_type=client_credentials
+
+fetch games;
+Headers;
+Client-ID - t86e9gszh18045kpdlg7r5lv1c9ykq
+Authorization - Bearer <AUTH_TOKEN>
+Accept - application/json
+
+POST https://api.igdb.com/v4/games/
+
+Body;
+fields name; where game_modes = (2,3,4,5,6); limit 500;
+offset 0; sort id;
+
+Cover letter:
+https://app.enhancv.com/share/0d57df62/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic
 
 ---
 
