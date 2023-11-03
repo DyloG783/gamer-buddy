@@ -17,6 +17,8 @@ Need help with:
 - can't get select form to pass selected option to formdata if it contains an image inside
 - 
 
+Cover letter:
+- https://app.enhancv.com/share/0d57df62/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic
 ---
 
 alt accounts;
