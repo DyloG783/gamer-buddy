@@ -1,23 +1,26 @@
 ---
+Run dev server:
+npm run dev
 
 View prisma dashboard in browser command: 
 npx prisma studio
 
 Update Prisma after changing schema: 
-1. npx prisma db pull
+1. npx prisma db push
 2. npx prisma generate
 
 Run postgres db command:
 dont need to run in with app. Use PSQL command tool for console access
 
-
 Need help with:
-
 - setting nav height as %viewport bad idea?
 - "any" ts types
 - should I use global css at all with tailwind?
 - front end validation approach?
+- managing async & promises (i.e. games/page.tsx)
+- storing only 1 instance of a token in a DB table? (i.e. games/page.tsx)
 - paginating api responses. getting into db
+- background jobs / workers for things like api auth?
 
 alt accounts:
 Google(https://console.cloud.google.com/)
