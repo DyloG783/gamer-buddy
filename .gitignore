@@ -18,8 +18,8 @@
 # misc
 .DS_Store
 *.pem
-# react.d.ts
-# /big_data
+react.d.ts
+/big_data
 
 # debug
 npm-debug.log*
@@ -27,11 +27,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-# .env*.local
+.env*.local
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
-# next-env.d.ts
+next-env.d.ts
