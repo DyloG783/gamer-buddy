@@ -46,7 +46,6 @@ export default function UserMenu() {
                 className={`flex items-center h-full gap-2 p-2 w-full
                 hover:shadow-lg`}
             >
-                {/* <Image src={profileImageURL} height={0} width={80} alt="Profile Avatar" /> */}
                 <Image src={"vercel.svg"} height={0} width={0} alt="Profile Avatar"
                     className='w-20 md:w-28 lg:w-36 mx-auto'
                 />

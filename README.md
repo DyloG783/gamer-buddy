@@ -12,15 +12,26 @@ Update Prisma after changing schema:
 Run postgres db command:
 dont need to run in with app. Use PSQL command tool for console access
 
+PSQL:
+view databases; \l
+connect to db; \c mydb
+    view tables; \dt
+    delete all data from table; DELETE FROM your_table_name;
+quit psql; \q
+
+Run a script:
+with "tsx" (which allow imports into script); npx tsx myscript.ts (while in directory need to figure out tsconfig to run from anywhere)
+
+Current script flow: 
+1. saveTwitchAuthTokenToDb; fetches auth token from twitch api and saves it to db
+2. 
+
 Need help with:
-- setting nav height as %viewport bad idea?
 - "any" ts types
-- should I use global css at all with tailwind?
-- front end validation approach?
-- managing async & promises (i.e. games/page.tsx)
-- storing only 1 instance of a token in a DB table? (i.e. games/page.tsx)
-- paginating api responses. getting into db
-- background jobs / workers for things like api auth?
+- front end validation approach? = https://react-hook-form.com/
+- storing only 1 instance of a token in a DB table? = use a script instead
+    - paginating api responses. getting into db
+    - background jobs / workers for things like api auth?
 
 alt accounts:
 Google(https://console.cloud.google.com/)
@@ -30,23 +41,6 @@ dgdevelopment65@gmail.com, C0mplexPassword! (new main for managing google logins
 postman:
 dgdevelopment65@gmail.com
 
-auth;
-POST https://id.twitch.tv/oauth2/token?client_id=t86e9gszh18045kpdlg7r5lv1c9ykq&client_secret=347folsyh0cl57ich7kb6gmloelgh6&grant_type=client_credentials
-
-fetch games;
-Headers;
-Client-ID - t86e9gszh18045kpdlg7r5lv1c9ykq
-Authorization - Bearer <AUTH_TOKEN>
-Accept - application/json
-
-POST https://api.igdb.com/v4/games/
-
-Body;
-fields name; where game_modes = (2,3,4,5,6); limit 500;
-offset 0; sort id;
-
-Cover letter:
-https://app.enhancv.com/share/0d57df62/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic
 
 ---
 

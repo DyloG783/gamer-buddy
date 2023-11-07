@@ -1,6 +1,6 @@
 import AboutYou from "./about_you/AboutYou";
 import Username from "./username/Username";
-import prisma from '../lib/db';
+import prisma from '@/app/lib/db';
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import Timezone from "./timezone/Timezone";
