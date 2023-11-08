@@ -1,6 +1,6 @@
 require('dotenv').config({ path: '../.env' })
 import prisma from '@/app/lib/db';
-import getMultiplayerGameCount from './getMultiplayerGameCount';
+import getMultiplayerGameCount from './helpers/getMultiplayerGameCount';
 
 async function saveGamesToDb(){ 
 
@@ -28,10 +28,10 @@ async function saveGamesToDb(){
                 "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
                 "Accept": "application/json"
                 },
-                body: `fields name, url, summary; where game_modes = (2,3,4,5,6); limit ${limit}; offset ${offset}; sort id;`
+                body: `fields name, url, summary, platforms, game_modes, genres; where game_modes = (2,3,4,5,6) & platforms != null; limit ${limit}; offset ${offset}; sort id;`
             })
             const gamesJSON = await response.json()
-            await AddGamesToDb(gamesJSON)
+            await saveGames(gamesJSON)
 
             offset += limit
             loopCount++
@@ -43,7 +43,7 @@ async function saveGamesToDb(){
         }
     }
 
-    async function AddGamesToDb(gamesJSON: any) { 
+    async function saveGames(gamesJSON: any) { 
         try {
             for (let i = 0; i < Object.keys(gamesJSON).length; i++) { 
 
@@ -59,6 +59,9 @@ async function saveGamesToDb(){
                         name: gamesJSON[i].name,
                         summary: gamesJSON[i].summary,
                         url: gamesJSON[i].url,
+                        platforms: gamesJSON[i].platforms,
+                        gameModes: gamesJSON[i].game_modes,
+                        genres: gamesJSON[i].genres
                     },
                 })
             }

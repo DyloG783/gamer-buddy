@@ -1,5 +1,5 @@
 import prisma from '@/app/lib/db';
-import getTwitchAuthToken from './getTwitchAuthToken'
+import getTwitchAuthToken from './helpers/getTwitchAuthToken'
 
 async function saveTwitchAuthTokenToDb() { 
 

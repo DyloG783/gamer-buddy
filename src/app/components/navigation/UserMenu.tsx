@@ -6,11 +6,9 @@ import { useSession } from "next-auth/react";
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-
-// techdebt - typing any
 export default function UserMenu() {
 
-    // what path am I on? used to add effect in css to show active link
+    // Used to track current url and close menu when url changes
     const pathname = usePathname();
 
     // state for toggling user menu drop down

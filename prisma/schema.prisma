@@ -73,4 +73,25 @@ model Games {
   name       String
   summary    String?
   url        String?
+  platforms  Int[]
+  gameModes  Int[]
+  genres     Int[]
+}
+
+model Platforms {
+  id         Int    @id @default(autoincrement())
+  externalId Int    @unique
+  name       String
+}
+
+model GameModes {
+  id         Int    @id @default(autoincrement())
+  externalId Int    @unique
+  name       String
+}
+
+model Genres {
+  id         Int    @id @default(autoincrement())
+  externalId Int    @unique
+  name       String
 }

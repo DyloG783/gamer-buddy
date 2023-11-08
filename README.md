@@ -24,14 +24,10 @@ with "tsx" (which allow imports into script); npx tsx myscript.ts (while in dire
 
 Current script flow: 
 1. saveTwitchAuthTokenToDb; fetches auth token from twitch api and saves it to db
-2. 
+2. saveGamesToDb; fetches all multiplayer games and upserts them to db
 
-Need help with:
-- "any" ts types
-- front end validation approach? = https://react-hook-form.com/
-- storing only 1 instance of a token in a DB table? = use a script instead
-    - paginating api responses. getting into db
-    - background jobs / workers for things like api auth?
+IGDB:
+genres; 
 
 alt accounts:
 Google(https://console.cloud.google.com/)
@@ -41,6 +37,12 @@ dgdevelopment65@gmail.com, C0mplexPassword! (new main for managing google logins
 postman:
 dgdevelopment65@gmail.com
 
+Need help with:
+- "any" ts types
+- front end validation approach? = https://react-hook-form.com/
+- storing only 1 instance of a token in a DB table? = use a script instead
+    - paginating api responses. getting into db
+    - background jobs / workers for things like api auth?
 
 ---
 
