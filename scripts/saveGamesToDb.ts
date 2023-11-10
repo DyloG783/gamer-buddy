@@ -19,7 +19,6 @@ async function saveGamesToDb(){
     
     // loop through fetching all games until the offset (increments 500) is > game count (~35,000)
     while (offset < gameCount) { 
-        
         try {
             const response = await fetch(`${igdbBaseUrl}/games`, {
                 method: "POST",
@@ -47,7 +46,7 @@ async function saveGamesToDb(){
         try {
             for (let i = 0; i < Object.keys(gamesJSON).length; i++) { 
 
-                await prisma.games.upsert({
+                await prisma.game.upsert({
                     where: {
                         externalId: gamesJSON[i].id,
                     },

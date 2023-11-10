@@ -67,30 +67,33 @@ model TwitchAuthToken {
   twitchAuthToken String
 }
 
-model Games {
-  id         Int     @id @default(autoincrement())
-  externalId Int     @unique
-  name       String
-  summary    String?
-  url        String?
-  platforms  Int[]
-  gameModes  Int[]
-  genres     Int[]
+model Game {
+  id             Int      @id @default(autoincrement())
+  externalId     Int      @unique
+  name           String
+  summary        String?
+  url            String?
+  platforms      Int[]
+  platformNames  String[]
+  gameModes      Int[]
+  gameModeNames  String[]
+  genres         Int[]
+  gameGenreNames String[]
 }
 
-model Platforms {
+model Platform {
   id         Int    @id @default(autoincrement())
   externalId Int    @unique
   name       String
 }
 
-model GameModes {
+model GameMode {
   id         Int    @id @default(autoincrement())
   externalId Int    @unique
   name       String
 }
 
-model Genres {
+model Genre {
   id         Int    @id @default(autoincrement())
   externalId Int    @unique
   name       String

@@ -25,14 +25,17 @@ with "tsx" (which allow imports into script); npx tsx myscript.ts (while in dire
 Current script flow: 
 1. saveTwitchAuthTokenToDb; fetches auth token from twitch api and saves it to db
 2. saveGamesToDb; fetches all multiplayer games and upserts them to db
+3. repeat above for 'saveGameModes...' 'saveGenres...' 'savePlatforms...'
+4. updateGamesWithPlatformsDB, ...gamemodes ...genres ...platforms
+
 
 IGDB:
 genres; 
 
 alt accounts:
-Google(https://console.cloud.google.com/)
-dylantest679@gmail.com, C0mplexPassword!
-dgdevelopment65@gmail.com, C0mplexPassword! (new main for managing google logins)
+Google(https://console.cloud.google.com/) 
+dylantest679@gmail.com, 
+dgdevelopment65@gmail.com, (new main for managing google logins)
 
 postman:
 dgdevelopment65@gmail.com

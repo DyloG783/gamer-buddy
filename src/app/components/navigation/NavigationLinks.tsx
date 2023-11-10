@@ -25,7 +25,7 @@ export default function NavigationLinks() {
                         //     text-sm md:text-base lg:text-lg 
                         //     hover:shadow-lg text-white border-gray-700 border-2 border-dotted
                         //     ${pathname === navItem.link ? 'shadow-lg' : ''}`}
-                        className={`flex items-center justify-around h-full p-0.5 md:p-2
+                        className={`flex items-center justify-around h-full p-2 md:p-4
                             text-sm md:text-base lg:text-lg 
                             hover:shadow-lg text-white
                             ${pathname === navItem.link ? 'shadow-lg' : ''}`}

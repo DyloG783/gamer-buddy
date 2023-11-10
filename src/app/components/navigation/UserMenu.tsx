@@ -23,8 +23,8 @@ export default function UserMenu() {
     const { status } = useSession()
     if (status === "unauthenticated") {
         return (
-            <div className="flex h-full ">
-                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex justify-around items-center w-full p-3 hover:shadow-lg text-white'>Sign in</Link>
+            <div className="flex ">
+                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex justify-around items-center w-full p-2 md:p-4 hover:shadow-lg text-white'>Sign in</Link>
             </div>
         )
     }
@@ -37,11 +37,10 @@ export default function UserMenu() {
 
     return (
         <div className="relative">
-            {/* <div className="relative mx-auto md:mx-0"></div> */}
             <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 aria-label="User or profile drop down menu"
-                className={`flex items-center h-full gap-2 p-2 w-full
+                className={`flex items-center h-full gap-2 p-4 w-full
                 hover:shadow-lg`}
             >
                 <Image src={"vercel.svg"} height={0} width={0} alt="Profile Avatar"

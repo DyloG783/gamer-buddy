@@ -11,12 +11,11 @@ export default function HomeLink() {
         <>
             <Link
                 href="/"
-                className={`link ${pathname === '/home' ? 'shadow-xl' : ''} 
-                flex justify-around
-                p-2 hover:shadow-md border-dotted`}
+                className={`${pathname === '/home' ? 'shadow-xl' : ''} 
+                 p-4 hover:shadow-md flex justify-around`}
             >
-                <Image src="./next.svg" height={0} width={0} alt="Home page link"
-                    className="w-20 md:w-32 lg:w-48 border-gray-700"
+                <Image src="./mainicon.svg" height={0} width={0} alt="Home page link"
+                    className="w-12 md:w-20 lg:w-24 "
                     priority
                 />
             </Link>

@@ -1,17 +1,23 @@
 import React from "react";
 import prisma from "../lib/db";
-import YourGames from "./YourGames";
-import AllGames from "./AllGames";
+import YourGames from "./components/YourGames";
+import AllGames from "./components/AllGames";
 
 export default async function Games() {
 
-    const allGames = await prisma.games.findMany({ take: 100 })
-    // const allGames = await prisma.games.findMany()
+    const defaultGames = await prisma.game.findMany()
 
     return (
-        <>
-            <YourGames />
-            <AllGames allGames={allGames} />
-        </>
+        <div className="grow flex text-sm md:text-base lg:text-lg">
+            <div className="grow md:grid md:grid-flow-row auto-rows-fr ">
+                <div className="p-2 shadow-sm">
+                    <YourGames />
+                </div>
+                <div className="p-2 shadow-sm flex justify-around">
+                    <AllGames allGames={defaultGames} />
+                </div>
+            </div>
+
+        </div>
     )
 }

@@ -1,6 +1,6 @@
 import prisma from "@/app/lib/db"
 
-async function saveGenresToDb() {
+async function saveGamePlatformsToDb() {
 
     const igdbBaseUrl = process.env.IGDB_BASE_URL
     const twitchClientId = process.env.TWITCH_CLIENT_ID as string
@@ -11,7 +11,7 @@ async function saveGenresToDb() {
     })
 
     try {
-        const response = await fetch(`${igdbBaseUrl}/genres`, {
+        const response = await fetch(`${igdbBaseUrl}/platforms`, {
             method: "POST",
             headers: {
                 "Client-ID": twitchClientId,
@@ -20,34 +20,34 @@ async function saveGenresToDb() {
             },
             body: `fields name; limit 500; sort id;`
         })
-        const genresJSON = await response.json()
-        await saveGenres(genresJSON)
+        const platformsJSON = await response.json()
+        await savePlatforms(platformsJSON)
     } catch (error) {
-        console.log("Something went wrong fetching genres:", error)
+        console.log("Something went wrong fetching platforms:", error)
     }
 
-    async function saveGenres(genresJSON: any){ 
+    async function savePlatforms(platformsJSON: any){ 
         try {
-            for (let i = 0; i < Object.keys(genresJSON).length; i++) { 
+            for (let i = 0; i < Object.keys(platformsJSON).length; i++) { 
 
-                await prisma.genres.upsert({
+                await prisma.platform.upsert({
                     where: {
-                        externalId: genresJSON[i].id,
+                        externalId: platformsJSON[i].id,
                     },
                     update: {
                         
                     },
                     create: {
-                        externalId: genresJSON[i].id,
-                        name: genresJSON[i].name,
+                        externalId: platformsJSON[i].id,
+                        name: platformsJSON[i].name,
                     },
                 })
             }
 
         } catch (error) {
-            console.log("Something went wrong saving genres:", error)
+            console.log("Something went wrong saving platforms:", error)
         }
     }
 } 
     
-saveGenresToDb()
+saveGamePlatformsToDb()
