@@ -11,14 +11,14 @@ export const metadata = {
 
 export default async function RootLayout(
   { children, }: { children: React.ReactNode }) {
-  const session = await getServerSession();
 
+  const session = await getServerSession();
 
   return (
     <html lang="en">
-      <body className='min-h-screen flex flex-col bg-slate-200'>
+      <body className='min-h-screen flex flex-col bg-slate-200 text-sm md:text-base lg:text-lg'>
         <SessionProvider session={session}>
-          <header className=''>
+          <header>
             <TopNavigationBar />
           </header>
           <main className='grow flex'>

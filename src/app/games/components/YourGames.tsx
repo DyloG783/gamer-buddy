@@ -10,7 +10,6 @@ export default function YourGames() {
     if (status === "unauthenticated") {
         return (
             <div className="">
-                <div>Your Games</div>
                 <Link href="/api/auth/signin" className='flex justify-around items-center w-full p-3 hover:shadow-lg '>Sign in to see your games</Link>
             </div>
         )
@@ -18,7 +17,7 @@ export default function YourGames() {
 
     return (
         <div className=" text-center ">
-            <div>Your Games</div>
+            <div>Content soon!</div>
         </div>
     )
 }

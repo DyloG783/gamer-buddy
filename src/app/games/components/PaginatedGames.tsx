@@ -8,22 +8,23 @@ interface IPaginatedItemsProps {
     itemsPerPage: number
 }
 
-interface IAllGamesProps {
-    allGames: IGame[]
+interface IPaginatedGamesProps {
+    games: IGame[]
+    itemsPerPage: number
 }
 
 interface IPageGames {
     currentItems: IGame[]
 }
 
-const AllGames: React.FC<IAllGamesProps> = ({ allGames }) => {
+const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage }) => {
 
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
-            <div className="grid md:grid-flow-col md:auto-cols-fr text-sm ">
+            <div className="grid md:grid-flow-col md:auto-cols-fr grid-rows-3 text-sm ">
                 {currentItems &&
                     currentItems.map((game: IGame, index: Key) => (
-                        <div key={index} className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden">
+                        <div key={index} className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden">
                             <h3 className="font-bold pb-2 text-base">{game.name}</h3>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Genre</h3>
@@ -64,16 +65,16 @@ const AllGames: React.FC<IAllGamesProps> = ({ allGames }) => {
         // (This could be items from props; or items loaded in a local state
         // from an API endpoint with useEffect and useState)
         const endOffset = itemOffset + itemsPerPage;
-        const currentItems = allGames.slice(itemOffset, endOffset);
-        const pageCount = Math.ceil(allGames.length / itemsPerPage);
+        const currentItems = games.slice(itemOffset, endOffset);
+        const pageCount = Math.ceil(games.length / itemsPerPage);
 
         // Invoke when user click to request another page.
-        const handlePageClick = (event: any) => {
-            const newOffset = (event.selected * itemsPerPage) % allGames.length;
+        const handlePageClick = (event: { selected: number; }) => {
+            const newOffset = (event.selected * itemsPerPage) % games.length;
             setItemOffset(newOffset);
         };
         return (
-            <>
+            <div className="flex flex-col">
                 <Items currentItems={currentItems} />
                 <ReactPaginate
                     breakLabel="..."
@@ -86,18 +87,13 @@ const AllGames: React.FC<IAllGamesProps> = ({ allGames }) => {
                     className="flex justify-around md:justify-center md:gap-3
                     p-1 md:p-2 bg-slate-400 text-white "
                 />
-            </>
+            </div>
         );
     }
 
     return (
-        <div className="flex flex-col justify-between ">
-            <div className="text-center pb-2">All Games</div>
-            <div>
-                <PaginatedItems itemsPerPage={5} />
-            </div>
-        </div>
+        <PaginatedItems itemsPerPage={itemsPerPage} />
     )
 }
 
-export default AllGames;
+export default PaginatedGames;

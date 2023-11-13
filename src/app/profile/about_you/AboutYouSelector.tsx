@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
+import EditCancelSubmitButton from "@/app/profile/EditCancelSubmitButton"
 import SubmitBio from "./SubmitAboutYou"
 import { useFormState } from 'react-dom'
 
@@ -44,28 +44,9 @@ export default function AboutYou({ bio }: { bio: string | null | undefined }) {
 
     return (
         <div className="p-2">
-            <div className="flex justify-between">
-                <label htmlFor="bio" className="font-bold pb-2">About you</label>
-                <Image src="./edit_icon.svg"
-                    onClick={() => setEditing(true)} height={0} width={0} alt="Edit button"
-                    className={`w-4 md:w-7 ${editing ? 'hidden' : ''}`}
-                />
-                <div className={`flex gap-2 ${editing ? '' : 'hidden'}`}>
-                    <button form="bioform" className={`${editing ? '' : 'hidden'}`}>
-                        <Image src="./checkmark-icon.svg"
-                            onClick={() => setEditing(false)}
-                            height={0} width={0} alt="Submit button"
-                            className={`w-4 md:w-7 ${inputValid ? '' : 'hidden'}
-                        `}
-                        />
-                    </button>
-                    <Image src="./red_cross.svg"
-                        onClick={() => setEditing(false)}
-                        height={0} width={0} alt="Cancel edit button"
-                        className={`w-4 md:w-7 ${editing ? '' : 'hidden'}`}
-                    />
-                </div>
-            </div>
+            <EditCancelSubmitButton editing={editing} inputValid={inputValid}
+                label="About You" setEditing={setEditing} submitFormName="bioform"
+            />
             <div className={`${editing ? 'hidden' : ''} p-2 italic`}>{savedBioFromDatabase(bio)}</div>
             <div className={`${editing ? '' : 'hidden'}`}>
                 <form

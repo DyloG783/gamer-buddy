@@ -5,8 +5,9 @@ import timezoneJSON from 'timezones.json';
 import Image from 'next/image';
 import SubmitTimezone from './SubmitTimezone';
 import { useFormState } from 'react-dom';
+import EditCancelSubmitButton from '@/app/profile/EditCancelSubmitButton';
 
-export default function Timezone({ userTimezone }: { userTimezone: string | null | undefined }) {
+export default function TimezoneSelector({ userTimezone }: { userTimezone: string | null | undefined }) {
 
     // const [selectedTimezone, setSelectedTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone)
     const [selectedTimezone, setSelectedTimezone] = useState('')
@@ -28,9 +29,11 @@ export default function Timezone({ userTimezone }: { userTimezone: string | null
         tzArray.push(timezoneJSON[i].text)
     }
 
+    // can't use 'EditCancelSubmitButton' with this select form/form action becauase null
+    // keeps getting send to the server
     return (
         <>
-            <div className='flex justify-between p-2'>
+            <div id="editControlsLabel" className='flex justify-between p-2'>
                 <label htmlFor="selectID" className='font-bold'>Select your timezone</label>
                 <Image src="./edit_icon.svg"
                     onClick={() => setEditing(true)} height={0} width={0} alt="Edit button"
