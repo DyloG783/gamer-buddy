@@ -17,8 +17,8 @@ export default function NavigationLinks() {
     }
     return (
         <ul className="grid grid-flow-row auto-cols-fr md:grid-flow-col">
-            {mainNavItems.map((navItem, index) => (
-                <li key={index}>
+            {mainNavItems.map((navItem) => (
+                <li key={navItem.name}>
                     <Link
                         href={navItem.link}
                         // className={`h-full w-full flex items-center justify-around p-2

@@ -4,7 +4,7 @@ import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import TwitchProvider from "next-auth/providers/twitch";
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import prisma from "@/app/lib/db";
+import prisma from "@/lib/db";
 
 export const authOptions: NextAuthOptions = {
 

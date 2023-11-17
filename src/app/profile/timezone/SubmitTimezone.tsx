@@ -1,6 +1,6 @@
 'use server'
 
-import prisma from '../../lib/db'
+import prisma from '../../../lib/db'
 import { revalidatePath } from 'next/cache'
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
@@ -33,6 +33,6 @@ export default async function SubmitTimezone(prevState: any, formData: FormData)
     revalidatePath('/');
     return { message: `Updated timezone: ${input}` }
   } catch (error) {
-    return { message: `Failed to update timezone` }
+    return { message: `Failed to update timezone`, error }
   }
 }

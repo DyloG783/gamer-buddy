@@ -2,7 +2,8 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame } from "@/app/lib/custom_types";
+import { IGame } from "@/lib/custom_types";
+import Link from "next/link";
 
 interface IPaginatedItemsProps {
     itemsPerPage: number
@@ -23,8 +24,12 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
         return (
             <div className="grid md:grid-flow-col md:auto-cols-fr grid-rows-3 text-sm ">
                 {currentItems &&
-                    currentItems.map((game: IGame, index: Key) => (
-                        <div key={index} className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden">
+                    currentItems.map((game: IGame) => (
+                        <Link
+                            key={game.externalId}
+                            className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
+                            href={`/game/${game.id}`}
+                        >
                             <h3 className="font-bold pb-2 text-base">{game.name}</h3>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Genre</h3>
@@ -50,7 +55,8 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                                     </span>
                                 ))}
                             </div>
-                        </div>
+
+                        </Link>
                     ))}
             </div>
         );
@@ -74,25 +80,28 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
             setItemOffset(newOffset);
         };
         return (
-            <div className="flex flex-col">
+            <>
                 <Items currentItems={currentItems} />
                 <ReactPaginate
                     breakLabel="..."
                     nextLabel="next >"
                     onPageChange={handlePageClick}
-                    pageRangeDisplayed={5}
+                    pageRangeDisplayed={3}
                     pageCount={pageCount}
                     previousLabel="< previous"
                     renderOnZeroPageCount={null}
                     className="flex justify-around md:justify-center md:gap-3
                     p-1 md:p-2 bg-slate-400 text-white "
                 />
-            </div>
+            </>
         );
     }
 
     return (
-        <PaginatedItems itemsPerPage={itemsPerPage} />
+        <div className={`flex flex-col`} id="paginated_Games" >
+            <PaginatedItems itemsPerPage={itemsPerPage} />
+        </div>
+
     )
 }
 

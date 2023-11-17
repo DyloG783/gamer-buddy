@@ -3,13 +3,14 @@ import prisma from "@/lib/db";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
 import SearchOptions from "@/app/games/components/SearchOptions";
 
-export default async function Genre({ params }: { params: { genre: number } }) {
+export default async function Search({ params }: { params: { search: string } }) {
 
-    const genreId = Number(params.genre)
-    const genreGames = await prisma.game.findMany({
+    const searchString = params.search
+    const searchedGames = await prisma.game.findMany({
         where: {
-            genres: {
-                has: genreId
+            name: {
+                startsWith: searchString,
+                mode: "insensitive"
             }
         }
     })
@@ -23,8 +24,7 @@ export default async function Genre({ params }: { params: { genre: number } }) {
             id="page_games"
         >
             <SearchOptions genres={genres} platforms={platforms} modes={modes} />
-            <PaginatedGames games={genreGames} itemsPerPage={6} />
+            <PaginatedGames games={searchedGames} itemsPerPage={6} />
         </div>
-
     )
 }

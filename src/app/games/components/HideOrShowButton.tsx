@@ -7,8 +7,7 @@ interface IHideOrShowButtonProps {
 const HideOrShowButton: React.FC<IHideOrShowButtonProps> = ({ hideOrShowClickHandler, hiddenOrOpen }) => {
 
     return (
-        <button className=""
-            onClick={hideOrShowClickHandler}>
+        <button onClick={hideOrShowClickHandler} className="  p-2 hover:bg-slate-400">
             <svg
                 className={`w-3 md:w-4 lg:w-5
                             ${hiddenOrOpen ? "" : "hidden"}`}

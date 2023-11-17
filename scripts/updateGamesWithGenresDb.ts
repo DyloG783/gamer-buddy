@@ -1,5 +1,5 @@
 require('dotenv').config({ path: '../.env' })
-import prisma from '@/app/lib/db';
+import prisma from '@/lib/db';
 
 async function updateGamesWithGenresDb() { 
 

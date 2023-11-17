@@ -1,16 +1,15 @@
 import './globals.css'
-import SessionProvider from "./components/auth/SessionProvider"
+import SessionProvider from "../components/auth/SessionProvider"
 import { getServerSession } from "next-auth"
-import TopNavigationBar from "@/app/components/navigation/TopNavigationBar"
-import Footer from './components/Footer'
+import TopNavigationBar from "@/components/navigation/TopNavigationBar"
+import Footer from '../components/Footer'
 
 export const metadata = {
   title: 'Gamer Buddy',
   description: 'Team up with others on you favourate games',
 }
 
-export default async function RootLayout(
-  { children, }: { children: React.ReactNode }) {
+export default async function RootLayout({ children, }: { children: React.ReactNode }) {
 
   const session = await getServerSession();
 

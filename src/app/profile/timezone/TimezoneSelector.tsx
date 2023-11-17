@@ -63,8 +63,8 @@ export default function TimezoneSelector({ userTimezone }: { userTimezone: strin
                     required
                 >
                     <option disabled hidden label={userTimezone as string} />
-                    {tzArray.map((timezone, index) =>
-                        <option key={index} value={timezone} label={timezone} />
+                    {tzArray.map((timezone) =>
+                        <option key={timezone} value={timezone} label={timezone} />
                     )}
                 </select>
             </form>
