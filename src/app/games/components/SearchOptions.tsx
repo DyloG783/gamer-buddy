@@ -30,7 +30,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
         useEffect(() => {
             if (categoryListSelection != "") {
-                redirect(`/games/${categoryName.toLowerCase()}/${categoryListSelection}`)
+                redirect(`/games/type/${categoryName.toLowerCase()}/${categoryListSelection}`)
             }
         }, [categoryListSelection])
 

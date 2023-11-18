@@ -35,17 +35,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  Profile       Profile?
-  sessions      Session[]
-}
-
 model Profile {
   id       String  @id @default(cuid())
   bio      String?
@@ -67,18 +56,33 @@ model TwitchAuthToken {
   twitchAuthToken String
 }
 
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  Profile       Profile?
+  sessions      Session[]
+  games         Game[]
+}
+
 model Game {
-  id             Int      @id @default(autoincrement())
-  externalId     Int      @unique
-  name           String
-  summary        String?
-  url            String?
-  platforms      Int[]
-  platformNames  String[]
-  gameModes      Int[]
-  gameModeNames  String[]
-  genres         Int[]
-  gameGenreNames String[]
+  id               Int      @id @default(autoincrement())
+  externalId       Int      @unique
+  name             String
+  summary          String?
+  url              String?
+  platforms        Int[]
+  platformNames    String[]
+  gameModes        Int[]
+  gameModeNames    String[]
+  genres           Int[]
+  gameGenreNames   String[]
+  firstReleaseDate Int?
+  totalRating      Float?
+  users            User[]
 }
 
 model Platform {
