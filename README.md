@@ -9,6 +9,12 @@ Update Prisma after changing schema:
 1. npx prisma db push
 2. npx prisma generate
 
+Git:
+to merge branchto main
+1. push branch
+2. checkout master
+3. git merge [branch namegit status] 
+
 Run postgres db command:
 dont need to run in with app. Use PSQL command tool for console access
 

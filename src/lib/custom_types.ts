@@ -10,4 +10,17 @@ export interface IGame {
     gameModeNames: string[];
     genres: number[];
     gameGenreNames: string[];
+    firstReleaseDate?: number;
+    totalRating?: number;
+}
+
+export interface ISearchState {
+    genre: number | undefined;
+    platform: number | undefined;
+    mode: number | undefined;
+    search: string | undefined;
+    genreName: string | undefined;
+    platformName: string | undefined;
+    modeName: string | undefined;
+    currentSelected: string | undefined;
 }

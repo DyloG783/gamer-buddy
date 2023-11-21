@@ -65,7 +65,7 @@ model User {
   accounts      Account[]
   Profile       Profile?
   sessions      Session[]
-  games         Game[]
+  games         Int[]     @unique
 }
 
 model Game {
@@ -82,7 +82,6 @@ model Game {
   gameGenreNames   String[]
   firstReleaseDate Int?
   totalRating      Float?
-  users            User[]
 }
 
 model Platform {

@@ -1,9 +1,9 @@
 "use client"
 
-import EditCancelSubmitButton from "@/app/profile/EditCancelSubmitButton";
+import EditCancelSubmitButton from "@/app/profile/componenets/EditCancelSubmitButton";
 import { useEffect, useState } from "react";
 import { useFormState } from 'react-dom'
-import SubmitUsername from "./SubmitUsername";
+import submitUsername from "./SubmitUsername";
 
 export default function Username({ userName }: { userName: string | null | undefined }) {
 
@@ -16,12 +16,14 @@ export default function Username({ userName }: { userName: string | null | undef
     // state to manage input was valid to show submit buttonm
     const [inputValid, setInputvalid] = useState(false)
 
-    // part of server action
+    // this needs to be passed to useFormState to get a success or error message back from db write
+    // causing red squigly under userFormState but this is how it should work from the docs... 
     const initialState = {
         message: null,
     }
+
     // use form state using server action for form submit
-    const [state, formAction] = useFormState(SubmitUsername, initialState)
+    const [state, formAction] = useFormState(submitUsername, initialState)
 
     // use effect for validation on input change
     useEffect(() => validate(), [input])
@@ -59,6 +61,9 @@ export default function Username({ userName }: { userName: string | null | undef
                         onChange={(e) => setInput(e.target.value)}
                         required
                     />
+                    <p aria-live="polite" className="sr-only">
+                        {state?.message}
+                    </p>
                 </form>
                 <span className={`${inputValid ? 'hidden' : ''} text-red-400`}> 3 - 15 characters</span>
             </div>

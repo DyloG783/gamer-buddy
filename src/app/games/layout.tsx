@@ -6,10 +6,6 @@ import prisma from "@/lib/db";
 
 export default async function GamesLayout({ children }: { children: React.ReactNode }) {
 
-    const genres = await prisma.genre.findMany()
-    const platforms = await prisma.platform.findMany()
-    const modes = await prisma.gameMode.findMany()
-
     return (
         <div className="grow flex flex-col " id="layout_games">
             <div className=" flex flex-col p-2 shadow-sm" id="yourGames_layout">
@@ -20,7 +16,6 @@ export default async function GamesLayout({ children }: { children: React.ReactN
                 <h1 className="md:py-10 text-center font-bold text-lg md:text-2xl">Games</h1>
                 <div className={`grow flex flex-col justify-between`} id="allgames_layout_children">
                     <Suspense fallback={<Loading />}>
-                        <SearchOptions genres={genres} platforms={platforms} modes={modes} />
                         {children}
                     </Suspense>
                 </div>

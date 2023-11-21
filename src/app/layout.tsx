@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 
 export const metadata = {
   title: 'Gamer Buddy',
-  description: 'Team up with others on you favourate games',
+  description: 'Team up with others on you favourate games'
 }
 
 export default async function RootLayout({ children, }: { children: React.ReactNode }) {

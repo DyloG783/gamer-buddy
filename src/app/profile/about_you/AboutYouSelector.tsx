@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import EditCancelSubmitButton from "@/app/profile/EditCancelSubmitButton"
+import EditCancelSubmitButton from "@/app/profile/componenets/EditCancelSubmitButton"
 import SubmitBio from "./SubmitAboutYou"
 import { useFormState } from 'react-dom'
 
@@ -13,8 +13,14 @@ export default function AboutYou({ bio }: { bio: string | null | undefined }) {
     // state for input into the text area
     const [input, setInput] = useState("")
 
+    // this needs to be passed to useFormState to get a success or error message back from db write
+    // causing red squigly under userFormState but this is how it should work from the docs... 
+    const initialState = {
+        message: null,
+    }
+
     // use form state using server action for form submit
-    const [state, formAction] = useFormState(SubmitBio, null)
+    const [state, formAction] = useFormState(SubmitBio, initialState)
 
     // state for input validation
     const [inputValid, setInputvalid] = useState(false)
@@ -64,6 +70,9 @@ export default function AboutYou({ bio }: { bio: string | null | undefined }) {
                         onChange={(e) => setInput(e.target.value)}
                         required
                     />
+                    <p aria-live="polite" className="sr-only">
+                        {state?.message}
+                    </p>
                 </form>
                 <span className={`${inputValid ? 'hidden' : ''} text-red-400`}> 10 - 500 characters</span>
             </div>

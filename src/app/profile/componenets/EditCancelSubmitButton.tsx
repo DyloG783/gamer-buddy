@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react"
 import Image from "next/image"
+import { useFormStatus } from "react-dom";
 
 interface IEditCancelSubmitButtonProps {
     setEditing: Dispatch<SetStateAction<boolean>>;
@@ -36,6 +37,9 @@ const EditCancelSubmitButton: React.FC<IEditCancelSubmitButtonProps> = ({ setEdi
         }
     }
 
+    // pending state to disable submit button whileserver action completes
+    const { pending } = useFormStatus()
+
     return (
         <div className="flex justify-between">
             <span className="font-bold">{label}</span>
@@ -44,7 +48,12 @@ const EditCancelSubmitButton: React.FC<IEditCancelSubmitButtonProps> = ({ setEdi
                 className={`w-4 md:w-7 ${editing ? 'hidden' : ''}`}
             />
             <div className={`flex gap-2 ${editing ? '' : 'hidden'}`}>
-                <button type="submit" form={submitFormName} className={`${editing ? '' : 'hidden'}`}>
+                <button
+                    type="submit"
+                    form={submitFormName}
+                    className={`${editing ? '' : 'hidden'}`}
+                    aria-disabled={pending}
+                >
                     <ValidationRequiredImage inputValid={inputValid} />
                 </button>
                 <Image src="./red_cross.svg"

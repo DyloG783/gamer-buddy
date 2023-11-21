@@ -22,9 +22,9 @@ export default async function Profile() {
     })
 
     return (
-        <div className="grow flex justify-around
+        <div className="grow flex justify-around my-1 md:my-10 
             text-sm md:text-base lg:text-lg">
-            <div className=" w-1/2 md:w-3/4">
+            <div className="md:w-3/4 shadow-sm p-2">
                 <UsernameSelector userName={findUser?.name} />
                 <AboutYouSelector bio={findProfile?.bio} />
                 <TimezoneSelector userTimezone={findProfile?.timezone} />

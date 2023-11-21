@@ -4,8 +4,7 @@ import { useState } from 'react';
 import timezoneJSON from 'timezones.json';
 import Image from 'next/image';
 import SubmitTimezone from './SubmitTimezone';
-import { useFormState } from 'react-dom';
-import EditCancelSubmitButton from '@/app/profile/EditCancelSubmitButton';
+import { useFormState, useFormStatus } from 'react-dom';
 
 export default function TimezoneSelector({ userTimezone }: { userTimezone: string | null | undefined }) {
 
@@ -15,13 +14,17 @@ export default function TimezoneSelector({ userTimezone }: { userTimezone: strin
     // state to manage whether editing is enabled
     const [editing, setEditing] = useState(false);
 
-    // part of server action
+    // this needs to be passed to useFormState to get a success or error message back from db write
+    // causing red squigly under userFormState but this is how it should work from the docs... 
     const initialState = {
         message: null,
     }
 
     // use form state using server action for form submit to databse
     const [state, formAction] = useFormState(SubmitTimezone, initialState)
+
+    // pending state to disable submit button whileserver action completes
+    const { pending } = useFormStatus()
 
     // converting timezone JSON into array to map out select form options
     const tzArray = []
@@ -40,7 +43,12 @@ export default function TimezoneSelector({ userTimezone }: { userTimezone: strin
                     className={`w-4 md:w-7 ${editing ? 'hidden' : ''}`}
                 />
                 <div className={`flex gap-2 ${editing ? '' : 'hidden'}`}>
-                    <button type="submit" form="formID" className={`${editing ? '' : 'hidden'}`}>
+                    <button
+                        type="submit"
+                        form="formID"
+                        className={`${editing ? '' : 'hidden'}`}
+                        aria-disabled={pending}
+                    >
                         <Image src="./checkmark-icon.svg" height={0} width={0} alt="Submit button"
                             className={`w-4 md:w-7`}
                         />
@@ -67,6 +75,9 @@ export default function TimezoneSelector({ userTimezone }: { userTimezone: strin
                         <option key={timezone} value={timezone} label={timezone} />
                     )}
                 </select>
+                <p aria-live="polite" className="sr-only">
+                    {state?.message}
+                </p>
             </form>
         </>
     )

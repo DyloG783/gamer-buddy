@@ -5,9 +5,9 @@ import { revalidatePath } from 'next/cache'
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
-export default async function SubmitUsername(prevState: any, formData: FormData) {
+export default async function submitUsername(prevState: any, formData: FormData) {
 
-  const input = formData.get("usernameInput") as string;
+  const input = formData.get('usernameInput') as string;
 
   const session = await getServerSession(authOptions);
 
@@ -24,6 +24,6 @@ export default async function SubmitUsername(prevState: any, formData: FormData)
     revalidatePath('/');
     return { message: `Updated username: ${input}` }
   } catch (error) {
-    return { message: `Failed to update username` }
+    return { message: `Failed to update username`, error }
   }
 }
