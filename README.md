@@ -10,7 +10,7 @@ Update Prisma after changing schema:
 2. npx prisma generate
 
 Git:
-to merge branchto main
+to merge branch to main
 1. push branch
 2. checkout master
 3. git merge [branch namegit status] 
@@ -34,24 +34,22 @@ Current script flow:
 3. repeat above for 'saveGameModes...' 'saveGenres...' 'savePlatforms...'
 4. updateGamesWithPlatformsDB, ...gamemodes ...genres ...platforms
 
-
-IGDB:
-genres; 
-
 alt accounts:
 Google(https://console.cloud.google.com/) 
-dylantest679@gmail.com, 
-dgdevelopment65@gmail.com, (new main for managing google logins)
+- dylantest679@gmail.com, 
+- dgdevelopment65@gmail.com, (new main for managing google logins)
+    - dgdevelopment651@gmail.com (Tr...........)
+
+Twitch
+- dgdevelopment652@  (Tr.... Tr....)
 
 postman:
 dgdevelopment65@gmail.com
 
 Need help with:
-- "any" ts types
-- front end validation approach? = https://react-hook-form.com/
-- storing only 1 instance of a token in a DB table? = use a script instead
-    - paginating api responses. getting into db
-    - background jobs / workers for things like api auth?
+
+- multiple accounts to test with giving I can't use credentials provider?
+- storing only 1 instance of a token in a DB table?
 
 ---
 

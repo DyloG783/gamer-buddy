@@ -1,5 +1,6 @@
 import prisma from "@/lib/db"
 import ButtonAddGame from "@/app/game/components/ButtonAddGame";
+import ButtonRemoveGame from "@/app/game/components/ButtonRemoveGame";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
@@ -7,17 +8,21 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 export default async function GamePage({ params }: { params: { id: number } }) {
 
     const gameId = Number(params.id) // this id passed in params is the game's ExternalID(for referential integrity)
-
     const session = await getServerSession(authOptions);
+
     const user = await prisma.user.findUnique({
         where: {
             email: session?.user?.email as string
         }
     })
 
+    // the game selected from the games page
     let game;
-    let exists = false;
 
+    // boolean for whether the user already has this game added to their account
+    let alreadyExists = false;
+
+    // retrieve game from db
     try {
         game = await prisma.game.findUnique({
             where: {
@@ -34,10 +39,13 @@ export default async function GamePage({ params }: { params: { id: number } }) {
         )
     }
 
+    // return not found in case a user enters a random number through url
     if (!game) {
         return (<p>Game not found</p>)
     }
 
+    // retrieve user's array of saved games (game external id's)
+    // if user already has game in array set alreadyExists = true
     try {
         const usersGames = await prisma.user.findFirst({
             where: {
@@ -49,7 +57,7 @@ export default async function GamePage({ params }: { params: { id: number } }) {
         })
 
         if (usersGames?.games.includes(gameId)) {
-            exists = true;
+            alreadyExists = true;
         }
 
     } catch (error) {
@@ -95,7 +103,11 @@ export default async function GamePage({ params }: { params: { id: number } }) {
                 </div>
             </div>
             <div>
-                <ButtonAddGame gameId={gameId} exists={exists} />
+                {alreadyExists
+                    && <ButtonRemoveGame gameId={gameId} userEmail={user?.email} />
+                    || <ButtonAddGame gameId={gameId} userEmail={user?.email} />
+                }
+
             </div>
         </div>
     )

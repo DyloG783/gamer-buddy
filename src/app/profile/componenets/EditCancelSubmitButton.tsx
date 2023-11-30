@@ -37,7 +37,7 @@ const EditCancelSubmitButton: React.FC<IEditCancelSubmitButtonProps> = ({ setEdi
         }
     }
 
-    // pending state to disable submit button whileserver action completes
+    // pending state to disable submit button while server action completes
     const { pending } = useFormStatus()
 
     return (

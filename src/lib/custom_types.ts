@@ -10,8 +10,8 @@ export interface IGame {
     gameModeNames: string[];
     genres: number[];
     gameGenreNames: string[];
-    firstReleaseDate?: number;
-    totalRating?: number;
+    firstReleaseDate: number | null;
+    totalRating: number | null;
 }
 
 export interface ISearchState {

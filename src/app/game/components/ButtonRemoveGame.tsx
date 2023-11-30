@@ -3,14 +3,14 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-export default function ButtonAddGame({ gameId, userEmail }: { gameId: number, userEmail: string | null | undefined }) {
+export default function ButtonRemoveGame({ gameId, userEmail }: { gameId: number, userEmail: string | null | undefined }) {
 
     const [buttonDisabled, setButtonDisabled] = useState(false)
 
     const handleSubmit = async () => {
         setButtonDisabled(true)
 
-        const res = await fetch('http://localhost:3000/api/addGame', {
+        const res = await fetch('http://localhost:3000/api/removeGame', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export default function ButtonAddGame({ gameId, userEmail }: { gameId: number, u
                 }
                 disabled={buttonDisabled}
             >
-                {buttonDisabled ? 'Saving...' : 'Add game'}
+                {buttonDisabled ? 'Removing...' : 'Remove game'}
             </button>
         </form>
     )

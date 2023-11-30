@@ -40,7 +40,7 @@ model Profile {
   bio      String?
   userId   String  @unique
   timezone String?
-  user     User    @relation(fields: [userId], references: [id])
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {

@@ -1,9 +1,9 @@
-import AboutYouSelector from "./about_you/AboutYouSelector";
-import UsernameSelector from "./username/UsernameSelector";
 import prisma from '@/lib/db';
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import TimezoneSelector from "./timezone/TimezoneSelector";
+import AboutYouSelector from "./about_you/AboutYouSelector";
+import UsernameSelector from "./username/UsernameSelector";
 
 export default async function Profile() {
 
@@ -31,5 +31,4 @@ export default async function Profile() {
             </div>
         </div>
     );
-
 };

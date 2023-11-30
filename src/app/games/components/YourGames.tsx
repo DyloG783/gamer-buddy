@@ -1,13 +1,19 @@
 'use client'
 
+import { IGame } from "@/lib/custom_types";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import PaginatedGames from "./PaginatedGames";
 
-export default function YourGames() {
+interface IYourGamesProps {
+    yourGames: IGame[];
+}
+
+const YourGames: React.FC<IYourGamesProps> = ({ yourGames }) => {
 
     // auth check for active session redirecting to sign in if not
     const { status } = useSession()
+
     if (status === "unauthenticated") {
         return (
             <div className="">
@@ -17,8 +23,15 @@ export default function YourGames() {
     }
 
     return (
-        <div className=" text-center ">
-            <div>Content soon!</div>
+        <div className=" ">
+            {yourGames.length > 0
+                &&
+                <PaginatedGames games={yourGames} itemsPerPage={3} />
+                ||
+                <p>You don't have any games</p>
+            }
         </div>
     )
 }
+
+export default YourGames;

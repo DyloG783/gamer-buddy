@@ -26,18 +26,7 @@ export default function AboutYou({ bio }: { bio: string | null | undefined }) {
     const [inputValid, setInputvalid] = useState(false)
 
     // use effect for validation on input change
-    useEffect(() => validate(), [input])
-
-    const savedBioFromDatabase = (bio: string | null | undefined) => {
-        if (bio === null || bio === undefined) {
-            const emptyPlaceholderText = 'Share something about yourself i.e. "My favourate genre is build/craft survival games." Or "Usually available to play between 6pm - 10pm weekdays in my timezone."'
-            return emptyPlaceholderText
-        }
-        else return bio
-    }
-
-    // input validation method only showing submit button if valid input
-    function validate() {
+    useEffect(() => {
         setInputvalid(false)
         if (input.length >= 10) {
             if (input.length <= 500) {
@@ -46,6 +35,14 @@ export default function AboutYou({ bio }: { bio: string | null | undefined }) {
                 }
             }
         }
+    }, [input])
+
+    const savedBioFromDatabase = (bio: string | null | undefined) => {
+        if (bio === null || bio === undefined) {
+            const emptyPlaceholderText = 'Share something about yourself i.e. "My favourate genre is build/craft survival games." Or "Usually available to play between 6pm - 10pm weekdays in my timezone."'
+            return emptyPlaceholderText
+        }
+        else return bio
     }
 
     return (

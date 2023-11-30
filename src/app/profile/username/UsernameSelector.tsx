@@ -26,10 +26,7 @@ export default function Username({ userName }: { userName: string | null | undef
     const [state, formAction] = useFormState(submitUsername, initialState)
 
     // use effect for validation on input change
-    useEffect(() => validate(), [input])
-
-    // input validation method only showing submit button if valid input
-    function validate() {
+    useEffect(() => {
         setInputvalid(false)
         if (input.length >= 3) {
             if (input.length <= 15) {
@@ -38,7 +35,7 @@ export default function Username({ userName }: { userName: string | null | undef
                 }
             }
         }
-    }
+    }, [input])
 
     return (
         <div className="p-2 text-sm md:text-base lg:text-lg">
