@@ -30,8 +30,7 @@ export default function ButtonAddGame({ gameId, userEmail }: { gameId: number, u
         <form onSubmit={handleSubmit}>
             <button
                 type="submit"
-                className={`p-4 text-xs hover:shadow-xl bg-slate-700 text-white`
-                }
+                className={`btn`}
                 disabled={buttonDisabled}
             >
                 {buttonDisabled ? 'Saving...' : 'Add game'}

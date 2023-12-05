@@ -11,6 +11,12 @@ export default function UserMenu() {
     // Used to track current url and close menu when url changes
     const pathname = usePathname();
 
+    // usermenu dropdown links mapped over in ul>li
+    const userMenuItems = [
+        { name: 'Profile', link: '/profile' },
+        { name: 'Sign out', link: '/api/auth/signout' }
+    ]
+
     // state for toggling user menu drop down
     const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -19,8 +25,10 @@ export default function UserMenu() {
         setUserMenuOpen(false);
     }, [pathname])
 
+    // status used for auth check, data used for profile picture
+    const { status, data } = useSession()
+
     // auth check for active session redirecting to sign in if not
-    const { status } = useSession()
     if (status === "unauthenticated") {
         return (
             <div className="flex ">
@@ -29,22 +37,16 @@ export default function UserMenu() {
         )
     }
 
-    // usermenu dropdown links mapped over in ul>li
-    const userMenuItems = [
-        { name: 'Profile', link: '/profile' },
-        { name: 'Sign out', link: '/api/auth/signout' }
-    ]
-
     return (
-        <div className="relative">
+        <div className="relative min-w-[200px]">
             <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 aria-label="User or profile drop down menu"
                 className={`flex items-center h-full gap-2 p-4 w-full
                 hover:shadow-lg`}
             >
-                <Image src={"/./vercel.svg"} height={0} width={0} alt="Profile Avatar"
-                    className='w-20 md:w-28 lg:w-36 mx-auto'
+                <img src={`${data?.user?.image}`} height={0} width={0} alt="Profile Avatar"
+                    className='w-14 md:w-20 xl:w-24 h-auto mx-auto rounded-full'
                 />
                 <div className={`${userMenuOpen ? "hidden" : ""} mb-auto`}>
                     <svg className={`w-3 md:w-4 lg:w-5 `}
@@ -69,7 +71,7 @@ export default function UserMenu() {
             >
                 <ul className="bg-slate-400">
                     {userMenuItems.map((userMenuItem, index) => (
-                        <li key={index} className={`w-full p-0.5 md:p-3 hover:shadow-lg ${pathname === userMenuItem.link ? 'shadow-lg' : ''}`}>
+                        <li key={index} className={`w-full p-3 hover:shadow-lg ${pathname === userMenuItem.link ? 'shadow-lg' : ''}`}>
                             <Link href={userMenuItem.link}
                                 className={`flex justify-around w-full text-sm md:text-base lg:text-lg text-white`}
                                 onClick={() => setUserMenuOpen(false)}

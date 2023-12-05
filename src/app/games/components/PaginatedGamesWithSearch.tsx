@@ -71,7 +71,7 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ games, defau
             )
         }
     }
-    if (searchState.search) {
+    if (searchState.currentSelected === "textSearch") {
         if (searchState.genre || searchState.platform || searchState.mode) {
             filteredGames = filteredGames.filter(game => game.name.toLowerCase().includes(searchState.search!.toLowerCase() as string))
         }
@@ -144,26 +144,36 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ games, defau
         };
         return (
             <>
-                <Items currentItems={currentItems} />
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={3}
-                    pageCount={pageCount}
-                    previousLabel="< previous"
-                    renderOnZeroPageCount={null}
-                    className="flex justify-around md:justify-center md:gap-3
-                    p-1 md:p-2 bg-slate-400 text-white "
-                />
+                {filteredGames.length > 0
+                    &&
+                    <div
+                        id="paginated_Games_with_search"
+                        className={`flex flex-col p-4 `}
+                    >
+                        <Items currentItems={currentItems} />
+                        <ReactPaginate
+                            breakLabel="..."
+                            nextLabel=">"
+                            onPageChange={handlePageClick}
+                            pageRangeDisplayed={3}
+                            pageCount={pageCount}
+                            previousLabel="<"
+                            renderOnZeroPageCount={null}
+                            className="flex justify-around md:justify-center gap-4
+                        p-2 bg-slate-400 text-white "
+                        />
+                    </div>
+                    ||
+                    <div className="mx-auto my-2 md:my-10">
+                        No games matched your search. Reset the search to try again
+                    </div>
+                }
             </>
         );
     }
 
     return (
-        <div className={`flex flex-col`} id="paginated_Games" >
-            <PaginatedItems itemsPerPage={itemsPerPage} />
-        </div>
+        <PaginatedItems itemsPerPage={itemsPerPage} />
     )
 }
 

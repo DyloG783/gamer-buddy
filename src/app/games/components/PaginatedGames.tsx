@@ -80,13 +80,13 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                 <Items currentItems={currentItems} />
                 <ReactPaginate
                     breakLabel="..."
-                    nextLabel="next >"
+                    nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={3}
                     pageCount={pageCount}
-                    previousLabel="< previous"
+                    previousLabel="<"
                     renderOnZeroPageCount={null}
-                    className="flex justify-around md:justify-center md:gap-3
+                    className="flex justify-around md:justify-center md:gap-4
                     p-1 md:p-2 bg-slate-400 text-white "
                 />
             </>

@@ -1,26 +1,25 @@
 import prisma from "@/lib/db"
-import ButtonAddGame from "@/app/game/components/ButtonAddGame";
-import ButtonRemoveGame from "@/app/game/components/ButtonRemoveGame";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import GameActionBar from "../components/GameActionBar";
 
 export default async function GamePage({ params }: { params: { id: number } }) {
 
-    const gameId = Number(params.id) // this id passed in params is the game's ExternalID(for referential integrity)
+    const gameId = Number(params.id) // this id passed in params is the game's ExternalID
     const session = await getServerSession(authOptions);
-
-    const user = await prisma.user.findUnique({
-        where: {
-            email: session?.user?.email as string
-        }
-    })
 
     // the game selected from the games page
     let game;
 
+    // find user in db using email from session, used for checking if this game is already saved or not
+    let user;
+
     // boolean for whether the user already has this game added to their account
     let alreadyExists = false;
+
+    // users email to be passed into buttons for api actions
+    let userEmail;
 
     // retrieve game from db
     try {
@@ -44,12 +43,21 @@ export default async function GamePage({ params }: { params: { id: number } }) {
         return (<p>Game not found</p>)
     }
 
-    // retrieve user's array of saved games (game external id's)
-    // if user already has game in array set alreadyExists = true
-    try {
+    if (session) {
+
+        userEmail = session?.user?.email;
+
+        user = await prisma.user.findUnique({
+            where: {
+                email: userEmail as string
+            }
+        })
+
+        // retrieve user's array of saved games (game external id's)
+        // if user already has game in array set alreadyExists = true
         const usersGames = await prisma.user.findFirst({
             where: {
-                email: user?.email
+                email: userEmail
             },
             select: {
                 games: true
@@ -59,56 +67,44 @@ export default async function GamePage({ params }: { params: { id: number } }) {
         if (usersGames?.games.includes(gameId)) {
             alreadyExists = true;
         }
-
-    } catch (error) {
-        console.log("Failed looking up existing game on user", error)
     }
 
     return (
-        <div id="game_Info_View" className={`flex m-2 justify-between shadow-sm`}>
-            <div className="">
-                <div className="pb-4">
-                    <p className="font-bold">Name</p>
-                    <p className="italic">{`${game?.name}`}</p>
-                </div>
-                <div className="pb-4">
-                    <p className="font-bold">Genre</p>
-                    {game?.gameGenreNames.map((genre: string) => (
-                        <span key={genre} className="italic">{genre + ", "}</span>
-                    ))}
-                </div>
-                <div className="pb-4">
-                    <p className="font-bold">Mode</p>
-                    {game?.gameModeNames.map((mode: string) => (
-                        <span key={mode} className="italic">{mode + ", "}</span>
-                    ))}
-                </div>
-                <div className="pb-4">
-                    <p className="font-bold">Platform</p>
-                    {game?.platformNames.map((plat: string) => (
-                        <span key={plat} className="italic">{plat + ", "}</span>
-                    ))}
-                </div>
-                <div className="pb-4">
-                    <p className="font-bold">Link to IGBD game site</p>
-                    <Link href={`${game?.url}`} className="italic text-purple-700"
+        <div id="game_info_and_action_buttons_view" className={`flex flex-col md:flex-row justify-center bg-slate-300 p-4 my-auto`}>
+            <div id="game_info_container" className="p-1 md:p-4 my-auto">
+                <div id="game_title_and_summary" className="pb-1 md:pb-4">
+                    <Link href={`${game?.url}`}
+                        className="hover:italic text-blue-700 hover:text-purple-700 "
                         target="_blank"
                     >
-                        {`${game?.url}`}
+                        <h1 className="font-semibold text-xl md:text-4xl text-center pb-2 ">{`${game?.name}`}</h1>
                     </Link>
+                    <p className="text-left italic p-4">{`${game?.summary}`}</p>
                 </div>
-                <div className="pb-4 max-w-4xl">
-                    <p className=" font-bold">Summary</p>
-                    <p className=" italic">{`${game?.summary}`}</p>
+                <div id="game_info_groups_container"
+                    className="flex justify-around p-1 md:p-4 gap-2 md:gap-0 md:mt-10"
+                >
+                    <div id="game_genre_group" className="pb-4">
+                        <p className="font-semibold">Genre</p>
+                        {game?.gameGenreNames.map((genre: string) => (
+                            <span key={genre} className="italic">{genre + ", "}</span>
+                        ))}
+                    </div>
+                    <div id="game_mode_group" className="pb-4">
+                        <p className="font-semibold">Mode</p>
+                        {game?.gameModeNames.map((mode: string) => (
+                            <span key={mode} className="italic">{mode + ", "}</span>
+                        ))}
+                    </div>
+                    <div id="game_platform_group" className="pb-4">
+                        <p className="font-semibold">Platform</p>
+                        {game?.platformNames.map((plat: string) => (
+                            <span key={plat} className="italic">{plat + ", "}</span>
+                        ))}
+                    </div>
                 </div>
             </div>
-            <div>
-                {alreadyExists
-                    && <ButtonRemoveGame gameId={gameId} userEmail={user?.email} />
-                    || <ButtonAddGame gameId={gameId} userEmail={user?.email} />
-                }
-
-            </div>
+            <GameActionBar session={session} alreadyExists={alreadyExists} gameId={gameId} userEmail={userEmail} />
         </div>
     )
 }

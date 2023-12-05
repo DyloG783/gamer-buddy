@@ -1,9 +1,9 @@
 export default function Footer() {
 
+    // leaving this to force some spacing from the bottom of the page. May be used later
     return (
-        <div className="bottom-0 flex justify-evenly items-center p-4 bg-slate-400 text-white
-        md:min-h-[100px]">
-            Footer
+        <div className="bottom-0 min-h-[20px] ">
+
         </div>
     )
 }

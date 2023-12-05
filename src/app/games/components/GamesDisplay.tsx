@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function GamesDisplay(props: any) {
 
-    const [searchState, setSearchState] = useState({
+    const defaultState = {
         genre: undefined,
         genreName: undefined,
         platform: undefined,
@@ -15,11 +15,13 @@ export default function GamesDisplay(props: any) {
         modeName: undefined,
         search: undefined,
         currentSelected: undefined
-    })
+    }
+
+    const [searchState, setSearchState] = useState(defaultState)
 
     return (
-        <div className="grow flex flex-col justify-between">
-            <SearchOptions genres={props.genres} platforms={props.platforms} modes={props.modes} searchState={searchState} setSearchState={setSearchState} />
+        <div className="grow flex flex-col justify-between bg-slate-300 mt-4">
+            <SearchOptions genres={props.genres} platforms={props.platforms} modes={props.modes} searchState={searchState} setSearchState={setSearchState} defaultState={defaultState} />
             <PaginatedGamesWithSearch games={props.games} defaultGames={props.defaultGames} itemsPerPage={6} searchState={searchState} />
         </div>
     )

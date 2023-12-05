@@ -23,14 +23,14 @@ const YourGames: React.FC<IYourGamesProps> = ({ yourGames }) => {
     }
 
     return (
-        <div className=" ">
+        <>
             {yourGames.length > 0
                 &&
-                <PaginatedGames games={yourGames} itemsPerPage={3} />
+                <PaginatedGames games={yourGames} itemsPerPage={5} />
                 ||
                 <p>You don't have any games</p>
             }
-        </div>
+        </>
     )
 }
 

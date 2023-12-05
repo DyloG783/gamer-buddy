@@ -50,6 +50,7 @@ Need help with:
 
 - multiple accounts to test with giving I can't use credentials provider?
 - storing only 1 instance of a token in a DB table?
+- Text searh only working either with, or without another dropdown selected
 
 ---
 

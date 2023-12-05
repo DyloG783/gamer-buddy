@@ -12,11 +12,10 @@ export default function HomeLink() {
             <Link
                 href="/"
                 className={`${pathname === '/home' ? 'shadow-xl' : ''} 
-                 p-4 hover:shadow-md flex justify-around`}
+                  hover:shadow-md flex justify-around`}
             >
-                <Image src="/./mainicon.svg" height={0} width={0} alt="Home page link"
-                    className="w-12 md:w-20 lg:w-24 "
-                    priority
+                <img src="/./GamerBuddy.png" height={0} width={0} alt="Home page link"
+                    className="w-16 md:w-24 lg:w-28 h-auto"
                 />
             </Link>
         </>

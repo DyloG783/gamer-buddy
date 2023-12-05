@@ -65,7 +65,7 @@ model User {
   accounts      Account[]
   Profile       Profile?
   sessions      Session[]
-  games         Int[]     @unique
+  games         Int[]
 }
 
 model Game {

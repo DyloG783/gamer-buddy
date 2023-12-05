@@ -11,5 +11,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/profile', '/connections']
+  matcher: ['/profile', '/connections', '/connect/:path*']
 }

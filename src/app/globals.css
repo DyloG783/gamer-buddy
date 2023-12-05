@@ -8,3 +8,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+@layer components{
+    .btn {
+        @apply p-2 md:p-4 text-xs hover:shadow-xl bg-slate-700 text-white rounded-lg w-32;
+    }
+}

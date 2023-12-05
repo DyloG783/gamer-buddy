@@ -17,6 +17,7 @@ interface ISearchOptionsProps {
     modes: ISearchableGameType[];
     searchState: ISearchState;
     setSearchState: any;
+    defaultState: {};
 }
 
 interface ISelectSearchProps {
@@ -24,7 +25,7 @@ interface ISelectSearchProps {
     categoryName: string;
 }
 
-const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState }) => {
+const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState, defaultState }) => {
 
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
@@ -71,8 +72,8 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
 
         return (
-            <div className="flex flex-col gap-2">
-                <h2 className="font-bold p-1">{categoryName}</h2>
+            <div className="flex flex-col gap-1">
+                <h2 className="font-semibold p-1">{categoryName}</h2>
                 <select
                     name="select_Search_Options"
                     onChange={e => handleSubmit(e)}
@@ -82,7 +83,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                             : categoryName === "Mode" ? searchState.mode!
                                 : ""
                     }
-                    className="w-56"
+                    className="w-56 bg-slate-200 text-sm md:text-base"
                 >
                     {categoryList.map((listItem) =>
                         <option key={listItem.externalId} value={listItem.externalId}>
@@ -103,7 +104,8 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
             if (submitText != "placeholder") {
                 setSearchState({
                     ...searchState,
-                    search: submitText
+                    search: submitText,
+                    currentSelected: "textSearch"
                 })
             }
         }, [submitText])
@@ -115,14 +117,15 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
         }
 
         return (
-            <div className="flex flex-col gap-2">
-                <h2 className="font-bold p-1">Search</h2>
+            <div className="flex flex-col gap-1">
+                <h2 className="font-semibold p-1">Search</h2>
                 <input
                     name="input"
                     placeholder={searchState.search ? searchState.search : "Search for game name"}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleSubmit}
+                    className="bg-slate-200 w-56 text-sm md:text-base"
                 >
                 </input>
             </div>
@@ -130,13 +133,24 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
     }
 
     return (
-        <div className="flex flex-wrap gap-4 justify-between pb-4 sm:text-sm md:text-base lg:text-lg"
-            id="search_options"
+        <div id="search_options_and_reset_button"
+            className="flex flex-col p-2 md:p-8"
         >
-            <SelectSearch categoryList={genres} categoryName="Genre" />
-            <SelectSearch categoryList={platforms} categoryName="Platform" />
-            <SelectSearch categoryList={modes} categoryName="Mode" />
-            <TextSearch />
+            <button
+                id="reset_search"
+                onClick={() => setSearchState(defaultState)}
+                className="btn p-2 max-w-[100px] ml-auto"
+            >
+                Reset search
+            </button>
+            <div className="flex flex-wrap gap-4 justify-center pb-4 sm:text-sm md:text-base lg:text-lg"
+                id="search_options"
+            >
+                <SelectSearch categoryList={genres} categoryName="Genre" />
+                <SelectSearch categoryList={platforms} categoryName="Platform" />
+                <SelectSearch categoryList={modes} categoryName="Mode" />
+                <TextSearch />
+            </div>
         </div>
     )
 }

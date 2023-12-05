@@ -30,8 +30,7 @@ export default function ButtonRemoveGame({ gameId, userEmail }: { gameId: number
         <form onSubmit={handleSubmit}>
             <button
                 type="submit"
-                className={`p-4 text-xs hover:shadow-xl bg-slate-700 text-white`
-                }
+                className={`btn`}
                 disabled={buttonDisabled}
             >
                 {buttonDisabled ? 'Removing...' : 'Remove game'}
