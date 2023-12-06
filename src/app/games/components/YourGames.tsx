@@ -17,7 +17,7 @@ const YourGames: React.FC<IYourGamesProps> = ({ yourGames }) => {
     if (status === "unauthenticated") {
         return (
             <div className="">
-                <Link href="/api/auth/signin" className='flex justify-around items-center w-full p-3 hover:shadow-lg '>Sign in to see your games</Link>
+                <Link href="/api/auth/signin" className='flex justify-around items-center w-full p-3 hover:shadow-lg hover:text-purple-600 bg-red-300 '>Sign in to see your games</Link>
             </div>
         )
     }

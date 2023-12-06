@@ -9,16 +9,24 @@ export default async function ConnectionMessages() {
     return (
         <div
             id="connectoin_messages_container"
-            className="flex justify-around p-4"
+            className="p-4 shadow-md bg-slate-300"
         >
             {session?.user
                 &&
-                <div> Your connection messages: ...</div>
+                <div
+                    id="connection_messages_container"
+                    className=" flex flex-col items-center"
+                >
+                    <h2 className="font-semibold text-blue-700 text-xl mb-4">Your connection messages</h2>
+                    <div className="max-w-4xl">
+                        You don't yet have any messages, or connection requests. Checkout some Games and connect with others who want to play!
+                    </div>
+                </div>
                 ||
                 <div>
                     <Link href={`/api/auth/signin`}
-                        className="text-purple-800 underline"
-                    >Sign in to see your messages</Link>
+                        className="text-purple-800 underline italic"
+                    >Sign in to see Messages, Connection requests, and more!</Link>
                 </div>
             }
         </div>

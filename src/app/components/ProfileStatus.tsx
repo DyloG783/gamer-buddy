@@ -11,11 +11,7 @@ export default async function ProfileStatus() {
     // user is not logged in so give them a link to sign in 
     if (!session) {
         return (
-            <div className="flex justify-around">
-                <Link href={`/api/auth/signin`}
-                    className="text-purple-800 underline"
-                >Sign in to check profile status!</Link>
-            </div>
+            null
         )
     }
 
@@ -45,11 +41,11 @@ export default async function ProfileStatus() {
     }
 
     return (
-        <div id="profile_status_container"
-            className="p-2 bg-red-200 border-2 border-black"
+        <div id="profile_status_container "
+            className="p-4 md:p-8 mx-auto bg-yellow-100 shadow-lg"
         >
             <Link href={`/profile`}>
-                <h1 className="font-bold text-center">Your profile status</h1>
+                <h1 className="font-semibold text-center mb-4 text-blue-700">Your profile status</h1>
                 {timezone
                     &&
                     <div
@@ -67,11 +63,7 @@ export default async function ProfileStatus() {
                         id="timezone_status_unavailable"
                         className="flex gap-2 pb-2"
                     >
-                        <Image src="./red_cross.svg"
-                            height={0} width={0} alt="fail timezone not provided"
-                            className={`w-4 md:w-7`}
-                        />
-                        <p>You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with!</p>
+                        <p>* You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
                     </div>
                 }
                 {aboutYou
@@ -91,11 +83,7 @@ export default async function ProfileStatus() {
                         id="aboutYou_status_unavailable"
                         className="flex gap-2 pb-2"
                     >
-                        <Image src="./red_cross.svg"
-                            height={0} width={0} alt="fail aboutYou not provided"
-                            className={`w-4 md:w-7`}
-                        />
-                        <p>You still need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information. You idiot!!!</p>
+                        <p>* You still need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
                     </div>
                 }
             </Link>

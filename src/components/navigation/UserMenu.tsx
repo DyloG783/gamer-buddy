@@ -49,7 +49,7 @@ export default function UserMenu() {
                     className='w-14 md:w-20 xl:w-24 h-auto mx-auto rounded-full'
                 />
                 <div className={`${userMenuOpen ? "hidden" : ""} mb-auto`}>
-                    <svg className={`w-3 md:w-4 lg:w-5 `}
+                    <svg className={`w-3 md:w-5 lg:w-7`}
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
                     >
@@ -58,7 +58,7 @@ export default function UserMenu() {
                 </div>
                 <div className={`${userMenuOpen ? "" : "hidden"} mb-auto`}>
                     <svg
-                        className={`w-3 md:w-4 lg:w-5`}
+                        className={`w-3 md:w-5 lg:w-7`}
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
                     >
