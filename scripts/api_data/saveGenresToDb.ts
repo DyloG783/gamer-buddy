@@ -32,13 +32,13 @@ async function saveGameGenresToDb() {
 
                 await prisma.genre.upsert({
                     where: {
-                        externalId: genresJSON[i].id,
+                        id: genresJSON[i].id,
                     },
                     update: {
                         
                     },
                     create: {
-                        externalId: genresJSON[i].id,
+                        id: genresJSON[i].id,
                         name: genresJSON[i].name,
                     },
                 })

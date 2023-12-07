@@ -7,7 +7,6 @@ import { ISearchState } from "@/lib/custom_types";
 // same data structure in the db
 interface ISearchableGameType {
     id: number;
-    externalId: number;
     name: string;
 }
 
@@ -30,8 +29,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
         const [categoryListSelection, setCategoryListSelection] = useState({
-            id: 0,
-            name: ""
+            id: 0
         })
 
         useEffect(() => {
@@ -40,7 +38,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     setSearchState({
                         ...searchState,
                         genre: categoryListSelection.id,
-                        genreName: categoryListSelection.name,
                         currentSelected: "genre"
                     })
                 }
@@ -48,7 +45,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     setSearchState({
                         ...searchState,
                         platform: categoryListSelection.id,
-                        platformName: categoryListSelection.name,
                         currentSelected: "platform"
                     })
                 }
@@ -56,7 +52,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     setSearchState({
                         ...searchState,
                         mode: categoryListSelection.id,
-                        modeName: categoryListSelection.name,
                         currentSelected: "mode"
                     })
                 }
@@ -66,7 +61,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
         const handleSubmit = (e: React.ChangeEvent<HTMLSelectElement>) => {
             setCategoryListSelection({
                 id: Number(e.target.value),
-                name: e.target.options[e.target.selectedIndex].innerHTML
             })
         }
 
@@ -86,7 +80,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     className="w-56 bg-slate-200 text-sm md:text-base"
                 >
                     {categoryList.map((listItem) =>
-                        <option key={listItem.externalId} value={listItem.externalId}>
+                        <option key={listItem.id} value={listItem.id}>
                             {listItem.name}
                         </option>
                     )}
@@ -98,10 +92,10 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
     const TextSearch: React.FC = () => {
 
         const [input, setInput] = useState("")
-        const [submitText, setSubmitText] = useState("placeholder")
+        const [submitText, setSubmitText] = useState("")
 
         useEffect(() => {
-            if (submitText != "placeholder") {
+            if (submitText != "") {
                 setSearchState({
                     ...searchState,
                     search: submitText,

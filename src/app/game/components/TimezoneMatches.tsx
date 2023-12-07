@@ -39,7 +39,9 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
         usersWhoAlsoHaveThisGame = await prisma.user.findMany({
             where: {
                 games: {
-                    has: gameId
+                    some: {
+                        id: gameId
+                    }
                 },
                 NOT: {
                     id: thisUser?.id

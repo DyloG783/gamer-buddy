@@ -6,7 +6,7 @@ type gameAndUser = { userEmail: string, gameId: number }
 export async function POST(request: Request) { 
 
     const data: gameAndUser = await request.json()
-
+    
     const { userEmail, gameId } = data
 
     try {
@@ -16,7 +16,9 @@ export async function POST(request: Request) {
             },
             data: {
                 games: {
-                    push: gameId
+                    connect: {
+                        id: gameId
+                    }
                 }
             }
         })
@@ -25,7 +27,6 @@ export async function POST(request: Request) {
         console.log("Failed to update user with game", error)
         return NextResponse.json({message: "failed to update user with game"})
     }
-    
 
     return NextResponse.json({message: "Succeeded adding game to user"})
 }

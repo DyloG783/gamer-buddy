@@ -1,6 +1,6 @@
 import prisma from "@/lib/db"
 
-async function saveGamePlatformsToDb() {
+async function saveGameModesToDb() {
 
     const igdbBaseUrl = process.env.IGDB_BASE_URL
     const twitchClientId = process.env.TWITCH_CLIENT_ID as string
@@ -11,7 +11,7 @@ async function saveGamePlatformsToDb() {
     })
 
     try {
-        const response = await fetch(`${igdbBaseUrl}/platforms`, {
+        const response = await fetch(`${igdbBaseUrl}/game_modes`, {
             method: "POST",
             headers: {
                 "Client-ID": twitchClientId,
@@ -20,34 +20,34 @@ async function saveGamePlatformsToDb() {
             },
             body: `fields name; limit 500; sort id;`
         })
-        const platformsJSON = await response.json()
-        await savePlatforms(platformsJSON)
+        const gameModesJSON = await response.json()
+        await savegameModes(gameModesJSON)
     } catch (error) {
-        console.log("Something went wrong fetching platforms:", error)
+        console.log("Something went wrong fetching game modes:", error)
     }
 
-    async function savePlatforms(platformsJSON: any){ 
+    async function savegameModes(gameModesJSON: any){ 
         try {
-            for (let i = 0; i < Object.keys(platformsJSON).length; i++) { 
+            for (let i = 0; i < Object.keys(gameModesJSON).length; i++) { 
 
-                await prisma.platform.upsert({
+                await prisma.mode.upsert({
                     where: {
-                        externalId: platformsJSON[i].id,
+                        id: gameModesJSON[i].id,
                     },
                     update: {
                         
                     },
                     create: {
-                        externalId: platformsJSON[i].id,
-                        name: platformsJSON[i].name,
+                        id: gameModesJSON[i].id,
+                        name: gameModesJSON[i].name,
                     },
                 })
             }
 
         } catch (error) {
-            console.log("Something went wrong saving platforms:", error)
+            console.log("Something went wrong saving game modes:", error)
         }
     }
 } 
     
-saveGamePlatformsToDb()
+saveGameModesToDb()

@@ -2,10 +2,9 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame } from "@/lib/custom_types";
+import { IGame, IGenre, IMode, IPlatform } from "@/lib/custom_types";
 import { ISearchState } from "@/lib/custom_types";
 import Link from "next/link";
-
 
 interface IPaginatedGamesProps {
     games: IGame[]
@@ -25,58 +24,79 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ games, defau
     if (searchState.currentSelected === "genre") {
 
         filteredGames = games.filter(game =>
-            game.genres.includes(searchState.genre as number)
+            game.genreIds.includes(searchState.genre!)
         )
 
         if (searchState.platform) {
             filteredGames = filteredGames.filter(game =>
-                game.platforms.includes(searchState.platform as number)
+                game.platformIds.includes(searchState.platform!)
             )
         }
         if (searchState.mode) {
             filteredGames = filteredGames.filter(game =>
-                game.gameModes.includes(searchState.mode as number)
+                game.modeIds.includes(searchState.mode!)
             )
         }
     }
     if (searchState.currentSelected === "platform") {
         filteredGames = games.filter(game =>
-            game.platforms.includes(searchState.platform as number)
+            game.platformIds.includes(searchState.platform!)
         )
 
         if (searchState.genre) {
             filteredGames = filteredGames.filter(game =>
-                game.genres.includes(searchState.genre as number)
+                game.genreIds.includes(searchState.genre!)
             )
         }
         if (searchState.mode) {
             filteredGames = filteredGames.filter(game =>
-                game.gameModes.includes(searchState.mode as number)
+                game.modeIds.includes(searchState.mode!)
             )
         }
     }
     if (searchState.currentSelected === "mode") {
         filteredGames = games.filter(game =>
-            game.gameModes.includes(searchState.mode as number)
+            game.modeIds.includes(searchState.mode!)
         )
 
         if (searchState.genre) {
             filteredGames = filteredGames.filter(game =>
-                game.genres.includes(searchState.genre as number)
+                game.genreIds.includes(searchState.genre!)
             )
         }
         if (searchState.platform) {
             filteredGames = filteredGames.filter(game =>
-                game.platforms.includes(searchState.platform as number)
+                game.platformIds.includes(searchState.platform!)
             )
         }
     }
     if (searchState.currentSelected === "textSearch") {
         if (searchState.genre || searchState.platform || searchState.mode) {
-            filteredGames = filteredGames.filter(game => game.name.toLowerCase().includes(searchState.search!.toLowerCase() as string))
+
+            filteredGames = games.filter(game => game.name.toLowerCase().includes(searchState.search!.toLowerCase()))
+
+            if (searchState.genre) {
+                filteredGames = filteredGames.filter(game =>
+                    game.genreIds.includes(searchState.genre!)
+                )
+            }
+
+            if (searchState.platform) {
+                filteredGames = filteredGames.filter(game =>
+                    game.platformIds.includes(searchState.platform!)
+                )
+            }
+
+            if (searchState.mode) {
+                filteredGames = filteredGames.filter(game =>
+                    game.modeIds.includes(searchState.mode!)
+                )
+            }
+
+
         }
         else {
-            filteredGames = games.filter(game => game.name.toLowerCase().includes(searchState.search!.toLowerCase() as string))
+            filteredGames = games.filter(game => game.name.toLowerCase().includes(searchState.search!.toLowerCase()))
         }
     }
     if (searchState.currentSelected === undefined) {
@@ -89,32 +109,32 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ games, defau
                 {currentItems &&
                     currentItems.map((game: IGame) => (
                         <Link
-                            key={game.externalId}
+                            key={game.id}
                             className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
-                            href={`/game/${game.externalId}`}
+                            href={`/game/${game.id}`}
                         >
                             <h3 className="font-bold pb-2 text-base">{game.name}</h3>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Genre</h3>
-                                {game.gameGenreNames.map((genre: string, index: Key) => (
+                                {game.genres.map((genre: IGenre, index: Key) => (
                                     <span key={index}>
-                                        {genre + ", "}
+                                        {genre.name + ", "}
                                     </span>
                                 ))}
                             </div>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Mode</h3>
-                                {game.gameModeNames.map((mode: string, index: Key) => (
+                                {game.modes.map((mode: IMode, index: Key) => (
                                     <span key={index}>
-                                        {mode + ", "}
+                                        {mode.name + ", "}
                                     </span>
                                 ))}
                             </div>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Platform</h3>
-                                {game.platformNames.map((platform: string, index: Key) => (
+                                {game.platforms.map((platform: IPlatform, index: Key) => (
                                     <span key={index}>
-                                        {platform + ", "}
+                                        {platform.name + ", "}
                                     </span>
                                 ))}
                             </div>

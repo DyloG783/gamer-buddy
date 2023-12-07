@@ -1,6 +1,5 @@
 'use client'
 
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function ButtonRemoveGame({ gameId, userEmail }: { gameId: number, userEmail: string | null | undefined }) {

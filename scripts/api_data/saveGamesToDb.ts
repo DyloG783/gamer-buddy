@@ -1,6 +1,6 @@
 require('dotenv').config({ path: '../.env' })
 import prisma from '@/lib/db';
-import getMultiplayerGameCount from './helpers/getMultiplayerGameCount';
+import getMultiplayerGameCount from '../helpers/getMultiplayerGameCount';
 
 async function saveGamesToDb(){ 
 
@@ -47,19 +47,19 @@ async function saveGamesToDb(){
             for (let i = 0; i < Object.keys(gamesJSON).length; i++) {
                 await prisma.game.upsert({
                     where: {
-                        externalId: gamesJSON[i].id,
+                        id: gamesJSON[i].id,
                     },
                     update: {
                         
                     },
                     create: {
-                        externalId: gamesJSON[i].id,
+                        id: gamesJSON[i].id,
                         name: gamesJSON[i].name,
                         summary: gamesJSON[i].summary,
                         url: gamesJSON[i].url,
-                        platforms: gamesJSON[i].platforms,
-                        gameModes: gamesJSON[i].game_modes,
-                        genres: gamesJSON[i].genres,
+                        platformIds: gamesJSON[i].platforms,
+                        modeIds: gamesJSON[i].game_modes,
+                        genreIds: gamesJSON[i].genres,
                         totalRating: gamesJSON[i].total_rating,
                         firstReleaseDate: gamesJSON[i].first_release_date
                     },

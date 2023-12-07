@@ -6,31 +6,9 @@ type gameAndUser = { userEmail: string, gameId: number }
 export async function POST(request: Request) { 
 
     const data: gameAndUser = await request.json()
+
     const { userEmail, gameId } = data
 
-    // get all games from user
-    const games = await prisma.user.findUnique({
-        where: {
-            email: userEmail
-        },
-        select: { 
-            games: true
-        }
-    })
-
-    // filter out game (.filter function didn't work so needed for loop)
-    let filteredGames: number[] = [];
-    if (games != null) { 
-
-        for (let i = 0; i < games.games.length; i++) {
-            if (games.games[i] !== gameId) { 
-                filteredGames.push(games.games[i])
-            }
-         }
-        
-    }
-
-    // set new filtered array as user's games array
     try {
         const removeGameFromUser = await prisma.user.update({
             where: {
@@ -38,7 +16,9 @@ export async function POST(request: Request) {
             },
             data: {
                 games: {
-                    set: filteredGames
+                    disconnect: {
+                        id: gameId
+                    }
                 }
             }
         })

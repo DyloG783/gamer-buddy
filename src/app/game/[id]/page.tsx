@@ -3,17 +3,15 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import GameActionBar from "../components/GameActionBar";
+import { IGenre, IMode, IPlatform } from "@/lib/custom_types";
 
 export default async function GamePage({ params }: { params: { id: number } }) {
 
-    const gameId = Number(params.id) // this id passed in params is the game's ExternalID
+    const gameId = Number(params.id) // this id passed in params is the game's id
     const session = await getServerSession(authOptions);
 
     // the game selected from the games page
     let game;
-
-    // find user in db using email from session, used for checking if this game is already saved or not
-    let user;
 
     // boolean for whether the user already has this game added to their account
     let alreadyExists = false;
@@ -25,7 +23,12 @@ export default async function GamePage({ params }: { params: { id: number } }) {
     try {
         game = await prisma.game.findUnique({
             where: {
-                externalId: gameId
+                id: gameId
+            },
+            include: {
+                genres: true,
+                modes: true,
+                platforms: true
             }
         })
     }
@@ -47,24 +50,20 @@ export default async function GamePage({ params }: { params: { id: number } }) {
 
         userEmail = session?.user?.email;
 
-        user = await prisma.user.findUnique({
+        const hasGame = await prisma.user.findUnique({
             where: {
                 email: userEmail as string
-            }
-        })
-
-        // retrieve user's array of saved games (game external id's)
-        // if user already has game in array set alreadyExists = true
-        const usersGames = await prisma.user.findFirst({
-            where: {
-                email: userEmail
             },
             select: {
-                games: true
+                games: {
+                    where: {
+                        id: gameId
+                    }
+                }
             }
         })
 
-        if (usersGames?.games.includes(gameId)) {
+        if (hasGame?.games.length) {
             alreadyExists = true;
         }
     }
@@ -86,20 +85,20 @@ export default async function GamePage({ params }: { params: { id: number } }) {
                 >
                     <div id="game_genre_group" className="pb-4">
                         <p className="font-semibold">Genre</p>
-                        {game?.gameGenreNames.map((genre: string) => (
-                            <span key={genre} className="italic">{genre + ", "}</span>
+                        {game?.genres.map((genre: IGenre) => (
+                            <span key={genre.id} className="italic">{genre.name + ", "}</span>
                         ))}
                     </div>
                     <div id="game_mode_group" className="pb-4">
                         <p className="font-semibold">Mode</p>
-                        {game?.gameModeNames.map((mode: string) => (
-                            <span key={mode} className="italic">{mode + ", "}</span>
+                        {game?.modes.map((mode: IMode) => (
+                            <span key={mode.id} className="italic">{mode.name + ", "}</span>
                         ))}
                     </div>
                     <div id="game_platform_group" className="pb-4">
                         <p className="font-semibold">Platform</p>
-                        {game?.platformNames.map((plat: string) => (
-                            <span key={plat} className="italic">{plat + ", "}</span>
+                        {game?.platforms.map((plat: IPlatform) => (
+                            <span key={plat.id} className="italic">{plat.name + ", "}</span>
                         ))}
                     </div>
                 </div>

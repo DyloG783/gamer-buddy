@@ -35,14 +35,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Profile {
-  id       String  @id @default(cuid())
-  bio      String?
-  userId   String  @unique
-  timezone String?
-  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -56,6 +48,14 @@ model TwitchAuthToken {
   twitchAuthToken String
 }
 
+model Profile {
+  id       String  @id @default(cuid())
+  bio      String?
+  userId   String  @unique
+  timezone String?
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -65,39 +65,39 @@ model User {
   accounts      Account[]
   Profile       Profile?
   sessions      Session[]
-  games         Int[]
+  games         Game[]
 }
 
 model Game {
-  id               Int      @id @default(autoincrement())
-  externalId       Int      @unique
+  id               Int        @id @unique
   name             String
   summary          String?
   url              String?
-  platforms        Int[]
-  platformNames    String[]
-  gameModes        Int[]
-  gameModeNames    String[]
-  genres           Int[]
-  gameGenreNames   String[]
+  platformIds      Int[]
+  modeIds          Int[]
+  genreIds         Int[]
+  platforms        Platform[]
+  modes            Mode[]
+  genres           Genre[]
+  users            User[]
   firstReleaseDate Int?
   totalRating      Float?
 }
 
 model Platform {
-  id         Int    @id @default(autoincrement())
-  externalId Int    @unique
-  name       String
+  id    Int    @id @unique
+  name  String
+  games Game[]
 }
 
-model GameMode {
-  id         Int    @id @default(autoincrement())
-  externalId Int    @unique
-  name       String
+model Mode {
+  id    Int    @id @unique
+  name  String
+  games Game[]
 }
 
 model Genre {
-  id         Int    @id @default(autoincrement())
-  externalId Int    @unique
-  name       String
+  id    Int    @id @unique
+  name  String
+  games Game[]
 }

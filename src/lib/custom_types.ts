@@ -1,17 +1,31 @@
-export interface IGame {
+export type IGame = {
     id: number;
-    externalId: number;
     name: string;
     summary: string | null;
     url: string | null;
-    platforms: number[];
-    platformNames: string[];
-    gameModes: number[];
-    gameModeNames: string[];
-    genres: number[];
-    gameGenreNames: string[];
+    platformIds: number[];
+    modeIds: number[];
+    genreIds: number[];
     firstReleaseDate: number | null;
     totalRating: number | null;
+    genres: IGenre[];
+    platforms: IPlatform[];
+    modes: IMode[];
+}
+
+export type IGenre = {
+    id: number;
+    name: string;
+}
+
+export type IPlatform = {
+    id: number;
+    name: string;
+}
+
+export type IMode = {
+    id: number;
+    name: string;
 }
 
 export interface ISearchState {
@@ -19,8 +33,5 @@ export interface ISearchState {
     platform: number | undefined;
     mode: number | undefined;
     search: string | undefined;
-    genreName: string | undefined;
-    platformName: string | undefined;
-    modeName: string | undefined;
     currentSelected: string | undefined;
 }

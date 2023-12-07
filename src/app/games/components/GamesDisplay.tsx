@@ -3,16 +3,22 @@
 import PaginatedGamesWithSearch from "@/app/games/components/PaginatedGamesWithSearch";
 import SearchOptions from "./SearchOptions";
 import { useState } from "react";
+import { IGame } from "@/lib/custom_types";
 
-export default function GamesDisplay(props: any) {
+type IGamesDisplayProps = {
+    genres: { id: number; name: string; }[],
+    platforms: { id: number; name: string; }[],
+    modes: { id: number; name: string; }[],
+    games: IGame[],
+    defaultGames: IGame[],
+}
+
+export default function GamesDisplay(props: IGamesDisplayProps) {
 
     const defaultState = {
         genre: undefined,
-        genreName: undefined,
         platform: undefined,
-        platformName: undefined,
         mode: undefined,
-        modeName: undefined,
         search: undefined,
         currentSelected: undefined
     }

@@ -2,7 +2,7 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame } from "@/lib/custom_types";
+import { IGame, IPlatform, IMode, IGenre } from "@/lib/custom_types";
 import Link from "next/link";
 
 interface IPaginatedGamesProps {
@@ -22,36 +22,35 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                 {currentItems &&
                     currentItems.map((game: IGame) => (
                         <Link
-                            key={game.externalId}
+                            key={game.id}
                             className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
-                            href={`/game/${game.externalId}`}
+                            href={`/game/${game.id}`}
                         >
                             <h3 className="font-bold pb-2 text-base">{game.name}</h3>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Genre</h3>
-                                {game.gameGenreNames.map((genre: string, index: Key) => (
+                                {game.genres.map((genre: IGenre, index: Key) => (
                                     <span key={index}>
-                                        {genre + ", "}
+                                        {genre.name + ", "}
                                     </span>
                                 ))}
                             </div>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Mode</h3>
-                                {game.gameModeNames.map((mode: string, index: Key) => (
+                                {game.modes.map((mode: IMode, index: Key) => (
                                     <span key={index}>
-                                        {mode + ", "}
+                                        {mode.name + ", "}
                                     </span>
                                 ))}
                             </div>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Platform</h3>
-                                {game.platformNames.map((platform: string, index: Key) => (
+                                {game.platforms.map((platform: IPlatform, index: Key) => (
                                     <span key={index}>
-                                        {platform + ", "}
+                                        {platform.name + ", "}
                                     </span>
                                 ))}
                             </div>
-
                         </Link>
                     ))}
             </div>
