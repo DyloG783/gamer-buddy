@@ -26,12 +26,6 @@ export default function TimezoneSelector({ userTimezone }: { userTimezone: strin
     // pending state to disable submit button whileserver action completes
     const { pending } = useFormStatus()
 
-    // converting timezone JSON into array to map out select form options
-    const tzArray = []
-    for (let i in timezoneJSON) {
-        tzArray.push(timezoneJSON[i].text)
-    }
-
     // can't use 'EditCancelSubmitButton' with this select form/form action becauase null
     // keeps getting send to the server
     return (
@@ -71,8 +65,8 @@ export default function TimezoneSelector({ userTimezone }: { userTimezone: strin
                     required
                 >
                     <option disabled hidden label={userTimezone as string} />
-                    {tzArray.map((timezone) =>
-                        <option key={timezone} value={timezone} label={timezone} />
+                    {timezoneJSON.map((timezone) =>
+                        <option key={timezone.text} value={timezone.text} label={timezone.text} />
                     )}
                 </select>
                 <p aria-live="polite" className="sr-only">

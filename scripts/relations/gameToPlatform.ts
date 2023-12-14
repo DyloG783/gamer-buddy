@@ -6,30 +6,30 @@ async function gameToPlatform() {
 
     try {
 
-        for (let pl = 0; pl < platforms.length; pl++) { 
+        for (const platform of platforms) { 
 
-            console.log(`Platform loop ${platforms[pl].name}`)
+            console.log(`Platform loop ${platform.name}`)
 
            const games = await prisma.game.findMany({
                 where: {
                     platformIds: {
-                        has: platforms[pl].id
+                        has: platform.id
                     }
                 }
            })
             
             console.log(`Games to connect ${games.length}`)
             
-            for (let gam = 0; gam < games.length; gam++) { 
+            for (const game of games) { 
 
                 await prisma.game.update({
                     where: {
-                    id: games[gam].id,
+                    id: game.id,
                     },
                     data: {
                         platforms: {
                             connect: {
-                                id: platforms[pl].id,
+                                id: platform.id,
                             },
                         },
                     },

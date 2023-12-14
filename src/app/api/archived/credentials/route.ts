@@ -14,9 +14,9 @@ export async function POST(request: Request) {
             where: {email: email}
         })
 
-        if (usr?.password === password) { 
-            user = usr
-        }
+        // if (usr?.password === password) { 
+        //     user = usr
+        // }
     }
 
     main()

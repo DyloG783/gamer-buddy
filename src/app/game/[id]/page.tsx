@@ -103,7 +103,7 @@ export default async function GamePage({ params }: { params: { id: number } }) {
                     </div>
                 </div>
             </div>
-            <GameActionBar session={session} alreadyExists={alreadyExists} gameId={gameId} userEmail={userEmail} />
+            <GameActionBar session={session} alreadyExists={alreadyExists} game={game} userEmail={userEmail} />
         </div>
     )
 }

@@ -8,6 +8,18 @@ export type IGame = {
     genreIds: number[];
     firstReleaseDate: number | null;
     totalRating: number | null;
+} 
+
+export type IGameAndTypes = {
+    id: number;
+    name: string;
+    summary: string | null;
+    url: string | null;
+    platformIds: number[];
+    modeIds: number[];
+    genreIds: number[];
+    firstReleaseDate: number | null;
+    totalRating: number | null;
     genres: IGenre[];
     platforms: IPlatform[];
     modes: IMode[];
@@ -35,3 +47,11 @@ export interface ISearchState {
     search: string | undefined;
     currentSelected: string | undefined;
 }
+
+export type IUser = {
+    id: string;
+    name: string | null;
+    email: string | null;
+    emailVerified: Date | null;
+    image: string | null;
+} 

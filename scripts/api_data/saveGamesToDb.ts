@@ -27,7 +27,7 @@ async function saveGamesToDb(){
                 "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
                 "Accept": "application/json"
                 },
-                body: `fields name, url, summary, platforms, game_modes, genres, first_release_date, total_rating; where game_modes = (2,3,4,5,6) & first_release_date > 1262350800 & platforms != null & genres != null; limit ${limit}; offset ${offset}; sort id;`
+                body: `fields name, url, summary, platforms, game_modes, genres, first_release_date, total_rating; where game_modes = (2,3,4,5,6) & first_release_date > 1262350800 & platforms = (3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 20, 34, 39, 48, 49, 130, 165, 167, 169, 384, 385, 386, 390, 471) & genres != null; limit ${limit}; offset ${offset}; sort id;`
             })
             const gamesJSON = await response.json()
             await saveGames(gamesJSON)
@@ -44,24 +44,24 @@ async function saveGamesToDb(){
 
     async function saveGames(gamesJSON: any) { 
         try {
-            for (let i = 0; i < Object.keys(gamesJSON).length; i++) {
+            for (const game of gamesJSON) {
                 await prisma.game.upsert({
                     where: {
-                        id: gamesJSON[i].id,
+                        id: game.id,
                     },
                     update: {
                         
                     },
                     create: {
-                        id: gamesJSON[i].id,
-                        name: gamesJSON[i].name,
-                        summary: gamesJSON[i].summary,
-                        url: gamesJSON[i].url,
-                        platformIds: gamesJSON[i].platforms,
-                        modeIds: gamesJSON[i].game_modes,
-                        genreIds: gamesJSON[i].genres,
-                        totalRating: gamesJSON[i].total_rating,
-                        firstReleaseDate: gamesJSON[i].first_release_date
+                        id: game.id,
+                        name: game.name,
+                        summary: game.summary,
+                        url: game.url,
+                        platformIds: game.platforms,
+                        modeIds: game.game_modes,
+                        genreIds: game.genres,
+                        totalRating: game.total_rating,
+                        firstReleaseDate: game.first_release_date
                     },
                 })
             }

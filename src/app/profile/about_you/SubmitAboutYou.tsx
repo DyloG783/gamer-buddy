@@ -30,8 +30,11 @@ export default async function SubmitBio(prevState: any, formData: FormData) {
         bio: input,
       },
     })
+
     revalidatePath('/');
+
     return { message: `Updated about you: ${input}` }
+
   } catch (error) {
     return { message: `Failed to update about you` }
   }

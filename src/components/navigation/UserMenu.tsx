@@ -32,37 +32,43 @@ export default function UserMenu() {
     if (status === "unauthenticated") {
         return (
             <div className="flex ">
-                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex justify-around items-center w-full p-2 md:p-4 hover:shadow-lg text-white'>Sign in</Link>
+                <Link href="/api/auth/signin" className='text-sm md:text-base lg:text-lg flex justify-around items-center w-full p-2 md:p-8 hover:shadow-lg text-white'>Sign in</Link>
             </div>
         )
     }
 
     return (
-        <div className="relative min-w-[200px]">
+        <div className="relative min-w-[150px]">
             <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 aria-label="User or profile drop down menu"
-                className={`flex items-center h-full gap-2 p-4 w-full
-                hover:shadow-lg`}
+                className={`flex justify-center md:justify-end h-full p-2 md:p-4 w-full
+                hover:shadow-lg gap-2`}
             >
                 <img src={`${data?.user?.image}`} height={0} width={0} alt="Profile Avatar"
-                    className='w-14 md:w-20 xl:w-24 h-auto mx-auto rounded-full'
+                    className='w-12 md:w-16 h-auto  rounded-full'
                 />
                 <div className={`${userMenuOpen ? "hidden" : ""} mb-auto`}>
-                    <svg className={`w-3 md:w-5 lg:w-7`}
+                    <svg className={`w-3 md:w-4 lg:w-5`}
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
                     >
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        <path
+                            fill="#FFFFFF"
+                            d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
+                        />
                     </svg>
                 </div>
                 <div className={`${userMenuOpen ? "" : "hidden"} mb-auto`}>
                     <svg
-                        className={`w-3 md:w-5 lg:w-7`}
+                        className={`w-3 md:w-4 lg:w-5`}
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
                     >
-                        <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                        <path
+                            fill="#FFFFFF"
+                            d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"
+                        />
                     </svg>
                 </div>
             </button>

@@ -6,30 +6,30 @@ async function gameToMode() {
 
     try {
 
-        for (let mo = 0; mo < modes.length; mo++) { 
+        for (const mode of modes) { 
 
-            console.log(`Mode loop ${modes[mo].name}`)
+            console.log(`Mode loop ${mode.name}`)
 
            const games = await prisma.game.findMany({
                 where: {
                     modeIds: {
-                        has: modes[mo].id
+                        has: mode.id
                     }
                 }
            })
             
             console.log(`Games to connect ${games.length}`)
             
-            for (let gam = 0; gam < games.length; gam++) { 
+            for (const game of games) { 
 
                 await prisma.game.update({
                     where: {
-                    id: games[gam].id,
+                    id: game.id,
                     },
                     data: {
                         modes: {
                             connect: {
-                                id: modes[mo].id,
+                                id: mode.id,
                             },
                         },
                     },

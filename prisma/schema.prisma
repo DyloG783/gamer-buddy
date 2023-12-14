@@ -66,6 +66,19 @@ model User {
   Profile       Profile?
   sessions      Session[]
   games         Game[]
+  followedBy    Follows[] @relation("followedBy")
+  following     Follows[] @relation("following")
+}
+
+model Follows {
+  followedBy   User   @relation("followedBy", fields: [followedById], references: [id])
+  followedById String
+  following    User   @relation("following", fields: [followingId], references: [id])
+  followingId  String
+  game         Game   @relation(fields: [gameId], references: [id])
+  gameId       Int
+
+  @@id([followingId, followedById])
 }
 
 model Game {
@@ -82,6 +95,7 @@ model Game {
   users            User[]
   firstReleaseDate Int?
   totalRating      Float?
+  Follows          Follows[]
 }
 
 model Platform {

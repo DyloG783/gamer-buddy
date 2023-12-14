@@ -9,15 +9,12 @@ export default async function Profile() {
 
     const session = await getServerSession(authOptions);
 
-    const findUser = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
         where: {
             email: session?.user?.email as string
-        }
-    })
-
-    const findProfile = await prisma.profile.findUnique({
-        where: {
-            userId: findUser?.id
+        },
+        include: {
+            Profile: true
         }
     })
 
@@ -25,9 +22,9 @@ export default async function Profile() {
         <div className="grow flex justify-around my-1 md:my-10 
             text-sm md:text-base lg:text-lg">
             <div className="md:w-3/4 shadow-md p-4 md:p-10">
-                <UsernameSelector userName={findUser?.name} />
-                <AboutYouSelector bio={findProfile?.bio} />
-                <TimezoneSelector userTimezone={findProfile?.timezone} />
+                <UsernameSelector userName={user?.name} />
+                <AboutYouSelector bio={user?.Profile?.bio} />
+                <TimezoneSelector userTimezone={user?.Profile?.timezone} />
             </div>
         </div>
     );

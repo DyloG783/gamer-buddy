@@ -14,7 +14,8 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
     // potentially a list of users who havee the game AND timezone match
     let usersWithGameAndTimezone = 0;
 
-    let thisUsersTimezone;
+    // this is used as a flag to display different content based on whether the user has theirtime zone set in their profile 
+    let usersTimezone: string | null | undefined;
 
     if (session) {
 
@@ -22,18 +23,12 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
         const thisUser = await prisma.user.findUnique({
             where: {
                 email: session?.user?.email as string
-            }
-        })
-
-        // get profile for timezone
-        const thisUsersProfile = await prisma.profile.findUnique({
-            where: {
-                userId: thisUser?.id
-            }
+            },
+            include: { Profile: true }
         })
 
         // this users timezone to compare to others who also have this games
-        thisUsersTimezone = thisUsersProfile?.timezone;
+        usersTimezone = thisUser?.Profile?.timezone;
 
         // find other users who have also have this game saved
         usersWhoAlsoHaveThisGame = await prisma.user.findMany({
@@ -45,26 +40,19 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
                 },
                 NOT: {
                     id: thisUser?.id
-                }
-            }
+                },
+            },
+            include: { Profile: true }
         })
 
         // look up the profile for each user who also has this game
-        for (let i = 0; i < usersWhoAlsoHaveThisGame.length; i++) {
-            const otherUsersProfile = await prisma.profile.findUnique({
-                where: {
-                    userId: usersWhoAlsoHaveThisGame[i].id
-                }
-            })
-
-            // when timezones match increment a counter to display to user letting them know how many
-            //possible mathes there are
-            if (otherUsersProfile?.timezone === thisUsersTimezone) {
+        for (const otherPlayer of usersWhoAlsoHaveThisGame) {
+            if (otherPlayer.Profile?.timezone === usersTimezone) {
                 usersWithGameAndTimezone++;
             }
         }
 
-        if (thisUsersTimezone) {
+        if (usersTimezone) {
             return (
                 <div className="p-4 bg-slate-300 my-auto">
                     <h2 className="font-semibold text-lg md:text-2xl mb-2 text-blue-700">Other Players</h2>
@@ -146,8 +134,6 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
                         </div>
                     </Link>
                 </div>
-
-
             </div>
         )
     }

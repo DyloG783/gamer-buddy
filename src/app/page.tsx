@@ -1,13 +1,7 @@
-import prisma from "@/lib/db";
 import ConnectionMessages from "@/app/components/ConnectionMessages";
-import PaginatedGames from "@/app/games/components/PaginatedGames";
 import ProfileStatus from "@/app/components/ProfileStatus";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
-
-export default async function Home() {
-
+export default function Home() {
 
   return (
     <>

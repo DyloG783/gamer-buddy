@@ -28,18 +28,18 @@ async function saveGameModesToDb() {
 
     async function savegameModes(gameModesJSON: any){ 
         try {
-            for (let i = 0; i < Object.keys(gameModesJSON).length; i++) { 
+            for (const mode of gameModesJSON) { 
 
                 await prisma.mode.upsert({
                     where: {
-                        id: gameModesJSON[i].id,
+                        id: mode.id,
                     },
                     update: {
                         
                     },
                     create: {
-                        id: gameModesJSON[i].id,
-                        name: gameModesJSON[i].name,
+                        id: mode.id,
+                        name: mode.name,
                     },
                 })
             }

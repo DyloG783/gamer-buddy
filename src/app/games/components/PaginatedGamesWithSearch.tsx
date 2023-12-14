@@ -2,24 +2,23 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame, IGenre, IMode, IPlatform } from "@/lib/custom_types";
-import { ISearchState } from "@/lib/custom_types";
+import { IGame, IGameAndTypes, IGenre, IMode, IPlatform, ISearchState } from "@/lib/custom_types";
 import Link from "next/link";
 
 interface IPaginatedGamesProps {
-    games: IGame[]
-    defaultGames: IGame[]
+    games: IGameAndTypes[]
+    defaultGames: IGameAndTypes[]
     itemsPerPage: number
     searchState: ISearchState
 }
 
 interface IPageGames {
-    currentItems: IGame[]
+    currentItems: IGameAndTypes[]
 }
 
 const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ games, defaultGames, itemsPerPage, searchState }) => {
 
-    let filteredGames: IGame[] = []
+    let filteredGames: IGameAndTypes[] = []
 
     if (searchState.currentSelected === "genre") {
 
@@ -107,7 +106,7 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ games, defau
         return (
             <div className="grid md:grid-flow-col md:auto-cols-fr grid-rows-3 text-sm ">
                 {currentItems &&
-                    currentItems.map((game: IGame) => (
+                    currentItems.map((game: IGameAndTypes) => (
                         <Link
                             key={game.id}
                             className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"

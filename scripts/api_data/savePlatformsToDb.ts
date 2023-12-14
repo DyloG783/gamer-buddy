@@ -18,7 +18,7 @@ async function saveGamePlatformsToDb() {
                 "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
                 "Accept": "application/json"
             },
-            body: `fields name; limit 500; sort id;`
+            body: `fields name; where id = (3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 20, 34, 39, 48, 49, 130, 165, 167, 169, 384, 385, 386, 390, 471); limit 500; sort id;`
         })
         const platformsJSON = await response.json()
         await savePlatforms(platformsJSON)
@@ -28,18 +28,18 @@ async function saveGamePlatformsToDb() {
 
     async function savePlatforms(platformsJSON: any){ 
         try {
-            for (let i = 0; i < Object.keys(platformsJSON).length; i++) { 
+            for (const plat of platformsJSON) { 
 
                 await prisma.platform.upsert({
                     where: {
-                        id: platformsJSON[i].id,
+                        id: plat.id,
                     },
                     update: {
                         
                     },
                     create: {
-                        id: platformsJSON[i].id,
-                        name: platformsJSON[i].name,
+                        id: plat.id,
+                        name: plat.name,
                     },
                 })
             }

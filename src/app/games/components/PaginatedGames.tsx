@@ -2,16 +2,16 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame, IPlatform, IMode, IGenre } from "@/lib/custom_types";
+import { IGame, IGameAndTypes, IPlatform, IMode, IGenre } from "@/lib/custom_types";
 import Link from "next/link";
 
 interface IPaginatedGamesProps {
-    games: IGame[]
+    games: IGameAndTypes[]
     itemsPerPage: number
 }
 
 interface IPageGames {
-    currentItems: IGame[]
+    currentItems: IGameAndTypes[]
 }
 
 const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage }) => {
@@ -20,7 +20,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
         return (
             <div className="grid md:grid-flow-col md:auto-cols-fr text-xs pb-2 ">
                 {currentItems &&
-                    currentItems.map((game: IGame) => (
+                    currentItems.map((game: IGameAndTypes) => (
                         <Link
                             key={game.id}
                             className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"

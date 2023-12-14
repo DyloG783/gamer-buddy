@@ -20,7 +20,7 @@ export default async function getMultiplayerGameCount() {
             "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
             "Accept": "application/json"
         },
-        body: "fields name; where game_modes = (2,3,4,5,6) & first_release_date > 1262350800 & platforms != null & genres != null;"
+        body: "fields name; where game_modes = (2,3,4,5,6) & first_release_date > 1262350800 & platforms = (3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 20, 34, 39, 48, 49, 130, 165, 167, 169, 384, 385, 386, 390, 471) & genres != null;"
     })
 
     const countJSON = await totalCountResponse.json()

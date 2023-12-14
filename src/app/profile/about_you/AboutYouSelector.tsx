@@ -27,7 +27,9 @@ export default function AboutYou({ bio }: { bio: string | null | undefined }) {
 
     // use effect for validation on input change
     useEffect(() => {
+
         setInputvalid(false)
+
         if (input.length >= 10) {
             if (input.length <= 500) {
                 if (input != "") {

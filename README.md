@@ -13,7 +13,7 @@ Git:
 to merge branch to main
 1. push branch
 2. checkout master
-3. git merge [branch namegit status] 
+3. git merge [branch name] 
 
 Run postgres db command:
 dont need to run in with app. Use PSQL command tool for console access
@@ -32,7 +32,7 @@ Current script flow:
 1. saveTwitchAuthTokenToDb; fetches auth token from twitch api and saves it to db
 2. saveGamesToDb; fetches all multiplayer games and upserts them to db
 3. repeat above for 'savemodes...' 'saveGenres...' 'savePlatforms...'
-4. updateGamesWithPlatformsDB, ...gamemodes ...genres ...platforms
+4. reun scripts to create relation connections for the above data
 
 Update npm packages:
 1. npx npm-check-updates
@@ -45,7 +45,7 @@ Google(https://console.cloud.google.com/)
     - dgdevelopment651@gmail.com (Tr...........)
 
 Twitch
-- dgdevelopment652@  (Tr.... Tr....)
+- dylangreenslade, (Tr.... Tr....)
 
 postman:
 dgdevelopment65@gmail.com
@@ -54,7 +54,18 @@ Need help with:
 
 - multiple accounts to test with giving I can't use credentials provider?
 - storing only 1 instance of a token in a DB table?
-- Text searh only working either with, or without another dropdown selected
+- Text searh only working either with not other selections?
+- can't cache all games from db as it's over 2mb. If I create a route to only fetch searched games how would I manage all the possibilities in a db query?
+- Good looking css?
+- code review main pages?
+- 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged?
+- userIds in url for routing not good?
+
+---
+
+DB:
+
+- category 1 (console); 3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 20, 34, 39, 48, 49, 130, 165, 167, 169, 384, 385, 386, 390, 471
 
 ---
 

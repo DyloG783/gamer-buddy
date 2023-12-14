@@ -1,7 +1,7 @@
 import './globals.css'
 import SessionProvider from "../components/auth/SessionProvider"
 import { getServerSession } from "next-auth"
-import TopNavigationBar from "@/components/navigation/TopNavigationBar"
+import NavigationBar from "@/components/navigation/NavigationBar"
 import Footer from '../components/Footer'
 
 export const metadata = {
@@ -17,10 +17,10 @@ export default async function RootLayout({ children, }: { children: React.ReactN
     <html lang="en">
       <body className='min-h-screen flex flex-col bg-slate-200 text-sm md:text-base lg:text-lg'>
         <SessionProvider session={session}>
-          <header>
-            <TopNavigationBar />
+          <header className='bg-slate-400 '>
+            <NavigationBar />
           </header>
-          <main className='grow flex'>
+          <main className='grow flex md:w-3/4 mx-auto'>
             {children}
           </main>
           <footer>

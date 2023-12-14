@@ -22,7 +22,9 @@ export default async function submitUsername(prevState: any, formData: FormData)
     })
 
     revalidatePath('/');
+
     return { message: `Updated username: ${input}` }
+
   } catch (error) {
     return { message: `Failed to update username`, error }
   }

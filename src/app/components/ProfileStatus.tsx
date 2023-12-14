@@ -8,7 +8,7 @@ export default async function ProfileStatus() {
 
     const session = await getServerSession(authOptions)
 
-    // user is not logged in so give them a link to sign in 
+    // user is not logged in don't display this component
     if (!session) {
         return (
             null
@@ -16,22 +16,18 @@ export default async function ProfileStatus() {
     }
 
     // find the user's email from the  the session
-    const findUser = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
         where: {
             email: session?.user?.email as string
-        }
-    })
-
-    // find the users profile based on their email
-    const findProfile = await prisma.profile.findUnique({
-        where: {
-            userId: findUser?.id
+        },
+        include: {
+            Profile: true
         }
     })
 
     // get user's bio & timezone if they exist 
-    const aboutYou = findProfile?.bio
-    const timezone = findProfile?.timezone
+    const aboutYou = user?.Profile?.bio
+    const timezone = user?.Profile?.timezone
 
     // This works for hiding the component completely if the user has completed setting their timezone, and about-you section
     if (aboutYou && timezone) {

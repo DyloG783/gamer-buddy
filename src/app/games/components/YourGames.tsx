@@ -1,4 +1,3 @@
-import { IGame } from "@/lib/custom_types";
 import Link from "next/link";
 import PaginatedGames from "./PaginatedGames";
 import { getServerSession } from "next-auth";
@@ -9,8 +8,6 @@ import prisma from "@/lib/db";
 const YourGames: React.FC = async () => {
 
     const session = await getServerSession(authOptions)
-
-    let playerGames: IGame[] = [];
 
     // auth check for active session redirecting to sign in if not
     if (!session) {
@@ -23,28 +20,27 @@ const YourGames: React.FC = async () => {
         )
     }
 
-    const gameSearch = await prisma.game.findMany({
+    const games = await prisma.user.findUnique({
         where: {
-            users: {
-                some: session.user
-            }
+            email: session.user?.email!
         },
         include: {
-            genres: true,
-            platforms: true,
-            modes: true
-        },
-    })
+            games: {
+                include: {
+                    genres: true,
+                    modes: true,
+                    platforms: true
+                }
+            }
+        }
 
-    if (gameSearch != null) {
-        playerGames = gameSearch
-    }
+    })
 
     return (
         <>
-            {playerGames.length > 0
+            {games && games?.games.length > 0
                 &&
-                <PaginatedGames games={playerGames} itemsPerPage={5} />
+                <PaginatedGames games={games.games} itemsPerPage={5} />
                 ||
                 <p>You don't have any games</p>
             }

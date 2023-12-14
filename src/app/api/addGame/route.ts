@@ -1,13 +1,14 @@
+import { IGame } from "@/lib/custom_types";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 
-type gameAndUser = { userEmail: string, gameId: number }
+type gameAndUser = { userEmail: string, game: IGame };
 
 export async function POST(request: Request) { 
 
     const data: gameAndUser = await request.json()
     
-    const { userEmail, gameId } = data
+    const { userEmail, game } = data
 
     try {
         const updateUserWithGame = await prisma.user.update({
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
             data: {
                 games: {
                     connect: {
-                        id: gameId
+                        id: game.id
                     }
                 }
             }

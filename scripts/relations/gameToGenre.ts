@@ -6,30 +6,30 @@ async function gameToGenre() {
 
     try {
 
-        for (let ge = 0; ge < genres.length; ge++) { 
+        for (const genre of genres) { 
 
-            console.log(`Genre loop ${genres[ge].name}`)
+            console.log(`Genre loop ${genre.name}`)
 
            const games = await prisma.game.findMany({
                 where: {
                     genreIds: {
-                        has: genres[ge].id
+                        has: genre.id
                     }
                 }
            })
             
             console.log(`Games to connect ${games.length}`)
             
-            for (let gam = 0; gam < games.length; gam++) { 
+            for (const game of games) { 
 
                 await prisma.game.update({
                     where: {
-                    id: games[gam].id,
+                    id: game.id,
                     },
                     data: {
                         genres: {
                             connect: {
-                                id: genres[ge].id,
+                                id: genre.id,
                             },
                         },
                     },
