@@ -22,10 +22,10 @@ export const authOptions: NextAuthOptions = {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         }),
-        TwitchProvider({
-            clientId: process.env.TWITCH_CLIENT_ID as string,
-            clientSecret: process.env.TWITCH_CLIENT_SECRET as string,
-        }),
+        // TwitchProvider({
+        //     clientId: process.env.TWITCH_CLIENT_ID as string,
+        //     clientSecret: process.env.TWITCH_CLIENT_SECRET as string,
+        // }),
         EmailProvider({
             server: {
                 host: process.env.EMAIL_SERVER_HOST,

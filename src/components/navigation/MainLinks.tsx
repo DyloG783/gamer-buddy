@@ -1,13 +1,11 @@
 "use client"
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 export default function MainLinks() {
 
-    const { status } = useSession();
     const pathname = usePathname();
 
     return (
@@ -33,20 +31,17 @@ export default function MainLinks() {
                         Games
                     </Link>
                 </li>
-                {status === "authenticated"
-                    &&
-                    <li id="connections">
-                        <Link
-                            href="/connections"
-                            className={`flex items-center justify-around h-full p-2 md:p-4
+                <li id="connections">
+                    <Link
+                        href="/connections"
+                        className={`flex items-center justify-around h-full p-2 md:p-4
                             text-sm md:text-base lg:text-lg 
                             hover:shadow-lg text-white
                             ${pathname === '/connections' ? 'shadow-lg' : ''}`}
-                        >
-                            Connections
-                        </Link>
-                    </li>
-                }
+                    >
+                        Connections
+                    </Link>
+                </li>
             </ul>
         </div>
     )

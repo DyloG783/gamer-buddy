@@ -1,13 +1,6 @@
 import prisma from "./db";
 
-type IFollowing = {
-    followedById: string;
-    followingId: string;
-    gameId: number;
-}[]
-
-
-export async function getUsersConnectionInfo(userEmail: string) { 
+export async function getUsersFollowingInfo(userEmail: string) { 
 
     const connections = await prisma.user.findUnique({
         where: {
@@ -34,58 +27,34 @@ export async function getUsersConnectionRequests(userEmail: string) {
             followedBy: true
         }
     })
-    
-    const requests: IFollowing = [];
 
-    for (let fol = 0; fol < connections.following.length; fol++) {
-
-        let found = false;
-        for (let by = 0; by < connections.followedBy.length; by++) {
-            if (connections.following[fol].followedById === connections.followedBy[by].followingId) { 
-                found = true
-            }
-        }
-
-        if (!found) { 
-            requests.push(connections.following[fol])
-        }
-    }
-
-    // const req = userAndConnections.following.map(fol => {
-    //     if (userAndConnections.followedBy.find((by) => (fol.followedById != by.followingId))) {
-    //         requests.push()
-    //     }
-    // })
-
-    // // the people the user is following
-    // const relations = await prisma.follows.findMany({
-    //     where: {
-    //         followedById: userAndConnections?.id,
-    //     }
-    // })
-
-    // // still not working...
-    // const requests = userAndConnections?.following.filter(fol => (
-    //     relations.some(rel => (
-    //         rel.followingId != fol.followedById
-    //     )) 
-    // ))!
-
-    // this works for findingthe connection!?!?!?
-    // const requests = connections?.following.filter(fol => (
-    //     connections.followedBy.some(by => (
-    //         by.followingId != fol.followedById
-    //     ))
-    // ))!
-
-    // // this works for findingthe connection!?!?!?
-    // const requests = connections?.following.filter(fol => (
-    //     connections.followedBy.map(by => (
-    //         by.followingId).includes(fol.followedById)
-    //     )
-    // ))!
+    const requests = connections?.following.filter(fol => (
+        !connections.followedBy.some(by => (
+            by.followingId === fol.followedById
+        ))
+    ))
 
     return requests;
 }
 
- 
+// returns "followedBy" relations when both users have connected with eachother (essentially accepted connections request)
+export async function getUsersConnections(userEmail: string) { 
+
+    const followInfo = await prisma.user.findUniqueOrThrow({
+        where: {
+            email: userEmail
+        },
+        select: {
+            following: true,
+            followedBy: true
+        }
+    })
+
+    const connections = followInfo?.following.filter(fol => (
+        followInfo.followedBy.some(by => (
+            by.followingId === fol.followedById
+        ))
+    ))
+
+    return connections;
+}

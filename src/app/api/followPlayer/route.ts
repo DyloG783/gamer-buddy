@@ -10,15 +10,13 @@ export async function POST(request: Request) {
     const { user, player, game } = data
     
     try {
-
         await prisma.follows.create({
             data: {
-                followedById: user.id, // this is the user who is being followed (seems backwards)
-                followingId: player.id, // this is the user who is doing the following (seems backwards)
+                followedById: user.id, 
+                followingId: player.id, 
                 gameId: game.id,
             }
         })
-
 
     } catch (error) {
         return NextResponse.json({message: `${user.name} and ${player.name} and ${game.name} connection failed` , error})

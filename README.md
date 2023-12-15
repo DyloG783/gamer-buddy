@@ -42,7 +42,7 @@ alt accounts:
 Google(https://console.cloud.google.com/) 
 - dylantest679@gmail.com, 
 - dgdevelopment65@gmail.com, (new main for managing google logins)
-    - dgdevelopment651@gmail.com (Tr...........)
+    - dgdevelopment651@gmail.com (Tr.....Tr....)
 
 Twitch
 - dylangreenslade, (Tr.... Tr....)
@@ -60,12 +60,6 @@ Need help with:
 - code review main pages?
 - 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged?
 - userIds in url for routing not good?
-
----
-
-DB:
-
-- category 1 (console); 3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 20, 34, 39, 48, 49, 130, 165, 167, 169, 384, 385, 386, 390, 471
 
 ---
 

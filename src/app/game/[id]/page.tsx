@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import GameActionBar from "../components/GameActionBar";
-import { IGenre, IMode, IPlatform } from "@/lib/custom_types";
+import { IGameFilterType, IGameFilterType, IGameFilterType } from "@/lib/custom_types";
 
 export default async function GamePage({ params }: { params: { id: number } }) {
 
@@ -85,19 +85,19 @@ export default async function GamePage({ params }: { params: { id: number } }) {
                 >
                     <div id="game_genre_group" className="pb-4">
                         <p className="font-semibold">Genre</p>
-                        {game?.genres.map((genre: IGenre) => (
+                        {game?.genres.map((genre: IGameFilterType) => (
                             <span key={genre.id} className="italic">{genre.name + ", "}</span>
                         ))}
                     </div>
                     <div id="game_mode_group" className="pb-4">
                         <p className="font-semibold">Mode</p>
-                        {game?.modes.map((mode: IMode) => (
+                        {game?.modes.map((mode: IGameFilterType) => (
                             <span key={mode.id} className="italic">{mode.name + ", "}</span>
                         ))}
                     </div>
                     <div id="game_platform_group" className="pb-4">
                         <p className="font-semibold">Platform</p>
-                        {game?.platforms.map((plat: IPlatform) => (
+                        {game?.platforms.map((plat: IGameFilterType) => (
                             <span key={plat.id} className="italic">{plat.name + ", "}</span>
                         ))}
                     </div>

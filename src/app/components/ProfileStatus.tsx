@@ -16,21 +16,17 @@ export default async function ProfileStatus() {
     }
 
     // find the user's email from the  the session
-    const user = await prisma.user.findUnique({
+    const userProfile = await prisma.user.findUnique({
         where: {
             email: session?.user?.email as string
         },
-        include: {
+        select: {
             Profile: true
         }
     })
 
-    // get user's bio & timezone if they exist 
-    const aboutYou = user?.Profile?.bio
-    const timezone = user?.Profile?.timezone
-
     // This works for hiding the component completely if the user has completed setting their timezone, and about-you section
-    if (aboutYou && timezone) {
+    if (userProfile?.Profile?.bio && userProfile?.Profile?.timezone) {
         return (
             null
         )
@@ -42,7 +38,7 @@ export default async function ProfileStatus() {
         >
             <Link href={`/profile`}>
                 <h1 className="font-semibold text-center mb-4 text-blue-700">Your profile status</h1>
-                {timezone
+                {userProfile?.Profile?.timezone
                     &&
                     <div
                         id="timezone_status_available"
@@ -62,7 +58,7 @@ export default async function ProfileStatus() {
                         <p>* You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
                     </div>
                 }
-                {aboutYou
+                {userProfile?.Profile?.timezone
                     &&
                     <div
                         id="aboutYou_status_available"

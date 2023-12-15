@@ -19,7 +19,7 @@ export default function PlayerActionBar({ user, player, alreadyExists, game }:
         const handleSubmit = async () => {
             setButtonDisabled(true)
 
-            const res = await fetch('http://localhost:3000/api/addPlayer', {
+            const res = await fetch('http://localhost:3000/api/followPlayer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ export default function PlayerActionBar({ user, player, alreadyExists, game }:
         const handleSubmit = async () => {
             setButtonDisabled(true)
 
-            const res = await fetch('http://localhost:3000/api/removePlayer', {
+            const res = await fetch('http://localhost:3000/api/unfollowPlayer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

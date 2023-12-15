@@ -23,11 +23,14 @@ export async function POST(request: Request) {
                 }
             }
         })
+        
         console.log("Success updating user with game (from api/prisma)", updateUserWithGame)
+        return NextResponse.json({ message: "Succeeded adding game to user" })
+        
     } catch (error) {
         console.log("Failed to update user with game", error)
         return NextResponse.json({message: "failed to update user with game"})
     }
 
-    return NextResponse.json({message: "Succeeded adding game to user"})
+    
 }

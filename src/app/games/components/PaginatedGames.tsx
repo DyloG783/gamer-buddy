@@ -2,7 +2,7 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame, IGameAndTypes, IPlatform, IMode, IGenre } from "@/lib/custom_types";
+import { IGame, IGameAndTypes, IGameFilterType, IGameFilterType, IGameFilterType } from "@/lib/custom_types";
 import Link from "next/link";
 
 interface IPaginatedGamesProps {
@@ -29,7 +29,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                             <h3 className="font-bold pb-2 text-base">{game.name}</h3>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Genre</h3>
-                                {game.genres.map((genre: IGenre, index: Key) => (
+                                {game.genres.map((genre: IGameFilterType, index: Key) => (
                                     <span key={index}>
                                         {genre.name + ", "}
                                     </span>
@@ -37,7 +37,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                             </div>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Mode</h3>
-                                {game.modes.map((mode: IMode, index: Key) => (
+                                {game.modes.map((mode: IGameFilterType, index: Key) => (
                                     <span key={index}>
                                         {mode.name + ", "}
                                     </span>
@@ -45,7 +45,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                             </div>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Platform</h3>
-                                {game.platforms.map((platform: IPlatform, index: Key) => (
+                                {game.platforms.map((platform: IGameFilterType, index: Key) => (
                                     <span key={index}>
                                         {platform.name + ", "}
                                     </span>
