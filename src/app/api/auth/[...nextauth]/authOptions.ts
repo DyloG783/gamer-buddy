@@ -1,5 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+// import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from "@/lib/db";
 import GithubProvider from "next-auth/providers/github";
 import EmailProvider from "next-auth/providers/email";
@@ -10,6 +11,7 @@ import TwitchProvider from "next-auth/providers/twitch";
 export const authOptions: NextAuthOptions = {
 
     session: { strategy: "jwt", },
+    // session: { strategy: "database", },
 
     adapter: PrismaAdapter(prisma),
     
@@ -72,8 +74,23 @@ export const authOptions: NextAuthOptions = {
         // }),
     ],
     // callbacks: {
-    //     async session({ session }) { 
-    //         return session
+    //     // async session({ session }) {
+    //     //     return session
+    //     // }
+    //     // async jwt({ token, user }) {
+    //     // if (user) {
+    //     // // Add the user's ID to the JWT payload
+    //     //     token.userId = user.id;
+    //     // }
+    //     // return token;
+    //     // },
+
+    //     async jwt({ token, account }) {
+    //     // Persist the OAuth access_token to the token right after signin
+    //     if (account) {
+    //         token.accessToken = account.access_token
     //     }
+    //     return token
+    // },
     // }
 }

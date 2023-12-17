@@ -58,7 +58,7 @@ export default async function ProfileStatus() {
                         <p>* You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
                     </div>
                 }
-                {userProfile?.Profile?.timezone
+                {userProfile?.Profile?.bio
                     &&
                     <div
                         id="aboutYou_status_available"

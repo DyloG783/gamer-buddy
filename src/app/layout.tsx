@@ -1,5 +1,5 @@
 import './globals.css'
-import SessionProvider from "../components/auth/SessionProvider"
+import SessionProvider from "../lib/SessionProvider"
 import { getServerSession } from "next-auth"
 import NavigationBar from "@/components/navigation/NavigationBar"
 import Footer from '../components/Footer'

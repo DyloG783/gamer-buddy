@@ -5,8 +5,8 @@ import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 
 export default async function Home() {
 
-  const session = await getServerSession(authOptions)
-  console.log(session)
+  // const session = await getServerSession(authOptions)
+  // console.log(JSON.stringify(session))
 
   return (
     <>

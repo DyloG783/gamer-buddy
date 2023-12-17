@@ -44,6 +44,10 @@ Google(https://console.cloud.google.com/)
 - dgdevelopment65@gmail.com, (new main for managing google logins)
     - dgdevelopment651@gmail.com (Tr.....Tr....)
 
+Superbase: (dylan.m.c, Tr...!)
+    - db pass: M4WTQyZs3kaWoGIN
+    
+
 Twitch
 - dylangreenslade, (Tr.... Tr....)
 
