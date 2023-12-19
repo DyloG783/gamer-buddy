@@ -39,7 +39,7 @@ export default function PlayerActionBar({ user, player, alreadyExists, game }:
         return (
             <form onSubmit={handleSubmit}>
                 <button id="connect_button"
-                    className="btn-primary"
+                    className="btn bg-green-600"
                     disabled={buttonDisabled}
                     type="submit"
                 >

@@ -31,12 +31,12 @@ export type IGameFilterType = {
     name: string;
 }
 
-export interface ISearchState {
-    genre: number | undefined;
-    platform: number | undefined;
-    mode: number | undefined;
-    search: string | undefined;
-    currentSelected: string | undefined;
+export type ISearchState = {
+    genre: number | null;
+    platform: number | null;
+    mode: number | null;
+    search: string | null;
+    currentSelected: string | null;
 }
 
 export type IUser = {

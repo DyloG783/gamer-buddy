@@ -2,7 +2,7 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame, IGameAndTypes, IGameFilterType, IGameFilterType, IGameFilterType } from "@/lib/custom_types";
+import { IGameAndTypes, IGameFilterType } from "@/lib/custom_types";
 import Link from "next/link";
 
 interface IPaginatedGamesProps {

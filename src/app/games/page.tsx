@@ -9,35 +9,6 @@ export default async function GamesPage() {
     const platforms = await prisma.platform.findMany()
     const modes = await prisma.mode.findMany()
 
-    // const games = await prisma.game.findMany({
-    //     include: {
-    //         genres: true,
-    //         modes: true,
-    //         platforms: true
-    //     }
-    // })
-
-    // this works fine but nextjs can't cache more than 2mb
-    async function getGames() {
-        const res = await fetch('http://localhost:3000/api/getAllGames', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        if (!res.ok) {
-            // This will activate the closest `error.js` Error Boundary
-            throw new Error('Failed to fetch data')
-        }
-
-        const result = await res.json();
-
-        return result.games
-    };
-
-    const games = await getGames();
-
     // Gets the last 500 games in the DB including future releases to be displayed before searching
     const defaultGames = await prisma.game.findMany({
         take: 500,
@@ -61,8 +32,7 @@ export default async function GamesPage() {
                 <p className="text-sm italic pb-2">Games that you have 'Saved' are displayed below</p>
                 <YourGames />
             </div>
-            <GamesDisplay genres={genres} platforms={platforms} modes={modes} games={games} defaultGames={defaultGames} />
-            {/* <GamesDisplay genres={genres} platforms={platforms} modes={modes} defaultGames={defaultGames} /> */}
+            <GamesDisplay genres={genres} platforms={platforms} modes={modes} defaultGames={defaultGames} />
         </div>
     )
 }

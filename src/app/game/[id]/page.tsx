@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import GameActionBar from "../components/GameActionBar";
-import { IGameFilterType, IGameFilterType, IGameFilterType } from "@/lib/custom_types";
+import { IGameFilterType } from "@/lib/custom_types";
 
 export default async function GamePage({ params }: { params: { id: number } }) {
 
@@ -47,20 +47,13 @@ export default async function GamePage({ params }: { params: { id: number } }) {
     }
 
     if (session) {
-
         userEmail = session?.user?.email;
 
         const hasGame = await prisma.user.findUnique({
             where: {
                 email: userEmail as string
             },
-            select: {
-                games: {
-                    where: {
-                        id: gameId
-                    }
-                }
-            }
+            select: { games: { where: { id: gameId } } }
         })
 
         if (hasGame?.games.length) {

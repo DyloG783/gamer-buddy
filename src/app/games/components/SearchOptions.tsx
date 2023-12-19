@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ISearchState } from "@/lib/custom_types";
+import { useRouter } from "next/navigation";
 
 // 'ISearchableGameType'represents either genres, platforms, or modes which have the
 // same data structure in the db
@@ -16,7 +17,6 @@ interface ISearchOptionsProps {
     modes: ISearchableGameType[];
     searchState: ISearchState;
     setSearchState: any;
-    defaultState: {};
 }
 
 interface ISelectSearchProps {
@@ -24,34 +24,32 @@ interface ISelectSearchProps {
     categoryName: string;
 }
 
-const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState, defaultState }) => {
+const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState }) => {
 
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
-        const [categoryListSelection, setCategoryListSelection] = useState({
-            id: 0
-        })
+        const [categoryListSelection, setCategoryListSelection] = useState(999999)
 
         useEffect(() => {
-            if (categoryListSelection.id != 0) {
+            if (categoryListSelection != 999999) {
                 if (categoryName === "Genre") {
                     setSearchState({
                         ...searchState,
-                        genre: categoryListSelection.id,
+                        genre: categoryListSelection,
                         currentSelected: "genre"
                     })
                 }
                 if (categoryName === "Platform") {
                     setSearchState({
                         ...searchState,
-                        platform: categoryListSelection.id,
+                        platform: categoryListSelection,
                         currentSelected: "platform"
                     })
                 }
                 if (categoryName === "Mode") {
                     setSearchState({
                         ...searchState,
-                        mode: categoryListSelection.id,
+                        mode: categoryListSelection,
                         currentSelected: "mode"
                     })
                 }
@@ -59,9 +57,9 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
         }, [categoryListSelection])
 
         const handleSubmit = (e: React.ChangeEvent<HTMLSelectElement>) => {
-            setCategoryListSelection({
-                id: Number(e.target.value),
-            })
+            setCategoryListSelection(
+                Number(e.target.value)
+            )
         }
 
 
@@ -72,9 +70,9 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     name="select_Search_Options"
                     onChange={e => handleSubmit(e)}
 
-                    value={categoryName === "Genre" ? searchState.genre!
-                        : categoryName === "Platform" ? searchState.platform!
-                            : categoryName === "Mode" ? searchState.mode!
+                    value={categoryName === "Genre" && searchState.genre != null ? searchState.genre
+                        : categoryName === "Platform" && searchState.platform != null ? searchState.platform
+                            : categoryName === "Mode" && searchState.mode != null ? searchState.mode
                                 : ""
                     }
                     className="w-56 bg-slate-200 text-sm md:text-base"
@@ -132,7 +130,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
         >
             <button
                 id="reset_search"
-                onClick={() => setSearchState(defaultState)}
+                onClick={() => window.location.reload()}
                 className="btn p-2 max-w-[100px] ml-auto"
             >
                 Reset search

@@ -37,7 +37,7 @@ export default function ButtonRemoveGame({ game, userEmail, setExists }:
         <form onSubmit={handleSubmit}>
             <button
                 type="submit"
-                className={`btn`}
+                className={`btn bg-red-600`}
                 disabled={buttonDisabled}
             >
                 {buttonDisabled ? 'Removing...' : 'Remove game'}

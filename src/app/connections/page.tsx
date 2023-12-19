@@ -20,7 +20,7 @@ const Connections = async () => {
                         key={c.followingId}
                         className="text-purple-700 hover:italic"
                     >
-                        <p >{`${c.followingId} - ${c.gameId}; `}</p>
+                        <p >{`${c.followedBy.name} - ${c.game.name}; `}</p>
                     </Link>
                 ))}
             </div>
@@ -32,7 +32,7 @@ const Connections = async () => {
                         <Link href={`/connect/${req.gameId}/${req.followedById}`}
                             className="text-purple-700 hover:italic"
                         >
-                            ID: {req.followedById}, Game: {req.gameId}
+                            ID: {req.followedBy.name}, Game: {req.game.name}
                         </Link>
                     </li>
                 ))}
@@ -45,7 +45,7 @@ const Connections = async () => {
                         key={by.followingId}
                         className="text-purple-700 hover:italic"
                     >
-                        <p >{by.followingId}, Game: {by.gameId}</p>
+                        <p >{by.following.name}, Game: {by.game.name}</p>
                     </Link>
                 ))}
             </ul>

@@ -1,12 +1,11 @@
 'use client'
 
-import React, { Key, useState } from "react";
+import React, { Key, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IGameAndTypes, IGameFilterType, ISearchState } from "@/lib/custom_types";
 import Link from "next/link";
 
 interface IPaginatedGamesProps {
-    games: IGameAndTypes[]
     defaultGames: IGameAndTypes[]
     itemsPerPage: number
     searchState: ISearchState
@@ -16,91 +15,47 @@ interface IPageGames {
     currentItems: IGameAndTypes[]
 }
 
+const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, itemsPerPage, searchState }) => {
 
-const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ games, defaultGames, itemsPerPage, searchState }) => {
+    const [searchedGames, setSearchedGames] = useState<IGameAndTypes[]>([])
+    const [isLoading, setLoading] = useState(false)
 
     let filteredGames: IGameAndTypes[] = []
 
-    if (searchState.currentSelected === "genre") {
+    useEffect(() => {
 
-        filteredGames = games.filter(game =>
-            game.genreIds.includes(searchState.genre!)
-        )
+        if (searchState.currentSelected) {
 
-        if (searchState.platform) {
-            filteredGames = filteredGames.filter(game =>
-                game.platformIds.includes(searchState.platform!)
-            )
+            setLoading(true)
+
+            fetch('http://localhost:3000/api/search-games', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    searchState
+                })
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("rendering to set games now")
+                    setSearchedGames(data.searchedGames)
+                    setLoading(false)
+                    filteredGames = searchedGames
+                })
         }
-        if (searchState.mode) {
-            filteredGames = filteredGames.filter(game =>
-                game.modeIds.includes(searchState.mode!)
-            )
-        }
+
+    }, [searchState.currentSelected]);
+
+    if (isLoading) return <p>Loading...</p>
+
+    if (searchedGames.length > 0) {
+        filteredGames = searchedGames;
     }
-    if (searchState.currentSelected === "platform") {
-        filteredGames = games.filter(game =>
-            game.platformIds.includes(searchState.platform!)
-        )
 
-        if (searchState.genre) {
-            filteredGames = filteredGames.filter(game =>
-                game.genreIds.includes(searchState.genre!)
-            )
-        }
-        if (searchState.mode) {
-            filteredGames = filteredGames.filter(game =>
-                game.modeIds.includes(searchState.mode!)
-            )
-        }
-    }
-    if (searchState.currentSelected === "mode") {
-        filteredGames = games.filter(game =>
-            game.modeIds.includes(searchState.mode!)
-        )
-
-        if (searchState.genre) {
-            filteredGames = filteredGames.filter(game =>
-                game.genreIds.includes(searchState.genre!)
-            )
-        }
-        if (searchState.platform) {
-            filteredGames = filteredGames.filter(game =>
-                game.platformIds.includes(searchState.platform!)
-            )
-        }
-    }
-    if (searchState.currentSelected === "textSearch") {
-        if (searchState.genre || searchState.platform || searchState.mode) {
-
-            filteredGames = games.filter(game => game.name.toLowerCase().includes(searchState.search!.toLowerCase()))
-
-            if (searchState.genre) {
-                filteredGames = filteredGames.filter(game =>
-                    game.genreIds.includes(searchState.genre!)
-                )
-            }
-
-            if (searchState.platform) {
-                filteredGames = filteredGames.filter(game =>
-                    game.platformIds.includes(searchState.platform!)
-                )
-            }
-
-            if (searchState.mode) {
-                filteredGames = filteredGames.filter(game =>
-                    game.modeIds.includes(searchState.mode!)
-                )
-            }
-
-
-        }
-        else {
-            filteredGames = games.filter(game => game.name.toLowerCase().includes(searchState.search!.toLowerCase()))
-        }
-    }
-    if (searchState.currentSelected === undefined) {
-        filteredGames = defaultGames
+    if (searchedGames.length === 0 && searchState.currentSelected === null) {
+        filteredGames = defaultGames;
     }
 
     const Items: React.FC<IPageGames> = ({ currentItems }) => {

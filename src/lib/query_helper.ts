@@ -1,5 +1,7 @@
+import { ISearchState } from "./custom_types";
 import prisma from "./db";
 
+// who they follow
 export async function getUsersFollowingInfo(userEmail: string) { 
 
     const connections = await prisma.user.findUnique({
@@ -7,8 +9,11 @@ export async function getUsersFollowingInfo(userEmail: string) {
             email: userEmail
         },
         select: {
-            followedBy:true,
-            following: true,
+            followedBy: {
+                include: {
+                    following: { select: { id: true, name: true } },
+                    game: { select: { name: true} }
+            } },
         }
     })
 
@@ -23,9 +28,15 @@ export async function getUsersConnectionRequests(userEmail: string) {
             email: userEmail
         },
         select: {
-            following: true,
+            following: {
+                include: {
+                    followedBy: { select: { id: true, name: true } },
+                    game: { select: { name: true} }
+                }
+            },
             followedBy: true
-        }
+        },
+
     })
 
     const requests = connections?.following.filter(fol => (
@@ -45,7 +56,11 @@ export async function getUsersConnections(userEmail: string) {
             email: userEmail
         },
         select: {
-            following: true,
+            following: {
+                include: {
+                    followedBy: { select: {id: true, name: true} },
+                    game: { select: {name: true} }
+            } },
             followedBy: true
         }
     })

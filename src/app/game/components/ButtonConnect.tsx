@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ButtonConnect({ game }: { game: IGame }) {
 
     return (
-        <button className="btn">
+        <button className="btn bg-green-600">
             <Link href={`/connect/${game.id}`}>Connect with players</Link>
         </button>
     )

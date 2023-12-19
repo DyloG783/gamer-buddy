@@ -1,13 +1,7 @@
 import ConnectionMessages from "@/app/components/ConnectionMessages";
 import ProfileStatus from "@/app/components/ProfileStatus";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 
 export default async function Home() {
-
-  // const session = await getServerSession(authOptions)
-  // console.log(JSON.stringify(session))
-
   return (
     <>
       <div id="home_page_container" className="grow flex justify-evenly flex-col p-2">

@@ -77,7 +77,6 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
                             </div>
                         </div>
                     </Link>
-
                 </div>
             )
         }
@@ -91,10 +90,10 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
                     <div id="timezone_no_timezone_set" className="grid grid-flow-col auto-cols-fr">
                         <Link href={`/profile`}>
                             <div id="others_in_your_timezone"
-                                className="text-sm p-4 md:p-8 bg-red-200 hover:shadow-md
+                                className="text-sm p-4 md:p-8 bg-yellow-200 hover:shadow-md
                             hover:text-purple-600"
                             >
-                                Set your timezone to make it easier to connect with others
+                                *Set your timezone to make it easier to connect with others
                             </div>
                         </Link>
                         <Link href={`/connect/${gameId}`} className="">

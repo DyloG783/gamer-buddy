@@ -36,7 +36,7 @@ export default function ButtonAddGame({ game, userEmail, setExists }:
         <form onSubmit={handleSubmit}>
             <button
                 type="submit"
-                className={`btn`}
+                className={`btn bg-green-600`}
                 disabled={buttonDisabled}
             >
                 {buttonDisabled ? 'Saving...' : 'Add game'}

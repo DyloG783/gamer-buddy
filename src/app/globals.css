@@ -12,8 +12,4 @@
     .btn {
         @apply p-2 md:p-4 text-xs hover:shadow-xl bg-slate-700 text-white rounded-lg w-32;
     }
-
-    .btn-primary {
-        @apply p-2 md:p-4 text-xs hover:shadow-xl bg-green-500 text-white rounded-lg w-32;
-    }
 }
