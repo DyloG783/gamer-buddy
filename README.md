@@ -47,15 +47,13 @@ Google(https://console.cloud.google.com/)
 Superbase: (dylan.m.c, Tr...!)
     - db pass: M4WTQyZs3kaWoGIN
     
-
-Twitch
+Twitch:
 - dylangreenslade, (Tr.... Tr....)
 
 postman:
 dgdevelopment65@gmail.com
 
 Need help with:
-
 - multiple accounts to test with giving I can't use credentials provider?
 - storing only 1 instance of a token in a DB table?
 - Text searh only working either with not other selections?

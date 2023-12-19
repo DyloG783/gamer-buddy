@@ -2,24 +2,28 @@ export const test_users = [
     {
         email: "test1@test.com",
         name: "Test1",
-        password: "password",
-        games: [21, 38, 72, 75, 104]
+        games: [250630, 83563, 211573, 279624, 270049],
+        bio: "I'm available to play in other timezones too!",
+        timezone: "(UTC-12:00) International Date Line West"
     },
     {
         email: "test2@test.com",
         name: "Test2",
-        password: "password",
-        games: [516]
+        games: [250630, 83563, 211573, 279624],
+        bio: "I have limited availability so can only play a few hours a night in my tz",
+        timezone: "(UTC-12:00) International Date Line West"
     },
     {
         email: "test3@test.com",
         name: "Test3",
-        password: "password",
+        bio: "Just looking around...",
+        timezone: "(UTC+02:00) Beirut"
     },
     {
         email: "test4@test.com",
         name: "Test4",
-        password: "password",
-        games: [21, 38, 72, 75, 104, 769, 866, 960, 976, 1122, 1126]
+        games: [211573, 250630, 83563, 270049],
+        bio: "Down for whatever hit me up. Pretty cas",
+        timezone: "(UTC+10:00) Canberra, Melbourne, Sydney"
     },
 ]
