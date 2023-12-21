@@ -10,11 +10,13 @@ import TwitchProvider from "next-auth/providers/twitch";
 
 export const authOptions: NextAuthOptions = {
 
+    // debug: true,
+
     session: { strategy: "jwt", },
     // session: { strategy: "database", },
 
     adapter: PrismaAdapter(prisma),
-    
+
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_ID as string,

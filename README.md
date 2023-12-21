@@ -41,8 +41,8 @@ Update npm packages:
 alt accounts:
 Google(https://console.cloud.google.com/) 
 - dylantest679@gmail.com, 
-- dgdevelopment65@gmail.com, (new main for managing google logins)
-    - dgdevelopment651@gmail.com (Tr.....Tr....)
+- dgdevelopment65@gmail.com, (Tr.....Development!)
+    - dgdevelopment651@gmail.com 
 
 Superbase: (dylan.m.c, Tr...!)
     - db pass: M4WTQyZs3kaWoGIN
