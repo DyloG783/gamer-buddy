@@ -11,7 +11,6 @@ export async function POST(request: Request) {
     const search: string = data.searchState.search;
 
     try {
-        
        const searchedGames = await prisma.game.findMany({
         where: {
             genreIds: genre && { has: genre } || undefined,
@@ -26,7 +25,6 @@ export async function POST(request: Request) {
         
         return NextResponse.json({ searchedGames })
     } catch (error) {
-
         console.log("Failed to retreive searched games from db in client route", error)
         return NextResponse.json({message: "Failed to retreive searched games from db in client route", error})
     }

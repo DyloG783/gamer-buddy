@@ -13,7 +13,7 @@ const YourGames: React.FC = async () => {
     if (!session) {
         return (
             <div>
-                <Link href="/api/auth/signin" className='flex justify-around items-center w-full p-3 hover:shadow-lg hover:text-purple-600 bg-red-300 '>
+                <Link href="/api/auth/signin" className='flex justify-around items-center w-full p-3 hover:shadow-lg hover:text-purple-600 bg-yellow-200 '>
                     Sign in to see your games
                 </Link>
             </div>
@@ -21,10 +21,8 @@ const YourGames: React.FC = async () => {
     }
 
     const games = await prisma.user.findUnique({
-        where: {
-            email: session.user?.email!
-        },
-        include: {
+        where: { email: session.user?.email! },
+        select: {
             games: {
                 include: {
                     genres: true,
@@ -33,7 +31,6 @@ const YourGames: React.FC = async () => {
                 }
             }
         }
-
     })
 
     return (

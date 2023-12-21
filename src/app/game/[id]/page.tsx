@@ -4,59 +4,38 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import GameActionBar from "../components/GameActionBar";
 import { IGameFilterType } from "@/lib/custom_types";
+import { checkGameExistsAndReturn } from "@/lib/query_helper";
+import { GameNotExist } from "@/lib/errors";
 
 export default async function GamePage({ params }: { params: { id: number } }) {
 
-    const gameId = Number(params.id) // this id passed in params is the game's id
-    const session = await getServerSession(authOptions);
+    // this is required to convert string in params to number
+    const gameId = Number(params.id)
 
-    // the game selected from the games page
-    let game;
+    // if game doesnt exist retun null, or return game
+    const game = await checkGameExistsAndReturn(gameId);
+
+    if (game === null) {
+        return (
+            <GameNotExist />
+        )
+    }
 
     // boolean for whether the user already has this game added to their account
     let alreadyExists = false;
 
-    // users email to be passed into buttons for api actions
-    let userEmail;
-
-    // retrieve game from db
-    try {
-        game = await prisma.game.findUnique({
-            where: {
-                id: gameId
-            },
-            include: {
-                genres: true,
-                modes: true,
-                platforms: true
-            }
-        })
-    }
-    catch (error) {
-        console.log("Failed looking up game id in database, returning bare game:", error)
-        return (
-            <div id="failureDiv">
-                {`No game found in database; gameId: ${gameId}; game returned: ${game}`}
-            </div>
-        )
-    }
-
-    // return not found in case a user enters a random number through url
-    if (!game) {
-        return (<p>Game not found</p>)
-    }
-
+    const session = await getServerSession(authOptions);
     if (session) {
-        userEmail = session?.user?.email;
 
+        // check whether user already has this game saved
         const hasGame = await prisma.user.findUnique({
+            select: { games: { where: { id: gameId } } },
             where: {
-                email: userEmail as string
+                email: session?.user?.email!
             },
-            select: { games: { where: { id: gameId } } }
         })
 
-        if (hasGame?.games.length) {
+        if (hasGame && hasGame.games.length > 0) {
             alreadyExists = true;
         }
     }
@@ -96,7 +75,9 @@ export default async function GamePage({ params }: { params: { id: number } }) {
                     </div>
                 </div>
             </div>
-            <GameActionBar session={session} alreadyExists={alreadyExists} game={game} userEmail={userEmail} />
+            {session &&
+                <GameActionBar session={session} alreadyExists={alreadyExists} game={game} />
+            }
         </div>
     )
 }

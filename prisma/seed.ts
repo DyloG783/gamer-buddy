@@ -1,6 +1,6 @@
 // import prisma from "@/lib/db";
 import { PrismaClient } from '@prisma/client'
-import { test_users } from "./misc/test_users";
+import { test_users } from "./test_users";
 
 const prisma = new PrismaClient()
 

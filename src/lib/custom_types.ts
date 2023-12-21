@@ -46,3 +46,12 @@ export type IUser = {
     emailVerified: Date | null;
     image: string | null;
 } 
+
+export type IConnection = ({
+    followedById: string;
+    followedByName: string;
+    followingId: string;
+    followingName: string;
+    gameId: number;
+    gameName: string;
+})

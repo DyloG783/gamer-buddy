@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const { userEmail, game } = data
 
     try {
-        const removeGameFromUser = await prisma.user.update({
+        await prisma.user.update({
             where: {
                 email: userEmail
             },
@@ -23,11 +23,9 @@ export async function POST(request: Request) {
                 }
             }
         })
-        console.log("Success remove game from User (from api/prisma)", removeGameFromUser)
     } catch (error) {
         console.log("Failed to remove game from User", error)
         return NextResponse.json({message: "Failed to remove game from User"})
     }
-    
     return NextResponse.json({message: "Succeeded removing game from user"})
 }

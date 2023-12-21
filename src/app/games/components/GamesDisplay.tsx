@@ -20,14 +20,15 @@ export default function GamesDisplay(props: IGamesDisplayProps) {
         mode: null,
         search: null,
         currentSelected: null
-    }
+    };
 
-    const [searchState, setSearchState] = useState(defaultSearchState)
+    const [searchState, setSearchState] = useState(defaultSearchState);
+    const [searchEmpty, setSearchEmpty] = useState(false);
 
     return (
         <div className="grow flex flex-col justify-between bg-slate-300 mt-4">
-            <SearchOptions genres={props.genres} platforms={props.platforms} modes={props.modes} searchState={searchState} setSearchState={setSearchState} />
-            <PaginatedGamesWithSearch defaultGames={props.defaultGames} itemsPerPage={6} searchState={searchState} />
+            <SearchOptions genres={props.genres} platforms={props.platforms} modes={props.modes} searchState={searchState} setSearchState={setSearchState} searchEmpty={searchEmpty} />
+            <PaginatedGamesWithSearch defaultGames={props.defaultGames} itemsPerPage={6} searchState={searchState} setSearchEmpty={setSearchEmpty} />
         </div>
     )
 }

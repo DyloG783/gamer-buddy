@@ -9,19 +9,21 @@ interface IPaginatedGamesProps {
     defaultGames: IGameAndTypes[]
     itemsPerPage: number
     searchState: ISearchState
+    setSearchEmpty: any
 }
 
 interface IPageGames {
     currentItems: IGameAndTypes[]
 }
 
-const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, itemsPerPage, searchState }) => {
+const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, itemsPerPage, searchState, setSearchEmpty }) => {
 
     const [searchedGames, setSearchedGames] = useState<IGameAndTypes[]>([])
     const [isLoading, setLoading] = useState(false)
 
     let filteredGames: IGameAndTypes[] = []
 
+    // fetch games from the db andfilter based on the current search state
     useEffect(() => {
 
         if (searchState.currentSelected) {
@@ -43,6 +45,10 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                     setSearchedGames(data.searchedGames)
                     setLoading(false)
                     filteredGames = searchedGames
+
+                    if (data.searchedGames.length === 0) {
+                        setSearchEmpty(true);
+                    }
                 })
         }
 
@@ -50,21 +56,24 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
 
     if (isLoading) return <p>Loading...</p>
 
+    // the games to be displayed are either default, or what was returned from searching
+    if (searchedGames.length === 0 && searchState.currentSelected === null) {
+        filteredGames = defaultGames;
+    }
     if (searchedGames.length > 0) {
         filteredGames = searchedGames;
     }
 
-    if (searchedGames.length === 0 && searchState.currentSelected === null) {
-        filteredGames = defaultGames;
-    }
-
+    // the display for each games (2 by 3 column layout) 
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
-            <div className="grid md:grid-flow-col md:auto-cols-fr grid-rows-3 text-sm ">
+            <div id="games_grid_view"
+                className="grid md:grid-flow-col md:auto-cols-fr grid-rows-3 text-sm ">
                 {currentItems &&
                     currentItems.map((game: IGameAndTypes) => (
                         <Link
                             key={game.id}
+                            id="game_link_view"
                             className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
                             href={`/game/${game.id}`}
                         >

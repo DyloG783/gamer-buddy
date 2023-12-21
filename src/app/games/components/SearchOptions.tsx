@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { ISearchState } from "@/lib/custom_types";
-import { useRouter } from "next/navigation";
 
 // 'ISearchableGameType'represents either genres, platforms, or modes which have the
 // same data structure in the db
@@ -17,6 +16,7 @@ interface ISearchOptionsProps {
     modes: ISearchableGameType[];
     searchState: ISearchState;
     setSearchState: any;
+    searchEmpty: boolean;
 }
 
 interface ISelectSearchProps {
@@ -24,7 +24,7 @@ interface ISelectSearchProps {
     categoryName: string;
 }
 
-const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState }) => {
+const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState, searchEmpty }) => {
 
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
@@ -128,13 +128,22 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
         <div id="search_options_and_reset_button"
             className="flex flex-col p-2 md:p-8"
         >
-            <button
-                id="reset_search"
-                onClick={() => window.location.reload()}
-                className="btn p-2 max-w-[100px] ml-auto"
-            >
-                Reset search
-            </button>
+            {searchEmpty &&
+                <button
+                    id="reset_search"
+                    onClick={() => window.location.reload()}
+                    className="btn p-2 max-w-[100px] ml-auto bg-green-500"
+                >
+                    Reset search
+                </button> ||
+                <button
+                    id="reset_search"
+                    onClick={() => window.location.reload()}
+                    className="btn p-2 max-w-[100px] ml-auto"
+                >
+                    Reset search
+                </button>
+            }
             <div className="flex flex-wrap gap-4 justify-center pb-4 sm:text-sm md:text-base lg:text-lg"
                 id="search_options"
             >

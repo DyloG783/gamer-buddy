@@ -11,7 +11,7 @@ export default async function ConnectionMessages() {
         return (
             <div id="no_session_container">
                 <Link href={`/api/auth/signin`}
-                    className="text-purple-800 underline italic"
+                    className="text-purple-800 underline italic flex justify-around"
                 >Sign in to see Messages, Connection requests, and more!</Link>
             </div>
         )

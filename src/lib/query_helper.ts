@@ -1,75 +1,102 @@
-import { ISearchState } from "./custom_types";
+import { revalidatePath } from "next/cache";
 import prisma from "./db";
 
-// who they follow
-export async function getUsersFollowingInfo(userEmail: string) { 
+export async function getUserId(userEmail: string) { 
+    const id = await prisma.user.findUniqueOrThrow({ where: { email: userEmail }, select: { id: true } });
+    return id.id;
+}
 
-    const connections = await prisma.user.findUnique({
+// who user follows, but they don't follow back
+export async function getFollowing(userEmail: string) { 
+
+    const userId = await getUserId(userEmail);
+
+    const connections = await prisma.follows.findMany({
         where: {
-            email: userEmail
+            followedById: userId, // the people I'm following
+            NOT: {
+                following: { 
+                    followedBy: { some: { followingId: userId } } 
+                },
+            },
         },
-        select: {
-            followedBy: {
-                include: {
-                    following: { select: { id: true, name: true } },
-                    game: { select: { name: true} }
-            } },
-        }
-    })
+    });
 
+    revalidatePath('/');
     return (connections)
 }
 
-// returns a following relation if the user is not also following this user (pending connection)
+// returns followers of the user, if the user is not following them (pending connection request to the user)
 export async function getUsersConnectionRequests(userEmail: string) { 
 
-    const connections = await prisma.user.findUniqueOrThrow({
+    const userId = await getUserId(userEmail);
+
+    const connections = await prisma.follows.findMany({
         where: {
-            email: userEmail
-        },
-        select: {
-            following: {
-                include: {
-                    followedBy: { select: { id: true, name: true } },
-                    game: { select: { name: true} }
+            followingId: userId, // people who fol me
+            NOT: { // not
+                followedBy: { // when I 
+                    following: { some: { followedById: userId } } // follow them
                 }
-            },
-            followedBy: true
+            }
         },
+    });
 
-    })
-
-    const requests = connections?.following.filter(fol => (
-        !connections.followedBy.some(by => (
-            by.followingId === fol.followedById
-        ))
-    ))
-
-    return requests;
-}
-
-// returns "followedBy" relations when both users have connected with eachother (essentially accepted connections request)
-export async function getUsersConnections(userEmail: string) { 
-
-    const followInfo = await prisma.user.findUniqueOrThrow({
-        where: {
-            email: userEmail
-        },
-        select: {
-            following: {
-                include: {
-                    followedBy: { select: {id: true, name: true} },
-                    game: { select: {name: true} }
-            } },
-            followedBy: true
-        }
-    })
-
-    const connections = followInfo?.following.filter(fol => (
-        followInfo.followedBy.some(by => (
-            by.followingId === fol.followedById
-        ))
-    ))
-
+    revalidatePath('/');
     return connections;
 }
+
+// returns relations when both users have connected with eachother (essentially accepted connections request)
+export async function getUsersConnections(userEmail: string) { 
+
+    const userId = await getUserId(userEmail);
+
+    const connections = await prisma.follows.findMany({
+        where: {
+            followingId: userId,
+            AND: {
+                followedBy: {
+                    following: { some: { followedById: userId } }
+                }
+            }
+        },
+    });
+
+    revalidatePath('/');
+    return connections;
+}
+
+// check game exists (for when user types random strings into urls) and returns it if true
+export async function checkGameExistsAndReturn(gameId: number) { 
+
+    if (Number.isNaN(gameId)) { 
+        console.log("Game Check: NaN")
+        return null;
+    }
+
+    try {
+        const game = await prisma.game.findUnique({ where: { id: gameId }, include: { genres: true, modes: true, platforms: true } })
+        return game;
+    } catch (error) {
+        console.log("Game Check: try/catch fail retrieving game")
+        return null;
+    }
+}
+
+// check user exists (for when user types random strings into urls) and returns it if true
+export async function checkUserExistsAndReturn(userId: string) { 
+
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id: userId }, include: {
+                Profile: true, games: {
+                    include: { genres: true, modes: true, platforms: true }
+                }
+            }
+        })
+        return user;
+    } catch (error) {
+        console.log("User Check: try/catch fail retrieving user")
+        return null;
+    }
+} 

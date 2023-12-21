@@ -1,7 +1,5 @@
 import React, { Suspense } from "react";
-import YourGames from "./components/YourGames";
 import Loading from "./loading";
-import prisma from "@/lib/db";
 
 export default function GamesLayout({ children }: { children: React.ReactNode }) {
 

@@ -71,12 +71,15 @@ model User {
 }
 
 model Follows {
-  followedBy   User   @relation("followedBy", fields: [followedById], references: [id])
-  followedById String
-  following    User   @relation("following", fields: [followingId], references: [id])
-  followingId  String
-  game         Game   @relation(fields: [gameId], references: [id])
-  gameId       Int
+  followedBy     User   @relation("followedBy", fields: [followedById], references: [id])
+  followedById   String
+  followedByName String
+  following      User   @relation("following", fields: [followingId], references: [id])
+  followingId    String
+  followingName  String
+  game           Game   @relation(fields: [gameId], references: [id])
+  gameId         Int
+  gameName       String
 
   @@id([followingId, followedById])
 }

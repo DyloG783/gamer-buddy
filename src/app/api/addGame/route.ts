@@ -7,11 +7,10 @@ type gameAndUser = { userEmail: string, game: IGame };
 export async function POST(request: Request) { 
 
     const data: gameAndUser = await request.json()
-    
     const { userEmail, game } = data
 
     try {
-        const updateUserWithGame = await prisma.user.update({
+        await prisma.user.update({
             where: {
                 email: userEmail
             },
@@ -23,14 +22,9 @@ export async function POST(request: Request) {
                 }
             }
         })
-        
-        console.log("Success updating user with game (from api/prisma)", updateUserWithGame)
-        return NextResponse.json({ message: "Succeeded adding game to user" })
-        
     } catch (error) {
         console.log("Failed to update user with game", error)
         return NextResponse.json({message: "failed to update user with game"})
     }
-
-    
+    return NextResponse.json({ message: "Succeeded adding game to user" })
 }

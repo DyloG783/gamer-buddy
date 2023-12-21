@@ -1,58 +1,61 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import prisma from "@/lib/db";
-import { getServerSession } from "next-auth";
+import { GameNotExist } from "@/lib/errors";
+import { checkGameExistsAndReturn } from "@/lib/query_helper";
+import { Session } from "next-auth";
 import Link from "next/link";
 
-export default async function TimezoneMatches({ gameId }: { gameId: number }) {
+export default async function TimezoneMatches({ gameId, session }: { gameId: number, session: Session | null }) {
 
-    // need session to find user's email address, then can lookup their timezone setting
-    const session = await getServerSession(authOptions);
+    // if game doesnt exist retun null, or return game
+    const game = await checkGameExistsAndReturn(gameId);
 
-    // potentially a list of users with this game saved
-    let usersWhoAlsoHaveThisGame = [];
+    if (game === null) {
+        return
+    }
 
-    // potentially a list of users who havee the game AND timezone match
-    let usersWithGameAndTimezone = 0;
-
-    // this is used as a flag to display different content based on whether the user has theirtime zone set in their profile 
-    let usersTimezone: string | null | undefined;
+    // find other users who have also have this game saved by count to be displayed in page regardless of session
+    const usersWhoAlsoHaveThisGameCount = await prisma.user.count({
+        where: {
+            games: {
+                some: {
+                    id: gameId
+                }
+            },
+        },
+    })
 
     if (session) {
 
         // get this user from session to lookup profile tz setting
-        const thisUser = await prisma.user.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 email: session?.user?.email as string
             },
             include: { Profile: true }
         })
 
-        // this users timezone to compare to others who also have this games
-        usersTimezone = thisUser?.Profile?.timezone;
+        if (user?.Profile?.timezone) {
 
-        // find other users who have also have this game saved
-        usersWhoAlsoHaveThisGame = await prisma.user.findMany({
-            where: {
-                games: {
-                    some: {
-                        id: gameId
-                    }
+            // find other users who have also have this game saved
+            const usersWhoAlsoHaveThisGame = await prisma.user.findMany({
+                where: {
+                    games: {
+                        some: {
+                            id: gameId
+                        }
+                    },
+                    NOT: {
+                        id: user?.id
+                    },
                 },
-                NOT: {
-                    id: thisUser?.id
-                },
-            },
-            include: { Profile: true }
-        })
+                select: { Profile: true }
+            })
 
-        // look up the profile for each user who also has this game
-        for (const otherPlayer of usersWhoAlsoHaveThisGame) {
-            if (otherPlayer.Profile?.timezone === usersTimezone) {
-                usersWithGameAndTimezone++;
-            }
-        }
+            const usersWithGameAndTimezoneCount = usersWhoAlsoHaveThisGame.filter(u => (
+                u.Profile?.timezone === user.Profile?.timezone
+            )).length
 
-        if (usersTimezone) {
+
             return (
                 <div className="p-4 bg-slate-300 my-auto">
                     <h2 className="font-semibold text-lg md:text-2xl mb-2 text-blue-700">Other Players</h2>
@@ -68,12 +71,12 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
                             <div id="others_in_your_timezone"
                                 className="text-sm p-4 md:p-8 "
                             >
-                                {`Other players in your timezone playing this game: '${usersWithGameAndTimezone}'`}
+                                {`Other players in your timezone playing this game: '${usersWithGameAndTimezoneCount}'`}
                             </div>
                             <div id="others_in_all_timezones"
                                 className="text-sm p-4 md:p-8"
                             >
-                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGame.length}'`}
+                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount - 1}'`}
                             </div>
                         </div>
                     </Link>
@@ -101,7 +104,7 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
                                 className="text-sm p-4 md:p-8 hover:shadow-md
                             hover:text-purple-600"
                             >
-                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGame.length}'`}
+                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount - 1}'`}
                             </div>
                         </Link>
                     </div>
@@ -129,7 +132,7 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
                             className="text-sm p-4 md:p-8 hover:shadow-md
                             hover:text-purple-600"
                         >
-                            {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGame.length}'`}
+                            {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount - 1}'`}
                         </div>
                     </Link>
                 </div>

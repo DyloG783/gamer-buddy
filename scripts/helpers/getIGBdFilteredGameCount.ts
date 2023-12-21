@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '../.env' })
 import prisma from '@/lib/db';
 
-export default async function getMultiplayerGameCount() { 
+export default async function getIGBdFilteredGameCount() { 
     const igdbBaseUrl = process.env.IGDB_BASE_URL
     const twitchClientId = process.env.TWITCH_CLIENT_ID as string
 

@@ -1,10 +1,10 @@
 require('dotenv').config({ path: '../.env' })
 import prisma from '@/lib/db';
-import getMultiplayerGameCount from '../helpers/getMultiplayerGameCount';
+import getIGBdFilteredGameCount from '../helpers/getIGBdFilteredGameCount';
 
 async function saveGamesToDb(){ 
 
-    const gameCount = await getMultiplayerGameCount()
+    const gameCount = await getIGBdFilteredGameCount()
     const limit: number = 500;
     let offset: number = 0;
     let loopCount = 0;

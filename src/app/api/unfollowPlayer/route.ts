@@ -10,17 +10,17 @@ export async function POST(request: Request) {
     const { user, player, game } = data
     
     try {
-
         await prisma.follows.delete({
             where: {
                 followingId_followedById: {
-                    followedById: user.id, // this is the user who initiates following. They have their 'followedBy'(meaning this user has followed others) instances increased to showtheir side ofthe relation
-                    followingId: player.id // this is the user who is beingfollowed. They get their 'Following'(measing this many people follow this user) instances increased to show their side of the relation
+                    followedById: user.id, // this is the user who initiates following. 
+                    followingId: player.id // this is the user who is beingfollowed. 
                 }
             }
         })
 
     } catch (error) {
+        console.log("Failed to delete following relation", error)
         return NextResponse.json({message: `${user.name} and ${player.name} and ${game.name} disconnection failed` , error})
     }
 

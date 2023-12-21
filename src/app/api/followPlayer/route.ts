@@ -13,12 +13,15 @@ export async function POST(request: Request) {
         await prisma.follows.create({
             data: {
                 followedById: user.id, 
+                followedByName: user.name!,
                 followingId: player.id, 
+                followingName: player.name!,
                 gameId: game.id,
+                gameName: game.name
             }
         })
-
     } catch (error) {
+        console.log("Failed to create following relation", error)
         return NextResponse.json({message: `${user.name} and ${player.name} and ${game.name} connection failed` , error})
     }
 
