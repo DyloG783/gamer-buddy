@@ -54,13 +54,10 @@ postman:
 dgdevelopment65@gmail.com
 
 Need help with:
-- multiple accounts to test with giving I can't use credentials provider?
 - storing only 1 instance of a token in a DB table?
-- Text searh only working either with not other selections?
-- can't cache all games from db as it's over 2mb. If I create a route to only fetch searched games how would I manage all the possibilities in a db query?
 - Good looking css?
 - code review main pages?
-- 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged?
+- 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged? = pass different onvclick handler
 - userIds in url for routing not good?
 
 ---

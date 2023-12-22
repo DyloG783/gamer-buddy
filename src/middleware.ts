@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { authMiddleware } from "@clerk/nextjs";
 
-export function middleware(request: NextRequest) {
-
-    const cookie = request.cookies.get("next-auth.session-token")?.value
-
-    if (!cookie) { 
-        return NextResponse.redirect(new URL('/api/auth/signin', request.url))
-    }
-}
+export default authMiddleware({ debug: false });
 
 export const config = {
-  matcher: ['/profile', '/connections', '/connect/:path*']
-}
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+  publicRoutes: ["/"]
+};

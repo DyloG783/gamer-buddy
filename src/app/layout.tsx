@@ -1,8 +1,7 @@
 import './globals.css'
-import SessionProvider from "../lib/SessionProvider"
-import { getServerSession } from "next-auth"
-import NavigationBar from "@/components/navigation/NavigationBar"
-import Footer from '../components/Footer'
+import { ClerkProvider } from '@clerk/nextjs'
+import NavigationBar from "@/app/components/navigation/NavigationBar"
+import Footer from './components/Footer'
 
 export const metadata = {
   title: 'Gamer Buddy',
@@ -11,23 +10,22 @@ export const metadata = {
 
 export default async function RootLayout({ children, }: { children: React.ReactNode }) {
 
-  const session = await getServerSession();
-
   return (
-    <html lang="en">
-      <body className='min-h-screen flex flex-col bg-slate-200 text-sm md:text-base lg:text-lg'>
-        <SessionProvider session={session}>
+    <ClerkProvider>
+      <html lang="en">
+        <body className='min-h-screen bg-slate-200 text-sm md:text-base lg:text-lg'>
           <header className='bg-slate-400 '>
             <NavigationBar />
           </header>
-          <main className='grow flex md:w-3/4 mx-auto'>
+          {/* <main className='grow flex flex-col md:w-3/4 mx-auto'> */}
+          <main className='grow flex md:w-3/4 justify-around'>
             {children}
           </main>
-          <footer>
+          {/* <footer>
             <Footer />
-          </footer>
-        </SessionProvider>
-      </body>
-    </html>
+          </footer> */}
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

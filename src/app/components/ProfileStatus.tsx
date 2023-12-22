@@ -1,42 +1,45 @@
-import { getServerSession } from "next-auth"
+import { auth, currentUser } from "@clerk/nextjs";
 import Image from "next/image"
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions"
 import Link from "next/link"
 import prisma from "@/lib/db"
 
 export default async function ProfileStatus() {
 
-    const session = await getServerSession(authOptions)
+    const { userId } = auth();
+    const user = await currentUser();
 
     // user is not logged in don't display this component
-    if (!session) {
+    if (!userId) {
         return (
             null
         )
     }
 
-    // find the user's email from the  the session
-    const userProfile = await prisma.user.findUnique({
-        where: {
-            email: session?.user?.email as string
-        },
-        select: {
-            Profile: true
-        }
-    })
+    console.log(userId)
+    console.log(user?.username)
 
-    // This works for hiding the component completely if the user has completed setting their timezone, and about-you section
-    if (userProfile?.Profile?.bio && userProfile?.Profile?.timezone) {
-        return (
-            null
-        )
-    }
+    // find the user's email from the the session // CLERK
+    // const userProfile = await prisma.user.findUnique({
+    //     where: {
+    //         email: session?.user?.email as string
+    //     },
+    //     select: {
+    //         Profile: true
+    //     }
+    // })
+
+    // // This works for hiding the component completely if the user has completed setting their timezone, and about-you section
+    // if (userProfile?.Profile?.bio && userProfile?.Profile?.timezone) {
+    //     return (
+    //         null
+    //     )
+    // }
 
     return (
         <div id="profile_status_container "
             className="p-4 md:p-8 mx-auto bg-yellow-100 shadow-lg"
         >
-            <Link href={`/profile`}>
+            {/* <Link href={`/profile`}>
                 <h1 className="font-semibold text-center mb-4 text-blue-700">Your profile status</h1>
                 {userProfile?.Profile?.timezone
                     &&
@@ -78,7 +81,7 @@ export default async function ProfileStatus() {
                         <p>* You still need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
                     </div>
                 }
-            </Link>
+            </Link> */}
         </div>
     )
 }

@@ -12,7 +12,8 @@ export default async function Home() {
           </p>
         </div>
         <ProfileStatus />
-        <ConnectionMessages />
+        {/* <ConnectionMessages /> */}
+
       </div>
     </>
   );
