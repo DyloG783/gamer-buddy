@@ -1,13 +1,14 @@
 import prisma from "@/lib/db"
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import GameActionBar from "../components/GameActionBar";
 import { IGameFilterType } from "@/lib/custom_types";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { GameNotExist } from "@/lib/errors";
+import { auth } from "@clerk/nextjs";
 
 export default async function GamePage({ params }: { params: { id: number } }) {
+
+    const { userId } = auth();
 
     // this is required to convert string in params to number
     const gameId = Number(params.id)
@@ -24,14 +25,13 @@ export default async function GamePage({ params }: { params: { id: number } }) {
     // boolean for whether the user already has this game added to their account
     let alreadyExists = false;
 
-    const session = await getServerSession(authOptions);
-    if (session) {
+    if (userId) {
 
         // check whether user already has this game saved
         const hasGame = await prisma.user.findUnique({
             select: { games: { where: { id: gameId } } },
             where: {
-                email: session?.user?.email!
+                id: userId
             },
         })
 
@@ -75,8 +75,8 @@ export default async function GamePage({ params }: { params: { id: number } }) {
                     </div>
                 </div>
             </div>
-            {session &&
-                <GameActionBar session={session} alreadyExists={alreadyExists} game={game} />
+            {userId &&
+                <GameActionBar alreadyExists={alreadyExists} game={game} />
             }
         </div>
     )

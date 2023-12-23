@@ -1,16 +1,14 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import { getFollowing, getUsersConnectionRequests, getUsersConnections } from "@/lib/query_helper";
 import ConnectedWith from "./components/ConnectedWith";
 import Following from "./components/Following";
 import PendingConnectionRequests from "./components/PendingConnectionRequests";
+import { IConnection } from "@/lib/custom_types";
 
 const Connections = async () => {
 
-    const session = await getServerSession(authOptions);
-    const userFollowing = await getFollowing(session?.user?.email!);
-    const requests = await getUsersConnectionRequests(session?.user?.email!)
-    const userConnections = await getUsersConnections(session?.user?.email!)
+    const userFollowing: IConnection[] = await getFollowing();
+    const requests: IConnection[] = await getUsersConnectionRequests()
+    const userConnections: IConnection[] = await getUsersConnections()
 
     return (
         <div className="w-full flex flex-col justify-evenly items-center">

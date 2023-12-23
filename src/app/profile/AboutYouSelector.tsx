@@ -37,7 +37,8 @@ export default function AboutYou() {
     return (
         <div className={`p-2 `} >
             <h1 className="text-xl font-semibold mb-2 text-blue-700">About You</h1>
-            <div className={`${editing ? 'hidden' : ''} p-2 hover:shadow-lg`} onClick={() => setEditing(true)}>{user?.unsafeMetadata.bio as string}</div>
+            <div className={`${editing ? 'hidden' : ''} p-2 hover:shadow-lg`}
+                onClick={() => setEditing(true)}>{user?.unsafeMetadata.bio as string}</div>
             <div className={`${editing ? '' : 'hidden'}`}>
                 <form
                     id="bioform"

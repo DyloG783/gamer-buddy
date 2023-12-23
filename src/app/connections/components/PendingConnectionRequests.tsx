@@ -17,7 +17,7 @@ export default function PendingConnectionRequests({ requests }: { requests: ICon
                             key={req.followingId}
                             className={`hover:text-purple-700`}
                         >
-                            <p>{req.followedByName}, Game: {req.gameName}</p>
+                            <p>{req.followedByUName}, Game: {req.gameName}</p>
                         </Link>
                     </li>
                 ))}

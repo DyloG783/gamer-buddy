@@ -1,13 +1,17 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { getServerSession } from "next-auth";
+import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 
 
 export default async function GameConnections({ gameId }: { gameId: number }) {
 
-    const session = await getServerSession(authOptions);
+    const { userId } = auth();
 
-    if (session) {
+    // if not logged in don't show component
+    if (!userId) {
+        return null
+    }
+
+    if (userId) {
         return (
             <div id="game_connections_main"
                 className="p-4 bg-slate-300 my-auto"

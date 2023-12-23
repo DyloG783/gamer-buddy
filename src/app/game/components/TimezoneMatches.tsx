@@ -1,16 +1,30 @@
+import { TUnsafeMetadata } from "@/lib/custom_types";
 import prisma from "@/lib/db";
 import { GameNotExist } from "@/lib/errors";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
-import { Session } from "next-auth";
+import { auth, currentUser } from "@clerk/nextjs";
 import Link from "next/link";
 
-export default async function TimezoneMatches({ gameId, session }: { gameId: number, session: Session | null }) {
+export default async function TimezoneMatches({ gameId }: { gameId: number }) {
+
+    const { userId } = auth();
+    const user = await currentUser();
+
+    // if not logged in don't show component
+    if (!userId) {
+        return null
+    }
+
+    // extract custom user profile info out of Clerk
+    const userBio: TUnsafeMetadata["bio"] = user?.unsafeMetadata.bio as string
+    const userTimezone: TUnsafeMetadata["timezone"] = user?.unsafeMetadata.timezone as string
 
     // if game doesnt exist retun null, or return game
     const game = await checkGameExistsAndReturn(gameId);
 
+    // in case user enters something incorrect into the url
     if (game === null) {
-        return
+        return <GameNotExist />
     }
 
     // find other users who have also have this game saved by count to be displayed in page regardless of session
@@ -24,17 +38,9 @@ export default async function TimezoneMatches({ gameId, session }: { gameId: num
         },
     })
 
-    if (session) {
+    if (userId) {
 
-        // get this user from session to lookup profile tz setting
-        const user = await prisma.user.findUnique({
-            where: {
-                email: session?.user?.email as string
-            },
-            include: { Profile: true }
-        })
-
-        if (user?.Profile?.timezone) {
+        if (userBio && userTimezone.length > 0) {
 
             // find other users who have also have this game saved
             const usersWhoAlsoHaveThisGame = await prisma.user.findMany({
@@ -45,14 +51,14 @@ export default async function TimezoneMatches({ gameId, session }: { gameId: num
                         }
                     },
                     NOT: {
-                        id: user?.id
+                        id: userId
                     },
-                },
-                select: { Profile: true }
+                }
             })
 
+            // count users with matching timezone as the player for this game
             const usersWithGameAndTimezoneCount = usersWhoAlsoHaveThisGame.filter(u => (
-                u.Profile?.timezone === user.Profile?.timezone
+                u.timezone === userTimezone
             )).length
 
 

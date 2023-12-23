@@ -1,15 +1,13 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions"
-import prisma from "@/lib/db"
-import { getServerSession } from "next-auth"
-import Link from "next/link"
-import SubNavigation from "./components/SubNavigation"
-
+import Link from "next/link";
+import SubNavigation from "./components/SubNavigation";
+import { auth, currentUser } from "@clerk/nextjs";
+import prisma from "@/lib/db";
 
 export default async function Connect({ params }: { params: { id: number } }) {
 
     const gameId = Number(params.id) // this id passed in params is the game's id
 
-    const session = await getServerSession(authOptions)
+    const { userId } = auth();
 
     const game = await prisma.game.findUnique({
         where: { id: gameId }
@@ -23,14 +21,9 @@ export default async function Connect({ params }: { params: { id: number } }) {
                 }
             },
             NOT: {
-                email: session?.user?.email
+                id: userId!
             }
         },
-        include: {
-            Profile: {
-                select: { timezone: true }
-            }
-        }
     })
 
     return (
@@ -62,17 +55,17 @@ export default async function Connect({ params }: { params: { id: number } }) {
                             <li key={player.email}
                                 className="shadow-sm text-sm md:text-base italic"
                             >
-                                {player.Profile?.timezone
+                                {player.timezone
                                     &&
                                     <Link href={`/connect/${gameId}/${player.id}`}
                                         className="hover:text-purple-700">
-                                        {player.name}: {player.Profile.timezone}
+                                        {player.userName}: {player.timezone}
                                     </Link>
 
                                     ||
                                     <Link href={`/connect/${gameId}/${player.id}`}
                                         className="hover:text-purple-700">
-                                        {player.name}:
+                                        {player.userName}:
                                     </Link>
                                 }
                             </li>

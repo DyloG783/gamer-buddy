@@ -1,16 +1,15 @@
-import Link from "next/link";
 import PaginatedGames from "./PaginatedGames";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import Link from "next/link";
 import prisma from "@/lib/db";
+import { auth, currentUser } from "@clerk/nextjs";
 
 
 const YourGames: React.FC = async () => {
 
-    const session = await getServerSession(authOptions)
+    const { userId } = auth();
 
     // auth check for active session redirecting to sign in if not
-    if (!session) {
+    if (!userId) {
         return (
             <div>
                 <Link href="/api/auth/signin" className='flex justify-around items-center w-full p-3 hover:shadow-lg hover:text-purple-600 bg-yellow-200 '>
@@ -21,7 +20,7 @@ const YourGames: React.FC = async () => {
     }
 
     const games = await prisma.user.findUnique({
-        where: { email: session.user?.email! },
+        where: { id: userId },
         select: {
             games: {
                 include: {

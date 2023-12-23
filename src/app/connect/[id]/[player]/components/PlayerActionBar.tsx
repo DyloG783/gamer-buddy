@@ -3,9 +3,8 @@
 import { IGame, IUser } from "@/lib/custom_types"
 import { useState } from "react"
 
-export default function PlayerActionBar({ user, player, alreadyExists, game }:
+export default function PlayerActionBar({ player, alreadyExists, game }:
     {
-        user: IUser,
         player: IUser,
         alreadyExists: boolean,
         game: IGame
@@ -25,7 +24,7 @@ export default function PlayerActionBar({ user, player, alreadyExists, game }:
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    user, player, game
+                    player, game
                 })
             })
 
@@ -60,7 +59,7 @@ export default function PlayerActionBar({ user, player, alreadyExists, game }:
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    user, player, game
+                    player, game
                 })
             })
 

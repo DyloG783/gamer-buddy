@@ -1,13 +1,14 @@
-import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]/authOptions"
-import Link from "next/link"
-import { getUsersConnectionRequests } from "@/lib/query_helper"
+import { auth, currentUser } from "@clerk/nextjs";
+import Link from "next/link";
+import { getUsersConnectionRequests } from "@/lib/query_helper";
 
 export default async function ConnectionMessages() {
 
-    const session = await getServerSession(authOptions);
+    const { userId } = auth();
+    // const user = await currentUser();
 
-    if (!session) {
+    // user is not logged in don't display this component
+    if (!userId) {
         return (
             <div id="no_session_container">
                 <Link href={`/api/auth/signin`}
@@ -17,7 +18,8 @@ export default async function ConnectionMessages() {
         )
     }
 
-    const requests = await getUsersConnectionRequests(session.user?.email!)
+
+    const requests = await getUsersConnectionRequests()
 
     return (
         <div

@@ -8,7 +8,7 @@ export type IGame = {
     genreIds: number[];
     firstReleaseDate: number | null;
     totalRating: number | null;
-} 
+}
 
 export type IGameAndTypes = {
     id: number;
@@ -41,17 +41,24 @@ export type ISearchState = {
 
 export type IUser = {
     id: string;
-    name: string | null;
     email: string | null;
-    emailVerified: Date | null;
-    image: string | null;
-} 
+    userName: string | null;
+    bio: string | null;
+    timezone: string | null;
+}
 
 export type IConnection = ({
     followedById: string;
-    followedByName: string;
+    followedByUName: string;
     followingId: string;
-    followingName: string;
+    followingUName: string;
     gameId: number;
     gameName: string;
+})
+
+export type TUserId = ({ userId: string })
+
+export type TUnsafeMetadata = ({
+    bio: string,
+    timezone: string
 })

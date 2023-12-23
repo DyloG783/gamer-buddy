@@ -28,7 +28,7 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                         >
                             <h3 className="font-bold pb-2 text-base">{connection.gameName}</h3>
                             <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">{`${connection.followedByName}`}</h3>
+                                <h3 className="font-bold text-gray-700">{`${connection.followedByUName}`}</h3>
                             </div>
                         </Link>
                     ))}

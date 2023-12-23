@@ -3,10 +3,9 @@
 import { IGame } from "@/lib/custom_types";
 import { useState } from "react";
 
-export default function ButtonRemoveGame({ game, userEmail, setExists }:
+export default function ButtonRemoveGame({ game, setExists }:
     {
         game: IGame,
-        userEmail: string | null | undefined,
         setExists: any
     }) {
 
@@ -21,7 +20,7 @@ export default function ButtonRemoveGame({ game, userEmail, setExists }:
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userEmail, game
+                game
             })
         })
 

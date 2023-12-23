@@ -1,7 +1,7 @@
 import { auth, currentUser } from "@clerk/nextjs";
 import Image from "next/image"
 import Link from "next/link"
-import prisma from "@/lib/db"
+import { TUnsafeMetadata } from "@/lib/custom_types";
 
 export default async function ProfileStatus() {
 
@@ -15,33 +15,24 @@ export default async function ProfileStatus() {
         )
     }
 
-    console.log(userId)
-    console.log(user?.username)
+    // extract custom user profile info out of Clerk
+    const bio: TUnsafeMetadata["bio"] = user?.unsafeMetadata.bio as string
+    const timezone: TUnsafeMetadata["timezone"] = user?.unsafeMetadata.timezone as string
 
-    // find the user's email from the the session // CLERK
-    // const userProfile = await prisma.user.findUnique({
-    //     where: {
-    //         email: session?.user?.email as string
-    //     },
-    //     select: {
-    //         Profile: true
-    //     }
-    // })
-
-    // // This works for hiding the component completely if the user has completed setting their timezone, and about-you section
-    // if (userProfile?.Profile?.bio && userProfile?.Profile?.timezone) {
-    //     return (
-    //         null
-    //     )
-    // }
+    // This works for hiding the component completely if the user has completed setting their timezone, and about-you profile info
+    if (bio && timezone) {
+        return (
+            null
+        )
+    }
 
     return (
         <div id="profile_status_container "
             className="p-4 md:p-8 mx-auto bg-yellow-100 shadow-lg"
         >
-            {/* <Link href={`/profile`}>
+            <Link href={`/user-profile/game-settings`}>
                 <h1 className="font-semibold text-center mb-4 text-blue-700">Your profile status</h1>
-                {userProfile?.Profile?.timezone
+                {timezone.length > 0
                     &&
                     <div
                         id="timezone_status_available"
@@ -61,7 +52,7 @@ export default async function ProfileStatus() {
                         <p>* You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
                     </div>
                 }
-                {userProfile?.Profile?.bio
+                {bio.length > 0
                     &&
                     <div
                         id="aboutYou_status_available"
@@ -81,7 +72,7 @@ export default async function ProfileStatus() {
                         <p>* You still need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
                     </div>
                 }
-            </Link> */}
+            </Link>
         </div>
     )
 }

@@ -17,7 +17,7 @@ export default function Following({ userFollowing }: { userFollowing: IConnectio
                             key={by.followingId}
                             className={`hover:text-purple-700`}
                         >
-                            <p >{by.followingName}, Game: {by.gameName}</p>
+                            <p >{by.followingUName}, Game: {by.gameName}</p>
                         </Link>
                     </li>
                 ))}

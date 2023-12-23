@@ -14,7 +14,10 @@ model TwitchAuthToken {
 
 model User {
   id         String    @id @unique
+  email      String?
   userName   String?
+  bio        String?
+  timezone   String?
   games      Game[]
   followedBy Follows[] @relation("followedBy")
   following  Follows[] @relation("following")

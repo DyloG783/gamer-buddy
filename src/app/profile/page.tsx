@@ -1,6 +1,6 @@
 import { useUser } from "@clerk/nextjs";
-import TimezoneSelector from "./timezone/TimezoneSelector";
-import AboutYouSelector from "./about_you/AboutYouSelector";
+import TimezoneSelector from "./TimezoneSelector";
+import AboutYouSelector from "./AboutYouSelector";
 
 export default function Profile() {
 
