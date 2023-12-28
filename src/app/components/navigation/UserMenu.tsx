@@ -7,7 +7,7 @@ import {
 
 export default function UserMenu() {
     return (
-        <div className="p-7 shadow-md hover:shadow-2xl">
+        <div className="p-7 hover:shadow-2xl">
             <SignedIn>
                 {/* Mount the UserButton component */}
                 <UserButton userProfileMode="navigation" userProfileUrl="/user-profile/" />

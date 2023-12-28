@@ -12,15 +12,46 @@ model TwitchAuthToken {
   twitchAuthToken String
 }
 
+model Gameforum {
+  id       Int                @id @unique
+  game     Game               @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId   Int                @unique
+  messages GameForumMessage[]
+}
+
+model GameForumMessage {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  gameForum Gameforum @relation(fields: [forumId], references: [id], onDelete: Cascade)
+  forumId   Int
+  message   String
+  sentBy    User      @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model PrivateMessage {
+  createdAt    DateTime @default(now())
+  sentBy       User     @relation("sender", fields: [sentById], references: [id], onDelete: Cascade)
+  sentById     String
+  recievedBy   User     @relation("reciever", fields: [recievedById], references: [id], onDelete: Cascade)
+  recievedById String
+  message      String   @db.VarChar(500)
+
+  @@id([sentById, recievedById, createdAt])
+}
+
 model User {
-  id         String    @id @unique
-  email      String?
-  userName   String?
-  bio        String?
-  timezone   String?
-  games      Game[]
-  followedBy Follows[] @relation("followedBy")
-  following  Follows[] @relation("following")
+  id               String             @id
+  email            String?
+  userName         String?
+  bio              String?
+  timezone         String?
+  games            Game[]
+  followedBy       Follows[]          @relation("followedBy")
+  following        Follows[]          @relation("following")
+  sentBy           PrivateMessage[]   @relation("sender")
+  recievedBy       PrivateMessage[]   @relation("reciever")
+  GameForumMessage GameForumMessage[]
 }
 
 model Follows {
@@ -52,6 +83,7 @@ model Game {
   firstReleaseDate Int?
   totalRating      Float?
   Follows          Follows[]
+  forum            Gameforum?
 }
 
 model Platform {

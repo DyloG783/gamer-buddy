@@ -16,22 +16,32 @@ interface IItems {
 
 const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage }) => {
 
+    // connections.map(c => (
+    //     console.log(c.followedById)
+    // ));
+
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
-            <div className="grid md:grid-flow-col md:auto-cols-fr text-xs pb-2 ">
-                {currentItems &&
-                    currentItems.map((connection: IConnection) => (
-                        <Link
-                            key={`${connection.followingId}`}
-                            className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
-                            href={`/connect/${connection.gameId}/${connection.followedById}`}
-                        >
-                            <h3 className="font-bold pb-2 text-base">{connection.gameName}</h3>
-                            <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">{`${connection.followedByUName}`}</h3>
-                            </div>
-                        </Link>
-                    ))}
+            <div className="">
+                <ul className="grid md:grid-flow-col md:auto-cols-fr text-xs pb-2">
+                    {currentItems &&
+                        currentItems.map((connection: IConnection) => (
+                            <li key={`${connection.followedById}`}>
+                                <Link
+                                    key={`${connection.followedById}`}
+                                    className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
+                                    href={`/connect/${connection.gameId}/${connection.followedById}`}
+                                >
+                                    <h3 className="font-bold pb-2 text-base">{connection.gameName}</h3>
+                                    <div className="italic pb-1">
+                                        <h3 className="font-bold text-gray-700">{`${connection.followedByUName}`}</h3>
+                                    </div>
+                                </Link>
+                            </li>
+
+                        ))}
+                </ul>
+
             </div>
         );
     }

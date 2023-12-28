@@ -7,17 +7,21 @@ import { IConnection } from "@/lib/custom_types";
 
 export default function PendingConnectionRequests({ requests }: { requests: IConnection[], }) {
 
+    // requests.map(req => (
+    //     console.log(req.followedById)
+    // ));
+
     return (
         <div className="" id="connection_request_container">
             <p className={styles.connection_header}>Connection requests</p>
             <ul className={styles.connection_items_container}>
                 {requests.map(req => (
-                    <li key={`${req.followingId}`} className={styles.connection_items}>
+                    <li key={`${req.followedById}`} className={styles.connection_items}>
                         <Link href={`/connect/${req.gameId}/${req.followedById}`}
-                            key={req.followingId}
+                            key={req.followedById}
                             className={`hover:text-purple-700`}
                         >
-                            <p>{req.followedByUName}, Game: {req.gameName}</p>
+                            <p>{req.followedByUName} ({req.gameName})</p>
                         </Link>
                     </li>
                 ))}

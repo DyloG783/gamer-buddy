@@ -18,7 +18,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
             <NavigationBar />
           </header>
           {/* <main className='grow flex flex-col md:w-3/4 mx-auto'> */}
-          <main className='grow flex md:w-3/4 justify-around'>
+          <main className=' flex w-full justify-around'>
             {children}
           </main>
           {/* <footer>

@@ -85,17 +85,24 @@ export async function POST(req: Request) {
         const timezone: TUnsafeMetadata["timezone"] = evt.data.unsafe_metadata.timezone as string;
 
         try {
-            await prisma.user.update({
+            await prisma.user.upsert({
                 where: {
                     id: userId,
                 },
-                data: {
+                update: {
                     // id: userId,
                     userName: userName,
                     email: email.email_address,
                     bio: bio,
                     timezone: timezone
                 },
+                create: {
+                    id: userId,
+                    userName: userName,
+                    email: email.email_address,
+                    bio: bio,
+                    timezone: timezone
+                }
             })
             console.log("Webhook, Update user, Prisma; Success!");
         } catch (error) {

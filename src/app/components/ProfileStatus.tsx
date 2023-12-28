@@ -32,7 +32,7 @@ export default async function ProfileStatus() {
         >
             <Link href={`/user-profile/game-settings`}>
                 <h1 className="font-semibold text-center mb-4 text-blue-700">Your profile status</h1>
-                {timezone.length > 0
+                {timezone && timezone.length > 0
                     &&
                     <div
                         id="timezone_status_available"
@@ -52,7 +52,7 @@ export default async function ProfileStatus() {
                         <p>* You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
                     </div>
                 }
-                {bio.length > 0
+                {bio && bio.length > 0
                     &&
                     <div
                         id="aboutYou_status_available"

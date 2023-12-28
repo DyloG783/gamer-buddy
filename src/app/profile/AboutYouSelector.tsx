@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import SubmitBio from '@/actions'
-import { useFormState } from 'react-dom'
+// import SubmitBio from '@/actions'
+// import { useFormState } from 'react-dom'
 import { useUser } from "@clerk/nextjs"
 
 // export default function AboutYou({ bio }: { bio: string | null | undefined }) {
