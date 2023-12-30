@@ -1,20 +1,22 @@
-import ConnectionMessages from "@/app/components/ConnectionMessages";
+import ConnectionUpdates from "@/app/components/ConnectionUpdates";
 import ProfileStatus from "@/app/components/ProfileStatus";
+import HeroContent from "./components/HeroContent";
 
 export default async function Home() {
   return (
-    <>
-      <div id="home_page_container" className="grow flex justify-evenly flex-col p-2">
-        <div id="title_info_section" className=" shadow-md flex flex-col items-center p-4 bg-slate-300">
-          <h1 className="font-semibold text-center mb-4 text-blue-700 text-xl">Bringing Gamers Together</h1>
-          <p className="max-w-4xl">
-            Connect with others who enjoy the same games as you based on similar timezones. You can chat with others in a forum, or click on another player and connect with them privately, once you are connected our job here is done. Go and enjoy your game together on whatever platform or service works best for you!
-          </p>
-        </div>
-        <ProfileStatus />
-        <ConnectionMessages />
-
+    <div id="home_page_container" className="grid grid-flow-row auto-rows-fr">
+      <div id="hero_layout_container" className="p-4 bg-slate-300 ">
+        <HeroContent />
       </div>
-    </>
+
+      <div
+        id="connectoin_updates_layout_container"
+        className="p-4 bg-slate-200 "
+      >
+        <ConnectionUpdates />
+      </div>
+
+      <ProfileStatus />
+    </div>
   );
 }

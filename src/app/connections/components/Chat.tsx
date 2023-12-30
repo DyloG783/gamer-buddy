@@ -1,26 +1,43 @@
 'use client'
 
-import { sendMessageForum } from "@/actions"
-import { useState } from "react"
+import { sendMessagePrivate } from "@/actions"
+import { useEffect, useState } from "react"
 
-type TForumMessages = {
-    messages: ({
-        sentBy: {
-            userName: string | null;
-        };
-    } & {
-        id: number;
-        createdAt: Date;
-        forumId: number;
-        message: string;
-        userId: string;
-    })[];
-} | null
+type TMessage = ({
+    sentBy: {
+        userName: string | null;
+    };
+    recievedBy: {
+        userName: string | null;
+    };
+} & {
+    createdAt: Date,
+    sentById: string,
+    recievedById: string,
+    message: string
+})
 
-export default function ChatForum({ messages, gameId }: { messages: TForumMessages, gameId: number }) {
+export default function Chat({ messages, playerId }:
+    { messages: TMessage[], playerId: string }) {
 
     const [message, setMessage] = useState("")
     const [editing, setEditing] = useState(false)
+
+    // FML!!! can't scroll to bottom of scrollable div...
+    // const ref = document.getElementById('message_container');
+    // useEffect(() => {
+    //     // const messageView = document.getElementById('message_container');
+    //     console.log(ref)
+    //     if (ref.c) {
+    //         if (ref) {
+    //             setTimeout(() => {
+    //                 ref.scrollIntoView({ behavior: "auto", block: "end" });
+    //             }, 100);
+    //         }
+
+
+    //     }
+    // }, [])
 
     const closeInput = () => {
         setEditing(false);
@@ -28,22 +45,23 @@ export default function ChatForum({ messages, gameId }: { messages: TForumMessag
     }
 
     // adds playerId to server actions
-    const updateWithForumId = sendMessageForum.bind(null, gameId)
+    const updateWithPlayerId = sendMessagePrivate.bind(null, playerId)
 
-    // display initial messages
-    // add for to submit messages
     return (
         <div id="chat_container" className="flex flex-col">
             <div id="message_container"
-                className="max-h-80 overflow-y-scroll"
+                className="max-h-40 md:max-h-80 overflow-y-scroll"
             >
-                {messages && messages.messages.length > 0 &&
-                    messages.messages.map((m) => (
-                        <p key={`${m.createdAt}`} className="p-2">{`${m.sentBy.userName}: ${m.message}`}</p>
+                {messages && messages.length > 0 &&
+                    messages.map((m) => (
+                        <div key={`${m.createdAt}`} className="p-2">
+                            <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentBy.userName}`}</p>
+                            <p>{`${m.message}`}</p>
+                        </div>
                     ))}
             </div>
 
-            <form id="message_form" action={updateWithForumId}
+            <form id="message_form" action={updateWithPlayerId}
                 onSubmit={closeInput}
                 className="p-4">
                 <input

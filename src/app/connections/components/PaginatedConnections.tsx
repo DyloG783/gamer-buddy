@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Key, useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IConnection } from "@/lib/custom_types";
 import Link from "next/link";
@@ -16,26 +16,19 @@ interface IItems {
 
 const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage }) => {
 
-    // connections.map(c => (
-    //     console.log(c.followedById)
-    // ));
-
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
-            <div className="">
-                <ul className="grid md:grid-flow-col md:auto-cols-fr text-xs pb-2">
+            <div className="p-4 md:p-10">
+                <ul className="grid md:grid-flow-col md:auto-cols-fr ">
                     {currentItems &&
                         currentItems.map((connection: IConnection) => (
-                            <li key={`${connection.followedById}`}>
+                            <li key={`${connection.followedById} + ${connection.followingId}`} className="hover:shadow-md">
                                 <Link
-                                    key={`${connection.followedById}`}
-                                    className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
+                                    className="p-4 whitespace-nowrap overflow-hidden"
                                     href={`/connect/${connection.gameId}/${connection.followedById}`}
                                 >
-                                    <h3 className="font-bold pb-2 text-base">{connection.gameName}</h3>
-                                    <div className="italic pb-1">
-                                        <h3 className="font-bold text-gray-700">{`${connection.followedByUName}`}</h3>
-                                    </div>
+                                    <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followedByUName}`}</p>
+                                    <p className="font-light ml-2 italic">{connection.gameName}</p>
                                 </Link>
                             </li>
 

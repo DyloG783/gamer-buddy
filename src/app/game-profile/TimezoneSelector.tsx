@@ -1,10 +1,7 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import timezoneJSON from 'timezones.json';
-import Image from 'next/image';
-import SubmitTimezone from '@/actions';
-import { useFormState, useFormStatus } from 'react-dom';
 import { useUser } from '@clerk/nextjs';
 
 export default function TimezoneSelector() {
@@ -17,17 +14,6 @@ export default function TimezoneSelector() {
 
     const { user } = useUser();
     const usMetadata = user?.unsafeMetadata;
-
-    // useEffect(() => {
-    //     user?.update({ unsafeMetadata: { timezone: selectedTimezone } })
-    // }, [selectedTimezone]);
-
-    // const handleSubmit = () => { 
-    //     user?.update({ unsafeMetadata: { timezone: selectedTimezone } })
-    //     setEditing()
-    // }
-
-
 
     return (
         <div className={`p-2 mt-2`} >

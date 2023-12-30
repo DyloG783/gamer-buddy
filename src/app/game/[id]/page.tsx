@@ -1,13 +1,11 @@
-import GameConnections from "../components/GameConnections";
-import TimezoneMatches from "../components/TimezoneMatches";
-import GameActionBar from "../components/GameActionBar";
+import OtherPlayers from "./components/OtherPlayers";
+import GameActionBar from "./components/GameActionBar";
 import { IGameFilterType } from "@/lib/custom_types";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { GameNotExist } from "@/lib/errors";
 import { auth } from "@clerk/nextjs";
-import prisma from "@/lib/db"
+import prisma from "@/lib/db";
 import Link from "next/link";
-import ChatForum from "../components/ChatForum";
 
 export default async function GamePage({ params }: { params: { id: number } }) {
 
@@ -19,6 +17,7 @@ export default async function GamePage({ params }: { params: { id: number } }) {
     // if game doesnt exist retun null, or return game
     const game = await checkGameExistsAndReturn(gameId);
 
+    // display 'game not exist' error on page (in case user enters incorrect url)
     if (game === null) {
         return (
             <GameNotExist />
@@ -42,76 +41,47 @@ export default async function GamePage({ params }: { params: { id: number } }) {
         }
     }
 
-    //create game forum table if not already exists
-    await prisma.gameforum.upsert({
-        where: { id: gameId },
-        update: {},
-        create: {
-            id: gameId,
-            gameId: gameId
-        }
-    })
-
-    const forumMessages = await prisma.gameforum.findUnique({
-        select: {
-            messages: {
-                include:
-                {
-                    sentBy:
-                        { select: { userName: true } }
-                },
-                orderBy: { createdAt: "desc" }
-            },
-        },
-        where: { gameId: gameId },
-
-    })
-
     return (
-        <div id="game_container" className={`flex flex-col  justify-center bg-slate-300 p-4 my-auto`}>
-            <div id="game_info_container" className="p-1 md:p-4 my-auto flex md:flex-row">
-                <div id="game_info_container">
-                    <div id="game_title_and_summary" className="pb-1 md:pb-4">
+        <>
+            <div id="game_container" className={`flex flex-col  justify-center bg-slate-300 p-8 md:p-16 `}>
+                <div id="game_info_container" className="p-1 md:p-4">
+                    <div id="game_title_actions_container" className="mb-1 md:mb-4 flex  ">
                         <Link href={`${game?.url}`}
-                            className="hover:italic text-blue-700 hover:text-purple-700 "
                             target="_blank"
                         >
-                            <h1 className="font-semibold text-xl md:text-4xl text-center pb-2 ">{`${game?.name}`}</h1>
+                            <h1 className="font-semibold text-xl md:text-4xl mb-2 hover:italic text-blue-700 hover:text-purple-700">{`${game?.name}`}</h1>
                         </Link>
-                        <p className="text-left italic p-4">{`${game?.summary}`}</p>
+                        {userId &&
+                            <GameActionBar alreadyExists={alreadyExists} game={game} />
+                        }
+
                     </div>
+                    <p className="text-left p-4 md:p-8 tracking-wide font-thin">{`${game?.summary}`}</p>
                     <div id="game_info_groups_container"
-                        className="flex justify-around p-1 md:p-4 gap-2 md:gap-0 md:mt-10"
+                        className="flex justify-around p-1 md:p-4 gap-2 md:gap-0 md:mt-0"
                     >
-                        <div id="game_genre_group" className="pb-4">
+                        <div id="game_genre_group" className="mb-4">
                             <p className="font-semibold">Genre</p>
                             {game?.genres.map((genre: IGameFilterType) => (
-                                <span key={genre.id} className="italic">{genre.name + ", "}</span>
+                                <span key={genre.id} className=" font-light">{genre.name + ", "}</span>
                             ))}
                         </div>
-                        <div id="game_mode_group" className="pb-4">
+                        <div id="game_mode_group" className="mb-4">
                             <p className="font-semibold">Mode</p>
                             {game?.modes.map((mode: IGameFilterType) => (
-                                <span key={mode.id} className="italic">{mode.name + ", "}</span>
+                                <span key={mode.id} className="font-light">{mode.name + ", "}</span>
                             ))}
                         </div>
-                        <div id="game_platform_group" className="pb-4">
+                        <div id="game_platform_group" className="mb-4">
                             <p className="font-semibold">Platform</p>
                             {game?.platforms.map((plat: IGameFilterType) => (
-                                <span key={plat.id} className="italic">{plat.name + ", "}</span>
+                                <span key={plat.id} className="font-light">{plat.name + ", "}</span>
                             ))}
                         </div>
                     </div>
                 </div>
-
-                {userId &&
-                    <GameActionBar alreadyExists={alreadyExists} game={game} />
-                }
             </div>
-
-            <GameConnections gameId={gameId} />
-            <TimezoneMatches gameId={gameId} />
-            <ChatForum messages={forumMessages} gameId={gameId} />
-        </div>
+            <OtherPlayers gameId={gameId} />
+        </>
     )
 }

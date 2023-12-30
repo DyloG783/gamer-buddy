@@ -2,7 +2,7 @@ import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
   // debug: true,
-  publicRoutes: ["/", "/game(.*)"],
+  publicRoutes: ["/", "/game(.*)", "/api/search-games"],
   ignoredRoutes: ["/api/webhook(.*)"],
 });
 

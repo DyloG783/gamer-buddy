@@ -18,7 +18,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
 
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
-            <div className="grid md:grid-flow-col md:auto-cols-fr text-xs pb-2 ">
+            <div className="grid md:grid-flow-col md:auto-cols-fr text-xs  ">
                 {currentItems &&
                     currentItems.map((game: IGameAndTypes) => (
                         <Link
@@ -85,8 +85,8 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                     pageCount={pageCount}
                     previousLabel="<"
                     renderOnZeroPageCount={null}
-                    className="flex justify-around md:justify-center md:gap-4
-                    p-1 md:p-2 bg-slate-400 text-white "
+                    className="flex justify-around md:justify-center gap-4 md:gap-6
+                    p-1 md:p-2 text-slate-700"
                 />
             </>
         );

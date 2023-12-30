@@ -55,6 +55,7 @@ dgdevelopment65@gmail.com
 
 Clerk:
 local tunnel to connect clerk with my local - https://localtunnel.github.io/www/ as per - https://clerk.com/docs/users/sync-data
+LT = lt --port 3000
 
 Need help with:
 - storing only 1 instance of a token in a DB table?
@@ -62,6 +63,7 @@ Need help with:
 - code review main pages?
 - 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged? = pass different onvclick handler
 - userIds in url for routing not good?
+- paginated items am I reusing the component correctly by having different versions?
 
 ---
 

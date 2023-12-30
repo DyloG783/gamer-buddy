@@ -7,10 +7,20 @@ import {
 
 export default function UserMenu() {
     return (
-        <div className="p-7 hover:shadow-2xl">
+        <div className="md:hover:shadow-md p-4 md:p-8 mx-auto md:mx-0">
             <SignedIn>
                 {/* Mount the UserButton component */}
-                <UserButton userProfileMode="navigation" userProfileUrl="/user-profile/" />
+                <UserButton
+                    userProfileMode="navigation"
+                    userProfileUrl="/user-profile/"
+                    showName
+                    appearance={{
+                        elements: {
+                            userButtonBox: "",
+                            userButtonOuterIdentifier: "text-white font-mono "
+                        }
+                    }}
+                />
             </SignedIn>
             <SignedOut>
                 {/* Signed out users get sign in button */}

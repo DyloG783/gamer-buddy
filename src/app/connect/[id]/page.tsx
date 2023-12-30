@@ -1,7 +1,9 @@
 import Link from "next/link";
-import SubNavigation from "./components/SubNavigation";
-import { auth, currentUser } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
+import ChatForum from "@/app/game/[id]/components/ChatForum";
+import { GameNotExist } from "@/lib/errors";
+import { checkGameExistsAndReturn } from "@/lib/query_helper";
 
 export default async function Connect({ params }: { params: { id: number } }) {
 
@@ -9,10 +11,17 @@ export default async function Connect({ params }: { params: { id: number } }) {
 
     const { userId } = auth();
 
-    const game = await prisma.game.findUnique({
-        where: { id: gameId }
-    })
+    // if game doesnt exist retun null, or return game
+    const game = await checkGameExistsAndReturn(gameId);
 
+    // display 'game not exist' error on page (in case user enters incorrect url)
+    if (game === null) {
+        return (
+            <GameNotExist />
+        )
+    }
+
+    // get all the users who also have this game saved
     const otherPlayers = await prisma.user.findMany({
         where: {
             games: {
@@ -26,57 +35,73 @@ export default async function Connect({ params }: { params: { id: number } }) {
         },
     })
 
+    // create game forum table if not already exists
+    await prisma.gameforum.upsert({
+        where: { id: gameId },
+        update: {},
+        create: {
+            id: gameId,
+            gameId: gameId
+        }
+    })
+
+    // get all messages posted on this forum
+    const forumMessages = await prisma.gameforum.findUnique({
+        select: {
+            messages: {
+                include:
+                {
+                    sentBy:
+                        { select: { userName: true } }
+                },
+                orderBy: { createdAt: "desc" }
+            },
+        },
+        where: { gameId: gameId },
+
+    })
+
     return (
         <div id="connect_container"
-            className="w-full"
+            className="bg-slate-300"
         >
-            <SubNavigation routeId={gameId} routeLabel={`${game?.name} page`} routeName="game" />
-            <div className="mt-2 md:mt-6 flex justify-around">
-                <h1 className=" my-2 md:my-10"
+            <div id="title_link_container" className="mb-10 md:mb-20 pt-4 md:pt-10">
+                <Link href={`/game/${gameId}`}
                 >
-                    <Link href={`/game/${gameId}`}
-                        className="text-blue-700 font-semibold text-xl md:text-4xl
-                    hover:text-purple-700 hover:italic "
-                    >
-                        {game?.name}
-                    </Link>
-                </h1>
+                    <h1 className="text-center tracking-wider text-blue-700 
+                    font-semibold text-xl md:text-4xl hover:text-purple-700 
+                    hover:italic 
+                    ">
+                        {game?.name} Chat
+                    </h1>
+                </Link>
             </div>
-
-
-            <div id="players_and_chat_forum_container"
+            <div id="players_and_chat_forum_container "
                 className="flex justify-between"
             >
-                <div id="other_players_container">
-                    <p className="font-semibold mb-1 md:mb-6">Other Players</p>
-                    <ul id="players_list"
-                        className="flex flex-col gap-4">
+                <div id="other_players_container" className="px-4 min-w-[33%]">
+                    <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Other Players</p>
+                    <ul id="player_list "
+                        className="flex flex-col gap-2">
                         {otherPlayers.map(player => (
                             <li key={player.email}
-                                className="shadow-sm text-sm md:text-base italic"
+                                className="shadow-sm hover:italic text-sm md:text-base p-1 "
                             >
-                                {player.timezone
-                                    &&
-                                    <Link href={`/connect/${gameId}/${player.id}`}
-                                        className="hover:text-purple-700">
-                                        {player.userName}: {player.timezone}
-                                    </Link>
-
-                                    ||
-                                    <Link href={`/connect/${gameId}/${player.id}`}
-                                        className="hover:text-purple-700">
-                                        {player.userName}:
-                                    </Link>
-                                }
+                                <Link key={player.email + player.email!} href={`/connect/${gameId}/${player.id}`}
+                                    className="inline-block w-full">
+                                    <p className="tracking-wider">{player.userName}</p>
+                                    <p className="italic font-light">{player.timezone}</p>
+                                </Link>
                             </li>
                         ))}
                     </ul>
                 </div>
 
                 <div id="chat_forum container"
-                    className="bg-yellow-200 min-w-[50%]"
+                    className=" min-w-[66%]"
                 >
-                    Chat forum
+                    <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Chat Forum</p>
+                    <ChatForum messages={forumMessages} gameId={gameId} />
                 </div>
 
             </div>

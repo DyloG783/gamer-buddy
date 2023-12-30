@@ -5,7 +5,7 @@ import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { auth, currentUser } from "@clerk/nextjs";
 import Link from "next/link";
 
-export default async function TimezoneMatches({ gameId }: { gameId: number }) {
+export default async function OtherPlayers({ gameId }: { gameId: number }) {
 
     const { userId } = auth();
     const user = await currentUser();
@@ -39,7 +39,6 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
     })
 
     if (userId) {
-
         if (userBio && userTimezone.length > 0) {
 
             // find other users who have also have this game saved
@@ -63,29 +62,31 @@ export default async function TimezoneMatches({ gameId }: { gameId: number }) {
 
 
             return (
-                <div className="p-4 bg-slate-300 my-auto">
-                    <h2 className="font-semibold text-lg md:text-2xl mb-2 text-blue-700">Other Players</h2>
-                    <p className="italic mb-2 md:mb-4 ml-4">These are the other people playing this game.
+                <div className="p-8 md:p-20 bg-slate-200 my-auto">
+                    <h2 className="font-semibold text-xl md:text-4xl mb-4 md:mb-8 text-blue-700">Other Players</h2>
+                    {/* <p className="mb-2 md:mb-4 ml-4">These are the other people playing this game.
                         Click below (or in the menu) to check out the chat forums, or find someone to connect with!
-                    </p>
-
-                    <Link href={`/connect/${gameId}`}>
-                        <div id="timezone_main_content"
-                            className="grid grid-flow-col auto-cols-fr hover:shadow-md
-                            hover:text-purple-600 "
-                        >
+                    </p> */}
+                    <div id="timezone_main_content"
+                        className="flex flex-col md:flex-row p-4 md:p-8
+                        justify-evenly"
+                    >
+                        <Link href={`/connect/${gameId}`}>
                             <div id="others_in_your_timezone"
-                                className="text-sm p-4 md:p-8 "
+                                className="hover:shadow-sm p-6 tracking-wide"
                             >
-                                {`Other players in your timezone playing this game: '${usersWithGameAndTimezoneCount}'`}
+                                {`Others in your timezone playing this game: '${usersWithGameAndTimezoneCount}'`}
                             </div>
+                        </Link>
+                        <Link href={`/connect/${gameId}`}>
                             <div id="others_in_all_timezones"
-                                className="text-sm p-4 md:p-8"
+                                className="hover:shadow-sm p-6 tracking-wide"
                             >
                                 {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount - 1}'`}
                             </div>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
+
                 </div>
             )
         }

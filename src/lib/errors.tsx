@@ -2,7 +2,7 @@
 
 export function GameNotExist() {
     return (
-        <div className="grow flex items-center justify-around">
+        <div className="flex items-center justify-around mt-10 tracking-wider text-2xl">
             <p>Game does not exist!</p>
         </div>
     )
@@ -10,7 +10,7 @@ export function GameNotExist() {
 
 export function UserNotExist() {
     return (
-        <div className="grow flex items-center justify-around">
+        <div className="flex items-center justify-around mt-10 tracking-wider text-2xl">
             <p>User does not exist!</p>
         </div>
     )

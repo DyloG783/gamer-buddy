@@ -75,7 +75,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                             : categoryName === "Mode" && searchState.mode != null ? searchState.mode
                                 : ""
                     }
-                    className="w-56 bg-slate-200 text-sm md:text-base"
+                    className="w-56 bg-slate-300 text-sm md:text-base"
                 >
                     {categoryList.map((listItem) =>
                         <option key={listItem.id} value={listItem.id}>
@@ -117,7 +117,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleSubmit}
-                    className="bg-slate-200 w-56 text-sm md:text-base"
+                    className="bg-slate-300 placeholder:text-slate-900 placeholder:italic w-56 text-sm md:text-base"
                 >
                 </input>
             </div>
@@ -126,25 +126,25 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
     return (
         <div id="search_options_and_reset_button"
-            className="flex flex-col p-2 md:p-8"
+            className="flex flex-col p-2 md:p-4"
         >
             {searchEmpty &&
                 <button
                     id="reset_search"
                     onClick={() => window.location.reload()}
-                    className="btn p-2 max-w-[100px] ml-auto bg-green-500"
+                    className="btn p-2 mb-2 md:mb-10 w-32 bg-green-500 ml-auto"
                 >
                     Reset search
                 </button> ||
                 <button
                     id="reset_search"
                     onClick={() => window.location.reload()}
-                    className="btn p-2 max-w-[100px] ml-auto"
+                    className="btn p-2 mb-2 md:mb-10 w-32 bg-slate-500 ml-auto"
                 >
                     Reset search
                 </button>
             }
-            <div className="flex flex-wrap gap-4 justify-center pb-4 sm:text-sm md:text-base lg:text-lg"
+            <div className="flex flex-wrap gap-3 justify-center mb-4 md:mb-8"
                 id="search_options"
             >
                 <SelectSearch categoryList={genres} categoryName="Genre" />

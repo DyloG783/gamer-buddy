@@ -1,8 +1,6 @@
 import { getFollowing, getUsersConnectionRequests, getUsersConnections } from "@/lib/query_helper";
-import ConnectedWith from "./components/ConnectedWith";
-import Following from "./components/Following";
-import PendingConnectionRequests from "./components/PendingConnectionRequests";
 import { IConnection } from "@/lib/custom_types";
+import PaginatedConnections from "./components/PaginatedConnections";
 
 const Connections = async () => {
 
@@ -11,10 +9,30 @@ const Connections = async () => {
     const userConnections: IConnection[] = await getUsersConnections()
 
     return (
-        <div className="w-full flex flex-col justify-evenly items-center">
-            <ConnectedWith connections={userConnections} />
-            <PendingConnectionRequests requests={requests} />
-            <Following userFollowing={userFollowing} />
+        <div className="flex flex-col">
+            <div className=" bg-slate-200" id="connected_with_container">
+                <p className="text-blue-600 font-semibold text-xl md:text-2xl
+                    tracking-wider mt-4 md:mt-10 ml-4"
+                >
+                    Connected With
+                </p>
+                <PaginatedConnections connections={userConnections} itemsPerPage={5} />
+            </div>
+            <div className=" bg-slate-300" id="connection_request_container">
+                <p className='text-blue-600 font-semibold text-xl md:text-2xl 
+                tracking-wider mt-4 md:mt-10 ml-4'>
+                    Connection requests
+                </p>
+                <PaginatedConnections connections={requests} itemsPerPage={5} />
+            </div>
+            <div className=" bg-slate-200" id="following_container">
+                <p className="text-blue-600 font-semibold text-xl md:text-2xl
+                 tracking-wider mt-4 md:mt-10 ml-4">
+                    Following
+                </p>
+                <PaginatedConnections connections={userFollowing} itemsPerPage={5} />
+            </div>
+
         </div>
     )
 };

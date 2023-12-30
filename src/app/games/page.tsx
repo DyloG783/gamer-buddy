@@ -1,7 +1,6 @@
 import React from "react";
 import prisma from "@/lib/db";
 import GamesDisplay from "./components/GamesDisplay";
-import YourGames from "./components/YourGames";
 
 export default async function GamesPage() {
 
@@ -11,27 +10,17 @@ export default async function GamesPage() {
 
     // Gets the last 500 games in the DB including future releases to be displayed before searching
     const defaultGames = await prisma.game.findMany({
-        take: 500,
-        where: {
-
-        },
+        take: 500, where: {},
         include: {
             genres: true,
             modes: true,
             platforms: true
         },
-        orderBy: {
-            firstReleaseDate: "desc",
-        },
+        orderBy: { firstReleaseDate: "desc" },
     })
 
     return (
-        <div className="grow flex flex-col justify-between" id="games_page_container">
-            <div className=" flex flex-col p-2 md:p-8 bg-slate-300 mt-4">
-                <h2 className="pb-2 font-bold text-blue-800 text-xl md:text-2xl">Your games</h2>
-                <p className="text-sm italic pb-2">Games that you have 'Saved' are displayed below</p>
-                <YourGames />
-            </div>
+        <div className="" id="games_page_container">
             <GamesDisplay genres={genres} platforms={platforms} modes={modes} defaultGames={defaultGames} />
         </div>
     )
