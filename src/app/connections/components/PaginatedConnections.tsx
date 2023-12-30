@@ -18,7 +18,7 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
 
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
-            <div className="p-4 md:p-10">
+            <div className="pl-4 md:pl-10">
                 <ul className="grid md:grid-flow-col md:auto-cols-fr ">
                     {currentItems &&
                         currentItems.map((connection: IConnection) => (
@@ -31,10 +31,8 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                                     <p className="font-light ml-2 italic">{connection.gameName}</p>
                                 </Link>
                             </li>
-
                         ))}
                 </ul>
-
             </div>
         );
     }
@@ -75,7 +73,7 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
     }
 
     return (
-        <div className={`flex flex-col`} id="paginated_Games" >
+        <div className={``} id="paginated_connections" >
             <PaginatedItems itemsPerPage={itemsPerPage} />
         </div>
     )

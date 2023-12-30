@@ -13,11 +13,11 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className='min-h-screen bg-slate-100 text-sm md:text-base lg:text-lg'>
-          <header className='bg-slate-500 max-w-screen-2xl mx-auto'>
+        <body className='min-h-screen text-sm md:text-base lg:text-lg bg-gray-400'>
+          <header className='bg-slate-500 max-w-screen-2xl md:h-24 mx-auto'>
             <NavigationBar />
           </header>
-          <main className='max-w-screen-2xl mx-auto'>
+          <main className='h-[calc(100vh-6rem)] max-w-screen-2xl mx-auto'>
             {children}
           </main>
           {/* <footer>
@@ -25,6 +25,6 @@ export default async function RootLayout({ children, }: { children: React.ReactN
           </footer> */}
         </body>
       </html>
-    </ClerkProvider>
+    </ClerkProvider >
   )
 }

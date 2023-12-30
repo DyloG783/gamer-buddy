@@ -2,7 +2,7 @@
 
 import Profile from "@/app/game-profile/page";
 import { UserProfile } from "@clerk/nextjs";
-import { Docs } from "./icons"; // find a better icon
+import { Docs } from "../../../../public/icons"; // find a better icon
 
 const UserProfilePage = () => (
     <div id="clerk_profile_container" className="flex justify-around">

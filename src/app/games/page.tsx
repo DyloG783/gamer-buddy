@@ -20,8 +20,6 @@ export default async function GamesPage() {
     })
 
     return (
-        <div className="" id="games_page_container">
-            <GamesDisplay genres={genres} platforms={platforms} modes={modes} defaultGames={defaultGames} />
-        </div>
+        <GamesDisplay genres={genres} platforms={platforms} modes={modes} defaultGames={defaultGames} />
     )
 }

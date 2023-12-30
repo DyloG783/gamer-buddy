@@ -20,7 +20,7 @@ export default async function ConnectionUpdates() {
     const requests = await getUsersConnectionRequests()
 
     return (
-        <div id="connection_updates_container" className="flex flex-col md:flex-row gap-8 justify-evenly mt-4 md:mt-32">
+        <div id="connection_updates_container" className="flex flex-col md:flex-row gap-8 md:gap-0 justify-around h-full md:mt-20 ">
             <div
                 id="connection_messages_container"
                 className=""

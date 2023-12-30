@@ -144,7 +144,7 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                             previousLabel="<"
                             renderOnZeroPageCount={null}
                             className="flex justify-around md:justify-center gap-4 md:gap-6
-                            p-1 md:p-2 bg text-slate-700 "
+                            p-1 md:p-4 bg text-slate-700 "
                         />
                     </div>
                     ||

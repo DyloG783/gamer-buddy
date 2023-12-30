@@ -54,8 +54,13 @@ postman:
 dgdevelopment65@gmail.com
 
 Clerk:
-local tunnel to connect clerk with my local - https://localtunnel.github.io/www/ as per - https://clerk.com/docs/users/sync-data
-LT = lt --port 3000
+https://dashboard.clerk.com/apps/app_2ZqGHEqwCP0kbHCTu9d9rOAYcrx/instances/ins_2ZqGHBR10qDJFiWuVt7xHbCyXWu
+
+Tunnel to connect clerk with my local - https://localtunnel.github.io/www/ as per - https://clerk.com/docs/users/sync-data
+- lt --port 3000
+
+Alby:
+https://ably.com/accounts/46307/apps/75024/getting_started
 
 Need help with:
 - storing only 1 instance of a token in a DB table?

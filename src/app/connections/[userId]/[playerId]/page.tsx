@@ -36,10 +36,9 @@ export default async function PlayerChat({ params }: { params: { userId: string,
         orderBy: { createdAt: "desc" }
     })
 
-
     return (
-        <div id="player_chat_container" className="">
-            <h1 className="text-2xl text-blue-600 tracking-wide mt-10 ml-10 md:mt-20 md:ml-20">
+        <div id="player_chat_container" className="bg-slate-200 h-full">
+            <h1 className="text-2xl text-blue-600 tracking-wide pt-6 md:pt-16 ml-10 md:ml-20">
                 {`${user.userName} and ${player.userName} chat`}
             </h1>
             <div id="layout-container_chat" className="p-8 md:p-20">
