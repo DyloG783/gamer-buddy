@@ -28,10 +28,10 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
-        const [categoryListSelection, setCategoryListSelection] = useState(999999)
+        const [categoryListSelection, setCategoryListSelection] = useState(0)
 
         useEffect(() => {
-            if (categoryListSelection != 999999) {
+            if (categoryListSelection != 0) {
                 if (categoryName === "Genre") {
                     setSearchState({
                         ...searchState,

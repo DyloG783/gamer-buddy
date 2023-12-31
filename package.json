@@ -20,11 +20,13 @@
     "relateGamesToModes": "npx tsx scripts/relations/gameToMode.ts",
     "relateGamesToPlatforms": "npx tsx scripts/relations/gameToPlatform.ts",
     "user_Relations": "npx tsx scripts/relations/user_relations.ts",
-    "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts"
+    "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts",
+    "server": "node server"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.28.1",
     "@prisma/client": "^5.7.0",
+    "ably": "^1.2.48",
     "autoprefixer": "10.4.16",
     "dotenv": "^16.3.1",
     "eslint": "8.55.0",

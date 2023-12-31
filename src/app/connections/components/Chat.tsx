@@ -23,22 +23,6 @@ export default function Chat({ messages, playerId }:
     const [message, setMessage] = useState("")
     const [editing, setEditing] = useState(false)
 
-    // FML!!! can't scroll to bottom of scrollable div...
-    // const ref = document.getElementById('message_container');
-    // useEffect(() => {
-    //     // const messageView = document.getElementById('message_container');
-    //     console.log(ref)
-    //     if (ref.c) {
-    //         if (ref) {
-    //             setTimeout(() => {
-    //                 ref.scrollIntoView({ behavior: "auto", block: "end" });
-    //             }, 100);
-    //         }
-
-
-    //     }
-    // }, [])
-
     const closeInput = () => {
         setEditing(false);
         setMessage("");
