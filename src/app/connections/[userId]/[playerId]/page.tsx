@@ -15,26 +15,26 @@ export default async function PlayerChat({ params }: { params: { userId: string,
         return <UserNotExist />
     }
 
-    // get all messages between the user and the player
-    const messages = await prisma.privateMessage.findMany({
-        where: {
-            OR: [
-                {
-                    sentById: { contains: userId },
-                    recievedById: { contains: playerId },
-                },
-                {
-                    sentById: { contains: playerId },
-                    recievedById: { contains: userId },
-                },
-            ]
-        },
-        include: {
-            sentBy: { select: { userName: true } },
-            recievedBy: { select: { userName: true } }
-        },
-        orderBy: { createdAt: "desc" }
-    })
+    // // get all messages between the user and the player
+    // const messages = await prisma.privateMessage.findMany({
+    //     where: {
+    //         OR: [
+    //             {
+    //                 sentById: { contains: userId },
+    //                 recievedById: { contains: playerId },
+    //             },
+    //             {
+    //                 sentById: { contains: playerId },
+    //                 recievedById: { contains: userId },
+    //             },
+    //         ]
+    //     },
+    //     include: {
+    //         sentBy: { select: { userName: true } },
+    //         recievedBy: { select: { userName: true } }
+    //     },
+    //     orderBy: { createdAt: "desc" }
+    // })
 
     return (
         <div id="player_chat_container" className="bg-slate-200 h-full">
@@ -42,7 +42,7 @@ export default async function PlayerChat({ params }: { params: { userId: string,
                 {`${user.userName} and ${player.userName} chat`}
             </h1>
             <div id="layout-container_chat" className="p-8 md:p-20">
-                <Chat playerId={`${playerId}`} messages={messages} />
+                <Chat playerId={`${playerId}`} />
             </div>
         </div>
     )

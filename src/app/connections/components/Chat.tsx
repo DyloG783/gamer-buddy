@@ -17,27 +17,37 @@ type TMessage = ({
     message: string
 })
 
-export default function Chat({ messages, playerId }:
-    { messages: TMessage[], playerId: string }) {
+export default function Chat({ playerId }: { playerId: string }) {
 
     const [message, setMessage] = useState("")
+    const [messages, setMessages] = useState<TMessage[]>([])
     const [editing, setEditing] = useState(false)
+    const [isLoading, setLoading] = useState(false)
 
-    // FML!!! can't scroll to bottom of scrollable div...
-    // const ref = document.getElementById('message_container');
-    // useEffect(() => {
-    //     // const messageView = document.getElementById('message_container');
-    //     console.log(ref)
-    //     if (ref.c) {
-    //         if (ref) {
-    //             setTimeout(() => {
-    //                 ref.scrollIntoView({ behavior: "auto", block: "end" });
-    //             }, 100);
-    //         }
+    useEffect(() => {
 
+        setLoading(true)
 
-    //     }
-    // }, [])
+        fetch('http://localhost:3000/api/getPrivateMessages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                playerId
+            })
+        })
+            .then((res) => res.json())
+            .then((data) => {
+
+                console.log("FML2", data.messages)
+                console.log("FML3", data.messages[0].createdAt)
+                setMessages(data.messages)
+                setLoading(false)
+            })
+    }, [])
+
+    if (isLoading) return <p>Loading...</p>
 
     const closeInput = () => {
         setEditing(false);
