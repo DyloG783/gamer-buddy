@@ -9,7 +9,7 @@ export default async function ConnectionUpdates() {
     // user is not logged in don't display this component
     if (!userId) {
         return (
-            <div id="no_session_container">
+            <div id="no_session_container" className="mt-60">
                 <Link href={`/api/auth/signin`}
                     className="text-purple-800 underline italic flex justify-around"
                 >Sign in to see Messages, Connection requests, and more!</Link>

@@ -19,7 +19,6 @@
 .DS_Store
 *.pem
 react.d.ts
-/big_data
 
 # debug
 npm-debug.log*

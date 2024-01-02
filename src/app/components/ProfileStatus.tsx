@@ -19,7 +19,7 @@ export default async function ProfileStatus() {
     const bio: TUnsafeMetadata["bio"] = user?.unsafeMetadata.bio as string
     const timezone: TUnsafeMetadata["timezone"] = user?.unsafeMetadata.timezone as string
 
-    // This works for hiding the component completely if the user has completed setting their timezone, and about-you profile info
+    // hide the component completely if the user has completed setting their timezone, and about-you profile info
     if (bio && timezone) {
         return (
             null
@@ -28,10 +28,10 @@ export default async function ProfileStatus() {
 
     return (
         <div id="profile_status_container "
-            className="p-4 md:p-8 mx-auto bg-yellow-100 shadow-lg"
+            className="grow w-full p-4 md:p-8 bg-yellow-100"
         >
             <Link href={`/user-profile/game-settings`}>
-                <h1 className="font-semibold text-center mb-4 text-blue-700">Your profile status</h1>
+                <h1 className="font-semibold text-center mb-4 md:mb-8 text-blue-700">Your profile status</h1>
                 {timezone && timezone.length > 0
                     &&
                     <div
@@ -47,9 +47,9 @@ export default async function ProfileStatus() {
                     ||
                     <div
                         id="timezone_status_unavailable"
-                        className="flex gap-2 pb-2"
+                        className="flex gap-2 mb-4"
                     >
-                        <p>* You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
+                        <p>You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
                     </div>
                 }
                 {bio && bio.length > 0
@@ -69,7 +69,7 @@ export default async function ProfileStatus() {
                         id="aboutYou_status_unavailable"
                         className="flex gap-2 pb-2"
                     >
-                        <p>* You still need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
+                        <p>You still need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
                     </div>
                 }
             </Link>

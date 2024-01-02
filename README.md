@@ -32,7 +32,7 @@ Current script flow:
 1. saveTwitchAuthTokenToDb; fetches auth token from twitch api and saves it to db
 2. saveGamesToDb; fetches all multiplayer games and upserts them to db
 3. repeat above for 'savemodes...' 'saveGenres...' 'savePlatforms...'
-4. reun scripts to create relation connections for the above data
+4. Relation scripts to create relation connections for the above data
 
 Update npm packages:
 1. npx npm-check-updates
@@ -43,9 +43,6 @@ Google(https://console.cloud.google.com/)
 - dylantest679@gmail.com, 
 - dgdevelopment65@gmail.com, (Tr.....Development!)
     - dgdevelopment651@gmail.com 
-
-Superbase: (dylan.m.c, Tr...!)
-    - db pass: M4WTQyZs3kaWoGIN
     
 Twitch:
 - dylangreenslade, (Tr.... Tr....)
@@ -66,9 +63,19 @@ Need help with:
 - storing only 1 instance of a token in a DB table?
 - Good looking css?
 - code review main pages?
-- 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged? = pass different onvclick handler
+- 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged? = pass different onclick handler
 - userIds in url for routing not good?
 - paginated items am I reusing the component correctly by having different versions?
+- how to close a select dropdown with a canel button?
+
+Setup Casey:
+Setup postgres database names 'gbdb' (should be all defaults, "password" (as per Prisma schema ))
+Run api scprpts,
+Run relation scripts but not users,
+Run local dev server,
+Create local tunnel (lt --port 3000),
+Add temp url in Clerk webhook
+
 
 ---
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import timezoneJSON from 'timezones.json';
 import { useUser } from '@clerk/nextjs';
 
@@ -14,6 +14,12 @@ export default function TimezoneSelector() {
 
     const { user } = useUser();
     const usMetadata = user?.unsafeMetadata;
+
+    // function clearSelection() {
+    //     document.getElementById('selectID')!.onclick = () => {
+    //         dropDownListObject.value = null;
+    //     }
+    // }
 
     return (
         <div className={`p-2 mt-2`} >
@@ -33,7 +39,6 @@ export default function TimezoneSelector() {
                 >
                     <select
                         id="selectID"
-                        // defaultValue={user?.unsafeMetadata.timezone as string}
                         name="tzselectname"
                         value={selectedTimezone}
                         onChange={e => setSelectedTimezone(e.target.value)}
@@ -52,6 +57,7 @@ export default function TimezoneSelector() {
                     {/* <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span> */}
                     <button
                         // onClick={() => setEditing(false)}
+                        // onClick={() => clearSelection()}
                         className="btn bg-red-400 p-2"
                     >
                         Cancel
