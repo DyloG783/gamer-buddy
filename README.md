@@ -67,8 +67,10 @@ Need help with:
 - userIds in url for routing not good?
 - paginated items am I reusing the component correctly by having different versions?
 - how to close a select dropdown with a canel button?
+- Vulnerable packeages that I didn't install myself?
 
 Setup Casey:
+Pull from git branch - alby_realtime_chat
 Setup postgres database names 'gbdb' (should be all defaults, "password" (as per Prisma schema ))
 Run api scprpts,
 Run relation scripts but not users,
