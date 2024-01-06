@@ -19,7 +19,7 @@ const Connections = async () => {
                     </p>
                     <p className="font-light tracking-wide ml-4">People who you follow and who follow you</p>
                 </div>
-                <PaginatedConnections connections={userConnections} itemsPerPage={5} />
+                <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connected"} />
             </div>
             <div className="grow bg-slate-300 flex flex-col justify-between" id="connection_request_container">
                 <div>
@@ -30,7 +30,7 @@ const Connections = async () => {
                     </p>
                     <p className="font-light tracking-wide ml-4">People who follow you</p>
                 </div>
-                <PaginatedConnections connections={requests} itemsPerPage={5} />
+                <PaginatedConnections connections={requests} itemsPerPage={5} option={"requests"} />
             </div>
             <div className="grow bg-slate-200 flex flex-col justify-between" id="following_container">
                 <div>
@@ -41,7 +41,7 @@ const Connections = async () => {
                     </p>
                     <p className="font-light tracking-wide ml-4">People who you follow</p>
                 </div>
-                <PaginatedConnections connections={userFollowing} itemsPerPage={5} />
+                <PaginatedConnections connections={userFollowing} itemsPerPage={5} option={"following"} />
             </div>
 
         </div>

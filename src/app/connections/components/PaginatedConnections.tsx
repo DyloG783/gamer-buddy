@@ -8,13 +8,14 @@ import Link from "next/link";
 interface IPaginatedConnectionsProps {
     connections: IConnection[]
     itemsPerPage: number
+    option: string
 }
 
 interface IItems {
     currentItems: IConnection[]
 }
 
-const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage }) => {
+const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage, option }) => {
 
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
@@ -23,12 +24,33 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                     {currentItems &&
                         currentItems.map((connection: IConnection) => (
                             <li key={`${connection.followedById} + ${connection.followingId}`} className="hover:shadow-md">
-                                <Link
-                                    className="p-4 whitespace-nowrap overflow-hidden"
-                                    href={`/connect/${connection.followedById}`}
-                                >
-                                    <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followedByUName}`}</p>
-                                </Link>
+                                {option === "connected"
+                                    &&
+                                    <Link
+                                        className="p-4 whitespace-nowrap overflow-hidden"
+                                        href={`/connections/view-player/${connection.followedById}`}
+                                    >
+                                        <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followedByUName}`}</p>
+                                    </Link>
+                                }
+                                {option === "requests"
+                                    &&
+                                    <Link
+                                        className="p-4 whitespace-nowrap overflow-hidden"
+                                        href={`/connections/view-player/${connection.followedById}`}
+                                    >
+                                        <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followedByUName}`}</p>
+                                    </Link>
+                                }
+                                {option === "following"
+                                    &&
+                                    <Link
+                                        className="p-4 whitespace-nowrap overflow-hidden"
+                                        href={`/connections/view-player/${connection.followingId}`}
+                                    >
+                                        <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followingUName}`}</p>
+                                    </Link>
+                                }
                             </li>
                         ))}
                 </ul>

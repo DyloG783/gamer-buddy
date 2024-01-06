@@ -5,11 +5,11 @@ import { useUser } from "@clerk/nextjs"
 import Link from "next/link"
 import { useState } from "react"
 
-export default function PlayerActionBar({ player, alreadyExists, game }:
+export default function PlayerActionBar({ player, alreadyExists, usersAreConnected }:
     {
         player: IUser,
         alreadyExists: boolean,
-        game: IGame
+        usersAreConnected: boolean
     }) {
 
     const [buttonDisabled, setButtonDisabled] = useState(false)
@@ -32,7 +32,7 @@ export default function PlayerActionBar({ player, alreadyExists, game }:
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    player, game
+                    player
                 })
             })
 
@@ -67,7 +67,7 @@ export default function PlayerActionBar({ player, alreadyExists, game }:
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    player, game
+                    player
                 })
             })
 
@@ -97,9 +97,12 @@ export default function PlayerActionBar({ player, alreadyExists, game }:
                 &&
                 <>
                     <ButtonDisconnect />
-                    <button className="btn bg-green-500">
-                        <Link href={`/connections/${user.id}/${player.id}`}>Chat</Link>
-                    </button>
+                    {usersAreConnected
+                        &&
+                        <button className="btn bg-green-500">
+                            <Link href={`/connections/${user.id}/${player.id}`}>Chat</Link>
+                        </button>
+                    }
                 </>
                 ||
                 <ButtonConnect />

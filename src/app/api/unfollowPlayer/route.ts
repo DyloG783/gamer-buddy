@@ -3,12 +3,12 @@ import prisma from "@/lib/db";
 import { auth, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-type userRequest = { user: IUser, player: IUser, game: IGame };
+type userRequest = { user: IUser, player: IUser };
 
 export async function POST(request: Request) {
 
     const data: userRequest = await request.json();
-    const { player, game } = data;
+    const { player } = data;
 
     const { userId } = auth();
     const user = await currentUser();
@@ -25,8 +25,8 @@ export async function POST(request: Request) {
 
     } catch (error) {
         console.log("Failed to delete following relation", error)
-        return NextResponse.json({ message: `${user?.username} and ${player.userName} and ${game.name} disconnection failed`, error })
+        return NextResponse.json({ message: `${user?.username} and ${player.userName} disconnection failed`, error })
     }
 
-    return NextResponse.json({ message: `${user?.username} and ${player.userName} and ${game.name} disconnection successful` })
+    return NextResponse.json({ message: `${user?.username} and ${player.userName} disconnection successful!` })
 }

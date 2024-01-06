@@ -1,20 +1,14 @@
 import prisma from "@/lib/db";
 import PlayerActionBar from "./components/PlayerActionBar";
-import { checkGameExistsAndReturn, checkUserExistsAndReturn } from "@/lib/query_helper";
-import { GameNotExist, UserNotExist } from "@/lib/errors";
+import { checkUserExistsAndReturn } from "@/lib/query_helper";
+import { UserNotExist } from "@/lib/errors";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
 import { auth } from "@clerk/nextjs";
 
-export default async function Player({ params }: { params: { playerId: string, gameId: number } }) {
+export default async function Player({ params }: { params: { playerId: string } }) {
 
-    const gameId = Number(params.gameId) // id of the game
     const playerId = params.playerId // this refeers to the other player the user wants to connect with
     const { userId } = auth();
-
-    const game = await checkGameExistsAndReturn(gameId)
-    if (!game) {
-        return <GameNotExist />
-    }
 
     // other player this user wants to connect with
     const playerWithGames = await checkUserExistsAndReturn(playerId);
@@ -50,11 +44,10 @@ export default async function Player({ params }: { params: { playerId: string, g
             <div id="connect_with_player_container"
                 className="grow p-4 md:p-20 bg-slate-300"
             >
-                {/* <SubNavigation routeId={gameId} routeLabel={`${game?.name} Connect Forum`} routeName="connect" /> */}
-                <div id="" className="">
+                <div id="player_action_bar_container">
                     {userId
                         &&
-                        <PlayerActionBar player={playerWithGames} alreadyExists={relationFromUser !== null} game={game} />
+                        <PlayerActionBar player={playerWithGames} alreadyExists={relationFromUser !== null} usersAreConnected={usersAreConnected !== null} />
                         ||
                         <p>Sign in to connect with player</p>
                     }
