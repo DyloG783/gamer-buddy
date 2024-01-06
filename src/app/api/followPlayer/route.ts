@@ -20,8 +20,6 @@ export async function POST(request: Request) {
                 followedByUName: user?.username!,
                 followingId: player.id,
                 followingUName: player.userName!,
-                gameId: game.id,
-                gameName: game.name
             }
         })
     } catch (error) {

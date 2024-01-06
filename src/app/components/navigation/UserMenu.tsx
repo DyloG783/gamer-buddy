@@ -7,7 +7,7 @@ import {
 
 export default function UserMenu() {
     return (
-        <div className="md:hover:shadow-md p-4 md:p-8 mx-auto md:mx-0">
+        <div className="md:hover:shadow-md p-4 md:p-8 mx-auto md:mx-0 text-white">
             <SignedIn>
                 {/* Mount the UserButton component */}
                 <UserButton

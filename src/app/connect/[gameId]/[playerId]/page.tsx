@@ -5,9 +5,6 @@ import { GameNotExist, UserNotExist } from "@/lib/errors";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
 import { auth } from "@clerk/nextjs";
 
-// const dynamic = 'force-dynamic';
-// const revalidate = 0;
-
 export default async function Player({ params }: { params: { playerId: string, gameId: number } }) {
 
     const gameId = Number(params.gameId) // id of the game

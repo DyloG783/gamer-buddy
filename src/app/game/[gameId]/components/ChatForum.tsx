@@ -5,19 +5,19 @@ import { useState } from "react"
 
 type TForumMessages = {
     messages: ({
-        sentBy: {
+        sentGameBy: {
             userName: string | null;
         };
     } & {
-        id: number;
+        id: string;
         createdAt: Date;
-        forumId: number;
+        gameRoomId: string;
         message: string;
         userId: string;
     })[];
 } | null
 
-export default function ChatForum({ messages, gameId }: { messages: TForumMessages, gameId: number }) {
+export default function ChatForum({ messages, gameRoomId }: { messages: TForumMessages, gameRoomId: string }) {
 
     const [message, setMessage] = useState("")
     const [editing, setEditing] = useState(false)
@@ -28,7 +28,7 @@ export default function ChatForum({ messages, gameId }: { messages: TForumMessag
     }
 
     // adds playerId to server actions
-    const updateWithForumId = sendMessageForum.bind(null, gameId)
+    const updateWithForumId = sendMessageForum.bind(null, gameRoomId)
 
     // display initial messages
     // add for to submit messages
@@ -41,7 +41,7 @@ export default function ChatForum({ messages, gameId }: { messages: TForumMessag
                     &&
                     messages.messages.map((m) => (
                         <div key={`${m.createdAt}`} className="p-2">
-                            <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentBy.userName}`}</p>
+                            <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentGameBy.userName}`}</p>
                             <p>{`${m.message}`}</p>
                         </div>
                     ))

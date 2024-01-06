@@ -25,10 +25,9 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                             <li key={`${connection.followedById} + ${connection.followingId}`} className="hover:shadow-md">
                                 <Link
                                     className="p-4 whitespace-nowrap overflow-hidden"
-                                    href={`/connect/${connection.gameId}/${connection.followedById}`}
+                                    href={`/connect/${connection.followedById}`}
                                 >
                                     <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followedByUName}`}</p>
-                                    <p className="font-light ml-2 italic">{connection.gameName}</p>
                                 </Link>
                             </li>
                         ))}

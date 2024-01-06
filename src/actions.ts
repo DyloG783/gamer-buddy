@@ -31,7 +31,7 @@ export async function sendMessagePrivate(playerId: string, formData: FormData) {
     }
 }
 
-export async function sendMessageForum(forumId: number, formData: FormData) {
+export async function sendMessageForum(gameRoomId: string, formData: FormData) {
     const message = formData.get('message_input') as string;
     const { userId } = auth();
 
@@ -41,11 +41,12 @@ export async function sendMessageForum(forumId: number, formData: FormData) {
     }
 
     try {
-        await prisma.gameForumMessage.create({
+        await prisma.gameMessage.create({
             data: {
                 userId: userId!,
                 message: message,
-                forumId: forumId
+                gameRoomId: gameRoomId,
+
             }
         })
         revalidatePath('/');

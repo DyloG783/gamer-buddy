@@ -1,5 +1,5 @@
 import prisma from '@/lib/db';
-import { getUserId } from '@/lib/query_helper';
+// import { getUserId } from '@/lib/query_helper';
 import { test_users } from '../../prisma/test_users';
 
 
@@ -24,25 +24,19 @@ async function user_Relations() {
                     followedById: testUser1!.id,
                     followedByUName: testUser1!.userName!,
                     followingId: user!.id,
-                    followingUName: user!.userName!,
-                    gameId: 83563,
-                    gameName: "NeptuneGL"
+                    followingUName: user!.userName!
                 },  // 1
                 {
                     followedById: user!.id,
                     followedByUName: user!.userName!,
                     followingId: testUser1.id,
-                    followingUName: testUser1.userName!,
-                    gameId: 83563,
-                    gameName: "NeptuneGL"
+                    followingUName: testUser1.userName!
                 },
                 {
                     followedById: testUser2.id,
                     followedByUName: testUser2.userName!,
                     followingId: user!.id,
-                    followingUName: user!.userName!,
-                    gameId: 81753,
-                    gameName: "AfterTheDawn"
+                    followingUName: user!.userName!
                 },  // 2
                 // {
                 //     followedById: user!.id,
@@ -56,65 +50,49 @@ async function user_Relations() {
                     followedById: testUser4.id,
                     followedByUName: testUser4.userName!,
                     followingId: user!.id,
-                    followingUName: user!.userName!,
-                    gameId: 83563,
-                    gameName: "NeptuneGL"
+                    followingUName: user!.userName!
                 },
                 {
                     followedById: user!.id,
                     followedByUName: user!.userName!,
                     followingId: testUser4.id,
-                    followingUName: testUser4.userName!,
-                    gameId: 83563,
-                    gameName: "NeptuneGL"
+                    followingUName: testUser4.userName!
                 },
                 {
                     followedById: testUser5.id,
                     followedByUName: testUser5.userName!,
                     followingId: user!.id,
-                    followingUName: user!.userName!,
-                    gameId: 262659,
-                    gameName: "ZeroSpace"
+                    followingUName: user!.userName!
                 }, // 5
                 {
                     followedById: user!.id,
                     followedByUName: user!.userName!,
                     followingId: testUser5.id,
-                    followingUName: testUser5.userName!,
-                    gameId: 262659,
-                    gameName: "ZeroSpace"
+                    followingUName: testUser5.userName!
                 },
                 {
                     followedById: user!.id,
                     followedByUName: user!.userName!,
                     followingId: testUser6!.id,
-                    followingUName: testUser6!.userName!,
-                    gameId: 81753,
-                    gameName: "AfterTheDawn"
+                    followingUName: testUser6!.userName!
                 }, //6
                 {
                     followedById: user!.id,
                     followedByUName: user!.userName!,
                     followingId: testUser7!.id,
-                    followingUName: testUser7!.userName!,
-                    gameId: 211573,
-                    gameName: "Zix"
+                    followingUName: testUser7!.userName!
                 }, //7
                 {
                     followedById: user!.id,
                     followedByUName: user!.userName!,
                     followingId: testUser8!.id,
-                    followingUName: testUser8!.userName!,
-                    gameId: 211573,
-                    gameName: "Zix"
+                    followingUName: testUser8!.userName!
                 }, //8
                 {
                     followedById: testUser9!.id,
                     followedByUName: testUser9!.userName!,
                     followingId: user!.id,
-                    followingUName: user!.userName!,
-                    gameId: 211573,
-                    gameName: "Zix"
+                    followingUName: user!.userName!
                 }, //9
             ],
             skipDuplicates: true,

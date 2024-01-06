@@ -12,21 +12,22 @@ model TwitchAuthToken {
   twitchAuthToken String
 }
 
-model Gameforum {
-  id       Int                @id @unique
-  game     Game               @relation(fields: [gameId], references: [id], onDelete: Cascade)
-  gameId   Int                @unique
-  messages GameForumMessage[]
+model ChatGameRoom {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  game      Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId    Int           @unique
+  messages  GameMessage[]
 }
 
-model GameForumMessage {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  gameForum Gameforum @relation(fields: [forumId], references: [id], onDelete: Cascade)
-  forumId   Int
-  message   String
-  sentBy    User      @relation(fields: [userId], references: [id])
-  userId    String
+model GameMessage {
+  id         String       @id @default(cuid())
+  createdAt  DateTime     @default(now())
+  gameRoom   ChatGameRoom @relation(fields: [gameRoomId], references: [id], onDelete: Cascade)
+  gameRoomId String
+  message    String       @db.VarChar(500)
+  sentGameBy User         @relation("sender", fields: [userId], references: [id])
+  userId     String
 }
 
 model PrivateMessage {
@@ -41,17 +42,17 @@ model PrivateMessage {
 }
 
 model User {
-  id               String             @id
-  email            String?
-  userName         String?
-  bio              String?
-  timezone         String?
-  games            Game[]
-  followedBy       Follows[]          @relation("followedBy")
-  following        Follows[]          @relation("following")
-  sentBy           PrivateMessage[]   @relation("sender")
-  recievedBy       PrivateMessage[]   @relation("reciever")
-  GameForumMessage GameForumMessage[]
+  id         String           @id
+  email      String?
+  userName   String?
+  bio        String?
+  timezone   String?
+  games      Game[]
+  followedBy Follows[]        @relation("followedBy")
+  following  Follows[]        @relation("following")
+  sentBy     PrivateMessage[] @relation("sender")
+  recievedBy PrivateMessage[] @relation("reciever")
+  sentGameBy GameMessage[]    @relation("sender")
 }
 
 model Follows {
@@ -61,15 +62,12 @@ model Follows {
   following       User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId     String
   followingUName  String
-  game            Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
-  gameId          Int
-  gameName        String
 
   @@id([followingId, followedById])
 }
 
 model Game {
-  id               Int        @id @unique
+  id               Int           @id @unique
   name             String
   summary          String?
   url              String?
@@ -82,8 +80,7 @@ model Game {
   users            User[]
   firstReleaseDate Int?
   totalRating      Float?
-  Follows          Follows[]
-  forum            Gameforum?
+  gameRoom         ChatGameRoom?
 }
 
 model Platform {

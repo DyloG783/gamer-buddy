@@ -39,7 +39,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
     })
 
     if (userId) {
-        if (userBio && userTimezone.length > 0) {
+        if (userBio && userTimezone) {
 
             // find other users who have also have this game saved
             const usersWhoAlsoHaveThisGame = await prisma.user.findMany({

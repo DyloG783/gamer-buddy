@@ -52,8 +52,6 @@ export type IConnection = ({
     followedByUName: string;
     followingId: string;
     followingUName: string;
-    gameId: number;
-    gameName: string;
 })
 
 export type TUserId = ({ userId: string })

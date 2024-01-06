@@ -36,28 +36,27 @@ export default async function Connect({ params }: { params: { gameId: number } }
     })
 
     // create game forum table if not already exists
-    await prisma.gameforum.upsert({
-        where: { id: gameId },
+    const gameRoom = await prisma.chatGameRoom.upsert({
+        where: { gameId: gameId },
         update: {},
         create: {
-            id: gameId,
             gameId: gameId
         }
     })
 
     // get all messages posted on this forum
-    const forumMessages = await prisma.gameforum.findUnique({
+    const roomMessages = await prisma.chatGameRoom.findUnique({
         select: {
             messages: {
                 include:
                 {
-                    sentBy:
+                    sentGameBy:
                         { select: { userName: true } }
                 },
                 orderBy: { createdAt: "desc" }
             },
         },
-        where: { gameId: gameId },
+        where: { gameId: gameRoom.gameId },
 
     })
 
@@ -101,7 +100,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
                     className=" min-w-[66%]"
                 >
                     <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Chat Forum</p>
-                    <ChatForum messages={forumMessages} gameId={gameId} />
+                    <ChatForum messages={roomMessages} gameRoomId={gameRoom.id} />
                 </div>
 
             </div>
