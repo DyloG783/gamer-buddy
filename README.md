@@ -59,16 +59,8 @@ https://dashboard.clerk.com/apps/app_2ZqGHEqwCP0kbHCTu9d9rOAYcrx/instances/ins_2
 Tunnel to connect clerk with my local - https://localtunnel.github.io/www/ as per - https://clerk.com/docs/users/sync-data
 - lt --port 3000
 
-Alby:
-https://ably.com/accounts/46307/apps/75024/getting_started
-
 Need help with:
-- storing only 1 instance of a token in a DB table?
-- Good looking css?
-- code review main pages?
-- 'ButtonAddGame / ButtonRemoveGame' almost identical except for different api routes. Should these be merged? = pass different onvclick handler
-- userIds in url for routing not good?
-- paginated items am I reusing the component correctly by having different versions?
+
 
 ---
 

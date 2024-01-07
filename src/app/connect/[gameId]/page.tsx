@@ -4,6 +4,11 @@ import prisma from "@/lib/db";
 import ChatForum from "@/app/game/[gameId]/components/ChatForum";
 import { GameNotExist } from "@/lib/errors";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
+import Form from "@/app/game/[gameId]/components/Form";
+
+export const dynamic = "force-dynamic";
+
+
 
 export default async function Connect({ params }: { params: { gameId: number } }) {
 
@@ -44,21 +49,27 @@ export default async function Connect({ params }: { params: { gameId: number } }
         }
     })
 
-    // get all messages posted on this forum
-    const roomMessages = await prisma.chatGameRoom.findUnique({
-        select: {
-            messages: {
-                include:
-                {
-                    sentGameBy:
-                        { select: { userName: true } }
+    async function getMessages() {
+        // get all messages posted on this forum
+        const data = await prisma.chatGameRoom.findUnique({
+            where: { gameId: gameRoom.gameId },
+            select: {
+                messages: {
+                    select: {
+                        id: true,
+                        message: true,
+                        sentGameBy: { select: { userName: true } }
+                    },
+                    take: 50,
+                    orderBy: { createdAt: "asc" }
                 },
-                orderBy: { createdAt: "desc" }
             },
-        },
-        where: { gameId: gameRoom.gameId },
+        });
 
-    })
+        return data;
+    }
+
+    const data = await getMessages();
 
     return (
         <div id="connect_container"
@@ -100,7 +111,8 @@ export default async function Connect({ params }: { params: { gameId: number } }
                     className=" min-w-[66%]"
                 >
                     <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Chat Forum</p>
-                    <ChatForum messages={roomMessages} gameRoomId={gameRoom.id} />
+                    <ChatForum roomMessages={data} gameRoomId={gameRoom.id} />
+                    <Form gameRoomId={gameRoom.id} />
                 </div>
 
             </div>
