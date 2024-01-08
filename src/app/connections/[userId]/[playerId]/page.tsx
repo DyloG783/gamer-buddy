@@ -2,6 +2,11 @@ import { UserNotExist } from "@/lib/errors";
 import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import Chat from "../../components/Chat";
 import prisma from "@/lib/db";
+import Form from "../../components/Form";
+const crypto = require('crypto');
+
+// stop page from caching (needed for real time chat (in prod))
+export const dynamic = "force-dynamic";
 
 export default async function PlayerChat({ params }: { params: { userId: string, playerId: string } }) {
 
@@ -15,26 +20,63 @@ export default async function PlayerChat({ params }: { params: { userId: string,
         return <UserNotExist />
     }
 
+    // create unique identifier from the user ids which is the same regardless of order
+    function combineUniqueIds(id1: string, id2: string) {
+
+        function hashString(inputString: string) {
+            const hash = crypto.createHash('sha256');
+            hash.update(inputString, 'utf-8');
+            return hash.digest('hex');
+        }
+
+        // Hash the input strings
+        const hashedId1 = hashString(id1);
+        // console.log("H1", hashedId1)
+        const hashedId2 = hashString(id2);
+        // console.log("H2", hashedId2)
+
+        // Convert the hashed strings to numbers (you may need a custom conversion method)
+        const num1 = parseInt(hashedId1.substring(0, 15), 16);
+        const num2 = parseInt(hashedId2.substring(0, 15), 16);
+
+        // Check if the conversion is successful
+        if (isNaN(num1) || isNaN(num2)) {
+            console.error("Invalid input. Unable to convert to numbers.");
+            return null;
+        }
+
+        // Perform addition on the converted numbers
+        return num1 + num2;
+    }
+
+    const privateChatId = String(combineUniqueIds(userId, playerId)!)
+    // console.log("chat room id", privateChatId)
+
+    // create private chat room if it not already exists
+    await prisma.chatPrivateRoom.upsert({
+        where: { id: privateChatId },
+        update: {},
+        create: {
+            id: privateChatId,
+            user1Email: user.email!,
+            user2Email: player.email!
+        }
+    });
+
     // get all messages between the user and the player
-    const messages = await prisma.privateMessage.findMany({
-        where: {
-            OR: [
-                {
-                    sentById: { contains: userId },
-                    recievedById: { contains: playerId },
+    const messages = await prisma.chatPrivateRoom.findUnique({
+        where: { id: privateChatId },
+        select: {
+            messages: {
+                select: {
+                    message: true,
+                    sentPrivateBy: { select: { userName: true } }
                 },
-                {
-                    sentById: { contains: playerId },
-                    recievedById: { contains: userId },
-                },
-            ]
+                take: 50,
+                orderBy: { createdAt: "asc" }
+            },
         },
-        include: {
-            sentBy: { select: { userName: true } },
-            recievedBy: { select: { userName: true } }
-        },
-        orderBy: { createdAt: "desc" }
-    })
+    });
 
     return (
         <div id="player_chat_container" className="bg-slate-200 h-full">
@@ -42,7 +84,8 @@ export default async function PlayerChat({ params }: { params: { userId: string,
                 {`${user.userName} and ${player.userName} chat`}
             </h1>
             <div id="layout-container_chat" className="p-8 md:p-20">
-                <Chat playerId={`${playerId}`} messages={messages} />
+                <Chat messages={messages?.messages!} privateRoomId={privateChatId} />
+                <Form privateRoomId={privateChatId} />
             </div>
         </div>
     )

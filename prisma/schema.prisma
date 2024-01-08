@@ -26,33 +26,39 @@ model GameMessage {
   gameRoom   ChatGameRoom @relation(fields: [gameRoomId], references: [id], onDelete: Cascade)
   gameRoomId String
   message    String       @db.VarChar(500)
-  sentGameBy User         @relation("sender", fields: [userId], references: [id])
+  sentGameBy User         @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
   userId     String
 }
 
-model PrivateMessage {
-  createdAt    DateTime @default(now())
-  sentBy       User     @relation("sender", fields: [sentById], references: [id], onDelete: Cascade)
-  sentById     String
-  recievedBy   User     @relation("reciever", fields: [recievedById], references: [id], onDelete: Cascade)
-  recievedById String
-  message      String   @db.VarChar(500)
+model ChatPrivateRoom {
+  id         String           @id @unique
+  createdAt  DateTime         @default(now())
+  user1Email String
+  user2Email String
+  messages   PrivateMessage[]
+}
 
-  @@id([sentById, recievedById, createdAt])
+model PrivateMessage {
+  id                String          @id @default(cuid())
+  createdAt         DateTime        @default(now())
+  privateRoom       ChatPrivateRoom @relation(fields: [chatPrivateRoomId], references: [id], onDelete: Cascade)
+  chatPrivateRoomId String
+  message           String          @db.VarChar(500)
+  sentPrivateBy     User            @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
 }
 
 model User {
-  id         String           @id
-  email      String?
-  userName   String?
-  bio        String?
-  timezone   String?
-  games      Game[]
-  followedBy Follows[]        @relation("followedBy")
-  following  Follows[]        @relation("following")
-  sentBy     PrivateMessage[] @relation("sender")
-  recievedBy PrivateMessage[] @relation("reciever")
-  sentGameBy GameMessage[]    @relation("sender")
+  id            String           @id
+  email         String?          @unique
+  userName      String?
+  bio           String?
+  timezone      String?
+  games         Game[]
+  followedBy    Follows[]        @relation("followedBy")
+  following     Follows[]        @relation("following")
+  sentGameBy    GameMessage[]    @relation("sender")
+  sentPrivateBy PrivateMessage[] @relation("sender")
 }
 
 model Follows {

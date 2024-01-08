@@ -2,11 +2,14 @@
 
 import prisma from '@/lib/db'
 import { auth } from '@clerk/nextjs';
-import { revalidatePath } from 'next/cache'
+// import { revalidatePath } from 'next/cache'
 
-export async function sendMessagePrivate(playerId: string, formData: FormData) {
+export async function sendMessagePrivate(privateRoomId: string, formData: FormData) {
+    'use server'
+
     const message = formData.get('message_input') as string;
     const { userId } = auth();
+    const Pusher = require("pusher");
 
     if (!auth) {
         console.log("Send message server action, not authorised failure")
@@ -14,20 +17,35 @@ export async function sendMessagePrivate(playerId: string, formData: FormData) {
     }
 
     try {
-        await prisma.privateMessage.create({
+        const privMessage = await prisma.privateMessage.create({
             data: {
-                sentById: userId!,
-                recievedById: playerId,
-                message: message
+                chatPrivateRoomId: privateRoomId,
+                message: message,
+                userId: userId!
+            },
+            select: {
+                message: true,
+                sentPrivateBy: { select: { userName: true } }
             }
         })
-        revalidatePath('/');
-        // return { message: `Created Message: ${message}!` }
-        console.log("Created Message")
-        return
+        // revalidatePath('/');
+        console.log("Created private message in Database!")
+
+        const pusher = new Pusher({
+            appId: process.env.PUSHER_APP_ID,
+            key: process.env.NEXT_PUBLIC_PUSHER_KEY,
+            secret: process.env.PUSHER_SECRET,
+            cluster: "ap1",
+            useTLS: true,
+        });
+
+        pusher.trigger(privateRoomId, "private-room-post", {
+            message: `${JSON.stringify(privMessage)}\n\n`,
+        });
+
     } catch (error) {
         // return { message: `Failed to create message`, error }
-        console.log("Fail created Message", error)
+        console.log("Fail create and broadcast private message", error)
     }
 }
 
@@ -60,9 +78,7 @@ export async function sendMessageForum(gameRoomId: string, formData: FormData) {
             }
         })
         // revalidatePath('/');
-        // return { message: `Created Message: ${message}!` }
         console.log("Created Message!")
-        // return
 
         const pusher = new Pusher({
             appId: process.env.PUSHER_APP_ID,

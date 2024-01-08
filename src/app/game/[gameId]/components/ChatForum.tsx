@@ -10,10 +10,9 @@ type TForumMessages = {
             userName: string | null;
         };
         message: string;
+        createdAt: Date;
     }[];
 } | null
-
-
 
 export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: TForumMessages, gameRoomId: string }) {
 
@@ -54,11 +53,11 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
             >
                 {totalMessages && totalMessages.length > 0
                     &&
-                    totalMessages.map((message, index) => (
+                    totalMessages.map((m, index) => (
                         <div key={index} className="p-2">
                             {/* <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentGameBy.userName}`}</p> */}
-                            <p className="font-light tracking-wider">{`${message.sentGameBy.userName}`}</p>
-                            <p>{`${message.message}`}</p>
+                            <p className="font-light tracking-wider">{`${m.sentGameBy.userName}`}</p>
+                            <p>{`${m.message}`}</p>
                         </div>
                     ))
                     ||

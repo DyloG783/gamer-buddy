@@ -1,94 +1,59 @@
 'use client'
 
-import { sendMessagePrivate } from "@/actions"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import Pusher from "pusher-js"
 
 type TMessage = ({
-    sentBy: {
+    sentPrivateBy: {
         userName: string | null;
     };
-    recievedBy: {
-        userName: string | null;
-    };
-} & {
-    createdAt: Date,
-    sentById: string,
-    recievedById: string,
-    message: string
+    message: string;
 })
 
-export default function Chat({ messages, playerId }:
-    { messages: TMessage[], playerId: string }) {
+export default function Chat({ messages, privateRoomId }: { messages: TMessage[], privateRoomId: string }) {
 
-    const [message, setMessage] = useState("")
-    const [editing, setEditing] = useState(false)
+    const [totalMessages, settotalMessages] = useState(messages || [])
+    const messageEndRef = useRef<HTMLInputElement>(null);
 
-    // FML!!! can't scroll to bottom of scrollable div...
-    // const ref = document.getElementById('message_container');
-    // useEffect(() => {
-    //     // const messageView = document.getElementById('message_container');
-    //     console.log(ref)
-    //     if (ref.c) {
-    //         if (ref) {
-    //             setTimeout(() => {
-    //                 ref.scrollIntoView({ behavior: "auto", block: "end" });
-    //             }, 100);
-    //         }
+    useEffect(() => {
 
+        // Pusher channel setup get game for group chat
+        var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
+            cluster: 'ap1'
+        });
+        var channel = pusher.subscribe(`${privateRoomId}`);
+        channel.bind('private-room-post', function (data: any) {
+            const parsedMessage = JSON.parse(data.message);
+            settotalMessages((prev) => [...prev, parsedMessage]);
+        });
 
-    //     }
-    // }, [])
+        return () => {
+            pusher.unsubscribe(`${privateRoomId}`);
+        };
+    }, []);
 
-    const closeInput = () => {
-        setEditing(false);
-        setMessage("");
-    }
+    const scrollTobottom = () => {
+        messageEndRef.current?.scrollIntoView({ behavior: "instant" });
+    };
 
-    // adds playerId to server actions
-    const updateWithPlayerId = sendMessagePrivate.bind(null, playerId)
+    useEffect(() => {
+        scrollTobottom();
+    }, [totalMessages]);
 
     return (
         <div id="chat_container" className="flex flex-col">
             <div id="message_container"
                 className="max-h-40 md:max-h-80 overflow-y-scroll"
             >
-                {messages && messages.length > 0 &&
-                    messages.map((m) => (
-                        <div key={`${m.createdAt}`} className="p-2">
-                            <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentBy.userName}`}</p>
+                {totalMessages && totalMessages.length > 0 &&
+                    totalMessages.map((m, index) => (
+                        <div key={index} className="p-2">
+                            {/* <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentBy.userName}`}</p> */}
+                            <p className="font-light tracking-wider">{`${m.sentPrivateBy.userName}`}</p>
                             <p>{`${m.message}`}</p>
                         </div>
                     ))}
-            </div>
-
-            <form id="message_form" action={updateWithPlayerId}
-                onSubmit={closeInput}
-                className="p-4">
-                <input
-                    name="message_input"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    onClick={() => setEditing(true)}
-                    required
-                    maxLength={500}
-                    className={`w-full p-4 min-h-[100px]`}
-                />
-            </form>
-            <div id="form_buttons" className="flex gap-2 mt-3 justify-end p-2">
-                {/* <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span> */}
-                <button type="reset"
-                    onClick={closeInput}
-                    className={`btn bg-red-400 p-2
-                    ${editing ? '' : 'hidden'}`}
-                >
-                    Cancel
-                </button>
-                <button type="submit" form="message_form"
-                    className={`btn bg-green-500 p-2 ${editing ? '' : 'hidden'}`}
-
-                >
-                    Send
-                </button>
+                <div ref={messageEndRef}></div>
             </div>
         </div>
     )
