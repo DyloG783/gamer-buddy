@@ -79,7 +79,7 @@ export default function PlayerActionBar({ player, alreadyExists, usersAreConnect
         }
 
         return (
-            <button id="connect_button"
+            <button id="disconnect_button"
                 className="btn bg-red-500"
                 onClick={handleSubmit}
                 disabled={buttonDisabled}
@@ -99,15 +99,9 @@ export default function PlayerActionBar({ player, alreadyExists, usersAreConnect
                     <ButtonDisconnect />
                     {usersAreConnected
                         &&
-                        // <button className="btn bg-green-500">
-                        //     <Link href={`/connections/${user.id}/${player.id}`}
-                        //         className="w-full">
-                        //         Chat
-                        //     </Link>
-                        // </button>
                         <Link href={`/connections/${user.id}/${player.id}`}
                             className="">
-                            <button className="btn bg-green-500 text-center">Chat</button>
+                            <button id="chat_button" className="btn bg-green-500 text-center">Chat</button>
                         </Link>
                     }
                 </>
