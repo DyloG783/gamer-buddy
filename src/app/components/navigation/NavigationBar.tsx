@@ -12,7 +12,7 @@ export default function NavigationBar() {
         <nav >
             <div id="non_responsive_layout" className="hidden md:flex justify-between">
                 <div className="flex">
-                    <div className={`flex hover:shadow-sm `}>
+                    <div className={`flex hover:shadow-md `}>
                         <Link href="/" className="grow">
                             <h1 className="text-black text-3xl font-bold px-6 py-8">
                                 Gamer<span className="text-teal-500">Buddy</span>

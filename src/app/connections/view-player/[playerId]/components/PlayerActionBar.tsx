@@ -106,8 +106,8 @@ export default function PlayerActionBar({ player, alreadyExists, usersAreConnect
                         //     </Link>
                         // </button>
                         <Link href={`/connections/${user.id}/${player.id}`}
-                            className="btn bg-green-500 text-center">
-                            Chat
+                            className="">
+                            <button className="btn bg-green-500 text-center">Chat</button>
                         </Link>
                     }
                 </>

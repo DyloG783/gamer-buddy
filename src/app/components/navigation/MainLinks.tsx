@@ -13,7 +13,7 @@ export default function MainLinks() {
                 <li id="games" className="flex ">
                     <Link
                         href="/games"
-                        className={`hover:shadow-sm py-4 px-8 md:my-auto md:py-8
+                        className={`hover:shadow-md py-4 px-8 md:my-auto md:py-8
                             ${pathname === '/games' || pathname.includes('game/') ? 'underline' : ''}`}
                     >
                         Games
@@ -22,7 +22,7 @@ export default function MainLinks() {
                 <li id="connections" className="flex">
                     <Link
                         href="/connections"
-                        className={`hover:shadow-sm py-4 px-6 md:my-auto md:py-8
+                        className={`hover:shadow-md py-4 px-6 md:my-auto md:py-8
                             ${pathname === '/connections' ? 'underline' : ''}`}
                     >
                         Connections

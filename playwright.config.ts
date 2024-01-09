@@ -24,58 +24,58 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    // contextOptions: {
-
-    // }
   },
 
   /* Configure projects for major browsers */
   projects: [
-    // Setup project
+    // Setup project auth
     { name: 'setup', testMatch: /.*\.setup\.ts/ },
+
+    // Setup test data
+    {
+      name: 'global setup',
+      testMatch: /global\.setup\.ts/,
+      teardown: 'global teardown',
+    },
+
+    // tear down test data
+    {
+      name: 'global teardown',
+      testMatch: /global\.teardown\.ts/,
+    },
+
     {
       name: 'chromium',
-      dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],
+        // Use prepared auth state.
         storageState: 'playwright/.auth/user.json',
-        // launchOptions: {
-        //   // ignoreDefaultArgs: [
-        //   //   '--disable-blink-features=AutomationControlled',
-        //   //   '--disable-component-extensions-with-background-pages',
-        //   //   '--disable-dev-shm-usage'
-        //   // ],
-        //   // args: [
-        //   //   '--disable-blink-features=AutomationControlled',
-        //   //   '--disable-component-extensions-with-background-pages',
-        //   //   '--disable-dev-shm-usage'
-        //   // ],
-        // },
       },
+      dependencies: ['setup', 'global setup'],
     },
 
     // {
     //   name: 'firefox',
     //   use: {
     //     ...devices['Desktop Firefox'],
-    //   // Use prepared auth state.
+    //     // Use prepared auth state.
     //     storageState: 'playwright/.auth/user.json',
     //   },
-    //   dependencies: ['setup'],
+    //   dependencies: ['setup', 'global setup'],
     // },
 
     // {
     //   name: 'webkit',
     //   use: {
     //     ...devices['Desktop Safari'],
-    //   // Use prepared auth state.
+    //     // Use prepared auth state.
     //     storageState: 'playwright/.auth/user.json',
     //   },
-    //   dependencies: ['setup'],
+    //   dependencies: ['setup', 'global setup'],
     // },
 
     /* Test against mobile viewports. */
@@ -102,7 +102,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3000',
+    url: 'http://localhost:3000/',
     reuseExistingServer: !process.env.CI,
   },
 });

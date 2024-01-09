@@ -36,6 +36,7 @@ export default function GameActionBar({ alreadyExists, game }: { alreadyExists: 
         return (
             <form onSubmit={handleSubmit}>
                 <button
+                    id="add_game"
                     type="submit"
                     className={`btn bg-green-500`}
                     disabled={buttonDisabled}

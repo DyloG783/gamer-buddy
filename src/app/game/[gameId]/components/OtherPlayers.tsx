@@ -82,7 +82,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
                             <div id="others_in_all_timezones"
                                 className="hover:shadow-sm p-6 tracking-wide"
                             >
-                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount - 1}'`}
+                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount}'`}
                             </div>
                         </Link>
                     </div>

@@ -1,7 +1,6 @@
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import NavigationBar from "@/app/components/navigation/NavigationBar"
-import Footer from './components/Footer'
 
 export const metadata = {
   title: 'Gamer Buddy',
@@ -24,9 +23,6 @@ export default async function RootLayout({ children, }: { children: React.ReactN
           <main className='h-[calc(100vh-6rem)] max-w-screen-2xl mx-auto'>
             {children}
           </main>
-          {/* <footer>
-            <Footer />
-          </footer> */}
         </body>
       </html>
     </ClerkProvider >

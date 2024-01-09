@@ -87,7 +87,7 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                     previousLabel="<"
                     renderOnZeroPageCount={null}
                     className="flex justify-around md:justify-center md:gap-4
-                    p-1 md:p-2 bg-slate-400 text-white "
+                    p-1 md:p-2 border border-solid"
                 />
             </>
         );

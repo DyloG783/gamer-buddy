@@ -12,7 +12,10 @@ const YourGames: React.FC = async () => {
     if (!userId) {
         return (
             <div>
-                <Link href="/api/auth/signin" className='flex justify-around items-center w-full p-3 hover:shadow-lg hover:text-purple-600 bg-yellow-200 '>
+                <Link href="/api/auth/signin"
+                    className='flex justify-around items-center w-full p-10 hover:shadow-lg text-purple-600 italic hover:underline
+                    font-semibold tracking-wider mb-4'
+                >
                     Sign in to see your games
                 </Link>
             </div>

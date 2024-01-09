@@ -91,7 +91,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
                             <li key={player.email}
                                 className="shadow-sm hover:italic text-sm md:text-base p-1 "
                             >
-                                <Link key={player.email + player.email!} href={`/connect/${gameId}/${player.id}`}
+                                <Link key={player.email + player.email!} href={`/connections/view-player/${player.id}`}
                                     className="inline-block w-full">
                                     <p className="tracking-wider">{player.userName}</p>
                                     <p className="italic font-light">{player.timezone}</p>

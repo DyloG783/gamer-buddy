@@ -1,4 +1,4 @@
-import { auth, currentUser } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { getUsersConnectionRequests } from "@/lib/query_helper";
 
@@ -9,10 +9,12 @@ export default async function ConnectionUpdates() {
     // user is not logged in don't display this component
     if (!userId) {
         return (
-            <div id="no_session_container">
+            <div id="no_session_container" className="flex h-full">
                 <Link href={`/api/auth/signin`}
-                    className="text-purple-800 underline italic flex justify-around"
-                >Sign in to see Messages, Connection requests, and more!</Link>
+                    className="text-purple-800 font-semibold tracking-wider italic m-auto
+                    p-10 hover:shadow-md "
+                >
+                    Sign in to see Messages, Connection requests, and more!</Link>
             </div>
         )
     }

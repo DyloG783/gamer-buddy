@@ -59,6 +59,11 @@ https://dashboard.clerk.com/apps/app_2ZqGHEqwCP0kbHCTu9d9rOAYcrx/instances/ins_2
 Tunnel to connect clerk with my local - https://localtunnel.github.io/www/ as per - https://clerk.com/docs/users/sync-data
 - lt --port 3000
 
+Playwright: 
+Test user 1 - sally, test1@test.com (password), user_2ZtEUw0s5N5aRXYNV27MWPKbLUB
+Test user 2 - jimmytool2, test2@test.com (password), user_2ZtF7sj1agf3O5bCSciz511eRzj
+Test user 3 - kingdon7, test3@test.com (password), user_2ZtFP1wPGdH5oITfJTmrU9OKA2w
+
 Need help with:
 
 
