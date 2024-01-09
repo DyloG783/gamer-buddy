@@ -8,38 +8,27 @@ export default function MainLinks() {
     const pathname = usePathname();
 
     return (
-        <div className="flex flex-col md:flex-row md:gap-8">
-            <Link
-                href="/"
-                className={`${pathname === '/home' ? 'underline' : ''} 
-                 hover:shadow-md w-full`}
-            >
-                <img src="/./GamerBuddy.png" height={0} width={0} alt="Home page link"
-                    className="w-16 md:w-20 lg:w-24 h-auto mx-auto md:p-1 object-contain"
-                />
-            </Link>
-            <ul className="flex flex-col md:flex-row">
-                <li id="games">
+        <>
+            <ul className="grow flex p-4 md:p-0 justify-center ">
+                <li id="games" className="flex ">
                     <Link
                         href="/games"
-                        className={`flex items-center justify-around h-full p-4 
-                            hover:shadow-md text-white
+                        className={`hover:shadow-sm py-4 px-8 md:my-auto md:py-8
                             ${pathname === '/games' || pathname.includes('game/') ? 'underline' : ''}`}
                     >
                         Games
                     </Link>
                 </li>
-                <li id="connections">
+                <li id="connections" className="flex">
                     <Link
                         href="/connections"
-                        className={`flex items-center justify-around h-full p-4 
-                            hover:shadow-md text-white
+                        className={`hover:shadow-sm py-4 px-6 md:my-auto md:py-8
                             ${pathname === '/connections' ? 'underline' : ''}`}
                     >
                         Connections
                     </Link>
                 </li>
             </ul>
-        </div>
+        </>
     )
 }

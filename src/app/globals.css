@@ -10,13 +10,16 @@
 
 @layer components{
     .btn {
-        @apply p-0 md:p-4 text-xs md:text-sm tracking-wider hover:shadow-xl bg-slate-700 text-white rounded-lg w-24 h-8 md:w-32 md:h-14;
+        @apply p-0 md:p-3 text-xs md:text-sm tracking-wider hover:shadow-xl text-white rounded-2xl w-24 h-8 md:w-32 md:h-14;
     }
-}
 
-@layer components {
     .link {
         @apply text-purple-700 hover:italic;
     }
+
+    /* .first-section {
+        @apply 'bg-gradient-to-l from-emerald-50/50 to-emerald-00';
+    } */
 }
+
 

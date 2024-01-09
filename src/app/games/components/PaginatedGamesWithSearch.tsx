@@ -148,8 +148,8 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                         />
                     </div>
                     ||
-                    <div className="mx-auto my-2 md:my-10">
-                        No games matched your search. Reset the search to try again
+                    <div className="m-auto">
+                        No games matched your search. Click 'Reset search' to try again
                     </div>
                 }
             </>
