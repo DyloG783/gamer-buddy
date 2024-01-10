@@ -38,7 +38,7 @@ export default async function ConnectionUpdates() {
             >
                 <h2 className="font-semibold text-blue-800 text-xl mb-4 md:mb-10 tracking-wide">Connection requests</h2>
                 <>
-                    {requests!.length > 0
+                    {requests && requests!.length > 0
                         &&
                         <Link href={`/connections`} className="">
                             <div className="flex p-4 hover:shadow-sm hover:cursor-pointer">

@@ -7,9 +7,9 @@ setup('delete follow relations', async ({ }) => {
     try {
         await prisma.follows.delete({
             where: {
-                followingId_followedById: {
-                    followedById: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB", // this is the user who initiates following.
-                    followingId: "user_2ZtF7sj1agf3O5bCSciz511eRzj" // this is the user who is beingfollowed.
+                followingEmail_followedByEmail: {
+                    followedByEmail: "test1@test.com", // this is the user who initiates following.
+                    followingEmail: "test2@test.com" // this is the user who is beingfollowed.
                 },
 
             }
@@ -17,9 +17,9 @@ setup('delete follow relations', async ({ }) => {
 
         await prisma.follows.delete({
             where: {
-                followingId_followedById: {
-                    followedById: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB", // this is the user who initiates following.
-                    followingId: "user_2ZtFP1wPGdH5oITfJTmrU9OKA2w" // this is the user who is beingfollowed.
+                followingEmail_followedByEmail: {
+                    followedByEmail: "test1@test.com", // this is the user who initiates following.
+                    followingEmail: "test4@test.com" // this is the user who is beingfollowed.
                 },
 
             }
@@ -27,9 +27,9 @@ setup('delete follow relations', async ({ }) => {
 
         await prisma.follows.delete({
             where: {
-                followingId_followedById: {
-                    followedById: "user_2ZtFP1wPGdH5oITfJTmrU9OKA2w", // this is the user who initiates following.
-                    followingId: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB" // this is the user who is beingfollowed.
+                followingEmail_followedByEmail: {
+                    followedByEmail: "test4@test.com", // this is the user who initiates following.
+                    followingEmail: "test1@test.com" // this is the user who is beingfollowed.
                 },
 
             }
@@ -37,9 +37,9 @@ setup('delete follow relations', async ({ }) => {
 
         await prisma.follows.delete({
             where: {
-                followingId_followedById: {
-                    followedById: "user_2ZtFu6LzPOsaLVmDiZeac9r2VRU", // this is the user who initiates following.
-                    followingId: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB" // this is the user who is beingfollowed.
+                followingEmail_followedByEmail: {
+                    followedByEmail: "test9@test.com", // this is the user who initiates following.
+                    followingEmail: "test1@test.com" // this is the user who is beingfollowed.
                 },
 
             }

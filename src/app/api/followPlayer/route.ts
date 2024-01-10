@@ -11,15 +11,21 @@ export async function POST(request: Request) {
     const { player } = data
 
     const { userId } = auth();
+    if (!userId) {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
     const user = await currentUser();
 
     try {
         await prisma.follows.create({
             data: {
-                followedById: userId!,
+                followedById: userId,
+                followedByEmail: user?.emailAddresses[0].emailAddress!,
                 followedByUName: user?.username!,
                 followingId: player.id,
-                followingUName: player.userName!,
+                followingEmail: player.email!,
+                followingUName: player.userName!
             }
         })
     } catch (error) {

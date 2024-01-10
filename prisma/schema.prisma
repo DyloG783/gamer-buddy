@@ -50,7 +50,7 @@ model PrivateMessage {
 
 model User {
   id            String           @id
-  email         String?          @unique
+  email         String           @unique
   userName      String?
   bio           String?
   timezone      String?
@@ -62,14 +62,16 @@ model User {
 }
 
 model Follows {
-  followedBy      User   @relation("followedBy", fields: [followedById], references: [id], onDelete: Cascade)
+  followedBy      User   @relation("followedBy", fields: [followedByEmail], references: [email], onDelete: Cascade)
+  followedByEmail String
   followedById    String
   followedByUName String
-  following       User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  following       User   @relation("following", fields: [followingEmail], references: [email], onDelete: Cascade)
+  followingEmail  String
   followingId     String
   followingUName  String
 
-  @@id([followingId, followedById])
+  @@id([followingEmail, followedByEmail])
 }
 
 model Game {

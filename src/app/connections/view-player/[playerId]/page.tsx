@@ -3,12 +3,12 @@ import PlayerActionBar from "./components/PlayerActionBar";
 import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import { UserNotExist } from "@/lib/errors";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
-import { auth } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 
 export default async function Player({ params }: { params: { playerId: string } }) {
 
     const playerId = params.playerId // this refeers to the other player the user wants to connect with
-    const { userId } = auth();
+    const user = await currentUser();
 
     // other player this user wants to connect with
     const playerWithGames = await checkUserExistsAndReturn(playerId);
@@ -19,9 +19,9 @@ export default async function Player({ params }: { params: { playerId: string } 
     // see whether we already follow this player
     const relationFromUser = await prisma.follows.findUnique({
         where: {
-            followingId_followedById: {
-                followedById: userId!,
-                followingId: playerWithGames.id
+            followingEmail_followedByEmail: {
+                followedByEmail: user?.emailAddresses[0].emailAddress!,
+                followingEmail: playerWithGames.email
             }
         }
     })
@@ -31,9 +31,9 @@ export default async function Player({ params }: { params: { playerId: string } 
     if (relationFromUser) {
         usersAreConnected = await prisma.follows.findUnique({
             where: {
-                followingId_followedById: {
-                    followedById: playerWithGames.id,
-                    followingId: userId!
+                followingEmail_followedByEmail: {
+                    followedByEmail: playerWithGames.email,
+                    followingEmail: user?.emailAddresses[0].emailAddress!
                 }
             }
         })
@@ -45,7 +45,7 @@ export default async function Player({ params }: { params: { playerId: string } 
                 className="grow p-4 md:p-20 bg-slate-300"
             >
                 <div id="player_action_bar_container">
-                    {userId
+                    {user
                         &&
                         <PlayerActionBar player={playerWithGames} alreadyExists={relationFromUser !== null} usersAreConnected={usersAreConnected !== null} />
                         ||

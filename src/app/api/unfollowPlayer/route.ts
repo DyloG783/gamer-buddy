@@ -11,14 +11,18 @@ export async function POST(request: Request) {
     const { player } = data;
 
     const { userId } = auth();
+    if (!userId) {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
     const user = await currentUser();
 
     try {
         await prisma.follows.delete({
             where: {
-                followingId_followedById: {
-                    followedById: userId!, // this is the user who initiates following. 
-                    followingId: player.id // this is the user who is beingfollowed. 
+                followingEmail_followedByEmail: {
+                    followedByEmail: user?.emailAddresses[0].emailAddress!,
+                    followingEmail: player.email!,
                 }
             }
         })

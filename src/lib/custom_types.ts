@@ -48,10 +48,12 @@ export type IUser = {
 }
 
 export type IConnection = ({
+    followedByEmail: string;
     followedById: string;
     followedByUName: string;
+    followingEmail: string;
     followingId: string;
-    followingUName: string;
+    followingUName: string
 })
 
 export type TUserId = ({ userId: string })

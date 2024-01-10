@@ -4,9 +4,9 @@ import PaginatedConnections from "./components/PaginatedConnections";
 
 const Connections = async () => {
 
-    const userFollowing: IConnection[] = await getFollowing();
-    const requests: IConnection[] = await getUsersConnectionRequests()
-    const userConnections: IConnection[] = await getUsersConnections()
+    const userFollowing: IConnection[] | null = await getFollowing();
+    const requests: IConnection[] | null = await getUsersConnectionRequests()
+    const userConnections: IConnection[] | null = await getUsersConnections()
 
     return (
         <div id="page_container" className="flex flex-col justify-between h-full ">

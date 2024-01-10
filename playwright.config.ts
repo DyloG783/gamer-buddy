@@ -40,6 +40,7 @@ export default defineConfig({
       name: 'global setup',
       testMatch: /global\.setup\.ts/,
       teardown: 'global teardown',
+      dependencies: ['setup'],
     },
 
     // tear down test data

@@ -1,14 +1,14 @@
 export const test_users = [
     {
         email: "test1@test.com",
-        name: "Sally",
+        name: "sally",
         games: [250630, 83563, 211573, 279624, 270049, 81753, 229],
         "bio": "I'm available to play in other timezones too!",
         "timezone": "(UTC-12:00) International Date Line West"
     },
     {
         email: "test2@test.com",
-        name: "Jimmy",
+        name: "jimmytool2",
         games: [250630, 83563, 211573, 279624, 81753, 229],
         "bio": "I have limited availability so can only play a few hours a night in my tz",
         "timezone": "(UTC-12:00) International Date Line West"
@@ -21,7 +21,7 @@ export const test_users = [
     },
     {
         email: "test4@test.com",
-        name: "KingDon66",
+        name: "kingdon7",
         games: [211573, 250630, 83563, 270049, 81753, 262659],
         "bio": "Down for whatever hit me up. Pretty cas",
         "timezone": "(UTC+10:00) Canberra, Melbourne, Sydney"
@@ -60,7 +60,7 @@ export const test_users = [
 
     {
         email: "test9@test.com",
-        name: "ThEbEsT",
+        name: "thebestofmelbour",
         games: [211573, 250630, 83563, 270049, 247567, 81753, 229],
         "bio": "Feel free to reach out any tz I'm not working soooooo",
         "timezone": "(UTC+12:00) Auckland, Wellington"

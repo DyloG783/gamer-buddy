@@ -10,27 +10,35 @@ setup('create follow relations', async ({ }) => {
             data: [
                 {
                     followedById: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB",
-                    followedByUName: "sally",
+                    followedByEmail: test_users[0].email,
+                    followedByUName: test_users[0].name,
                     followingId: "user_2ZtF7sj1agf3O5bCSciz511eRzj",
-                    followingUName: "jimmytool2",
+                    followingUName: test_users[1].name,
+                    followingEmail: test_users[1].email
                 },
                 {
                     followedById: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB",
-                    followedByUName: "sally",
+                    followedByEmail: test_users[0].email,
+                    followedByUName: test_users[0].name,
                     followingId: "user_2ZtFP1wPGdH5oITfJTmrU9OKA2w",
-                    followingUName: "kingdon7",
+                    followingUName: test_users[3].name,
+                    followingEmail: test_users[3].email
                 },
                 {
                     followedById: "user_2ZtFP1wPGdH5oITfJTmrU9OKA2w",
-                    followedByUName: "kingdon7",
+                    followedByEmail: test_users[3].email,
+                    followedByUName: test_users[3].name,
                     followingId: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB",
-                    followingUName: "sally",
+                    followingUName: test_users[0].name,
+                    followingEmail: test_users[0].email
                 },
                 {
                     followedById: "user_2ZtFu6LzPOsaLVmDiZeac9r2VRU",
-                    followedByUName: "thebestofmelbour",
+                    followedByEmail: test_users[8].email,
+                    followedByUName: test_users[8].name,
                     followingId: "user_2ZtEUw0s5N5aRXYNV27MWPKbLUB",
-                    followingUName: "sally",
+                    followingUName: test_users[0].name,
+                    followingEmail: test_users[0].email
                 },
             ]
         })

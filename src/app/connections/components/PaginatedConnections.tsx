@@ -6,7 +6,7 @@ import { IConnection } from "@/lib/custom_types";
 import Link from "next/link";
 
 interface IPaginatedConnectionsProps {
-    connections: IConnection[]
+    connections: IConnection[] | null
     itemsPerPage: number
     option: string
 }
@@ -17,13 +17,18 @@ interface IItems {
 
 const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage, option }) => {
 
+    // not sure if this is best approach
+    if (connections === null) {
+        return
+    }
+
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
             <div className="pl-4 md:pl-10">
                 <ul className="grid md:grid-flow-col md:auto-cols-fr ">
                     {currentItems &&
-                        currentItems.map((connection: IConnection) => (
-                            <li key={`${connection.followedById} + ${connection.followingId}`} className="hover:shadow-md">
+                        currentItems.map((connection: IConnection, index) => (
+                            <li key={index} className="hover:shadow-md">
                                 {option === "connected"
                                     &&
                                     <Link
