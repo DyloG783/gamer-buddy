@@ -4,18 +4,6 @@ import { automation_users } from '../prisma/automation_test_users';
 
 setup('delete follow relations', async ({ }) => {
 
-    // delete following relations between test users
-    // try {
-    //     await prisma.follows.deleteMany({
-    //         where: {
-    //             followedByEmail: { endsWith: 'gbtest.com' },
-    //         }
-    //     })
-    //     console.log("Success deleting following relations during global tear down Playwright")
-    // } catch (error) {
-    //     console.log("Failed to delete following relations during global tear down Playwright:", error)
-    // }
-
     // delete test users except permanent from clerk
     try {
         await prisma.user.deleteMany({

@@ -91,7 +91,4 @@ setup('create follow relations', async ({ }) => {
     } catch (error) {
         console.log("Fail setting up test connections in playwright global setup:", error)
     }
-
-
-
 });
