@@ -1,55 +1,46 @@
 import prisma from '@/lib/db';
-import { test as setup, expect } from '@playwright/test';
-import { test_users } from '../prisma/test_users';
+import { test as setup } from '@playwright/test';
+import { automation_users } from '../prisma/automation_test_users';
 
 setup('delete follow relations', async ({ }) => {
 
+    // delete following relations between test users
+    // try {
+    //     await prisma.follows.deleteMany({
+    //         where: {
+    //             followedByEmail: { endsWith: 'gbtest.com' },
+    //         }
+    //     })
+    //     console.log("Success deleting following relations during global tear down Playwright")
+    // } catch (error) {
+    //     console.log("Failed to delete following relations during global tear down Playwright:", error)
+    // }
+
+    // delete test users except permanent from clerk
     try {
-        await prisma.follows.delete({
+        await prisma.user.deleteMany({
             where: {
-                followingEmail_followedByEmail: {
-                    followedByEmail: "test1@test.com", // this is the user who initiates following.
-                    followingEmail: "test2@test.com" // this is the user who is beingfollowed.
-                },
-
+                email: { endsWith: 'gbtest.com' },
             }
         })
-
-        await prisma.follows.delete({
-            where: {
-                followingEmail_followedByEmail: {
-                    followedByEmail: "test1@test.com", // this is the user who initiates following.
-                    followingEmail: "test4@test.com" // this is the user who is beingfollowed.
-                },
-
-            }
-        })
-
-        await prisma.follows.delete({
-            where: {
-                followingEmail_followedByEmail: {
-                    followedByEmail: "test4@test.com", // this is the user who initiates following.
-                    followingEmail: "test1@test.com" // this is the user who is beingfollowed.
-                },
-
-            }
-        })
-
-        await prisma.follows.delete({
-            where: {
-                followingEmail_followedByEmail: {
-                    followedByEmail: "test9@test.com", // this is the user who initiates following.
-                    followingEmail: "test1@test.com" // this is the user who is beingfollowed.
-                },
-
-            }
-        })
-
-
-        console.log("Success deleting following relations during global tear down Playwright")
-
+        console.log("Success deleting users during global tear down Playwright")
     } catch (error) {
-        console.log("Failed to delete following relations during global tear down Playwright:", error)
+        console.log("Failed to deleting users during global tear down Playwright:", error)
+    }
+
+
+    // remove games onto permanent test user
+    try {
+        await prisma.user.update({
+            where: { email: automation_users[0].email },
+            data: {
+                games: {
+                    set: [],
+                }
+            },
+        })
+    } catch (error) {
+        console.log("Fail removing games from permanent test user in playwright global setup:", error)
     }
 
 });

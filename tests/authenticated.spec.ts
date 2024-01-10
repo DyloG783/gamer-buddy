@@ -11,7 +11,7 @@ test('Test clerk user menu is visible on login', async ({ page }) => {
 test('Test users name SALLY is displayed beside clerk user menu', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.locator('#non_responsive_layout')).toContainText('sally');
+  await expect(page.locator('#non_responsive_layout')).toContainText('auto1');
 });
 
 // test('get started link', async ({ page }) => {

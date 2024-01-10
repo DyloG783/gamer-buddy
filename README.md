@@ -1,6 +1,4 @@
 ---
-Run dev server:
-npm run dev
 
 View prisma dashboard in browser command: 
 npx prisma studio
@@ -9,24 +7,12 @@ Update Prisma after changing schema:
 1. npx prisma db push (or 'prisma migrate dev' to keep existing data)
 2. npx prisma generate
 
-Git:
-to merge branch to main
-1. push branch
-2. checkout master
-3. git merge [branch name] 
-
-Run postgres db command:
-dont need to run in with app. Use PSQL command tool for console access
-
 PSQL:
 view databases; \l
 connect to db; \c mydb
     view tables; \dt
     delete all data from table; DELETE FROM your_table_name;
 quit psql; \q
-
-Run a script:
-with "tsx" (which allow imports into script); npx tsx myscript.ts (while in directory need to figure out tsconfig to run from anywhere)
 
 Current script flow: 
 1. saveTwitchAuthTokenToDb; fetches auth token from twitch api and saves it to db
@@ -44,8 +30,6 @@ Google(https://console.cloud.google.com/)
 - dgdevelopment65@gmail.com, (Tr.....Development!)
     - dgdevelopment651@gmail.com 
 
-Superbase: (dylan.m.c, Tr...!)
-    - db pass: M4WTQyZs3kaWoGIN
     
 Twitch:
 - dylangreenslade, (Tr.... Tr....)
@@ -60,9 +44,9 @@ Tunnel to connect clerk with my local - https://localtunnel.github.io/www/ as pe
 - lt --port 3000
 
 Playwright: 
-Test user 1 - sally, test1@test.com (password), user_2ZtEUw0s5N5aRXYNV27MWPKbLUB
-Test user 2 - jimmytool2, test2@test.com (password), user_2ZtF7sj1agf3O5bCSciz511eRzj
-Test user 3 - kingdon7, test3@test.com (password), user_2ZtFP1wPGdH5oITfJTmrU9OKA2w
+- Need to have permanent user (per environment?) for authentication created in Clerk first (automation1@gbtest.com)
+- automation uses automation_test_data to create games, and other usrs/relations
+
 
 Need help with:
 

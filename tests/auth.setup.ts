@@ -1,11 +1,12 @@
 import { test as setup, expect } from '@playwright/test';
+import { automation_users } from '../prisma/automation_test_users';
 
 const authFile = 'playwright/.auth/user.json';
 
 setup('authenticate', async ({ page }) => {
     // Perform authentication steps. Replace these actions with your own.
     await page.goto('https://pro-marmoset-77.accounts.dev/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2F');
-    await page.getByLabel('Email address or username').fill('test1@test.com');
+    await page.getByLabel('Email address or username').fill(automation_users[0].email);
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.getByLabel('Password', { exact: true }).fill('password');
     await page.getByRole('button', { name: 'Continue' }).click();

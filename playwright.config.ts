@@ -32,16 +32,21 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // Setup project auth
-    { name: 'setup', testMatch: /.*\.setup\.ts/ },
 
     // Setup test data
     {
       name: 'global setup',
       testMatch: /global\.setup\.ts/,
       teardown: 'global teardown',
-      dependencies: ['setup'],
     },
+
+    // Setup project auth
+    {
+      name: 'setup', testMatch: /.*\.setup\.ts/,
+      dependencies: ['global setup'],
+    },
+
+
 
     // tear down test data
     {
@@ -56,7 +61,7 @@ export default defineConfig({
         // Use prepared auth state.
         storageState: 'playwright/.auth/user.json',
       },
-      dependencies: ['setup', 'global setup'],
+      dependencies: ['setup'],
     },
 
     // {
