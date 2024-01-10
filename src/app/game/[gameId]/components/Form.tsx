@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { sendMessageForum } from "@/actions"
+import { sendMessageForum } from "@/lib/actions"
 
 export default function Form({ gameRoomId }: { gameRoomId: string }) {
     const [message, setMessage] = useState("")

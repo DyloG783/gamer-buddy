@@ -1,5 +1,6 @@
 import OtherPlayers from "./components/OtherPlayers";
-import GameActionBar from "./components/GameActionBar";
+import { SubmitButton } from "./components/SubmitButton";
+import { addGame, removeGame } from "@/lib/actions"
 import { IGameFilterType } from "@/lib/custom_types";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { GameNotExist } from "@/lib/errors";
@@ -52,7 +53,22 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                             <h1 className="font-semibold text-xl md:text-4xl mb-2 hover:italic text-blue-700 hover:text-purple-700">{`${game?.name}`}</h1>
                         </Link>
                         {userId &&
-                            <GameActionBar alreadyExists={alreadyExists} game={game} />
+                            <div id="gameActionsBar"
+                                className="flex gap-2 ml-6 md:ml-auto">
+                                <div>
+                                    {alreadyExists
+                                        && <SubmitButton action={removeGame} text={`Remove game`} color={`bg-red-500`} gameId={game.id} />
+                                        || <SubmitButton action={addGame} text={`Add game`} color={`bg-green-500`} gameId={game.id} />
+                                    }
+                                </div>
+                                <div>
+                                    {alreadyExists &&
+                                        <button className="btn bg-green-500">
+                                            <Link href={`/connect/${game.id}`}>Connect</Link>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
                         }
 
                     </div>

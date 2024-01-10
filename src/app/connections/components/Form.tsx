@@ -1,6 +1,6 @@
 "use client"
 
-import { sendMessagePrivate } from "@/actions"
+import { sendMessagePrivate } from "@/lib/actions"
 import { useRef, useState } from "react"
 
 export default function Form({ privateRoomId }: { privateRoomId: string }) {

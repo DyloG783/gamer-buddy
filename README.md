@@ -50,6 +50,11 @@ Playwright:
 
 Need help with:
 
+flakey tests
+3 flaky
+    [chromium] › authenticated.spec.ts:11:5 › Test users name SALLY is displayed beside clerk user menu 
+    [chromium] › follow.spec.ts:45:5 › Test FOLLOWING with test user is present ────────────────────
+    [chromium] › follow.spec.ts:53:5 › Test Following user link on click displays View Player page with Disconnec
 
 ---
 

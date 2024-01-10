@@ -1,23 +1,25 @@
 import prisma from "@/lib/db";
-import PlayerActionBar from "./components/PlayerActionBar";
+import { addUser, removeUser } from "@/lib/actions"
 import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import { UserNotExist } from "@/lib/errors";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
 import { currentUser } from "@clerk/nextjs";
+import Link from "next/link";
+import { ConnectButton } from "./ConnectButton";
 
-export default async function Player({ params }: { params: { playerId: string } }) {
+export default async function ViewPlayer({ params }: { params: { playerId: string } }) {
 
     const playerId = params.playerId // this refeers to the other player the user wants to connect with
     const user = await currentUser();
 
     // other player this user wants to connect with
     const playerWithGames = await checkUserExistsAndReturn(playerId);
-    if (!playerWithGames) {
+    if (!playerWithGames || !user) {
         return <UserNotExist />
     }
 
     // see whether we already follow this player
-    const relationFromUser = await prisma.follows.findUnique({
+    const weFollowThisPlayer = await prisma.follows.findUnique({
         where: {
             followingEmail_followedByEmail: {
                 followedByEmail: user?.emailAddresses[0].emailAddress!,
@@ -26,9 +28,9 @@ export default async function Player({ params }: { params: { playerId: string } 
         }
     })
 
-    // ensure users are connected to eachother
+    // ensure users are connected to eachother by ensureing they follow us if we follow them
     let usersAreConnected;
-    if (relationFromUser) {
+    if (weFollowThisPlayer) {
         usersAreConnected = await prisma.follows.findUnique({
             where: {
                 followingEmail_followedByEmail: {
@@ -45,12 +47,29 @@ export default async function Player({ params }: { params: { playerId: string } 
                 className="grow p-4 md:p-20 bg-slate-300"
             >
                 <div id="player_action_bar_container">
-                    {user
-                        &&
-                        <PlayerActionBar player={playerWithGames} alreadyExists={relationFromUser !== null} usersAreConnected={usersAreConnected !== null} />
-                        ||
-                        <p>Sign in to connect with player</p>
-                    }
+
+                    <div id="player_action_bar_container"
+                        className="w-full mb-10 flex justify-end gap-2"
+                    >
+                        {usersAreConnected
+                            &&
+                            <>
+                                <ConnectButton action={removeUser} color={`bg-red-500`} player={playerWithGames} text={`Remove player`} />
+                                <Link href={`/connections/${user.id}/${playerWithGames.id}`}
+                                    className="">
+                                    <button id="chat_button" className="btn bg-green-500 text-center">Chat</button>
+                                </Link>
+                            </>
+                        }
+                        {!weFollowThisPlayer
+                            &&
+                            <ConnectButton action={addUser} color={`bg-green-500`} player={playerWithGames} text={`Add player`} />
+                        }
+                        {!usersAreConnected && weFollowThisPlayer
+                            &&
+                            <ConnectButton action={removeUser} color={`bg-red-500`} player={playerWithGames} text={`Remove player`} />
+                        }
+                    </div>
                     <h1 className="font-semibold text-blue-700 text-xl md:text-4xl tracking-wider mb-6 md:mb-20">{playerWithGames?.userName}'s Profile</h1>
                     <div id="players_bio_container"
                         className="ml-4 md:ml-10 mb-4 md:mb-10 ">
