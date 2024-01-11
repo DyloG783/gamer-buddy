@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build && getTwitchAuthToken && saveGamesToDb && saveGenresToDb && saveModesToDb && savePlatformsToDb && relateGamesToGenres && relateGamesToModes && relateGamesToPlatforms",
+    "build": "prisma generate && prisma db push && next build && getTwitchAuthToken && saveGamesToDb && saveGenresToDb && saveModesToDb && savePlatformsToDb && relateGamesToGenres && relateGamesToModes && relateGamesToPlatforms",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
