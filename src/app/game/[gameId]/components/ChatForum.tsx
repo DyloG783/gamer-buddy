@@ -61,7 +61,7 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
                         </div>
                     ))
                     ||
-                    <p className="p-2 tracking-wide font-light">Your're potentially the first person to leave a message... What an honor!</p>
+                    <p className="p-2 tracking-wide font-light">Your&apos;re potentially the first person to leave a message... What an honor!</p>
                 }
                 <div ref={messageEndRef}></div>
             </div>

@@ -18,10 +18,10 @@ interface IPageGames {
 
 const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, itemsPerPage, searchState, setSearchEmpty }) => {
 
-    const [searchedGames, setSearchedGames] = useState<IGameAndTypes[]>([])
-    const [isLoading, setLoading] = useState(false)
+    const [searchedGames, setSearchedGames] = useState<IGameAndTypes[]>([]);
+    const [isLoading, setLoading] = useState(false);
 
-    let filteredGames: IGameAndTypes[] = []
+    let filteredGames: IGameAndTypes[] = [];
 
     // fetch games from the db andfilter based on the current search state
     useEffect(() => {

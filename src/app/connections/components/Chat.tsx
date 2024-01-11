@@ -30,7 +30,7 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
         return () => {
             pusher.unsubscribe(`${privateRoomId}`);
         };
-    }, []);
+    }, [privateRoomId]);
 
     const scrollTobottom = () => {
         messageEndRef.current?.scrollIntoView({ behavior: "instant" });

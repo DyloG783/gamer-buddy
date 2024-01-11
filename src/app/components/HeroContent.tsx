@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function HeroContent() {
 
     return (
@@ -8,12 +10,12 @@ export default function HeroContent() {
                     <p className="m-auto tracking-wider">
                         Find others through your favorite games
                     </p>
-                    <img src="/./category.svg" height={0} width={0} alt="chat_icon"
+                    <Image src="/./category.svg" height={0} width={0} alt="chat_icon"
                         className="w-8 md:w-10 lg:w-12 h-auto m-auto "
                     />
                 </div>
                 <div className="grid grid-flow-col auto-cols-fr shadow-sm p-8">
-                    <img src="/./rank.svg" height={0} width={0} alt="chat_icon"
+                    <Image src="/./rank.svg" height={0} width={0} alt="chat_icon"
                         className="w-8 md:w-10 lg:w-12 h-auto m-auto"
                     />
                     <p className="m-auto tracking-wider">
@@ -24,7 +26,7 @@ export default function HeroContent() {
                     <p className="m-auto tracking-wider">
                         Create connections and chat with people 1-1
                     </p>
-                    <img src="/./comments-question.svg" height={0} width={0} alt="chat_icon"
+                    <Image src="/./comments-question.svg" height={0} width={0} alt="chat_icon"
                         className="w-8 md:w-10 lg:w-12 h-auto m-auto"
                     />
                 </div>

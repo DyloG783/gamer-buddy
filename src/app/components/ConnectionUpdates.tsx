@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { getUsersConnectionRequests } from "@/lib/query_helper";
+import Image from 'next/image';
 
 export default async function ConnectionUpdates() {
 
@@ -44,7 +45,7 @@ export default async function ConnectionUpdates() {
                             <div className="flex p-4 hover:shadow-sm hover:cursor-pointer">
                                 <span className="">Pending connection requests: {requests!.length}</span>
                                 <span className="animate-ping ml-4">
-                                    <img src="/./bells.svg" height={0} width={0} alt="chat_icon"
+                                    <Image src="/./bells.svg" height={0} width={0} alt="chat_icon"
                                         className="w-2 md:w-3 h-auto bg-yellow-200 rounded-xl"
                                     />
                                 </span>

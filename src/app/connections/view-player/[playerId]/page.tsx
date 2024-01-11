@@ -80,7 +80,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                             </form>
                         }
                     </div>
-                    <h1 className="font-semibold text-blue-700 text-xl md:text-4xl tracking-wider mb-6 md:mb-20">{player?.userName}'s Profile</h1>
+                    <h1 className="font-semibold text-blue-700 text-xl md:text-4xl tracking-wider mb-6 md:mb-20">{player?.userName}&apos;s Profile</h1>
                     <div id="players_bio_container"
                         className="ml-4 md:ml-10 mb-4 md:mb-10 ">
                         <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">About {player?.userName}</h2>
@@ -98,7 +98,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                     <div id="players_timezone_containter"
                         className="ml-4 md:ml-10 mb-4 md:mb-10"
                     >
-                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">{player?.userName}'s Timezone</h2>
+                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">{player?.userName}&apos;s Timezone</h2>
                         {player?.timezone
                             &&
                             <div id="players_timezone">
@@ -113,7 +113,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                 </div>
             </div>
             <div id="all_games" className="p-4 md:p-20 bg-slate-200">
-                <h1 className="font-semibold text-blue-900  mb-4 md:mb-10  tracking-wider text-xl md:text-2xl">All of {player?.userName}'s games</h1>
+                <h1 className="font-semibold text-blue-900  mb-4 md:mb-10  tracking-wider text-xl md:text-2xl">All of {player?.userName}&apos;s games</h1>
                 <div className="ml-4 md:ml-10">
                     {player?.games
                         &&

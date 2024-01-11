@@ -42,7 +42,7 @@ const YourGames: React.FC = async () => {
                 &&
                 <PaginatedGames games={games.games} itemsPerPage={3} />
                 ||
-                <p>You don't have any games</p>
+                <p>You don&apos;t have any games</p>
             }
         </div>
     )
