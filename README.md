@@ -1,7 +1,7 @@
 ---
 
 View prisma dashboard in browser command: 
-npx prisma studio
+npx prisma studio /
 
 Update Prisma after changing schema: 
 1. npx prisma db push (or 'prisma migrate dev' to keep existing data)
