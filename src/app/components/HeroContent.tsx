@@ -12,7 +12,6 @@ export default function HeroContent() {
                         className="w-8 md:w-10 lg:w-12 h-auto m-auto "
                     />
                 </div>
-
                 <div className="grid grid-flow-col auto-cols-fr shadow-sm p-8">
                     <img src="/./rank.svg" height={0} width={0} alt="chat_icon"
                         className="w-8 md:w-10 lg:w-12 h-auto m-auto"
@@ -21,8 +20,6 @@ export default function HeroContent() {
                         Chat in open forums per game
                     </p>
                 </div>
-
-
                 <div className="grid grid-flow-col auto-cols-fr p-8">
                     <p className="m-auto tracking-wider">
                         Create connections and chat with people 1-1
@@ -31,10 +28,7 @@ export default function HeroContent() {
                         className="w-8 md:w-10 lg:w-12 h-auto m-auto"
                     />
                 </div>
-                {/* <p className="m-auto italic p-4 tracking-wide">Once your chatting, or job here is done. Go and play on whatever platform works for you!</p> */}
             </div>
-
-
         </div>
     )
 }

@@ -1,13 +1,9 @@
 
 import MainLinks from "./MainLinks";
 import UserMenu from "./UserMenu";
-// import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function NavigationBar() {
-
-    // const pathname = usePathname();
-
     return (
         <nav >
             <div id="non_responsive_layout" className="hidden md:flex justify-between">

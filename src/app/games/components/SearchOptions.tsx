@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { ISearchState } from "@/lib/custom_types";
 
-// 'ISearchableGameType'represents either genres, platforms, or modes which have the
-// same data structure in the db
 interface ISearchableGameType {
     id: number;
     name: string;
@@ -61,7 +59,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                 Number(e.target.value)
             )
         }
-
 
         return (
             <div className="flex flex-col gap-1">

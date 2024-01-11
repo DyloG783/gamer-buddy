@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
-import prisma from "@/lib/db";
-import ChatForum from "@/app/game/[gameId]/components/ChatForum";
 import { GameNotExist } from "@/lib/errors";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import Form from "@/app/game/[gameId]/components/Form";
+import prisma from "@/lib/db";
+import ChatForum from "@/app/game/[gameId]/components/ChatForum";
 
 // stop page from caching (needed for real time chat (in prod))
 export const dynamic = "force-dynamic";
@@ -12,7 +12,6 @@ export const dynamic = "force-dynamic";
 export default async function Connect({ params }: { params: { gameId: number } }) {
 
     const gameId = Number(params.gameId) // this id passed in params is the game's id
-
     const { userId } = auth();
 
     // if game doesnt exist retun null, or return game
@@ -100,7 +99,6 @@ export default async function Connect({ params }: { params: { gameId: number } }
                         ))}
                     </ul>
                 </div>
-
                 <div id="chat_forum container"
                     className=" min-w-[66%]"
                 >

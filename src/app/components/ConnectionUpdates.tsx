@@ -1,5 +1,5 @@
-import { auth } from "@clerk/nextjs";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs";
 import { getUsersConnectionRequests } from "@/lib/query_helper";
 
 export default async function ConnectionUpdates() {
@@ -38,7 +38,7 @@ export default async function ConnectionUpdates() {
             >
                 <h2 className="font-semibold text-blue-800 text-xl mb-4 md:mb-10 tracking-wide">Connection requests</h2>
                 <>
-                    {requests && requests!.length > 0
+                    {requests && requests.length > 0
                         &&
                         <Link href={`/connections`} className="">
                             <div className="flex p-4 hover:shadow-sm hover:cursor-pointer">
@@ -49,9 +49,6 @@ export default async function ConnectionUpdates() {
                                     />
                                 </span>
                             </div>
-
-                            {/* <p>Click here to checkout the Connections page where you can manage your player interactions!</p> */}
-
                         </Link>
                         ||
                         <p className="p-4">You have no connection requests</p>

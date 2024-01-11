@@ -9,7 +9,6 @@ export default function UserMenu() {
     return (
         <div className="md:hover:shadow-md p-4 md:p-8 font-semibold ">
             <SignedIn>
-                {/* Mount the UserButton component */}
                 <UserButton
                     userProfileMode="navigation"
                     userProfileUrl="/user-profile/"
@@ -23,7 +22,6 @@ export default function UserMenu() {
                 />
             </SignedIn>
             <SignedOut>
-                {/* Signed out users get sign in button */}
                 <SignInButton />
             </SignedOut>
         </div>

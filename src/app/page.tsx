@@ -1,6 +1,7 @@
 import ConnectionUpdates from "@/app/components/ConnectionUpdates";
 import ProfileStatus from "@/app/components/ProfileStatus";
 import HeroContent from "./components/HeroContent";
+import { Suspense } from 'react'
 
 export default async function Home() {
   return (
@@ -15,10 +16,14 @@ export default async function Home() {
         id="connectoin_updates_layout_container"
         className="grow p-4 shadow-md bg-gradient-to-bl from-blue-100 to-sky-50"
       >
-        <ConnectionUpdates />
+        <Suspense fallback={<p>Loading connections...</p>}>
+          <ConnectionUpdates />
+        </Suspense>
       </div>
+      <Suspense fallback={<p>Loading profile status...</p>}>
+        <ProfileStatus />
+      </Suspense>
 
-      <ProfileStatus />
     </div>
   );
 }

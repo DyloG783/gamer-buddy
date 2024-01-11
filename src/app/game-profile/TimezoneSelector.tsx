@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from 'react';
-import timezoneJSON from 'timezones.json';
 import { useUser } from '@clerk/nextjs';
+import timezoneJSON from 'timezones.json';
 
 export default function TimezoneSelector() {
 
@@ -29,7 +29,6 @@ export default function TimezoneSelector() {
                             timezone: selectedTimezone
                         }
                     })}
-                // onClick={() => setEditing(true)}
                 >
                     <select
                         id="selectID"
@@ -37,11 +36,9 @@ export default function TimezoneSelector() {
                         name="tzselectname"
                         value={selectedTimezone}
                         onChange={e => setSelectedTimezone(e.target.value)}
-                        // disabled={!editing}
                         className={`p-2 italic w-full`}
                         required
                     >
-                        {/* <option disabled selected hidden label={'placeholderusertimezone'} /> */}
                         <option disabled hidden label={user?.unsafeMetadata.timezone as string} />
                         {timezoneJSON.map((timezone) =>
                             <option key={timezone.text} value={timezone.text} label={timezone.text} />
@@ -49,16 +46,14 @@ export default function TimezoneSelector() {
                     </select>
                 </form>
                 <div className={`flex gap-2 mt-3 justify-end " id="form_buttons ${editing ? '' : 'hidden'}`}>
-                    {/* <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span> */}
                     <button
-                        // onClick={() => setEditing(false)}
-                        className="btn bg-red-400 p-2"
+                        className="btn bg-red-500 p-2"
                     >
                         Cancel
                     </button>
 
                     <button type="submit" form="tzformid"
-                        className={`btn bg-green-400 p-2 `}
+                        className={`btn bg-green-500 p-2`}
                     >
                         Submit
                     </button>

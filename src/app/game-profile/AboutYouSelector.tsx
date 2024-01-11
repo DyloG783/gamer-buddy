@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-// import SubmitBio from '@/actions'
-// import { useFormState } from 'react-dom'
 import { useUser } from "@clerk/nextjs"
 
 // export default function AboutYou({ bio }: { bio: string | null | undefined }) {
@@ -55,7 +53,6 @@ export default function AboutYou() {
                         className="shadow-sm
                             p-2 w-full "
                         rows={10}
-                        // cols={0}
                         name="bioInputTextArea"
                         placeholder={user?.unsafeMetadata.bio as string}
                         value={input}

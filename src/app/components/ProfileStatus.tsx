@@ -1,7 +1,7 @@
 import { auth, currentUser } from "@clerk/nextjs";
-import Image from "next/image"
-import Link from "next/link"
 import { TUnsafeMetadata } from "@/lib/custom_types";
+import Image from "next/image";
+import Link from "next/link";
 
 export default async function ProfileStatus() {
 
@@ -49,7 +49,7 @@ export default async function ProfileStatus() {
                         id="timezone_status_unavailable"
                         className="flex gap-2 pb-2"
                     >
-                        <p>* You still need to add your timezone in your profile. Without this we can't show you how many others are available to game with</p>
+                        <p>* You still need to add your timezone in your profile. Without this we cannot show you how many others are available to game with</p>
                     </div>
                 }
                 {bio && bio.length > 0
