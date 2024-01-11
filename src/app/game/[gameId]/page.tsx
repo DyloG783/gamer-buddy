@@ -42,6 +42,10 @@ export default async function GamePage({ params }: { params: { gameId: number } 
         }
     }
 
+    // adds playerId to server action
+    const RemoveActionWithGameId = removeGame.bind(null, gameId)
+    const AddActionWithGameId = addGame.bind(null, gameId)
+
     return (
         <div id="page_container" className="flex flex-col h-full">
             <div id="game_container" className={`flex flex-col justify-center bg-slate-300 p-8 md:p-16 `}>
@@ -57,8 +61,15 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                                 className="flex gap-2 ml-6 md:ml-auto">
                                 <div>
                                     {alreadyExists
-                                        && <SubmitButton action={removeGame} text={`Remove game`} color={`bg-red-500`} gameId={game.id} />
-                                        || <SubmitButton action={addGame} text={`Add game`} color={`bg-green-500`} gameId={game.id} />
+                                        &&
+                                        <form action={RemoveActionWithGameId}>
+                                            <SubmitButton text={`Remove game`} color={`bg-red-500`} />
+
+                                        </form>
+                                        ||
+                                        <form action={AddActionWithGameId}>
+                                            <SubmitButton text={`Add game`} color={`bg-green-500`} />
+                                        </form>
                                     }
                                 </div>
                                 <div>

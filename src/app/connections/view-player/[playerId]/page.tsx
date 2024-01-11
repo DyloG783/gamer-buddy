@@ -13,8 +13,8 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
     const user = await currentUser();
 
     // other player this user wants to connect with
-    const playerWithGames = await checkUserExistsAndReturn(playerId);
-    if (!playerWithGames || !user) {
+    const player = await checkUserExistsAndReturn(playerId);
+    if (!player || !user) {
         return <UserNotExist />
     }
 
@@ -23,7 +23,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
         where: {
             followingEmail_followedByEmail: {
                 followedByEmail: user?.emailAddresses[0].emailAddress!,
-                followingEmail: playerWithGames.email
+                followingEmail: player.email
             }
         }
     })
@@ -34,12 +34,16 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
         usersAreConnected = await prisma.follows.findUnique({
             where: {
                 followingEmail_followedByEmail: {
-                    followedByEmail: playerWithGames.email,
+                    followedByEmail: player.email,
                     followingEmail: user?.emailAddresses[0].emailAddress!
                 }
             }
         })
     }
+
+    // adds playerId to server action
+    const addActionWithPlayer = addUser.bind(null, player)
+    const removeActionWithPlayer = removeUser.bind(null, player)
 
     return (
         <div className="flex flex-col h-full">
@@ -54,8 +58,10 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                         {usersAreConnected
                             &&
                             <>
-                                <ConnectButton action={removeUser} color={`bg-red-500`} player={playerWithGames} text={`Remove player`} />
-                                <Link href={`/connections/${user.id}/${playerWithGames.id}`}
+                                <form action={removeActionWithPlayer}>
+                                    <ConnectButton color={`bg-red-500`} text={`Remove player`} />
+                                </form>
+                                <Link href={`/connections/${user.id}/${player.id}`}
                                     className="">
                                     <button id="chat_button" className="btn bg-green-500 text-center">Chat</button>
                                 </Link>
@@ -63,51 +69,55 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                         }
                         {!weFollowThisPlayer
                             &&
-                            <ConnectButton action={addUser} color={`bg-green-500`} player={playerWithGames} text={`Add player`} />
+                            <form action={addActionWithPlayer}>
+                                <ConnectButton color={`bg-green-500`} text={`Add player`} />
+                            </form>
                         }
                         {!usersAreConnected && weFollowThisPlayer
                             &&
-                            <ConnectButton action={removeUser} color={`bg-red-500`} player={playerWithGames} text={`Remove player`} />
+                            <form action={removeActionWithPlayer}>
+                                <ConnectButton color={`bg-red-500`} text={`Remove player`} />
+                            </form>
                         }
                     </div>
-                    <h1 className="font-semibold text-blue-700 text-xl md:text-4xl tracking-wider mb-6 md:mb-20">{playerWithGames?.userName}'s Profile</h1>
+                    <h1 className="font-semibold text-blue-700 text-xl md:text-4xl tracking-wider mb-6 md:mb-20">{player?.userName}'s Profile</h1>
                     <div id="players_bio_container"
                         className="ml-4 md:ml-10 mb-4 md:mb-10 ">
-                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">About {playerWithGames?.userName}</h2>
-                        {playerWithGames?.bio
+                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">About {player?.userName}</h2>
+                        {player?.bio
                             &&
                             <div id="players_bio">
-                                {playerWithGames?.bio}
+                                {player?.bio}
                             </div>
                             ||
                             <div id="players_bio_falsey">
-                                {playerWithGames?.userName} has no information about themselves to share...
+                                {player?.userName} has no information about themselves to share...
                             </div>
                         }
                     </div>
                     <div id="players_timezone_containter"
                         className="ml-4 md:ml-10 mb-4 md:mb-10"
                     >
-                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">{playerWithGames?.userName}'s Timezone</h2>
-                        {playerWithGames?.timezone
+                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">{player?.userName}'s Timezone</h2>
+                        {player?.timezone
                             &&
                             <div id="players_timezone">
-                                {playerWithGames?.timezone}
+                                {player?.timezone}
                             </div>
                             ||
                             <div id="players_timezone_falsey">
-                                {playerWithGames?.userName} has no timezone set...
+                                {player?.userName} has no timezone set...
                             </div>
                         }
                     </div>
                 </div>
             </div>
             <div id="all_games" className="p-4 md:p-20 bg-slate-200">
-                <h1 className="font-semibold text-blue-900  mb-4 md:mb-10  tracking-wider text-xl md:text-2xl">All of {playerWithGames?.userName}'s games</h1>
+                <h1 className="font-semibold text-blue-900  mb-4 md:mb-10  tracking-wider text-xl md:text-2xl">All of {player?.userName}'s games</h1>
                 <div className="ml-4 md:ml-10">
-                    {playerWithGames?.games
+                    {player?.games
                         &&
-                        <PaginatedGames games={playerWithGames.games} itemsPerPage={3} />
+                        <PaginatedGames games={player.games} itemsPerPage={3} />
                     }
                 </div>
             </div>

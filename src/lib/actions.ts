@@ -98,7 +98,8 @@ export async function sendMessageForum(gameRoomId: string, formData: FormData) {
     }
 }
 
-export async function addGame(gameId: number) {
+export async function addGame(gameId: number, formData: FormData) {
+    'use server'
 
     const { userId } = auth();
 
@@ -122,7 +123,8 @@ export async function addGame(gameId: number) {
     }
 }
 
-export async function removeGame(gameId: number) {
+export async function removeGame(gameId: number, formData: FormData) {
+    'use server'
 
     const { userId } = auth();
 
@@ -147,7 +149,7 @@ export async function removeGame(gameId: number) {
 
 }
 
-export async function addUser(player: any) {
+export async function addUser(player: any, formData: FormData) {
     const user = await currentUser();
 
     try {
@@ -168,7 +170,7 @@ export async function addUser(player: any) {
     }
 }
 
-export async function removeUser(player: any) {
+export async function removeUser(player: any, formData: FormData) {
     const user = await currentUser();
 
     try {

@@ -2,23 +2,17 @@
 
 import { useFormStatus } from 'react-dom'
 
-export function SubmitButton({ action, text, color, gameId }: { action: any, text: string, color: string, gameId: number }) {
+export function SubmitButton({ text, color }: { text: string, color: string }) {
     const { pending } = useFormStatus()
-
-    // adds playerId to server action
-    const actionWithGameId = action.bind(null, gameId)
 
     return (
         <button
-            id="add_game"
+            // id="add_game"
             type="submit"
             className={`btn ${color}`}
             aria-disabled={pending}
-            onClick={async () => {
-                await actionWithGameId();
-            }}
         >
-            {text}
+            {pending ? '...' : `${text}`}
         </button>
     )
 }
