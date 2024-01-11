@@ -1,3 +1,6 @@
+// import { config } from 'dotenv' // https://www.prisma.io/docs/orm/more/development-environment/environment-variables/managing-env-files-and-setting-variables
+// config({ path: '.env.development.local' })
+
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from 'next/font/google';

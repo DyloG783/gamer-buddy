@@ -47,14 +47,11 @@ Playwright:
 - Need to have permanent user (per environment?) for authentication created in Clerk first (automation1@gbtest.com)
 - automation uses automation_test_data to create games, and other usrs/relations
 
+env per environment:
+dotenv -e .env.development -- npx prisma db pull
 
 Need help with:
 
-flakey tests
-3 flaky
-    [chromium] › authenticated.spec.ts:11:5 › Test users name SALLY is displayed beside clerk user menu 
-    [chromium] › follow.spec.ts:45:5 › Test FOLLOWING with test user is present ────────────────────
-    [chromium] › follow.spec.ts:53:5 › Test Following user link on click displays View Player page with Disconnec
 
 ---
 

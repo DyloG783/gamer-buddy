@@ -1,0 +1,10 @@
+// const { execSync } = require('child_process')
+
+// execSync("npm run getTwitchAuthToken")
+// execSync("npm run saveGamesToDb")
+// execSync("npm run saveGenresToDb")
+// execSync("npm run saveModesToDb")
+// execSync("npm run savePlatformsToDb")
+// execSync("npm run relateGamesToGenres")
+// execSync("npm run relateGamesToModes")
+// execSync("npm run relateGamesToPlatforms")
