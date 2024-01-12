@@ -54,12 +54,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
             }
         }, [categoryListSelection])
 
-        // const handleSubmit = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        //     setCategoryListSelection(
-        //         e.target.value
-        //     )
-        // }
-
         return (
             <div className="flex flex-col gap-1">
                 <h2 className="font-semibold p-1">{categoryName}</h2>
