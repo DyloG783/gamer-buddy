@@ -1,30 +1,30 @@
 import prisma from '@/lib/db';
 
-async function gameToMode() { 
+async function gameToMode() {
 
     const modes = await prisma.mode.findMany()
 
     try {
 
-        for (const mode of modes) { 
+        for (const mode of modes) {
 
-            console.log(`Mode loop ${mode.name}`)
+            console.log(`Mode loop ${mode}`)
 
-           const games = await prisma.game.findMany({
+            const games = await prisma.game.findMany({
                 where: {
                     modeIds: {
                         has: mode.id
                     }
                 }
-           })
-            
+            })
+
             console.log(`Games to connect ${games.length}`)
-            
-            for (const game of games) { 
+
+            for (const game of games) {
 
                 await prisma.game.update({
                     where: {
-                    id: game.id,
+                        id: game.id,
                     },
                     data: {
                         modes: {
@@ -36,7 +36,7 @@ async function gameToMode() {
                 })
             }
         }
-        
+
     } catch (error) {
         console.log("Something went wrong relating Games to Modes:", error)
     }

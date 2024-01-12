@@ -3,24 +3,10 @@ export type IGame = {
     name: string;
     summary: string | null;
     url: string | null;
-    platformIds: number[];
-    modeIds: number[];
-    genreIds: number[];
     firstReleaseDate: number | null;
-}
-
-export type IGameAndTypes = {
-    id: number;
-    name: string;
-    summary: string | null;
-    url: string | null;
-    platformIds: number[];
-    modeIds: number[];
-    genreIds: number[];
-    firstReleaseDate: number | null;
-    genres: IGameFilterType[];
-    platforms: IGameFilterType[];
-    modes: IGameFilterType[];
+    genres: string[];
+    platforms: string[];
+    modes: string[];
 }
 
 // this replaced duplicated types for genres, platforms, and modes which are all identical

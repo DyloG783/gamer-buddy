@@ -39,7 +39,7 @@ export async function sendMessagePrivate(privateRoomId: string, formData: FormDa
             useTLS: true,
         });
 
-        pusher.trigger(privateRoomId, "private-room-post", {
+        await pusher.trigger(privateRoomId, "private-room-post", {
             message: `${JSON.stringify(privMessage)}\n\n`,
         });
 
@@ -88,7 +88,7 @@ export async function sendMessageForum(gameRoomId: string, formData: FormData) {
             useTLS: true,
         });
 
-        pusher.trigger(gameRoomId, "game-room-post", {
+        await pusher.trigger(gameRoomId, "game-room-post", {
             message: `${JSON.stringify(newMessage)}\n\n`,
         });
 

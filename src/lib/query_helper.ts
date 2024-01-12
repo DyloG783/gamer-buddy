@@ -91,7 +91,7 @@ export async function checkGameExistsAndReturn(gameId: number) {
     }
 
     try {
-        const game = await prisma.game.findUnique({ where: { id: gameId }, include: { genres: true, modes: true, platforms: true } })
+        const game = await prisma.game.findUnique({ where: { id: gameId } })
         return game;
     } catch (error) {
         console.log("Game Check: try/catch fail retrieving game")
@@ -105,9 +105,7 @@ export async function checkUserExistsAndReturn(userId: string) {
     try {
         const user = await prisma.user.findUnique({
             where: { id: userId }, include: {
-                games: {
-                    include: { genres: true, modes: true, platforms: true }
-                }
+                games: true
             }
         })
         return user;

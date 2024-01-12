@@ -26,10 +26,10 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
-        const [categoryListSelection, setCategoryListSelection] = useState(999999)
+        const [categoryListSelection, setCategoryListSelection] = useState("999999")
 
         useEffect(() => {
-            if (categoryListSelection != 999999) {
+            if (categoryListSelection != "999999") {
                 if (categoryName === "Genre") {
                     setSearchState({
                         ...searchState,
@@ -56,7 +56,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
         const handleSubmit = (e: React.ChangeEvent<HTMLSelectElement>) => {
             setCategoryListSelection(
-                Number(e.target.value)
+                e.target.value
             )
         }
 
@@ -75,7 +75,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     className="w-56 bg-slate-300 text-sm md:text-base"
                 >
                     {categoryList.map((listItem) =>
-                        <option key={listItem.id} value={listItem.id}>
+                        <option key={listItem.id} value={listItem.name}>
                             {listItem.name}
                         </option>
                     )}

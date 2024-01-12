@@ -11,11 +11,6 @@ export default async function GamesPage() {
     // Gets the last 500 games in the DB including future releases to be displayed before searching
     const defaultGames = await prisma.game.findMany({
         take: 500, where: {},
-        include: {
-            genres: true,
-            modes: true,
-            platforms: true
-        },
         orderBy: { firstReleaseDate: "desc" },
     })
 

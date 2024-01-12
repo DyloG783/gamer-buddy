@@ -11,7 +11,7 @@ async function saveGameGenresToDb() {
     })
 
     try {
-        
+
         const response = await fetch(`${igdbBaseUrl}/genres`, {
             method: "POST",
             headers: {
@@ -29,16 +29,16 @@ async function saveGameGenresToDb() {
         console.log("Something went wrong fetching genres:", error)
     }
 
-    async function saveGenres(genresJSON: any){ 
+    async function saveGenres(genresJSON: any) {
         try {
-            for (const genre of genresJSON) { 
+            for (const genre of genresJSON) {
 
                 await prisma.genre.upsert({
                     where: {
                         id: genre.id,
                     },
                     update: {
-                        
+
                     },
                     create: {
                         id: genre.id,
@@ -51,6 +51,6 @@ async function saveGameGenresToDb() {
             console.log("Something went wrong saving genres:", error)
         }
     }
-} 
-    
+}
+
 saveGameGenresToDb()

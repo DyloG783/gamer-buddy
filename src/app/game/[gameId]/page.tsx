@@ -1,7 +1,6 @@
 import OtherPlayers from "./components/OtherPlayers";
 import { SubmitButton } from "./components/SubmitButton";
 import { addGame, removeGame } from "@/lib/actions"
-import { IGameFilterType } from "@/lib/custom_types";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { GameNotExist } from "@/lib/errors";
 import { auth } from "@clerk/nextjs";
@@ -89,20 +88,20 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                     >
                         <div id="game_genre_group" className="mb-4">
                             <p className="font-semibold">Genre</p>
-                            {game?.genres.map((genre: IGameFilterType) => (
-                                <span key={genre.id} className=" font-light">{genre.name + ", "}</span>
+                            {game?.genres.map((genre: string, index) => (
+                                <span key={index} className=" font-light">{genre + ", "}</span>
                             ))}
                         </div>
                         <div id="game_mode_group" className="mb-4">
                             <p className="font-semibold">Mode</p>
-                            {game?.modes.map((mode: IGameFilterType) => (
-                                <span key={mode.id} className="font-light">{mode.name + ", "}</span>
+                            {game?.modes.map((mode: string, index) => (
+                                <span key={index} className="font-light">{mode + ", "}</span>
                             ))}
                         </div>
                         <div id="game_platform_group" className="mb-4">
                             <p className="font-semibold">Platform</p>
-                            {game?.platforms.map((plat: IGameFilterType) => (
-                                <span key={plat.id} className="font-light">{plat.name + ", "}</span>
+                            {game?.platforms.map((plat: string, index) => (
+                                <span key={index} className="font-light">{plat + ", "}</span>
                             ))}
                         </div>
                     </div>

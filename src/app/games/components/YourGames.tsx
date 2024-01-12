@@ -24,13 +24,7 @@ const YourGames: React.FC = async () => {
     const games = await prisma.user.findUnique({
         where: { id: userId },
         select: {
-            games: {
-                include: {
-                    genres: true,
-                    modes: true,
-                    platforms: true
-                }
-            }
+            games: true
         }
     })
 

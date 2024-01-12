@@ -17,10 +17,7 @@
     "saveGenresToDb": "npx tsx scripts/api_data/saveGenresToDb.ts",
     "saveModesToDb": "npx tsx scripts/api_data/saveModesToDb.ts",
     "savePlatformsToDb": "npx tsx scripts/api_data/savePlatformsToDb.ts",
-    "relateGamesToGenres": "npx tsx scripts/relations/gameToGenre.ts",
-    "relateGamesToModes": "npx tsx scripts/relations/gameToMode.ts",
-    "relateGamesToPlatforms": "npx tsx scripts/relations/gameToPlatform.ts",
-    "allGameData": "npm run getTwitchAuthToken && npm run saveGamesToDb && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run relateGamesToGenres && npm run relateGamesToModes && npm run relateGamesToPlatforms",
+    "allGameData": "npm run getTwitchAuthToken && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run saveGamesToDb",
     "user_Relations": "npx tsx scripts/relations/user_relations.ts",
     "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts"
   },

@@ -17,61 +17,61 @@ model TwitchAuthToken {
 model ChatGameRoom {
   id        String        @id @default(cuid())
   createdAt DateTime      @default(now())
-  game      Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId    Int           @unique
+  game      Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
   messages  GameMessage[]
 }
 
 model GameMessage {
   id         String       @id @default(cuid())
   createdAt  DateTime     @default(now())
-  gameRoom   ChatGameRoom @relation(fields: [gameRoomId], references: [id], onDelete: Cascade)
   gameRoomId String
   message    String       @db.VarChar(500)
-  sentGameBy User         @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
   userId     String
+  gameRoom   ChatGameRoom @relation(fields: [gameRoomId], references: [id], onDelete: Cascade)
+  sentGameBy User         @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ChatPrivateRoom {
-  id         String           @id @unique
   createdAt  DateTime         @default(now())
   user1Email String
   user2Email String
+  id         String           @id @unique
   messages   PrivateMessage[]
 }
 
 model PrivateMessage {
-  id                String          @id @default(cuid())
   createdAt         DateTime        @default(now())
-  privateRoom       ChatPrivateRoom @relation(fields: [chatPrivateRoomId], references: [id], onDelete: Cascade)
-  chatPrivateRoomId String
   message           String          @db.VarChar(500)
-  sentPrivateBy     User            @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
+  id                String          @id @default(cuid())
   userId            String
+  chatPrivateRoomId String
+  privateRoom       ChatPrivateRoom @relation(fields: [chatPrivateRoomId], references: [id], onDelete: Cascade)
+  sentPrivateBy     User            @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
   id            String           @id
-  email         String           @unique
   userName      String?
+  email         String           @unique
   bio           String?
   timezone      String?
-  games         Game[]
   followedBy    Follows[]        @relation("followedBy")
   following     Follows[]        @relation("following")
   sentGameBy    GameMessage[]    @relation("sender")
   sentPrivateBy PrivateMessage[] @relation("sender")
+  games         Game[]           @relation("GameToUser")
 }
 
 model Follows {
-  followedBy      User   @relation("followedBy", fields: [followedByEmail], references: [email], onDelete: Cascade)
   followedByEmail String
-  followedById    String
-  followedByUName String
-  following       User   @relation("following", fields: [followingEmail], references: [email], onDelete: Cascade)
   followingEmail  String
+  followedById    String
   followingId     String
+  followedByUName String
   followingUName  String
+  followedBy      User   @relation("followedBy", fields: [followedByEmail], references: [email], onDelete: Cascade)
+  following       User   @relation("following", fields: [followingEmail], references: [email], onDelete: Cascade)
 
   @@id([followingEmail, followedByEmail])
 }
@@ -81,31 +81,25 @@ model Game {
   name             String
   summary          String?
   url              String?
-  platformIds      Int[]
-  modeIds          Int[]
-  genreIds         Int[]
-  platforms        Platform[]
-  modes            Mode[]
-  genres           Genre[]
-  users            User[]
   firstReleaseDate Int?
+  genres           String[]
+  modes            String[]
+  platforms        String[]
   gameRoom         ChatGameRoom?
+  users            User[]        @relation("GameToUser")
 }
 
 model Platform {
-  id    Int    @id @unique
-  name  String
-  games Game[]
+  id   Int    @id @unique
+  name String
 }
 
 model Mode {
-  id    Int    @id @unique
-  name  String
-  games Game[]
+  id   Int    @id @unique
+  name String
 }
 
 model Genre {
-  id    Int    @id @unique
-  name  String
-  games Game[]
+  id   Int    @id @unique
+  name String
 }
