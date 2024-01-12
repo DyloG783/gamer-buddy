@@ -7,7 +7,6 @@ export type IGame = {
     modeIds: number[];
     genreIds: number[];
     firstReleaseDate: number | null;
-    totalRating: number | null;
 }
 
 export type IGameAndTypes = {
@@ -19,7 +18,6 @@ export type IGameAndTypes = {
     modeIds: number[];
     genreIds: number[];
     firstReleaseDate: number | null;
-    totalRating: number | null;
     genres: IGameFilterType[];
     platforms: IGameFilterType[];
     modes: IGameFilterType[];

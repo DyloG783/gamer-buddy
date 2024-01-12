@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "prisma db push && prisma generate && next build && npm run getTwitchAuthToken && npm run saveGamesToDb && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run relateGamesToGenres && npm run relateGamesToModes && npm run relateGamesToPlatforms",
+    "build": "prisma db push && prisma generate && next build && npm run allGameData",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
@@ -20,6 +20,7 @@
     "relateGamesToGenres": "npx tsx scripts/relations/gameToGenre.ts",
     "relateGamesToModes": "npx tsx scripts/relations/gameToMode.ts",
     "relateGamesToPlatforms": "npx tsx scripts/relations/gameToPlatform.ts",
+    "allGameData": "npm run getTwitchAuthToken && npm run saveGamesToDb && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run relateGamesToGenres && npm run relateGamesToModes && npm run relateGamesToPlatforms",
     "user_Relations": "npx tsx scripts/relations/user_relations.ts",
     "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts"
   },
