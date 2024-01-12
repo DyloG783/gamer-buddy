@@ -18,7 +18,7 @@ async function saveGamePlatformsToDb() {
                 "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
                 "Accept": "application/json"
             },
-            body: `fields name; where id = (2,3,4,5,6); limit 500; sort id;`
+            body: `fields name; where id = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471); limit 500; sort id;`
         })
         const platformsJSON = await response.json()
         await savePlatforms(platformsJSON)

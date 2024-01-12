@@ -27,7 +27,7 @@ async function saveGamesToDb() {
                     "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
                     "Accept": "application/json"
                 },
-                body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null; limit ${limit}; offset ${offset}; sort id;`
+                body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null; limit ${limit}; offset ${offset}; sort id;`
             })
             const gamesJSON = await response.json()
             await saveGames(gamesJSON)
