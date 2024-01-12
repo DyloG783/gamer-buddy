@@ -7,7 +7,7 @@ async function saveGamesToDb() {
     // const gameCount = await getIGBdFilteredGameCount()
     // const limit: number = 500;
     // let offset: number = 0;
-    // let loopCount = 0;
+    let loopCount = 0;
 
     const igdbBaseUrl = process.env.IGDB_BASE_URL
     const twitchClientId = process.env.TWITCH_CLIENT_ID as string
@@ -32,11 +32,11 @@ async function saveGamesToDb() {
         })
         const gamesJSON = await response.json()
 
-        console.log("Loading and settingup 500 games for small demonstration...")
+        console.log("Loading and setting up 500 games for small demonstration...")
         await saveGames(gamesJSON)
 
         // offset += limit
-        // loopCount++
+
         // console.log("Current offset:", offset)
         // console.log("Max game count:", gameCount)
         // console.log("Iterations:", loopCount)
@@ -49,6 +49,9 @@ async function saveGamesToDb() {
     async function saveGames(gamesJSON: any) {
         try {
             for (const game of gamesJSON) {
+
+                console.log(`Game: ${loopCount + 1} of 500...`)
+                loopCount++
 
                 // get game's genres
                 const genresResponse = await fetch(`${igdbBaseUrl}/genres`, {

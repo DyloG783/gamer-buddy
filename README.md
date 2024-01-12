@@ -54,11 +54,14 @@ deploy steps:
 Sadly Clerk prod wont work with free vercel domain so I need to share between dev & prod.
 - https://dashboard.clerk.com/apps/app_2ZqGHEqwCP0kbHCTu9d9rOAYcrx/instances/ins_2ZqGHBR10qDJFiWuVt7xHbCyXWu/paths
 - Switch between http://localhost:3000/ & https://gamer-buddy.vercel.app/
+- after deploy update user data to create a webhook update to populate prod db (need seed may work!)
 
 Prisma schema datasource needs switching befor deploy;
 // url       = env("DATABASE_URL") // local only
   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connectionf
+
+  Follow vercel cli steps (seems to have got db running)
 
   
 
