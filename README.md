@@ -58,7 +58,7 @@ Sadly Clerk prod wont work with free vercel domain so I need to share between de
 Prisma schema datasource needs switching befor deploy;
 // url       = env("DATABASE_URL") // local only
   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connectionf
 
   
 
