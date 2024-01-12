@@ -4,9 +4,10 @@ import getIGBdFilteredGameCount from '../helpers/getIGBdFilteredGameCount';
 
 async function saveGamesToDb() {
 
-    // const gameCount = await getIGBdFilteredGameCount()
-    // const limit: number = 500;
-    // let offset: number = 0;
+    const gameCount = await getIGBdFilteredGameCount()
+    // const gameCount = 2000;
+    const limit: number = 500;
+    let offset: number = 0;
     let loopCount = 0;
 
     const igdbBaseUrl = process.env.IGDB_BASE_URL
@@ -18,33 +19,33 @@ async function saveGamesToDb() {
     })
 
     // loop through fetching all games until the offset (increments 500) is > game count (~35,000)
-    // while (offset < gameCount) {
-    try {
-        const response = await fetch(`${igdbBaseUrl}/games`, {
-            method: "POST",
-            headers: {
-                "Client-ID": twitchClientId,
-                "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
-                "Accept": "application/json"
-            },
-            // body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${limit}; offset ${offset}; sort id;`
-            body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${500}; sort id;`
-        })
-        const gamesJSON = await response.json()
+    while (offset < gameCount) {
+        try {
+            const response = await fetch(`${igdbBaseUrl}/games`, {
+                method: "POST",
+                headers: {
+                    "Client-ID": twitchClientId,
+                    "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
+                    "Accept": "application/json"
+                },
+                body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${limit}; offset ${offset}; sort id;`
+                // body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${500}; sort id;`
+            })
+            const gamesJSON = await response.json()
 
-        console.log("Loading and setting up 500 games for small demonstration...")
-        await saveGames(gamesJSON)
+            console.log("Loading and setting up 500 games for small demonstration...")
+            await saveGames(gamesJSON)
 
-        // offset += limit
+            offset += limit
 
-        // console.log("Current offset:", offset)
-        // console.log("Max game count:", gameCount)
-        // console.log("Iterations:", loopCount)
-    } catch (error) {
-        console.log("Something went wrong fetching games:", error)
-        // return
+            console.log("Current offset:", offset)
+            console.log("Max game count:", gameCount)
+            console.log("Iterations:", loopCount)
+        } catch (error) {
+            console.log("Something went wrong fetching games:", error)
+            // return
+        }
     }
-    // }
 
     async function saveGames(gamesJSON: any) {
         try {
