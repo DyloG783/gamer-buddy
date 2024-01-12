@@ -18,7 +18,7 @@ async function saveGameModesToDb() {
                 "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
                 "Accept": "application/json"
             },
-            body: `fields name; limit 500; sort id;`
+            body: `fields name; where id = (2,3,4,5,6); limit 500; sort id;`
         })
         const gameModesJSON = await response.json()
         await savegameModes(gameModesJSON)
@@ -26,16 +26,16 @@ async function saveGameModesToDb() {
         console.log("Something went wrong fetching game modes:", error)
     }
 
-    async function savegameModes(gameModesJSON: any){ 
+    async function savegameModes(gameModesJSON: any) {
         try {
-            for (const mode of gameModesJSON) { 
+            for (const mode of gameModesJSON) {
 
                 await prisma.mode.upsert({
                     where: {
                         id: mode.id,
                     },
                     update: {
-                        
+
                     },
                     create: {
                         id: mode.id,
@@ -48,6 +48,6 @@ async function saveGameModesToDb() {
             console.log("Something went wrong saving game modes:", error)
         }
     }
-} 
-    
+}
+
 saveGameModesToDb()

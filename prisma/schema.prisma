@@ -88,7 +88,6 @@ model Game {
   genres           Genre[]
   users            User[]
   firstReleaseDate Int?
-  totalRating      Float?
   gameRoom         ChatGameRoom?
 }
 
