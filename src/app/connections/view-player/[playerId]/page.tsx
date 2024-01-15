@@ -51,7 +51,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
     return (
         <div className="flex flex-col h-full">
             <div id="connect_with_player_container"
-                className="grow p-4 md:p-20 bg-slate-300"
+                className=" p-4 md:p-20 shadow-sm"
             >
                 <div id="player_action_bar_container">
 
@@ -62,34 +62,34 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                             &&
                             <>
                                 <form action={removeActionWithPlayer}>
-                                    <ConnectButton color={`bg-red-500`} text={`Remove player`} />
+                                    <ConnectButton css={`bg-rose-400`} text={`Remove player`} />
                                 </form>
                                 <Link href={`/connections/${user.id}/${player.id}`}
                                 >
-                                    <button id="chat_button" className="btn bg-green-500 text-center">Chat</button>
+                                    <button id="chat_button" className="btn-primary">Chat</button>
                                 </Link>
                             </>
                         }
                         {!weFollowThisPlayer
                             &&
                             <form action={addActionWithPlayer}>
-                                <ConnectButton color={`bg-green-500`} text={`Add player`} />
+                                <ConnectButton css={`bg-emerald-400`} text={`Add player`} />
                             </form>
                         }
                         {!usersAreConnected && weFollowThisPlayer
                             &&
                             <form action={removeActionWithPlayer}>
-                                <ConnectButton color={`bg-red-500`} text={`Remove player`} />
+                                <ConnectButton css={`bg-rose-400`} text={`Remove player`} />
                             </form>
                         }
                     </div>
-                    <h1 className="font-semibold text-blue-700 text-xl md:text-4xl tracking-wider mb-6 md:mb-20">{player?.userName}&apos;s Profile</h1>
+                    <h1 className="font-semibold text-blue-700 text-xl md:text-4xl tracking-wider mb-10 md:mb-20">{player?.userName}&apos;s Profile</h1>
                     <div id="players_bio_container"
                         className="ml-4 md:ml-10 mb-4 md:mb-10 ">
-                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">About {player?.userName}</h2>
+                        <h2 className="font-semibold text-blue-600 mb-4 md:mb-6 text-lg md:text-xl tracking-wide">About {player?.userName}</h2>
                         {player?.bio
                             &&
-                            <div id="players_bio">
+                            <div id="players_bio" className={''}>
                                 {player?.bio}
                             </div>
                             ||
@@ -101,7 +101,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                     <div id="players_timezone_containter"
                         className="ml-4 md:ml-10 mb-4 md:mb-10"
                     >
-                        <h2 className="font-semibold text-blue-600 mb-1 md:mb-2 text-lg md:text-xl tracking-wide">{player?.userName}&apos;s Timezone</h2>
+                        <h2 className="font-semibold text-blue-600 mb-4 md:mb-6 text-lg md:text-xl tracking-wide">{player?.userName}&apos;s Timezone</h2>
                         {player?.timezone
                             &&
                             <div id="players_timezone">
@@ -115,12 +115,12 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                     </div>
                 </div>
             </div>
-            <div id="all_games" className="p-4 md:p-20 bg-slate-200">
-                <h1 className="font-semibold text-blue-900  mb-4 md:mb-10  tracking-wider text-xl md:text-2xl">All of {player?.userName}&apos;s games</h1>
+            <div id="all_games" className="p-4 md:p-20  shadow-sm">
+                <h1 className="font-semibold text-blue-900  mb-10 md:mb-20 mt-3 md:mt-0 tracking-wider text-xl md:text-2xl">All of {player?.userName}&apos;s games</h1>
                 <div className="ml-4 md:ml-10">
-                    {player?.games
-                        &&
-                        <PaginatedGames games={player.games} itemsPerPage={3} />
+                    {player?.games.length > 0
+                        && <PaginatedGames games={player.games} itemsPerPage={3} />
+                        || <p className="tracking-wide">{player?.userName} has no games saved...</p>
                     }
                 </div>
             </div>

@@ -14,7 +14,7 @@ const Connections = async () => {
     return (
         <div id="page_container" className="flex flex-col justify-between h-full ">
             <div id="connected_with_container"
-                className="grow bg-gradient-to-tr from-sky-50 to-emerald-50 flex flex-col justify-between
+                className="grow flex flex-col justify-between
                 ">
                 <div className="md:pl-10">
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
@@ -26,7 +26,7 @@ const Connections = async () => {
                 </div>
                 <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connected"} />
             </div>
-            <div id="connection_request_container" className="grow bg-gradient-to-r from-blue-100 to-sky-50 flex flex-col justify-between" >
+            <div id="connection_request_container" className="grow  flex flex-col justify-between" >
                 <div className="md:pl-10">
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 md:mt-10 ml-4"
@@ -37,7 +37,7 @@ const Connections = async () => {
                 </div>
                 <PaginatedConnections connections={requests} itemsPerPage={5} option={"requests"} />
             </div>
-            <div id="following_container" className="grow bg-gradient-to-bl from-sky-50 to-emerald-50 flex flex-col justify-between">
+            <div id="following_container" className="grow flex flex-col justify-between">
                 <div className="md:pl-10">
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 md:mt-10 ml-4"

@@ -9,7 +9,7 @@ export function LinkButton({ text, css, link }: { text: string, css?: string, li
     return (
         <button
             type="button"
-            className={`btn ${css}`}
+            className={`btn-primary ${css}`}
             onClick={() => { router.push(`${link}`) }}
         >
             {`${text}`}

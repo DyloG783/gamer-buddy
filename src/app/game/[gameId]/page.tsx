@@ -49,7 +49,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
 
     return (
         <div id="page_container" className="flex flex-col h-full">
-            <div id="game_container" className={`flex flex-col justify-center bg-slate-300 p-8 md:p-16 `}>
+            <div id="game_container" className={`flex flex-col justify-center p-8 md:p-16 `}>
                 <div id="game_info_container" className="p-1 md:p-4">
                     <div id="game_title_actions_container" className="mb-1 md:mb-4 flex  ">
                         <Link href={`${game?.url}`}
@@ -64,18 +64,18 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                                     {alreadyExists
                                         &&
                                         <form action={RemoveActionWithGameId}>
-                                            <SubmitButton text={`Remove game`} color={`bg-red-500`} />
+                                            <SubmitButton text={`Remove game`} css={`bg-rose-400`} />
 
                                         </form>
                                         ||
                                         <form action={AddActionWithGameId}>
-                                            <SubmitButton text={`Add game`} color={`bg-green-500`} />
+                                            <SubmitButton text={`Add game`} css={`bg-emerald-400`} />
                                         </form>
                                     }
                                 </div>
                                 <div>
                                     {alreadyExists &&
-                                        <LinkButton link={`/connect/${game.id}`} text="Chat" css="bg-green-500" />
+                                        <LinkButton link={`/connect/${game.id}`} text="Chat" css="bg-emerald-400" />
                                         // <Link href={`/connect/${game.id}`}>Connect</Link>
                                     }
                                 </div>

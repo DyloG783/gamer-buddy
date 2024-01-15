@@ -2,14 +2,14 @@
 
 import { useFormStatus } from 'react-dom'
 
-export function ConnectButton({ text, color, }: { text: string, color: string }) {
+export function ConnectButton({ text, css, }: { text: string, css: string }) {
     const { pending } = useFormStatus()
 
     return (
         <button
             // id="add_game"
             type="submit"
-            className={`btn ${color} `}
+            className={`btn-primary ${css} `}
             aria-disabled={pending}
         >
             {pending ? '...' : `${text}`}

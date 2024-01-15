@@ -11,13 +11,13 @@ const YourGames: React.FC = async () => {
     if (!userId) {
         return (
             <div>
-                <Link href="/api/auth/signin"
+                <Link href={`${process.env.CLERK_SIGNIN}`}
                     className='flex justify-around items-center w-full p-10 hover:shadow-lg text-purple-600 italic hover:underline
-                    font-semibold tracking-wider mb-4'
+                font-semibold tracking-wider mb-4'
                 >
                     Sign in to see your games
                 </Link>
-            </div>
+            </div >
         )
     }
 

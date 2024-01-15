@@ -40,13 +40,12 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
             <div id="form_buttons" className="flex gap-2 mt-3 justify-end p-2">
                 <button type="reset"
                     onClick={closeInput}
-                    className={`btn bg-red-400 p-2
-                    ${editing ? '' : 'hidden'}`}
+                    className={`btn-cancel ${editing ? '' : 'hidden'}`}
                 >
                     Cancel
                 </button>
                 <button type="submit" form="message_form"
-                    className={`btn bg-green-500 p-2 ${editing ? '' : 'hidden'}`}
+                    className={`btn-primary ${editing ? '' : 'hidden'}`}
 
                 >
                     Send

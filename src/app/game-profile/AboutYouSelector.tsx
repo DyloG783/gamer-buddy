@@ -19,6 +19,10 @@ export default function AboutYou() {
     useEffect(() => {
         setInputvalid(false)
 
+        if (input.length !== 0) {
+            setEditing(true)
+        }
+
         if (input.length >= 10) {
             if (input.length < 500) {
                 if (input != "") {
@@ -26,57 +30,63 @@ export default function AboutYou() {
                 }
             }
         }
-    }, [input])
+    }, [input]);
+
+    function cancelFormSubmission() {
+        setInput("");
+        setEditing(false);
+    }
+
+
 
     const { user } = useUser();
     const usMetadata = user?.unsafeMetadata;
 
-
     return (
         <div className={`p-2 `} >
             <h1 className="text-xl font-semibold mb-2 text-blue-700">About You</h1>
-            <div className={`${editing ? 'hidden' : ''} p-2 hover:shadow-lg`}
-                onClick={() => setEditing(true)}>{user?.unsafeMetadata.bio as string}</div>
-            <div className={`${editing ? '' : 'hidden'}`}>
-                <form
-                    id="bioform"
-                    onSubmit={() => {
-                        user?.update({
-                            unsafeMetadata: {
-                                ...usMetadata,
-                                bio: input
-                            }
-                        })
-                    }}
-                >
-                    <textarea id="bio" minLength={10} maxLength={500}
-                        className="shadow-sm
+
+
+            <form
+                id="bioform"
+                onSubmit={() => {
+                    user?.update({
+                        unsafeMetadata: {
+                            ...usMetadata,
+                            bio: input
+                        }
+                    })
+
+                    setEditing(false)
+                }}
+            >
+                <textarea id="bio" minLength={10} maxLength={500}
+                    className="shadow-sm
                             p-2 w-full "
-                        rows={10}
-                        name="bioInputTextArea"
-                        placeholder={user?.unsafeMetadata.bio as string}
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        required
-                    />
-                </form>
-                <div className="flex gap-2 mt-3 justify-end" id="form_buttons">
-                    <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span>
-                    <button
-                        onClick={() => setEditing(false)}
-                        className="btn bg-red-400 p-2"
-                    >
-                        Cancel
-                    </button>
-
-                    <button type="submit" form="bioform"
-                        className={`btn bg-green-400 p-2 ${inputValid ? '' : 'hidden'}`}
-                    >
-                        Submit
-                    </button>
-                </div>
-
+                    rows={10}
+                    name="bioInputTextArea"
+                    placeholder={user?.unsafeMetadata.bio ? user?.unsafeMetadata.bio as string : 'Add something pal!'}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    required
+                />
+            </form>
+            <div className={`flex gap-2 mt-3 justify-end ${editing ? '' : 'hidden'}`} id="form_buttons">
+                <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span>
+                <button type="submit" form="bioform"
+                    className={`btn-primary p-2 ${inputValid ? '' : 'hidden'}`}
+                >
+                    Submit
+                </button>
+                <button
+                    onClick={() => cancelFormSubmission()}
+                    className="btn-cancel"
+                >
+                    Cancel
+                </button>
             </div>
+
+
         </div>
     )
 }

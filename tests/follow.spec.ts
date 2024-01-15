@@ -7,9 +7,9 @@ import { automation_users } from '../prisma/automation_test_users';
 test('Test Connected WITH test user is present', async ({ page }) => {
   await page.goto('/connections');
   const connection = page.locator("id=connected_with_container");
-  await expect(connection.getByRole('link', { name: automation_users[3].userName, exact: true })).toBeVisible();
-  await expect.soft(connection.getByRole('link', { name: automation_users[2].userName, exact: true })).not.toBeVisible();
-  await expect.soft(connection.getByRole('link', { name: automation_users[1].userName, exact: true })).not.toBeVisible();
+  await expect(connection.getByRole('link', { name: automation_users[3].userName })).toBeVisible();
+  await expect.soft(connection.getByRole('link', { name: automation_users[2].userName })).not.toBeVisible();
+  await expect.soft(connection.getByRole('link', { name: automation_users[1].userName })).not.toBeVisible();
 });
 
 test('Test Connected WITH link on click displays View Player page with Disconnect and chat buttons', async ({ page }) => {
@@ -26,9 +26,9 @@ test('Test Connected WITH link on click displays View Player page with Disconnec
 test('Test Connection REQUESTS with test user is present', async ({ page }) => {
   await page.goto('/connections');
   const connection = page.locator("id=connection_request_container")
-  await expect(connection.getByRole('link', { name: automation_users[2].userName, exact: true })).toBeVisible();
-  await expect.soft(connection.getByRole('link', { name: automation_users[3].userName, exact: true })).not.toBeVisible();
-  await expect.soft(connection.getByRole('link', { name: automation_users[1].userName, exact: true })).not.toBeVisible();
+  await expect(connection.getByRole('link', { name: automation_users[2].userName })).toBeVisible();
+  await expect.soft(connection.getByRole('link', { name: automation_users[3].userName })).not.toBeVisible();
+  await expect.soft(connection.getByRole('link', { name: automation_users[1].userName })).not.toBeVisible();
 });
 
 test('Test Connection REQUESTS link on click displays View Player page with Connect buttons', async ({ page }) => {
@@ -46,9 +46,9 @@ test('Test Connection REQUESTS link on click displays View Player page with Conn
 test('Test FOLLOWING with test user is present', async ({ page }) => {
   await page.goto('/connections');
   const connection = page.locator("id=following_container")
-  await expect(connection.getByRole('link', { name: automation_users[1].userName, exact: true })).toBeVisible();
-  await expect.soft(connection.getByRole('link', { name: automation_users[3].userName, exact: true })).not.toBeVisible();
-  await expect.soft(connection.getByRole('link', { name: automation_users[2].userName, exact: true })).not.toBeVisible();
+  await expect(connection.getByRole('link', { name: automation_users[1].userName })).toBeVisible();
+  await expect.soft(connection.getByRole('link', { name: automation_users[3].userName })).not.toBeVisible();
+  await expect.soft(connection.getByRole('link', { name: automation_users[2].userName })).not.toBeVisible();
 });
 
 test('Test Following user link on click displays View Player page with Disconnect button', async ({ page }) => {

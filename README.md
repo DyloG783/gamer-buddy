@@ -70,6 +70,9 @@ Clerk dev needs real domin, emails will besent to junk/spam
 Need help with:
 
 
+bg-gradient-to-bl from-blue-100 to-sky-50
+
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

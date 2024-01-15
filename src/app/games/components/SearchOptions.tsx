@@ -123,14 +123,14 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                 <button
                     id="reset_search"
                     onClick={() => window.location.reload()}
-                    className="btn p-2 mb-2 md:mb-10 w-32 bg-lime-500 ml-auto"
+                    className="btn-primary ml-auto animate-bounce bg-amber-200 text-black"
                 >
                     Reset search
                 </button> ||
                 <button
                     id="reset_search"
                     onClick={() => window.location.reload()}
-                    className="btn mb-2 md:mb-10 bg-blue-400 ml-auto"
+                    className="btn-primary ml-auto"
                 >
                     Reset search
                 </button>

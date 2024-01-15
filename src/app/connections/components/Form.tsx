@@ -36,18 +36,16 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
                     className={`w-full p-4 min-h-[100px]`}
                 />
             </form>
-            <div id="form_buttons" className="flex gap-2 mt-3 justify-end p-2">
+            <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`}>
                 {/* <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span> */}
                 <button type="reset"
                     onClick={closeInput}
-                    className={`btn bg-red-400 p-2
-                    ${editing ? '' : 'hidden'}`}
+                    className={`btn-cancel `}
                 >
                     Cancel
                 </button>
                 <button type="submit" form="message_form"
-                    className={`btn bg-green-500 p-2 ${editing ? '' : 'hidden'}`}
-
+                    className={`btn-primary`}
                 >
                     Send
                 </button>

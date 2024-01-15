@@ -11,7 +11,7 @@ export default async function ConnectionUpdates() {
     if (!userId) {
         return (
             <div id="no_session_container" className="flex h-full">
-                <Link href={`/api/auth/signin`}
+                <Link href={`${process.env.CLERK_SIGNIN}`}
                     className="text-purple-800 font-semibold tracking-wider italic m-auto
                     p-10 hover:shadow-md "
                 >

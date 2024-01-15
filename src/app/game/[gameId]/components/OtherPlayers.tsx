@@ -64,9 +64,6 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
             return (
                 <>
                     <h2 className="font-semibold text-xl md:text-4xl mb-4 md:mb-8 text-blue-700">Other Players</h2>
-                    {/* <p className="mb-2 md:mb-4 ml-4">These are the other people playing this game.
-                        Click below (or in the menu) to check out the chat forums, or find someone to connect with!
-                    </p> */}
                     <div id="timezone_main_content"
                         className="flex flex-col md:flex-row p-4 md:p-8
                         justify-evenly"
@@ -127,7 +124,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
                     Click below (or in the menu) to check out the chat forums, or find someone to connect with!
                 </p>
                 <div id="timezone_no_timezone_set" className="grid grid-flow-col auto-cols-fr">
-                    <Link href={`https://pro-marmoset-77.accounts.dev/sign-in`}>
+                    <Link href={`${process.env.CLERK_SIGNIN}`}>
                         <div id="timezone_not_signedin"
                             className="text-sm p-4 md:p-8 hover:shadow-md hover:text-purple-600 bg-red-300 mx-2"
                         >

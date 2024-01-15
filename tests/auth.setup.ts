@@ -5,7 +5,7 @@ const authFile = 'playwright/.auth/user.json';
 
 setup('authenticate', async ({ page }) => {
     // Perform authentication steps. Replace these actions with your own.
-    await page.goto('https://pro-marmoset-77.accounts.dev/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2F');
+    await page.goto(`${process.env.CLERK_SIGNIN}`);
     await page.getByLabel('Email address or username').fill(automation_users[0].email);
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.getByLabel('Password', { exact: true }).fill('password');
@@ -14,7 +14,7 @@ setup('authenticate', async ({ page }) => {
     //
     // Sometimes login flow sets cookies in the process of several redirects.
     // Wait for the final URL to ensure that the cookies are actually set.
-    await page.waitForURL('http://localhost:3000/');
+    await page.waitForURL(`${process.env.NEXT_PUBLIC_BASE_URL}`);
     // Alternatively, you can wait until the page reaches a state where all cookies are set.
     await expect(page.getByRole('button', { name: 'Open user button' })).toBeVisible();
 

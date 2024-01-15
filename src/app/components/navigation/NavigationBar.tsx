@@ -7,10 +7,10 @@ export default function NavigationBar() {
     return (
         <nav >
             <div id="non_responsive_layout" className="hidden md:flex justify-between">
-                <div className="flex ">
+                <div className="flex">
 
-                    <Link href="/" className="hover:shadow-md px-6 pt-8">
-                        <h1 className="text-black text-3xl font-bold ">
+                    <Link href="/" className="hover:shadow-md px-6 h-full flex items-center">
+                        <h1 className="text-black text-3xl font-bold">
                             Gamer<span className="text-teal-500">Buddy</span>
                         </h1>
                     </Link>
