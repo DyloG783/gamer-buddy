@@ -1,7 +1,10 @@
 import ConnectionUpdates from "@/app/components/ConnectionUpdates";
 import ProfileStatus from "@/app/components/ProfileStatus";
 import HeroContent from "./components/HeroContent";
-import { Suspense } from 'react'
+import { Suspense } from 'react';
+
+// 30 seconds auto update for all clients
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   return (

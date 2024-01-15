@@ -26,7 +26,7 @@ export default async function ConnectionUpdates() {
         <div id="connection_updates_container" className="flex flex-col md:flex-row gap-8 md:gap-0 justify-around h-full md:pt-20 ">
             <div
                 id="connection_messages_container"
-                className=""
+
             >
                 <h2 className="font-semibold text-blue-800 text-xl mb-4 md:mb-10 tracking-wide">Messages</h2>
                 <p className="p-4">
@@ -41,9 +41,9 @@ export default async function ConnectionUpdates() {
                 <>
                     {requests && requests.length > 0
                         &&
-                        <Link href={`/connections`} className="">
+                        <Link href={`/connections`} >
                             <div className="flex p-4 hover:shadow-sm hover:cursor-pointer">
-                                <span className="">Pending connection requests: {requests!.length}</span>
+                                <span >Pending connection requests: {requests!.length}</span>
                                 <span className="animate-ping ml-4">
                                     <Image src="/./bells.svg" height={0} width={0} alt="chat_icon"
                                         className="w-2 md:w-3 h-auto bg-yellow-200 rounded-xl"

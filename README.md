@@ -64,6 +64,8 @@ Prisma schema datasource needs switching befor deploy;
   Follow vercel cli steps (seems to have got db running)
 
   
+Prod FYI:
+Clerk dev needs real domin, emails will besent to junk/spam
 
 Need help with:
 

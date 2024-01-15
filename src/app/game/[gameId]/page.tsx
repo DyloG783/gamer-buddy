@@ -6,6 +6,8 @@ import { GameNotExist } from "@/lib/errors";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 import Link from "next/link";
+import { redirect } from 'next/navigation'
+import { LinkButton } from "./components/LinkButton";
 
 export default async function GamePage({ params }: { params: { gameId: number } }) {
 
@@ -73,9 +75,8 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                                 </div>
                                 <div>
                                     {alreadyExists &&
-                                        <button className="btn bg-green-500">
-                                            <Link href={`/connect/${game.id}`}>Connect</Link>
-                                        </button>
+                                        <LinkButton link={`/connect/${game.id}`} text="Chat" css="bg-green-500" />
+                                        // <Link href={`/connect/${game.id}`}>Connect</Link>
                                     }
                                 </div>
                             </div>

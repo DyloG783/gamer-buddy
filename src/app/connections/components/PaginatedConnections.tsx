@@ -17,43 +17,55 @@ interface IItems {
 
 const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage, option }) => {
 
-    // not sure if this is best approach
     if (connections === null) {
         return
     }
 
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
-            <div className="pl-4 md:pl-10">
+            <div className="">
                 <ul className="grid md:grid-flow-col md:auto-cols-fr ">
                     {currentItems &&
-                        currentItems.map((connection: IConnection, index) => (
-                            <li key={index} className="hover:shadow-md">
+                        currentItems.map((connection: any, index) => (
+                            <li key={index} className="hover:shadow-md md:max-w-64 p-2 md:p-8 md:ml-2">
                                 {option === "connected"
                                     &&
                                     <Link
-                                        className="p-4 whitespace-nowrap overflow-hidden"
+
                                         href={`/connections/view-player/${connection.followedById}`}
                                     >
-                                        <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followedByUName}`}</p>
+                                        <p className="font-semibold text-emerald-600 tracking-wider pb-2">{`${connection.followedByUName}`}</p>
+                                        {connection.followedBy.timezone != null
+                                            &&
+                                            <p className=" text-xs  tracking-wide">{`${connection.followedBy.timezone}`}</p>
+                                        }
                                     </Link>
                                 }
                                 {option === "requests"
                                     &&
                                     <Link
-                                        className="p-4 whitespace-nowrap overflow-hidden"
+
                                         href={`/connections/view-player/${connection.followedById}`}
                                     >
-                                        <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followedByUName}`}</p>
+                                        <p className="font-semibold text-emerald-600 tracking-wider pb-2">{`${connection.followedByUName}`}</p>
+                                        {connection.followedBy.timezone != null
+                                            &&
+                                            <p className=" text-xs tracking-wide">{`${connection.followedBy.timezone}`}</p>
+                                        }
                                     </Link>
                                 }
                                 {option === "following"
                                     &&
                                     <Link
-                                        className="p-4 whitespace-nowrap overflow-hidden"
+
                                         href={`/connections/view-player/${connection.followingId}`}
                                     >
-                                        <p className="font-semibold text-gray-700 ml-2 pb-2 tracking-wide">{`${connection.followingUName}`}</p>
+                                        <p className="font-semibold text-emerald-600 tracking-wider pb-2">{`${connection.followingUName}`}</p>
+                                        {connection.following.timezone != null
+                                            &&
+                                            <p className="text-xs tracking-wide">{`${connection.following.timezone}`}</p>
+                                        }
+
                                     </Link>
                                 }
                             </li>

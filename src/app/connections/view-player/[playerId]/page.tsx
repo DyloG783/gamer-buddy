@@ -7,6 +7,9 @@ import { currentUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { ConnectButton } from "./ConnectButton";
 
+// 30 seconds auto update for all clients
+export const dynamic = 'force-dynamic';
+
 export default async function ViewPlayer({ params }: { params: { playerId: string } }) {
 
     const playerId = params.playerId // this refeers to the other player the user wants to connect with
@@ -62,7 +65,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                                     <ConnectButton color={`bg-red-500`} text={`Remove player`} />
                                 </form>
                                 <Link href={`/connections/${user.id}/${player.id}`}
-                                    className="">
+                                >
                                     <button id="chat_button" className="btn bg-green-500 text-center">Chat</button>
                                 </Link>
                             </>

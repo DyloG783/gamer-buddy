@@ -40,7 +40,7 @@ test('Remove and Connect game buttons are visible when a user has this game save
 // });
 
 
-test('Connect button takes user to game chat forum', async ({ page }) => {
+test('Chat button takes user to game chat forum', async ({ page }) => {
   await page.goto('/game/83563');
 
   await page.getByRole('button', { name: 'Connect' }).click();

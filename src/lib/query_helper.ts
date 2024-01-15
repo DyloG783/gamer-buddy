@@ -17,9 +17,10 @@ export async function getFollowing() {
                     },
                 },
             },
+            include: { following: { select: { timezone: true } } }
         });
 
-        revalidatePath('/');
+        revalidatePath('/connections');
         return (connections);
     } catch (error) {
         console.log("Failed to find the users which this user follows in 'query_helper': ", error)
@@ -43,9 +44,10 @@ export async function getUsersConnectionRequests() {
                     }
                 }
             },
+            include: { followedBy: { select: { timezone: true } } }
         });
 
-        revalidatePath('/');
+        revalidatePath('/connections');
         return connections;
 
     } catch (error) {
@@ -70,9 +72,10 @@ export async function getUsersConnections() {
                     }
                 }
             },
+            include: { followedBy: { select: { timezone: true } } }
         });
 
-        revalidatePath('/');
+        revalidatePath('/connections');
         return connections;
 
     } catch (error) {

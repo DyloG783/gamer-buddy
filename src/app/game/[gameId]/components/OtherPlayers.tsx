@@ -98,7 +98,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
                         Click below (or in the menu) to check out the chat forums, or find someone to connect with!
                     </p>
                     <div id="timezone_no_timezone_set" className="grid grid-flow-col auto-cols-fr">
-                        <Link href={`/profile`}>
+                        <Link href={`/user-profile/game-settings`}>
                             <div id="others_in_your_timezone"
                                 className="text-sm p-4 md:p-8 bg-yellow-200 hover:shadow-md
                             hover:text-purple-600"
@@ -106,12 +106,12 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
                                 *Set your timezone to make it easier to connect with others
                             </div>
                         </Link>
-                        <Link href={`/connect/${gameId}`} className="">
+                        <Link href={`/connect/${gameId}`} >
                             <div id="others_in_all_timezones"
                                 className="text-sm p-4 md:p-8 hover:shadow-md
                             hover:text-purple-600"
                             >
-                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount - 1}'`}
+                                {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount}'`}
                             </div>
                         </Link>
                     </div>
@@ -127,19 +127,19 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
                     Click below (or in the menu) to check out the chat forums, or find someone to connect with!
                 </p>
                 <div id="timezone_no_timezone_set" className="grid grid-flow-col auto-cols-fr">
-                    <Link href={`/api/auth/signin`}>
+                    <Link href={`https://pro-marmoset-77.accounts.dev/sign-in`}>
                         <div id="timezone_not_signedin"
                             className="text-sm p-4 md:p-8 hover:shadow-md hover:text-purple-600 bg-red-300 mx-2"
                         >
                             Sign in to see if other games matching your timezone are playing this game
                         </div>
                     </Link>
-                    <Link href={`/connect/${gameId}`} className="">
+                    <Link href={`/connect/${gameId}`} >
                         <div id="others_in_all_timezones"
                             className="text-sm p-4 md:p-8 hover:shadow-md
                             hover:text-purple-600"
                         >
-                            {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount - 1}'`}
+                            {`Players in all timezones playing this game: '${usersWhoAlsoHaveThisGameCount}'`}
                         </div>
                     </Link>
                 </div>

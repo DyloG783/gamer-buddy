@@ -7,7 +7,7 @@ import {
 
 export default function UserMenu() {
     return (
-        <div className="md:hover:shadow-md p-4 md:p-8 font-semibold ">
+        <div className="md:hover:shadow-md p-4 md:p-8  ">
             <SignedIn>
                 <UserButton
                     userProfileMode="navigation"
@@ -16,7 +16,7 @@ export default function UserMenu() {
                     appearance={{
                         elements: {
                             userButtonBox: "",
-                            userButtonOuterIdentifier: "md:text-xl"
+                            userButtonOuterIdentifier: "md:text-lg font-semibold"
                         }
                     }}
                 />

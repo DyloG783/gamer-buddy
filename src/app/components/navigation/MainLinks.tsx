@@ -10,10 +10,10 @@ export default function MainLinks() {
     return (
         <>
             <ul className="grow flex p-4 md:p-0 justify-center ">
-                <li id="games" className="flex ">
+                <li id="games" className=" ">
                     <Link
                         href="/games"
-                        className={`hover:shadow-md py-4 px-8 md:my-auto md:py-8
+                        className={`hover:shadow-md py-4 px-8 md:my-auto h-full items-center flex
                             ${pathname === '/games' || pathname.includes('game/') ? 'underline' : ''}`}
                     >
                         Games
@@ -22,7 +22,7 @@ export default function MainLinks() {
                 <li id="connections" className="flex">
                     <Link
                         href="/connections"
-                        className={`hover:shadow-md py-4 px-6 md:my-auto md:py-8
+                        className={`hover:shadow-md py-4 px-8 md:my-auto h-full items-center flex
                             ${pathname === '/connections' ? 'underline' : ''}`}
                     >
                         Connections

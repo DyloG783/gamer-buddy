@@ -4,8 +4,8 @@ import getIGBdFilteredGameCount from '../helpers/getIGBdFilteredGameCount';
 
 async function saveGamesToDb() {
 
-    const gameCount = await getIGBdFilteredGameCount()
-    // const gameCount = 2000;
+    // const gameCount = await getIGBdFilteredGameCount()
+    const gameCount = 1000;
     const limit: number = 500;
     let offset: number = 0;
     let loopCount = 0;
@@ -29,11 +29,11 @@ async function saveGamesToDb() {
                     "Accept": "application/json"
                 },
                 body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${limit}; offset ${offset}; sort id;`
-                // body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${500}; sort id;`
+                // body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${1000}; sort id;`
             })
             const gamesJSON = await response.json()
 
-            console.log("Loading and setting up 500 games for small demonstration...")
+            // console.log("Loading and setting up 500 games for small demonstration...")
             await saveGames(gamesJSON)
 
             offset += limit
@@ -51,7 +51,6 @@ async function saveGamesToDb() {
         try {
             for (const game of gamesJSON) {
 
-                console.log(`Game: ${loopCount + 1} of 500...`)
                 loopCount++
 
                 // get game's genres

@@ -2,11 +2,14 @@ import { getFollowing, getUsersConnectionRequests, getUsersConnections } from "@
 import { IConnection } from "@/lib/custom_types";
 import PaginatedConnections from "./components/PaginatedConnections";
 
+// 30 seconds auto update for all clients
+export const dynamic = 'force-dynamic';
+
 const Connections = async () => {
 
     const userFollowing: IConnection[] | null = await getFollowing();
-    const requests: IConnection[] | null = await getUsersConnectionRequests()
-    const userConnections: IConnection[] | null = await getUsersConnections()
+    const requests: IConnection[] | null = await getUsersConnectionRequests();
+    const userConnections: IConnection[] | null = await getUsersConnections();
 
     return (
         <div id="page_container" className="flex flex-col justify-between h-full ">

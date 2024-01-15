@@ -9,7 +9,7 @@ export type IGame = {
     modes: string[];
 }
 
-// this replaced duplicated types for genres, platforms, and modes which are all identical
+// this represents genres, platforms, and modes
 export type IGameFilterType = {
     id: number;
     name: string;
@@ -33,12 +33,13 @@ export type IUser = {
 
 export type IConnection = ({
     followedByEmail: string;
-    followedById: string;
-    followedByUName: string;
     followingEmail: string;
+    followedById: string;
     followingId: string;
-    followingUName: string
+    followedByUName: string;
+    followingUName: string;
 })
+
 
 export type TUserId = ({ userId: string })
 
