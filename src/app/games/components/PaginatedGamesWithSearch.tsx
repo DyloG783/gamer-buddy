@@ -43,7 +43,6 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log("rendering to set games now")
                     setSearchedGames(data.searchedGames)
                     setLoading(false)
                     filteredGames = searchedGames
@@ -135,6 +134,13 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                         id="paginated_Games_with_search"
                         className={`flex flex-col  `}
                     >
+                        <div id="game_count" className="flex m-auto mb-10 track">
+                            {searchedGames.length === 0 && searchState.currentSelected === null &&
+                                <p className="italic">Lastest and upcoming games: <span className="text-emerald-500 not-italic">{filteredGames.length}</span></p>
+                                ||
+                                <p className="italic">Searched games: <span className="text-emerald-500 not-italic">{filteredGames.length}</span></p>
+                            }
+                        </div>
                         <Items currentItems={currentItems} />
                         <ReactPaginate
                             breakLabel="..."
@@ -149,7 +155,7 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                         />
                     </div>
                     ||
-                    <div className="m-auto">
+                    <div className="m-auto ">
                         No games matched your search. Click <span className="text-teal-600">Reset search</span> to try again
                     </div>
                 }

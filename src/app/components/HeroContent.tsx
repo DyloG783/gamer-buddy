@@ -22,7 +22,7 @@ export default function HeroContent() {
                         Chat in open forums per game
                     </p>
                 </div>
-                <div className="grid grid-flow-col auto-cols-fr p-8">
+                <div className="grid grid-flow-col auto-cols-fr p-8 mb-10">
                     <p className="m-auto tracking-wider">
                         Create connections and chat with people 1-1
                     </p>

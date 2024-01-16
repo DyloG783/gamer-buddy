@@ -3,14 +3,15 @@
 import PaginatedGamesWithSearch from "@/app/games/components/PaginatedGamesWithSearch";
 import SearchOptions from "./SearchOptions";
 import { useState } from "react";
-import { IGame, IGameFilterType, ISearchState, } from "@/lib/custom_types";
+import { IGame, ISearchState, ISearchableGameType } from "@/lib/custom_types";
 
 type IGamesDisplayProps = {
-    genres: IGameFilterType[],
-    platforms: IGameFilterType[],
-    modes: IGameFilterType[],
+    genres: ISearchableGameType[],
+    platforms: ISearchableGameType[],
+    modes: ISearchableGameType[],
     defaultGames: IGame[],
 }
+
 
 export default function GamesDisplay(props: IGamesDisplayProps) {
 

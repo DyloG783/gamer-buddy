@@ -6,7 +6,6 @@ import { GameNotExist } from "@/lib/errors";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 import Link from "next/link";
-import { redirect } from 'next/navigation'
 import { LinkButton } from "./components/LinkButton";
 
 export default async function GamePage({ params }: { params: { gameId: number } }) {
@@ -83,7 +82,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                         }
 
                     </div>
-                    <p className="text-left p-4 md:p-8 tracking-wide font-thin">{`${game?.summary}`}</p>
+                    <p className="text-left p-4 md:p-8 tracking-wide italic">{`${game?.summary}`}</p>
                     <div id="game_info_groups_container"
                         className="flex justify-around p-1 md:p-4 gap-2 md:gap-0 md:mt-0"
                     >
@@ -108,7 +107,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                     </div>
                 </div>
             </div>
-            <div className="grow p-8 md:p-20 bg-slate-200 my-auto">
+            <div className="grow p-8 md:p-20 my-auto">
                 <OtherPlayers gameId={gameId} />
             </div>
         </div>

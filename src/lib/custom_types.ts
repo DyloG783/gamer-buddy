@@ -10,9 +10,14 @@ export type IGame = {
 }
 
 // this represents genres, platforms, and modes
-export type IGameFilterType = {
-    id: number;
-    name: string;
+// export type IGameFilterType = {
+//     id: number;
+//     name: string;
+// }
+
+export type ISearchableGameType = {
+    value: string;
+    label: string;
 }
 
 export type ISearchState = {

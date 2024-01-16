@@ -4,13 +4,35 @@ import GamesDisplay from "./components/GamesDisplay";
 
 export default async function GamesPage() {
 
-    const genres = await prisma.genre.findMany()
-    const platforms = await prisma.platform.findMany()
-    const modes = await prisma.mode.findMany()
+    const genresDb = await prisma.genre.findMany();
+    const platformsDb = await prisma.platform.findMany();
+    const modesdb = await prisma.mode.findMany();
 
-    // Gets the last 500 games in the DB including future releases to be displayed before searching
+    const genres = genresDb.map((g) => {
+        return {
+            value: g.id.toString(),
+            label: g.name
+        }
+    })
+
+    const platforms = platformsDb.map((p) => {
+        return {
+            value: p.id.toString(),
+            label: p.name
+        }
+    })
+
+    const modes = modesdb.map((m) => {
+        return {
+            value: m.id.toString(),
+            label: m.name
+        }
+    })
+
+
+    // Gets the last 150 games in the DB including future releases to be displayed before searching
     const defaultGames = await prisma.game.findMany({
-        take: 500, where: {},
+        take: 150, where: {},
         orderBy: { firstReleaseDate: "desc" },
     })
 

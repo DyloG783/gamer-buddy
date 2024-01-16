@@ -22,7 +22,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
     <ClerkProvider>
       <html lang="en" className={inter.className}>
         <body className='min-h-screen text-sm md:text-base lg:text-lg
-        bg-gradient-to-b from-slate-100 to-slate-50/50'
+        '
         >
           <header className='max-w-screen-2xl md:h-24 mx-auto
           bg-white shadow-md'

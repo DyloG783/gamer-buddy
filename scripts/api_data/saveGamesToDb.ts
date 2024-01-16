@@ -20,6 +20,11 @@ async function saveGamesToDb() {
 
     // loop through fetching all games until the offset (increments 500) is > game count (~35,000)
     while (offset < gameCount) {
+
+        console.log("Games processing...:", offset)
+        console.log("Max game count:", gameCount)
+        console.log("Iterations:", loopCount)
+
         try {
             const response = await fetch(`${igdbBaseUrl}/games`, {
                 method: "POST",
@@ -38,9 +43,7 @@ async function saveGamesToDb() {
 
             offset += limit
 
-            console.log("Current offset:", offset)
-            console.log("Max game count:", gameCount)
-            console.log("Iterations:", loopCount)
+
         } catch (error) {
             console.log("Something went wrong fetching games:", error)
             // return

@@ -10,7 +10,7 @@ export default function GamesLayout({ children }: { children: React.ReactNode })
                 <YourGames />
             </div>
             <Suspense fallback={<Loading />}>
-                <div className=" px-2 pt-10 md:px-16 md:pt-10 shadow-sm"
+                <div className="grow px-2 pt-10 md:px-16 md:pt-10 shadow-sm"
                 >
                     {children}
                 </div>

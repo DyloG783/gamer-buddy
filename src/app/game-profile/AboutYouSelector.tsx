@@ -61,8 +61,7 @@ export default function AboutYou() {
                 }}
             >
                 <textarea id="bio" minLength={10} maxLength={500}
-                    className="shadow-sm
-                            p-2 w-full "
+                    className="shadow-sm p-4 md:p-6 w-full "
                     rows={10}
                     name="bioInputTextArea"
                     placeholder={user?.unsafeMetadata.bio ? user?.unsafeMetadata.bio as string : 'Add something pal!'}
@@ -72,7 +71,8 @@ export default function AboutYou() {
                 />
             </form>
             <div className={`flex gap-2 mt-3 justify-end ${editing ? '' : 'hidden'}`} id="form_buttons">
-                <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span>
+                <span className={`${inputValid ? 'hidden' : ''} text-red-400 italic text-sm mr-auto my-auto
+                `}>10 - 500 characters required friend!</span>
                 <button type="submit" form="bioform"
                     className={`btn-primary p-2 ${inputValid ? '' : 'hidden'}`}
                 >

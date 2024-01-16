@@ -23,7 +23,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                     currentItems.map((game: IGame) => (
                         <Link
                             key={game.id}
-                            className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
+                            className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden max-w-64"
                             href={`/game/${game.id}`}
                         >
                             <h3 className="font-bold pb-2 text-base">{game.name}</h3>

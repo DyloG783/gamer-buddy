@@ -10,6 +10,8 @@ export async function POST(request: Request) {
     const platform: string = data.searchState.platform;
     const search: string = data.searchState.search;
 
+    // console.log("API values before db search:", genre, mode, platform, search)
+
     try {
         const searchedGames = await prisma.game.findMany({
             where: {
@@ -20,6 +22,7 @@ export async function POST(request: Request) {
             }
         })
 
+        // console.log("searched games API JSON:", searchedGames)
         return NextResponse.json({ searchedGames })
     } catch (error) {
         console.log("Failed to retreive searched games from db in client route", error)
