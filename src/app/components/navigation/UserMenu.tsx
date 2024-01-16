@@ -5,7 +5,7 @@ import {
     UserButton,
 } from "@clerk/nextjs";
 
-export default function UserMenu() {
+export default async function UserMenu() {
     return (
         <div className="md:hover:shadow-md p-4 md:p-8 font-semibold ">
             <SignedIn>

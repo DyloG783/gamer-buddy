@@ -13,7 +13,7 @@ export default async function ConnectionUpdates() {
             <div id="no_session_container" className="flex h-full">
                 <Link href={`${process.env.CLERK_SIGNIN}`}
                     className="text-purple-800 font-semibold tracking-wider italic m-auto
-                    p-10 hover:shadow-md "
+                    p-10 hover:underline"
                 >
                     Sign in to see Messages, Connection requests, and more!</Link>
             </div>

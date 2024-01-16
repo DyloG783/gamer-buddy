@@ -24,10 +24,7 @@ export default async function Home() {
           <ConnectionUpdates />
         </Suspense>
       </div>
-      <Suspense fallback={<Loading />}>
-        <ProfileStatus />
-      </Suspense>
-
+      <ProfileStatus />
     </div>
   );
 }

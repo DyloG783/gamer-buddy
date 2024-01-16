@@ -10,14 +10,14 @@ const YourGames: React.FC = async () => {
     // auth check for active session redirecting to sign in if not
     if (!userId) {
         return (
-            <div>
-                <Link href={`${process.env.CLERK_SIGNIN}`}
-                    className='flex justify-around items-center w-full p-10 hover:shadow-lg text-purple-600 italic hover:underline
-                font-semibold tracking-wider mb-4'
-                >
-                    Sign in to see your games
-                </Link>
-            </div >
+
+            <Link href={`${process.env.CLERK_SIGNIN}`}
+                className=' flex justify-around text-purple-600 italic hover:underline
+                font-semibold tracking-wide mb-4'
+            >
+                Sign in to see your games
+            </Link>
+
         )
     }
 
@@ -36,9 +36,9 @@ const YourGames: React.FC = async () => {
                 &&
                 <PaginatedGames games={games.games} itemsPerPage={3} />
                 ||
-                <p>You don&apos;t have any games</p>
+                <p> You don&apos;t have any games</p>
             }
-        </div>
+        </div >
     )
 }
 

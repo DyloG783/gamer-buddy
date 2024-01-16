@@ -4,6 +4,7 @@ import React, { Key, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IGame, ISearchState } from "@/lib/custom_types";
 import Link from "next/link";
+import Loading from "@/lib/loading";
 
 interface IPaginatedGamesProps {
     defaultGames: IGame[]
@@ -55,7 +56,7 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
 
     }, [searchState.currentSelected]);
 
-    if (isLoading) return <p className="flex items-center">Loading...</p>
+    if (isLoading) return <Loading />
 
     // the games to be displayed are either default, or what was returned from searching
     if (searchedGames.length === 0 && searchState.currentSelected === null) {
@@ -69,7 +70,7 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
             <div id="games_grid_view"
-                className="grid md:grid-flow-col md:auto-cols-fr grid-rows-3 text-sm ">
+                className="grid md:grid-flow-col md:auto-cols-fr grid-rows-2 text-sm ">
                 {currentItems &&
                     currentItems.map((game: IGame) => (
                         <Link
@@ -78,7 +79,7 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                             className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
                             href={`/game/${game.id}`}
                         >
-                            <h3 className="font-bold pb-2 text-base">{game.name}</h3>
+                            <h3 className="font-bold pb-2 text-base text-emerald-500">{game.name}</h3>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Genre</h3>
                                 {game.genres.map((genre: string, index: Key) => (

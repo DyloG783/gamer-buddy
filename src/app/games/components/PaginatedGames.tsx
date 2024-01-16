@@ -26,7 +26,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                             className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden max-w-64"
                             href={`/game/${game.id}`}
                         >
-                            <h3 className="font-bold pb-2 text-base">{game.name}</h3>
+                            <h3 className="font-bold pb-2 text-base text-emerald-500">{game.name}</h3>
                             <div className="italic pb-1">
                                 <h3 className="font-bold text-gray-700">Genre</h3>
                                 {game.genres.map((genre: string, index: Key) => (

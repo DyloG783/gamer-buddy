@@ -118,7 +118,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
     return (
         <div id="search_options_and_reset_button"
-            className="flex flex-col p-2 md:p-4"
+            className="flex flex-col "
         >
             {searchEmpty &&
                 <button
@@ -136,7 +136,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     Reset search
                 </button>
             }
-            <div className="flex flex-wrap gap-3 justify-center mb-4 md:mb-8"
+            <div className="flex flex-wrap gap-3  mb-4 md:mb-8"
                 id="search_options"
             >
                 <SelectSearch categoryList={genres} categoryName="Genre" />
@@ -144,9 +144,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                 <SelectSearch categoryList={modes} categoryName="Mode" />
                 <TextSearch />
             </div>
-            {/* <div id="search_state">
-                Displaying searched games for Genre: {searchState.genre}
-            </div> */}
         </div>
     )
 }

@@ -1,12 +1,14 @@
 
+import { Suspense } from "react";
 import MainLinks from "./MainLinks";
 import UserMenu from "./UserMenu";
 import Link from "next/link";
+import Loading from "@/lib/loading";
 
 export default function NavigationBar() {
     return (
-        <nav >
-            <div id="non_responsive_layout" className="hidden md:flex justify-between">
+        <nav className="h-full">
+            <div id="non_responsive_layout" className="hidden md:flex justify-between h-full">
                 <div className="flex">
 
                     <Link href="/" className="hover:shadow-md px-6 h-full flex items-center">
@@ -20,7 +22,9 @@ export default function NavigationBar() {
                     </div>
                 </div>
 
+                {/* <Suspense fallback={<Loading />}> */}
                 <UserMenu />
+                {/* </Suspense> */}
             </div>
 
             <div id="responsive_layout" className="md:hidden flex flex-wrap">

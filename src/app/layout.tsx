@@ -25,7 +25,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
         '
         >
           <header className='max-w-screen-2xl md:h-24 mx-auto
-          bg-white shadow-md'
+          bg-white shadow-sm'
           >
             <NavigationBar />
           </header>
