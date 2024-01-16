@@ -119,7 +119,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
     else {
         return (
             <>
-                <h2 className="font-semibold text-2xl mb-2 text-blue-700">Other Players</h2>
+                <h2 className="font-semibold text-xl md:text-3xl mb-2 text-blue-700">Other Players</h2>
                 <p className="italic mb-2 md:mb-4 ml-4">These are the other people playing this game.
                     Click below (or in the menu) to check out the chat forums, or find someone to connect with!
                 </p>

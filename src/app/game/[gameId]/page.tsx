@@ -63,19 +63,18 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                                     {alreadyExists
                                         &&
                                         <form action={RemoveActionWithGameId}>
-                                            <SubmitButton text={`Remove game`} css={`bg-rose-400`} />
+                                            <SubmitButton text={`Remove game`} css={`cancel-color`} />
 
                                         </form>
                                         ||
                                         <form action={AddActionWithGameId}>
-                                            <SubmitButton text={`Add game`} css={`bg-emerald-400`} />
+                                            <SubmitButton text={`Add game`} css={`primary-color`} />
                                         </form>
                                     }
                                 </div>
                                 <div>
                                     {alreadyExists &&
-                                        <LinkButton link={`/connect/${game.id}`} text="Chat" css="bg-emerald-400" />
-                                        // <Link href={`/connect/${game.id}`}>Connect</Link>
+                                        <LinkButton link={`/connect/${game.id}`} text="Chat" css="primary-color" />
                                     }
                                 </div>
                             </div>

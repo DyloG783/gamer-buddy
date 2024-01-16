@@ -62,7 +62,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                             &&
                             <>
                                 <form action={removeActionWithPlayer}>
-                                    <ConnectButton css={`bg-rose-400`} text={`Remove player`} />
+                                    <ConnectButton css={`cancel-color`} text={`Remove player`} />
                                 </form>
                                 <Link href={`/connections/${user.id}/${player.id}`}
                                 >
@@ -73,7 +73,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                         {!weFollowThisPlayer
                             &&
                             <form action={addActionWithPlayer}>
-                                <ConnectButton css={`bg-emerald-400`} text={`Add player`} />
+                                <ConnectButton css={`primary-color`} text={`Add player`} />
                             </form>
                         }
                         {!usersAreConnected && weFollowThisPlayer

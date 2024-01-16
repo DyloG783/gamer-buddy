@@ -28,8 +28,6 @@ export async function sendMessagePrivate(privateRoomId: string, formData: FormDa
                 sentPrivateBy: { select: { userName: true } }
             }
         })
-        // revalidatePath('/');
-        console.log("Created private message in Database!")
 
         const pusher = new Pusher({
             appId: process.env.PUSHER_APP_ID,
@@ -44,7 +42,6 @@ export async function sendMessagePrivate(privateRoomId: string, formData: FormDa
         });
 
     } catch (error) {
-        // return { message: `Failed to create message`, error }
         console.log("Fail create and broadcast private message", error)
     }
 }
@@ -77,8 +74,6 @@ export async function sendMessageForum(gameRoomId: string, formData: FormData) {
                 }
             }
         })
-        // revalidatePath('/');
-        console.log("Created Message!")
 
         const pusher = new Pusher({
             appId: process.env.PUSHER_APP_ID,
@@ -93,7 +88,6 @@ export async function sendMessageForum(gameRoomId: string, formData: FormData) {
         });
 
     } catch (error) {
-        // return { message: `Failed to create message`, error }
         console.log("Fail create Message", error)
     }
 }
@@ -116,7 +110,6 @@ export async function addGame(gameId: number) {
                 }
             }
         })
-
         revalidatePath(`/game/${gameId}`)
     } catch (error) {
         console.log("Failed to add game - server action", error)
@@ -141,7 +134,6 @@ export async function removeGame(gameId: number) {
                 }
             }
         })
-
         revalidatePath(`/game/${gameId}`)
     } catch (error) {
         console.log("Failed to remove game - server action", error)
@@ -163,7 +155,6 @@ export async function addUser(player: any) {
                 followingUName: player.userName!
             }
         })
-        console.log("Success to create following relation - server action")
         revalidatePath(`/view-player/${player.id}`)
     } catch (error) {
         console.log("Failed to create following relation - server action", error)
@@ -182,7 +173,6 @@ export async function removeUser(player: any) {
                 }
             }
         })
-        console.log("Success to remove following relation - server action")
         revalidatePath(`/view-player/${player.id}`)
     } catch (error) {
         console.log("Failed to remove following relation - server action", error)
