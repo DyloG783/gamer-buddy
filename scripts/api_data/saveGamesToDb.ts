@@ -56,6 +56,16 @@ async function saveGamesToDb() {
 
                 loopCount++
 
+                const alreadyExists = await prisma.game.findUnique({
+                    where: { id: game.id }
+                })
+
+                if (alreadyExists) {
+                    return
+                }
+
+                console.log("New game: ", game.name);
+
                 // get game's genres
                 const genresResponse = await fetch(`${igdbBaseUrl}/genres`, {
                     method: "POST",
