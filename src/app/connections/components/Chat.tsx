@@ -8,6 +8,7 @@ type TMessage = ({
         userName: string | null;
     };
     message: string;
+    createdAt: Date;
 })
 
 export default function Chat({ messages, privateRoomId }: { messages: TMessage[], privateRoomId: string }) {
@@ -40,16 +41,24 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
         scrollTobottom();
     }, [totalMessages]);
 
+    // used for localDate to convert date saved in db to something that won't crash on render
+    const options: Intl.DateTimeFormatOptions = {
+        weekday: "long",
+        hour: "numeric",
+        minute: "numeric"
+    };
+
     return (
         <div id="chat_container" className="flex flex-col">
             <div id="message_container"
-                className="max-h-40 md:max-h-80 overflow-y-scroll"
+                className="max-h-40 md:max-h-80 overflow-y-auto"
             >
                 {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
                         <div key={index} className="p-2">
-                            {/* <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentBy.userName}`}</p> */}
-                            <p className="font-light tracking-wider">{`${m.sentPrivateBy.userName}`}</p>
+                            <span className="text-emerald-600 tracking-wider">{m.sentPrivateBy.userName} </span>
+                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt.toLocaleString(undefined, options)}</span>
+                            {/* <p className="font-light tracking-wider">{`${m.sentPrivateBy.userName}`}</p> */}
                             <p>{`${m.message}`}</p>
                         </div>
                     ))}

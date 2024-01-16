@@ -27,7 +27,7 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                 <ul className="grid md:grid-flow-col md:auto-cols-fr ">
                     {currentItems &&
                         currentItems.map((connection: any, index) => (
-                            <li key={index} className="hover:shadow-md md:max-w-64 p-2 md:p-8 md:ml-2">
+                            <li key={index} className="hover:shadow-lg shadow-md md:max-w-64 p-2 md:p-8 md:ml-2">
                                 {option === "connected"
                                     &&
                                     <Link
@@ -37,7 +37,7 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                                         <p className="font-semibold text-emerald-600 tracking-wider pb-2">{`${connection.followedByUName}`}</p>
                                         {connection.followedBy.timezone != null
                                             &&
-                                            <p className=" text-xs  tracking-wide">{`${connection.followedBy.timezone}`}</p>
+                                            <p className=" text-xs tracking-wide">{`${connection.followedBy.timezone}`}</p>
                                         }
                                     </Link>
                                 }

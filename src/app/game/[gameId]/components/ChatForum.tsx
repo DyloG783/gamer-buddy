@@ -46,22 +46,30 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
         scrollTobottom();
     }, [totalMessages]);
 
+    // used for localDate to convert date saved in db to something that won't crash on render
+    const options: Intl.DateTimeFormatOptions = {
+        weekday: "long",
+        hour: "numeric",
+        minute: "numeric"
+    };
+
     return (
         <div id="chat_container" className="flex flex-col">
             <div id="message_container"
-                className="max-h-96 overflow-y-scroll"
+                className="max-h-96 overflow-y-auto "
             >
                 {totalMessages && totalMessages.length > 0
                     &&
                     totalMessages.map((m, index) => (
+                        // const date = Date(m.createdAt).getTime()
                         <div key={index} className="p-2">
-                            {/* <p className="font-light tracking-wider">{`${`${m.createdAt.getUTCDate()}/${m.createdAt.getUTCMonth() + 1}/${m.createdAt.getUTCFullYear()}`} ${m.sentGameBy.userName}`}</p> */}
-                            <p className="font-light tracking-wider">{`${m.sentGameBy.userName}`}</p>
+                            <span className="text-emerald-600 tracking-wider">{m.sentGameBy.userName} </span>
+                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt.toLocaleString(undefined, options)}</span>
                             <p>{`${m.message}`}</p>
                         </div>
                     ))
                     ||
-                    <p className="p-2 tracking-wide font-light">Your&apos;re potentially the first person to leave a message... What an honor!</p>
+                    <p className="p-2 ml-2 md:ml-0 tracking-wide font-light italic">Your&apos;re potentially the first person to leave a message... What an honor!</p>
                 }
                 <div ref={messageEndRef}></div>
             </div>

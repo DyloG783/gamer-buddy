@@ -46,6 +46,16 @@ export default async function GamePage({ params }: { params: { gameId: number } 
     const RemoveActionWithGameId = removeGame.bind(null, gameId)
     const AddActionWithGameId = addGame.bind(null, gameId)
 
+    //convert game's release date from unix timestamp to readable
+
+
+    const unix_timestamp = game.firstReleaseDate
+    let date = null;
+    if (unix_timestamp) {
+        date = new Date(unix_timestamp * 1000)
+    }
+
+
     return (
         <div id="page_container" className="flex flex-col h-full">
             <div id="game_container" className={`flex flex-col justify-center p-8 md:p-16 `}>
@@ -58,7 +68,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                         </Link>
                         {userId &&
                             <div id="gameActionsBar"
-                                className="flex gap-2 ml-6 md:ml-auto">
+                                className="flex flex-col md:flex-row gap-2 ml-auto">
                                 <div>
                                     {alreadyExists
                                         &&
@@ -81,27 +91,31 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                         }
 
                     </div>
-                    <p className="text-left p-4 md:p-8 tracking-wide italic">{`${game?.summary}`}</p>
+                    <p className="my-4 md:my-2 tracking-wide ">{`${game?.summary}`}</p>
                     <div id="game_info_groups_container"
-                        className="flex justify-around p-1 md:p-4 gap-2 md:gap-0 md:mt-0"
+                        className="flex flex-col my-8 gap-2 "
                     >
                         <div id="game_genre_group" className="mb-4">
-                            <p className="font-semibold">Genre</p>
+                            <p className="font-semibold md:mb-2">Genre</p>
                             {game?.genres.map((genre: string, index) => (
                                 <span key={index} className=" font-light">{genre + ", "}</span>
                             ))}
                         </div>
                         <div id="game_mode_group" className="mb-4">
-                            <p className="font-semibold">Mode</p>
+                            <p className="font-semibold md:mb-2">Mode</p>
                             {game?.modes.map((mode: string, index) => (
                                 <span key={index} className="font-light">{mode + ", "}</span>
                             ))}
                         </div>
                         <div id="game_platform_group" className="mb-4">
-                            <p className="font-semibold">Platform</p>
+                            <p className="font-semibold md:mb-2">Platform</p>
                             {game?.platforms.map((plat: string, index) => (
                                 <span key={index} className="font-light">{plat + ", "}</span>
                             ))}
+                        </div>
+                        <div id="release_date" className="mb-4">
+                            <p className="font-semibold md:mb-2">Release date</p>
+                            {date != null && <p>{date.toLocaleDateString()}</p>}
                         </div>
                     </div>
                 </div>

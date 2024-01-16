@@ -66,7 +66,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
 
     return (
         <div id="connect_container"
-            className="bg-slate-300 h-full"
+            className=" h-full"
         >
             <div id="title_link_container" className="mb-10 md:mb-20 pt-4 md:pt-10">
                 <Link href={`/game/${gameId}`}
@@ -80,9 +80,9 @@ export default async function Connect({ params }: { params: { gameId: number } }
                 </Link>
             </div>
             <div id="players_and_chat_forum_container "
-                className="flex justify-between"
+                className="md:flex md:justify-between"
             >
-                <div id="other_players_container" className="px-4 min-w-[33%]">
+                <div id="other_players_container" className="px-4 pb-4 md:pb-0 min-w-[33%]">
                     <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Other Players</p>
                     <ul id="player_list "
                         className="flex flex-col gap-2">
@@ -100,9 +100,9 @@ export default async function Connect({ params }: { params: { gameId: number } }
                     </ul>
                 </div>
                 <div id="chat_forum container"
-                    className=" min-w-[66%]"
+                    className="min-w-[66%] mt-4"
                 >
-                    <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Chat Forum</p>
+                    <p className="font-semibold mb-1 md:mb-6 ml-4 md:ml-2 tracking-wide text-blue-700">Chat Forum</p>
                     <ChatForum roomMessages={messages} gameRoomId={gameRoom.id} />
                     <Form gameRoomId={gameRoom.id} />
                 </div>

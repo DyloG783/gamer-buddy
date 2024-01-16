@@ -34,7 +34,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                     onClick={() => setEditing(true)}
                     required
                     maxLength={500}
-                    className={`w-full p-4 min-h-[50px]`}
+                    className={`w-full p-4 min-h-[50px] shadow-md `}
                 />
             </form>
             <div id="form_buttons" className="flex gap-2 mt-3 justify-end p-2">
@@ -46,7 +46,6 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                 </button>
                 <button type="submit" form="message_form"
                     className={`btn-primary ${editing ? '' : 'hidden'}`}
-
                 >
                     Send
                 </button>

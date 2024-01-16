@@ -43,7 +43,7 @@ export default async function ConnectionUpdates() {
                         &&
                         <Link href={`/connections`} >
                             <div className="flex p-4 hover:shadow-sm hover:cursor-pointer">
-                                <span >Pending connection requests: {requests!.length}</span>
+                                <span >Pending connection requests: <span className="text-emerald-600 font-semibold">{requests!.length}</span></span>
                                 <span className="animate-ping ml-4">
                                     <Image src="/./bells.svg" height={0} width={0} alt="chat_icon"
                                         className="w-2 md:w-3 h-auto bg-yellow-200 rounded-xl"

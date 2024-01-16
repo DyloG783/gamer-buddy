@@ -70,7 +70,8 @@ export default async function PlayerChat({ params }: { params: { userId: string,
             messages: {
                 select: {
                     message: true,
-                    sentPrivateBy: { select: { userName: true } }
+                    sentPrivateBy: { select: { userName: true } },
+                    createdAt: true
                 },
                 take: 50,
                 orderBy: { createdAt: "asc" }
