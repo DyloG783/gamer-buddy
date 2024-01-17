@@ -9,17 +9,17 @@ export const metadata = {
   description: 'Team up with others on you favourate games'
 }
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+// const inter = Inter({
+//   subsets: ['latin'],
+//   display: 'swap',
+// })
 
 export default async function RootLayout({ children, }: { children: React.ReactNode }) {
 
   return (
 
     <ClerkProvider>
-      <html lang="en" className={inter.className}>
+      <html lang="en" className={'bg-sky-50/50'}>
         <body className='min-h-screen text-sm md:text-base lg:text-lg '>
           {/* <body className='min-h-screen text-sm md:text-base lg:text-lg dark text-foreground bg-background'> */}
           <Providers>

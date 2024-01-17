@@ -87,7 +87,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                     href={type === "your" ? `/connect/${game.id}` : `/game/${game.id}`}
                     className="text-xs "
                 >
-                    {type === 'your' ? 'Checkout who else is playing' : 'View game'}
+                    {type === 'your' ? 'Chat with others' : 'View game'}
                 </Link>
             </CardFooter>
         </Card>

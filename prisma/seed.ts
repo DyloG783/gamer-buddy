@@ -16,6 +16,9 @@ async function main() {
                     games: { connect: user.games?.map(g => ({ id: g })) }
                 }
             })
+
+            console.log("Success seeding filler users into db in prisma seed!")
+
         } catch (error) {
             console.log("Error seeding filler users into db: ", error)
         }

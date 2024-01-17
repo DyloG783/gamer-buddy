@@ -25,7 +25,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
         useEffect(() => {
             if (categoryListSelection !== "default") {
-                // console.log("Selection:", categoryListSelection)
                 if (categoryName === "Genre") {
                     setSearchState({
                         ...searchState,
@@ -70,11 +69,12 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     styles={{
                         control: (baseStyles) => ({
                             ...baseStyles,
-                            width: 250
+                            width: 250,
+                            zIndex: 9999
                         }),
+                        menu: provided => ({ ...provided, zIndex: 9999 })
                     }}
                 />
-
             </div>
         )
     }

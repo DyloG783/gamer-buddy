@@ -14,9 +14,9 @@ const Connections = async () => {
     const userConnections: IConnection[] | null = await getUsersConnections();
 
     return (
-        <div id="page_container" className="flex flex-col justify-between h-full ">
+        <div id="page_container" className="flex flex-col h-full ">
             <div id="connected_with_container"
-                className="grow flex flex-col justify-between md:pl-10 shadow-sm
+                className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm
                 ">
                 <div>
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
@@ -30,7 +30,7 @@ const Connections = async () => {
                     <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connectedOrRequest"} />
                 </Suspense>
             </div>
-            <div id="connection_request_container" className="grow flex flex-col justify-between md:pl-10 shadow-sm" >
+            <div id="connection_request_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm" >
                 <div>
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"
@@ -43,7 +43,7 @@ const Connections = async () => {
                     <PaginatedConnections connections={requests} itemsPerPage={5} option={"connectedOrRequest"} />
                 </Suspense>
             </div>
-            <div id="following_container" className="grow flex flex-col justify-between md:pl-10 shadow-sm">
+            <div id="following_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm">
                 <div>
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"

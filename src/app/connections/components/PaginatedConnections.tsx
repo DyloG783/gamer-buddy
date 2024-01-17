@@ -23,10 +23,10 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
 
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
-            <ul className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-6 ">
+            <ul className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-6">
                 {currentItems &&
                     currentItems.map((connection: any, index) => (
-                        <div id="card_key_wrapper" key={index} className="">
+                        <div id="card_key_wrapper" key={index} className="flex justify-around">
                             <ConnectionsCard connection={connection} type={option} />
                         </div>
                     ))}
