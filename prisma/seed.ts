@@ -1,5 +1,5 @@
-import prisma from "@/lib/db"
-import { test_users } from "./test_users"
+import prisma from "@/lib/db";
+import { test_users } from "./test_users";
 
 async function main() {
     for (const user of test_users) {
