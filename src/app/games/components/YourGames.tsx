@@ -34,7 +34,7 @@ const YourGames: React.FC = async () => {
             <div id="games_container" className="flex justify-around">
                 {games && games?.games.length > 0
                     &&
-                    <PaginatedGames games={games.games} itemsPerPage={3} />
+                    <PaginatedGames games={games.games} itemsPerPage={4} />
                     ||
                     <p> You don&apos;t have any games</p>
                 }

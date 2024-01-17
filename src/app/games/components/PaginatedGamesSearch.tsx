@@ -74,7 +74,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
                 className="flex flex-col md:flex-row gap-2 md:gap-6 text-sm text-nowrap ">
                 {currentItems &&
                     currentItems.map((game: IGame) => (
-                        <div id="card_key_wrapper" key={game.id}>
+                        <div id="card_key_wrapper" key={game.id} className="flex justify-around">
                             <GameCard game={game} type="all" />
                         </div>
                     ))}
