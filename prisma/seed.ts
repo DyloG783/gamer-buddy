@@ -61,10 +61,10 @@ async function main() {
             ]
         })
 
-        console.log("Success setting up test connections in playwright global setup!")
+        console.log("Success setting up test connections in prisma seed!")
 
     } catch (error) {
-        console.log("Fail setting up test connections in playwright global setup:", error)
+        console.log("Fail setting up test connections in prisma seed:", error)
     }
 }
 
