@@ -1,35 +1,79 @@
-// const { execSync } = require('child_process')
-
 import prisma from "@/lib/db"
-import { clerkClient } from "@clerk/nextjs/server";
+import { test_users } from "./test_users"
 
+async function main() {
+    for (const user of test_users) {
+        try {
+            await prisma.user.upsert({
+                where: { email: user.email },
+                update: {},
+                create: {
+                    email: user.email,
+                    id: user.email,
+                    userName: user.name,
+                    bio: user.bio,
+                    timezone: user.timezone,
+                    games: { connect: user.games?.map(g => ({ id: g })) }
+                }
+            })
+        } catch (error) {
+            console.log("Error seeding filler users into db: ", error)
+        }
+    }
 
+    // create follow realations between test users
+    // trusting my Clerk user ID doesn't change as I shouldn't be moving to prod for a while if ever
+    try {
+        await prisma.follows.createMany({
+            data: [
+                {
+                    followedById: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followedByEmail: "dylan.m.c.digby@gmail.com",
+                    followedByUName: "Dios",
+                    followingId: test_users[0].email,
+                    followingUName: test_users[0].name,
+                    followingEmail: test_users[0].email
+                },
+                {
+                    followedById: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followedByEmail: "dylan.m.c.digby@gmail.com",
+                    followedByUName: "Dios",
+                    followingId: test_users[2].email,
+                    followingUName: test_users[2].name,
+                    followingEmail: test_users[2].email
+                },
+                {
+                    followedById: test_users[2].email,
+                    followedByEmail: test_users[2].email,
+                    followedByUName: test_users[2].name,
+                    followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followingUName: "Dios",
+                    followingEmail: "dylan.m.c.digby@gmail.com"
+                },
+                {
+                    followedById: test_users[1].email,
+                    followedByEmail: test_users[1].email,
+                    followedByUName: test_users[1].name,
+                    followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followingUName: "Dios",
+                    followingEmail: "dylan.m.c.digby@gmail.com"
+                },
+            ]
+        })
 
-// execSync("npm run getTwitchAuthToken")
-// execSync("npm run saveGamesToDb")
-// execSync("npm run saveGenresToDb")
-// execSync("npm run saveModesToDb")
-// execSync("npm run savePlatformsToDb")
-// execSync("npm run relateGamesToGenres")
-// execSync("npm run relateGamesToModes")
-// execSync("npm run relateGamesToPlatforms")
+        console.log("Success setting up test connections in playwright global setup!")
 
-// try {
-//     await prisma.user.createMany({
-//         data: [
-//             {email: 'dylan.m.c.digby@gmail.com', },
-//             {}
-//         ]
-//         ,
-//         skipDuplicates: true
-//     })
-// } catch (error) {
-//     console.log("Error seeding permanent users into db prod")
-// }
+    } catch (error) {
+        console.log("Fail setting up test connections in playwright global setup:", error)
+    }
+}
 
-// const persistentUsers = ['user_2akaEri3dboquU8h0pJ4QCByLuN', 'user_2aq0Je7jvvFaARtNXQ8tRWKS3H7', 'user_2ZqO4PFqv2bK0A21MfqI5BS8uYN']
-
-// for (const id of persistentUsers) {
-//     const params = { firstName: 'Updateseed' };
-//     await clerkClient.users.updateUser(id, params);
-// }
+main()
+    .then(async () => {
+        await prisma.$disconnect()
+    })
+    .catch(async (e) => {
+        console.error(e)
+        await prisma.$disconnect()
+        process.exit(1)
+    })

@@ -75,7 +75,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
                             <h3 className="font-bold text-blue-700">Release date</h3>
-                            <span className="">{releaseDate.toLocaleString(undefined, options)}</span>
+                            <span suppressHydrationWarning>{releaseDate.toLocaleString(undefined, options)}</span>
                         </div>
                     </>
                 }

@@ -18,7 +18,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
 
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
-            <div className="flex flex-col md:flex-row gap-2 md:gap-6 ">
+            <div className="flex flex-col flex-wrap md:flex-row gap-2 md:gap-6 ">
                 {currentItems &&
                     currentItems.map((game: IGame) => (
                         <div id="card_key_wrapper" key={game.id}>

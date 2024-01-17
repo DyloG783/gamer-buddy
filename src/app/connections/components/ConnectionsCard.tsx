@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter, Divider, Link, Image } from "@n
 
 export default function ConnectionsCard({ connection, type }: { connection: any, type: string }) {
     return (
-        <Card className="w-[250px] md:w-[300px]">
+        <Card className="w-[250px] md:w-[300px]" data-testid='connection_card'>
             <CardHeader className="flex gap-3">
                 {/* <Image
                     alt="nextui logo"

@@ -70,7 +70,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
             <div id="games_grid_view"
-                className="flex flex-col md:flex-row gap-2 md:gap-6 text-sm text-nowrap ">
+                className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-6 text-sm text-nowrap ">
                 {currentItems &&
                     currentItems.map((game: IGame) => (
                         <div id="card_key_wrapper" key={game.id} className="flex justify-around">
@@ -119,7 +119,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
                             breakLabel="..."
                             nextLabel=">"
                             onPageChange={handlePageClick}
-                            pageRangeDisplayed={3}
+                            pageRangeDisplayed={2}
                             pageCount={pageCount}
                             previousLabel="<"
                             renderOnZeroPageCount={null}

@@ -56,7 +56,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
         return (
             <div className="flex flex-col gap-1 ">
-                <h2 className="font-semibold p-1 text-blue-800">{categoryName}</h2>
+                <h2 className="font-semibold  text-blue-800">{categoryName}</h2>
                 <Select
                     options={categoryList}
                     instanceId={`${categoryName}`}
@@ -102,7 +102,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
         return (
             <div className="flex flex-col gap-1">
-                <h2 className="font-semibold p-1 text-blue-800">Search</h2>
+                <h2 className="font-semibold text-blue-800">Search</h2>
                 <input
                     name="input"
                     placeholder={searchState.search ? searchState.search : "Search for game name"}
