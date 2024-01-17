@@ -2,8 +2,8 @@
 
 import React, { Key, useState } from "react";
 import ReactPaginate from "react-paginate";
-import Link from "next/link";
 import { IGame } from "@/lib/custom_types";
+import GameCard from "./GameCard";
 
 interface IPaginatedGamesProps {
     games: IGame[]
@@ -18,40 +18,12 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
 
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
-            <div className="grid md:grid-flow-col md:auto-cols-fr text-xs  ">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-6 ">
                 {currentItems &&
                     currentItems.map((game: IGame) => (
-                        <Link
-                            key={game.id}
-                            className="shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden max-w-64"
-                            href={`/game/${game.id}`}
-                        >
-                            <h3 className="font-bold pb-2 text-base text-emerald-500">{game.name}</h3>
-                            <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">Genre</h3>
-                                {game.genres.map((genre: string, index: Key) => (
-                                    <span key={index}>
-                                        {genre + ", "}
-                                    </span>
-                                ))}
-                            </div>
-                            <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">Mode</h3>
-                                {game.modes.map((mode: string, index: Key) => (
-                                    <span key={index}>
-                                        {mode + ", "}
-                                    </span>
-                                ))}
-                            </div>
-                            <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">Platform</h3>
-                                {game.platforms.map((platform: string, index: Key) => (
-                                    <span key={index}>
-                                        {platform + ", "}
-                                    </span>
-                                ))}
-                            </div>
-                        </Link>
+                        <div id="card_key_wrapper" key={game.id}>
+                            <GameCard game={game} type="your" />
+                        </div>
                     ))}
             </div>
         );
@@ -85,8 +57,8 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
                     pageCount={pageCount}
                     previousLabel="<"
                     renderOnZeroPageCount={null}
-                    className="flex justify-around md:justify-center gap-4 md:gap-6
-                    p-1 md:p-2 text-slate-700"
+                    className="flex justify-around md:justify-center gap-2 md:gap-6
+                    my-1 md:my-2 "
                 />
             </>
         );

@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import { IGame, ISearchState } from "@/lib/custom_types";
 import Link from "next/link";
 import Loading from "@/lib/loading";
+import GameCard from "./GameCard";
 
 interface IPaginatedGamesProps {
     defaultGames: IGame[]
@@ -17,7 +18,7 @@ interface IPageGames {
     currentItems: IGame[]
 }
 
-const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, itemsPerPage, searchState, setSearchEmpty }) => {
+const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, itemsPerPage, searchState, setSearchEmpty }) => {
 
     const [searchedGames, setSearchedGames] = useState<IGame[]>([]);
     const [isLoading, setLoading] = useState(false);
@@ -70,41 +71,12 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
     const Items: React.FC<IPageGames> = ({ currentItems }) => {
         return (
             <div id="games_grid_view"
-                className="grid md:grid-flow-col md:auto-cols-fr grid-rows-2 text-sm ">
+                className="flex flex-col md:flex-row gap-2 md:gap-6 text-sm text-nowrap ">
                 {currentItems &&
                     currentItems.map((game: IGame) => (
-                        <Link
-                            key={game.id}
-                            id="game_link_view"
-                            className=" shadow-sm hover:shadow-md p-2 whitespace-nowrap overflow-hidden"
-                            href={`/game/${game.id}`}
-                        >
-                            <h3 className="font-bold pb-2 text-base text-emerald-500">{game.name}</h3>
-                            <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">Genre</h3>
-                                {game.genres.map((genre: string, index: Key) => (
-                                    <span key={index}>
-                                        {genre + ", "}
-                                    </span>
-                                ))}
-                            </div>
-                            <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">Mode</h3>
-                                {game.modes.map((mode: string, index: Key) => (
-                                    <span key={index}>
-                                        {mode + ", "}
-                                    </span>
-                                ))}
-                            </div>
-                            <div className="italic pb-1">
-                                <h3 className="font-bold text-gray-700">Platform</h3>
-                                {game.platforms.map((platform: string, index: Key) => (
-                                    <span key={index}>
-                                        {platform + ", "}
-                                    </span>
-                                ))}
-                            </div>
-                        </Link>
+                        <div id="card_key_wrapper" key={game.id}>
+                            <GameCard game={game} type="all" />
+                        </div>
                     ))}
             </div>
         );
@@ -133,13 +105,13 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                     &&
                     <div
                         id="paginated_Games_with_search"
-                        className={`flex flex-col  `}
+                        className={`flex flex-col `}
                     >
                         <div id="game_count" className="flex mx-auto pb-4 md:pb-28">
                             {searchedGames.length === 0 && searchState.currentSelected === null &&
-                                <p className="italic"> Currently showing lastest and upcoming games: <span className="text-emerald-500 not-italic">{filteredGames.length}</span></p>
+                                <p className="italic"> Currently showing lastest and upcoming games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
                                 ||
-                                <p className="italic">Currently showing searched games: <span className="text-emerald-500 not-italic">{filteredGames.length}</span></p>
+                                <p className="italic">Currently showing searched games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
                             }
 
                         </div>
@@ -152,8 +124,8 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
                             pageCount={pageCount}
                             previousLabel="<"
                             renderOnZeroPageCount={null}
-                            className="flex justify-around md:justify-center gap-4 md:gap-6
-                            p-1 md:p-4 bg text-slate-700 "
+                            className="flex justify-around md:justify-center gap-2 md:gap-6
+                            my-1 md:my-2 "
                         />
                     </div>
                     ||
@@ -170,4 +142,4 @@ const PaginatedGamesWithSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames
     )
 }
 
-export default PaginatedGamesWithSearch;
+export default PaginatedGamesSearch;

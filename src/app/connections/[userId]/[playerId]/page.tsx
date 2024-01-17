@@ -80,7 +80,7 @@ export default async function PlayerChat({ params }: { params: { userId: string,
     });
 
     return (
-        <div id="player_chat_container" className="bg-slate-200 h-full">
+        <div id="player_chat_container" className=" h-full">
             <h1 className="text-2xl text-blue-600 tracking-wide pt-6 md:pt-16 ml-10 md:ml-20">
                 {`${user.userName} and ${player.userName} chat`}
             </h1>

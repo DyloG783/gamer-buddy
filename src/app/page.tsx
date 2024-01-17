@@ -11,14 +11,14 @@ export default async function Home() {
   return (
     <div id="home_page_container" className="h-full flex flex-col">
       <div id="hero_layout_container"
-        className="p-4 shadow-md "
+        className="p-4 shadow-sm"
       >
         <HeroContent />
       </div>
 
       <div
         id="connectoin_updates_layout_container"
-        className=" grow p-4 shadow-md "
+        className=" grow p-4 shadow-md"
       >
         <Suspense fallback={<Loading />}>
           <ConnectionUpdates />

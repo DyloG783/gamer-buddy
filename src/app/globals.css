@@ -70,12 +70,19 @@
         @apply text-purple-700 hover:italic;
     }
 
-        .primary-color {
+        .primary-color-bg {
             @apply bg-emerald-500;
         }
         
-        .cancel-color {
+        .cancel-color-bg {
             @apply bg-rose-500;
+        }
+        .primary-color-font {
+            @apply text-emerald-500;
+        }
+    
+        .cancel-color-font {
+            @apply text-rose-500;
         }
 
     /* .first-section {

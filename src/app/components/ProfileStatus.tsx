@@ -35,7 +35,7 @@ export default async function ProfileStatus() {
                 {!timezone &&
                     <div
                         id="timezone_status_unavailable"
-                        className="flex justify-around gap-2 pb-2"
+                        className="flex gap-2 pb-2"
                     >
                         <p className="text-sm italic">You still need to add your timezone in your profile. Without this we cannot show you how many others are available to game with</p>
                     </div>
@@ -43,7 +43,7 @@ export default async function ProfileStatus() {
                 {!bio &&
                     <div
                         id="aboutYou_status_unavailable"
-                        className="flex justify-around gap-2 pb-2"
+                        className="flex gap-2 pb-2"
                     >
                         <p className="text-sm italic">You need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
                     </div>

@@ -7,6 +7,9 @@ export type IGame = {
     genres: string[];
     platforms: string[];
     modes: string[];
+    _count?: {
+        users: number;
+    }
 }
 
 // this represents genres, platforms, and modes

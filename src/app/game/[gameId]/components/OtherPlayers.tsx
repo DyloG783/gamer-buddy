@@ -70,7 +70,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
                 {userTimezone && userTimezone.length > 0 &&
 
                     <p id="others_in_your_timezone"
-                        className="hover:shadow-sm p-6 tracking-wide"
+                        className="p-6 tracking-wide"
                     >
                         Others in your timezone playing this game: <span className="text-emerald-500 font-semibold">{usersWithGameAndTimezoneCount}</span>
                     </p>
@@ -79,7 +79,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
 
 
                 <p id="others_in_all_timezones"
-                    className=" p-6 tracking-wide"
+                    className="p-6 tracking-wide"
                 >
                     Players in all timezones playing this game: <span className="text-emerald-500 font-semibold">{usersWhoAlsoHaveThisGameCount}</span>
                 </p>

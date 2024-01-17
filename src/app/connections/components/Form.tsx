@@ -33,7 +33,7 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
                     onClick={() => setEditing(true)}
                     required
                     maxLength={500}
-                    className={`w-full p-4 min-h-[100px]`}
+                    className={`w-full p-4 min-h-[100px] shadow-md`}
                 />
             </form>
             <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`}>
