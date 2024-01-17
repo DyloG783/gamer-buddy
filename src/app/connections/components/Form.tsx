@@ -1,12 +1,25 @@
 "use client"
 
 import { sendMessagePrivate } from "@/lib/actions"
-import { useRef, useState } from "react"
+import { Textarea } from "@nextui-org/react"
+import { useEffect, useRef, useState } from "react"
 
 export default function Form({ privateRoomId }: { privateRoomId: string }) {
     const [message, setMessage] = useState("")
     const [editing, setEditing] = useState(false)
+    const [inputValid, setInputvalid] = useState(false) // state for input validation
     const formRef = useRef<HTMLFormElement>(null);
+
+    // use effect for validation on input change
+    useEffect(() => {
+        setInputvalid(false)
+
+        if (message.length > 0) {
+            if (message.length < 500) {
+                setInputvalid(true)
+            }
+        }
+    }, [message]);
 
     const closeInput = () => {
         setEditing(false);
@@ -25,19 +38,20 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
                     formRef.current?.reset();
                 }}
                 onSubmit={closeInput}
-                className="p-4">
-                <input
+                ref={formRef}
+            >
+                <Textarea
+                    label="Type here"
+                    placeholder="Enter your description"
+                    className="w-full mt-2"
                     name="message_input"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onClick={() => setEditing(true)}
-                    required
                     maxLength={500}
-                    className={`w-full p-4 min-h-[100px] shadow-md`}
                 />
             </form>
             <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`}>
-                {/* <span className={`${inputValid ? 'hidden' : ''} text-red-400 mb-2`}> 10 - 500 characters</span> */}
                 <button type="reset"
                     onClick={closeInput}
                     className={`btn-cancel `}
@@ -45,7 +59,7 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
                     Cancel
                 </button>
                 <button type="submit" form="message_form"
-                    className={`btn-primary`}
+                    className={`btn-primary ${inputValid ? '' : 'hidden'} `}
                 >
                     Send
                 </button>

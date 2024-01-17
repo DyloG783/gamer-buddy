@@ -1,9 +1,8 @@
 'use client'
 
-import React, { Key, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IGame, ISearchState } from "@/lib/custom_types";
-import Link from "next/link";
 import Loading from "@/lib/loading";
 import GameCard from "./GameCard";
 

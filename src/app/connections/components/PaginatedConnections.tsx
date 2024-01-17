@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IConnection } from "@/lib/custom_types";
-import Link from "next/link";
+import ConnectionsCard from "./ConnectionsCard";
 
 interface IPaginatedConnectionsProps {
     connections: IConnection[] | null
@@ -23,55 +23,14 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
 
     const Items: React.FC<IItems> = ({ currentItems }) => {
         return (
-            <div className="">
-                <ul className="grid md:grid-flow-col md:auto-cols-fr ">
-                    {currentItems &&
-                        currentItems.map((connection: any, index) => (
-                            <li key={index} className="hover:shadow-lg shadow-md md:max-w-64 p-2 md:p-8 md:ml-2">
-                                {option === "connected"
-                                    &&
-                                    <Link
-
-                                        href={`/connections/view-player/${connection.followedById}`}
-                                    >
-                                        <p className="font-semibold text-emerald-600 tracking-wider pb-2">{`${connection.followedByUName}`}</p>
-                                        {connection.followedBy.timezone != null
-                                            &&
-                                            <p className=" text-xs tracking-wide">{`${connection.followedBy.timezone}`}</p>
-                                        }
-                                    </Link>
-                                }
-                                {option === "requests"
-                                    &&
-                                    <Link
-
-                                        href={`/connections/view-player/${connection.followedById}`}
-                                    >
-                                        <p className="font-semibold text-emerald-600 tracking-wider pb-2">{`${connection.followedByUName}`}</p>
-                                        {connection.followedBy.timezone != null
-                                            &&
-                                            <p className=" text-xs tracking-wide">{`${connection.followedBy.timezone}`}</p>
-                                        }
-                                    </Link>
-                                }
-                                {option === "following"
-                                    &&
-                                    <Link
-
-                                        href={`/connections/view-player/${connection.followingId}`}
-                                    >
-                                        <p className="font-semibold text-emerald-600 tracking-wider pb-2">{`${connection.followingUName}`}</p>
-                                        {connection.following.timezone != null
-                                            &&
-                                            <p className="text-xs tracking-wide">{`${connection.following.timezone}`}</p>
-                                        }
-
-                                    </Link>
-                                }
-                            </li>
-                        ))}
-                </ul>
-            </div>
+            <ul className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-6 ">
+                {currentItems &&
+                    currentItems.map((connection: any, index) => (
+                        <div id="card_key_wrapper" key={index} className="">
+                            <ConnectionsCard connection={connection} type={option} />
+                        </div>
+                    ))}
+            </ul>
         );
     }
 
@@ -103,17 +62,15 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
                     pageCount={pageCount}
                     previousLabel="<"
                     renderOnZeroPageCount={null}
-                    className="flex justify-around md:justify-center md:gap-4
-                    p-1 md:p-2 border border-solid"
+                    className="flex justify-around md:justify-center gap-2 md:gap-6
+                            my-1 md:my-2"
                 />
             </>
         );
     }
 
     return (
-        <div className={``} id="paginated_connections" >
-            <PaginatedItems itemsPerPage={itemsPerPage} />
-        </div>
+        <PaginatedItems itemsPerPage={itemsPerPage} />
     )
 }
 

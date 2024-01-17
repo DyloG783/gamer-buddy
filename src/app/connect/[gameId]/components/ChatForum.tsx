@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
-import Pusher from "pusher-js"
+import { useEffect, useRef, useState } from "react";
+import Pusher from "pusher-js";
+import { ScrollShadow } from "@nextui-org/react";
 
 type TForumMessages = {
     messages: {
@@ -55,16 +56,14 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
 
     return (
         <div id="chat_container" className="flex flex-col">
-            <div id="message_container"
-                className="max-h-96 overflow-y-auto "
-            >
+            <ScrollShadow className="w-full h-[400px]">
                 {totalMessages && totalMessages.length > 0
                     &&
                     totalMessages.map((m, index) => (
                         // const date = Date(m.createdAt).getTime()
                         <div key={index} className="p-2">
                             <span className="text-emerald-600 tracking-wider">{m.sentGameBy.userName} </span>
-                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt.toLocaleString(undefined, options)}</span>
+                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>
                             <p>{`${m.message}`}</p>
                         </div>
                     ))
@@ -72,7 +71,7 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
                     <p className="p-2 ml-2 md:ml-0 tracking-wide font-light italic">Your&apos;re potentially the first person to leave a message... What an honor!</p>
                 }
                 <div ref={messageEndRef}></div>
-            </div>
+            </ScrollShadow>
         </div>
     )
 }

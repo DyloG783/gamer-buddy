@@ -6,6 +6,16 @@ import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-o
 // they will display different information and link to other places
 export default function GameCard({ game, type }: { game: IGame, type: string }) {
 
+    const unixTimestamp = game.firstReleaseDate;
+    const timestamp = unixTimestamp! * 1000;
+    const releaseDate = new Date(timestamp);
+
+    const options: Intl.DateTimeFormatOptions = {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    };
+
     return (
         <Card className="w-[250px] md:w-[300px] ">
             <CardHeader className="flex">
@@ -61,6 +71,11 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                                     {platform + ", "}
                                 </span>
                             ))}
+                        </div>
+                        <Divider className="my-2" />
+                        <div className="overflow-hidden">
+                            <h3 className="font-bold text-blue-700">Release date</h3>
+                            <span className="">{releaseDate.toLocaleString(undefined, options)}</span>
                         </div>
                     </>
                 }

@@ -16,37 +16,37 @@ const Connections = async () => {
     return (
         <div id="page_container" className="flex flex-col justify-between h-full ">
             <div id="connected_with_container"
-                className="grow flex flex-col justify-between
+                className="grow flex flex-col justify-between md:pl-10 shadow-sm
                 ">
-                <div className="md:pl-10">
+                <div>
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
-                    tracking-wider mt-4 md:mt-10 ml-4 mb-2"
+                    tracking-wider mt-4 pb-2"
                     >
                         Connected With
                     </p>
                     <p className="font-light tracking-wide ml-4">Connections you can chat with</p>
                 </div>
                 <Suspense fallback={<Loading />}>
-                    <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connected"} />
+                    <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connectedOrRequest"} />
                 </Suspense>
             </div>
-            <div id="connection_request_container" className="grow  flex flex-col justify-between" >
-                <div className="md:pl-10">
+            <div id="connection_request_container" className="grow flex flex-col justify-between md:pl-10 shadow-sm" >
+                <div>
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
-                    tracking-wider mt-4 md:mt-10 ml-4 mb-2"
+                    tracking-wider mt-4 pb-2"
                     >
                         Connection requests
                     </p>
                     <p className="font-light tracking-wide ml-4">People who follow you</p>
                 </div>
                 <Suspense fallback={<Loading />}>
-                    <PaginatedConnections connections={requests} itemsPerPage={5} option={"requests"} />
+                    <PaginatedConnections connections={requests} itemsPerPage={5} option={"connectedOrRequest"} />
                 </Suspense>
             </div>
-            <div id="following_container" className="grow flex flex-col justify-between">
-                <div className="md:pl-10">
+            <div id="following_container" className="grow flex flex-col justify-between md:pl-10 shadow-sm">
+                <div>
                     <p className="text-blue-600 font-semibold text-xl md:text-2xl
-                    tracking-wider mt-4 md:mt-10 ml-4 mb-2"
+                    tracking-wider mt-4 pb-2"
                     >
                         Following
                     </p>

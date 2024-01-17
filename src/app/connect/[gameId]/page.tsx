@@ -1,10 +1,10 @@
+import prisma from "@/lib/db";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { GameNotExist } from "@/lib/errors";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
-import Form from "@/app/game/[gameId]/components/Form";
-import prisma from "@/lib/db";
-import ChatForum from "@/app/game/[gameId]/components/ChatForum";
+import Form from "./components/Form";
+import ChatForum from "./components/ChatForum";
 
 // stop page from caching (needed for real time chat (in prod))
 export const dynamic = "force-dynamic";
@@ -100,9 +100,9 @@ export default async function Connect({ params }: { params: { gameId: number } }
                     </ul>
                 </div>
                 <div id="chat_forum container"
-                    className="min-w-[66%] mt-4"
+                    className="min-w-[66%] "
                 >
-                    <p className="font-semibold mb-1 md:mb-6 ml-4 md:ml-2 tracking-wide text-blue-700">Chat Forum</p>
+                    <h2 className="font-semibold mb-1 md:mb-6 ml-4 md:ml-2 tracking-wide text-blue-700">Chat Forum</h2>
                     <ChatForum roomMessages={messages} gameRoomId={gameRoom.id} />
                     <Form gameRoomId={gameRoom.id} />
                 </div>

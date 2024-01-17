@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Pusher from "pusher-js"
+import { ScrollShadow } from "@nextui-org/react";
 
 type TMessage = ({
     sentPrivateBy: {
@@ -50,20 +51,17 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
 
     return (
         <div id="chat_container" className="flex flex-col">
-            <div id="message_container"
-                className="max-h-40 md:max-h-80 overflow-y-auto"
-            >
+            <ScrollShadow className="w-full h-[400px]">
                 {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
                         <div key={index} className="p-2">
                             <span className="text-emerald-600 tracking-wider">{m.sentPrivateBy.userName} </span>
-                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt.toLocaleString(undefined, options)}</span>
-                            {/* <p className="font-light tracking-wider">{`${m.sentPrivateBy.userName}`}</p> */}
+                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>
                             <p>{`${m.message}`}</p>
                         </div>
                     ))}
                 <div ref={messageEndRef}></div>
-            </div>
+            </ScrollShadow>
         </div>
     )
 }
