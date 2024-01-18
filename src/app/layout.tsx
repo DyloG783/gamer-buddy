@@ -3,6 +3,7 @@ import NavigationBar from "@/app/components/navigation/NavigationBar"
 import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from 'next/font/google';
 import { Providers } from "./providers";
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'Gamer Buddy',
@@ -30,6 +31,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
               {children}
             </main>
           </Providers>
+          <Analytics />
         </body>
       </html>
     </ClerkProvider >

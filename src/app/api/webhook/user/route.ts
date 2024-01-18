@@ -125,26 +125,5 @@ export async function POST(req: Request) {
         }
     }
 
-    // if (evt.type === 'session.created') {
-    //     const userId = evt.data.id;
-    //     const userName = evt.data.username;
-    //     try {
-    //         await prisma.user.upsert({
-    //             where: {
-    //                 id: userId,
-    //             },
-    //             update: {},
-    //             create: {
-    //                 id: userId,
-    //                 userName: userName
-    //             }
-    //         })
-
-    //         console.log("Webhook, Delete user, Prisma; Success!");
-    //     } catch (error) {
-    //         console.log("Webhook, Delete user, Prisma; ", error);
-    //     }
-    // }
-
     return new Response('', { status: 200 })
 }
