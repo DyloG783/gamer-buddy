@@ -9,7 +9,7 @@ async function main() {
                 update: {},
                 create: {
                     email: user.email,
-                    id: user.email,
+                    id: user.id,
                     userName: user.name,
                     bio: user.bio,
                     timezone: user.timezone,
@@ -17,12 +17,12 @@ async function main() {
                 }
             })
 
-            console.log("Success seeding filler users into db in prisma seed!")
-
         } catch (error) {
             console.log("Error seeding filler users into db: ", error)
         }
     }
+
+    console.log("Success seeding filler users into db in prisma seed!")
 
     // create follow realations between test users
     // trusting my Clerk user ID doesn't change as I shouldn't be moving to prod for a while if ever
@@ -33,7 +33,7 @@ async function main() {
                     followedById: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
                     followedByEmail: "dylan.m.c.digby@gmail.com",
                     followedByUName: "Dios",
-                    followingId: test_users[0].email,
+                    followingId: test_users[0].id,
                     followingUName: test_users[0].name,
                     followingEmail: test_users[0].email
                 },
@@ -41,12 +41,12 @@ async function main() {
                     followedById: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
                     followedByEmail: "dylan.m.c.digby@gmail.com",
                     followedByUName: "Dios",
-                    followingId: test_users[2].email,
+                    followingId: test_users[2].id,
                     followingUName: test_users[2].name,
                     followingEmail: test_users[2].email
                 },
                 {
-                    followedById: test_users[2].email,
+                    followedById: test_users[2].id,
                     followedByEmail: test_users[2].email,
                     followedByUName: test_users[2].name,
                     followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
@@ -54,7 +54,7 @@ async function main() {
                     followingEmail: "dylan.m.c.digby@gmail.com"
                 },
                 {
-                    followedById: test_users[1].email,
+                    followedById: test_users[1].id,
                     followedByEmail: test_users[1].email,
                     followedByUName: test_users[1].name,
                     followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",

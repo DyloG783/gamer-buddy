@@ -96,26 +96,26 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                         className="flex flex-col my-8 gap-2 "
                     >
                         <div id="game_genre_group" className="mb-4">
-                            <p className="font-semibold md:mb-2">Genre</p>
+                            <p className="font-semibold md:mb-2 primary-color-font">Genre</p>
                             {game?.genres.map((genre: string, index) => (
                                 <span key={index} className=" font-light">{genre + ", "}</span>
                             ))}
                         </div>
                         <div id="game_mode_group" className="mb-4">
-                            <p className="font-semibold md:mb-2">Mode</p>
+                            <p className="font-semibold md:mb-2 primary-color-font">Mode</p>
                             {game?.modes.map((mode: string, index) => (
                                 <span key={index} className="font-light">{mode + ", "}</span>
                             ))}
                         </div>
                         <div id="game_platform_group" className="mb-4">
-                            <p className="font-semibold md:mb-2">Platform</p>
+                            <p className="font-semibold md:mb-2 primary-color-font">Platform</p>
                             {game?.platforms.map((plat: string, index) => (
                                 <span key={index} className="font-light">{plat + ", "}</span>
                             ))}
                         </div>
                         <div id="release_date" className="mb-4">
-                            <p className="font-semibold md:mb-2">Release date</p>
-                            {date != null && <p>{date.toLocaleDateString()}</p>}
+                            <p className="font-semibold md:mb-2 primary-color-font">Release date</p>
+                            {date != null && <p className="font-thin">{date.toLocaleDateString()}</p>}
                         </div>
                     </div>
                 </div>

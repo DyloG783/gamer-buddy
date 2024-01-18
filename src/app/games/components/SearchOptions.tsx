@@ -58,6 +58,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                 <h2 className="font-semibold  text-blue-800">{categoryName}</h2>
                 <Select
                     options={categoryList}
+                    // defaultValue={'all'}
                     instanceId={`${categoryName}`}
                     onChange={handleSelect}
                     value={{
@@ -70,7 +71,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                         control: (baseStyles) => ({
                             ...baseStyles,
                             width: 250,
-                            zIndex: 9999
                         }),
                         menu: provided => ({ ...provided, zIndex: 9999 })
                     }}

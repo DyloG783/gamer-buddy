@@ -2,13 +2,12 @@
 
 import { sendMessagePrivate } from "@/lib/actions"
 import { Textarea } from "@nextui-org/react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Form({ privateRoomId }: { privateRoomId: string }) {
     const [message, setMessage] = useState("")
     const [editing, setEditing] = useState(false)
     const [inputValid, setInputvalid] = useState(false) // state for input validation
-    const formRef = useRef<HTMLFormElement>(null);
 
     // use effect for validation on input change
     useEffect(() => {
@@ -21,40 +20,50 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
         }
     }, [message]);
 
-    const closeInput = () => {
-        setEditing(false);
+
+    function closeInput() {
         setMessage("");
+        setEditing(false);
     }
 
     // adds playerId to server action
     const updateWithPrivateRoomId = sendMessagePrivate.bind(null, privateRoomId)
 
+    async function handleFormSubmit(formData: FormData) {
+        await updateWithPrivateRoomId(formData);
+        closeInput();
+    }
+
     return (
         <>
             <form
                 id="message_form"
-                action={async (formData) => {
-                    await updateWithPrivateRoomId(formData)
-                    formRef.current?.reset();
-                }}
-                onSubmit={closeInput}
-                ref={formRef}
+                action={(formData) => handleFormSubmit(formData)}
             >
                 <Textarea
-                    label="Type here"
-                    placeholder="Enter your description"
+                    label="Enter your message"
                     className="w-full mt-2"
                     name="message_input"
+                    spellCheck="true"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onClick={() => setEditing(true)}
                     maxLength={500}
+                    onKeyDown={async (e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            if (message === "") return;
+                            const formData = new FormData();
+                            formData.append('message_input', message);
+                            handleFormSubmit(formData);
+                        }
+                    }}
                 />
             </form>
             <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`}>
                 <button type="reset"
                     onClick={closeInput}
-                    className={`btn-cancel `}
+                    className={`btn-cancel`}
                 >
                     Cancel
                 </button>

@@ -19,26 +19,9 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
     return (
         <Card className="w-[250px] md:w-[300px] ">
             <CardHeader className="flex">
-                {/* <Image
-                    alt="nextui logo"
-                    height={40}
-                    radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                    width={40}
-                /> */}
-                {type === "your" &&
-                    <Link className="flex" href={`/game/${game.id}`}>
-                        <p className="text-md primary-color-font font-semibold">{game.name}</p>
-                        {/* <p className="text-small text-default-500">test text</p> */}
-                    </Link>
-                }
-                {type === "all" &&
-                    <Link className="flex" href={`${game.url}`} target="_blank">
-                        <p className="text-md primary-color-font font-semibold">{game.name}</p>
-                        {/* <p className="text-small text-default-500">test text</p> */}
-                    </Link>
-                }
-
+                <Link className="flex" href={`/game/${game.id}`}>
+                    <p className="text-md primary-color-font font-semibold">{game.name}</p>
+                </Link>
             </CardHeader>
             <Divider />
             <CardBody>
@@ -84,10 +67,11 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
             <CardFooter>
                 <Link
                     showAnchorIcon
-                    href={type === "your" ? `/connect/${game.id}` : `/game/${game.id}`}
+                    href={type === "your" ? `/connect/${game.id}` : `${game.url}`}
                     className="text-xs "
+                    target={type === 'your' ? "_self" : "_blank"}
                 >
-                    {type === 'your' ? 'Chat with others' : 'View game'}
+                    {type === 'your' ? 'Chat with others' : 'View game on IGDB'}
                 </Link>
             </CardFooter>
         </Card>

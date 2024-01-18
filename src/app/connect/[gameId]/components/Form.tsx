@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { sendMessageForum } from "@/lib/actions";
 import { Textarea } from "@nextui-org/react";
 
@@ -8,7 +8,6 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
     const [message, setMessage] = useState("");
     const [editing, setEditing] = useState(false);
     const [inputValid, setInputvalid] = useState(false) // state for input validation
-    const formRef = useRef<HTMLFormElement>(null);
 
     // use effect for validation on input change
     useEffect(() => {
@@ -29,26 +28,34 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
     // adds gameRoomId to server action
     const updateWithForumId = sendMessageForum.bind(null, gameRoomId);
 
+    async function handleFormSubmit(formData: FormData) {
+        await updateWithForumId(formData);
+        closeInput();
+    }
+
     return (
         <>
             <form id="message_form"
-                action={async (formData) => {
-                    await updateWithForumId(formData);
-                    formRef.current?.reset();
-                }}
-                onSubmit={closeInput}
-                ref={formRef}
+                action={(formData) => handleFormSubmit(formData)}
             >
                 <Textarea
-                    label="Type here"
-                    placeholder="Enter your description"
+                    label="Enter your message"
                     className="w-full mt-2"
                     name="message_input"
+                    spellCheck="true"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onClick={() => setEditing(true)}
-                    required
                     maxLength={500}
+                    onKeyDown={async (e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            if (message === "") return;
+                            const formData = new FormData();
+                            formData.append('message_input', message);
+                            handleFormSubmit(formData);
+                        }
+                    }}
                 />
             </form>
             <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`} >
