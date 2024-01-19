@@ -72,7 +72,6 @@ Need help with:
 
 bg-gradient-to-bl from-blue-100 to-sky-50
 
-"build": "prisma db push && prisma generate && prisma db seed  && next build && npm run allGameData",
 
 
 
