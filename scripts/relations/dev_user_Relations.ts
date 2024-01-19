@@ -25,7 +25,6 @@ async function main() {
     console.log("Success seeding filler users into db in prisma seed!")
 
     // create follow realations between test users
-    // trusting my Clerk user ID doesn't change as I shouldn't be moving to prod for a while if ever
     try {
         await prisma.follows.createMany({
             data: [
@@ -57,6 +56,46 @@ async function main() {
                     followedById: test_users[1].id,
                     followedByEmail: test_users[1].email,
                     followedByUName: test_users[1].name,
+                    followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followingUName: "Dios",
+                    followingEmail: "dylan.m.c.digby@gmail.com"
+                },
+                {
+                    followedById: test_users[3].id,
+                    followedByEmail: test_users[3].email,
+                    followedByUName: test_users[3].name,
+                    followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followingUName: "Dios",
+                    followingEmail: "dylan.m.c.digby@gmail.com"
+                },
+                {
+                    followedById: test_users[4].id,
+                    followedByEmail: test_users[4].email,
+                    followedByUName: test_users[4].name,
+                    followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followingUName: "Dios",
+                    followingEmail: "dylan.m.c.digby@gmail.com"
+                },
+                {
+                    followedById: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followedByEmail: "dylan.m.c.digby@gmail.com",
+                    followedByUName: "Dios",
+                    followingId: test_users[5].id,
+                    followingUName: test_users[5].name,
+                    followingEmail: test_users[5].email
+                },
+                {
+                    followedById: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
+                    followedByEmail: "dylan.m.c.digby@gmail.com",
+                    followedByUName: "Dios",
+                    followingId: test_users[6].id,
+                    followingUName: test_users[6].name,
+                    followingEmail: test_users[6].email
+                },
+                {
+                    followedById: test_users[6].id,
+                    followedByEmail: test_users[6].email,
+                    followedByUName: test_users[6].name,
                     followingId: "user_2ZqO4PFqv2bK0A21MfqI5BS8uYN",
                     followingUName: "Dios",
                     followingEmail: "dylan.m.c.digby@gmail.com"

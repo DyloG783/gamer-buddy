@@ -31,8 +31,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
 
         if (searchState.currentSelected) {
 
-            setLoading(true)
-
+            setLoading(true);
             fetch(`${apiUrl}/api/search-games`, {
                 method: 'POST',
                 headers: {
@@ -112,7 +111,6 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
                                 ||
                                 <p className="italic">Currently showing searched games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
                             }
-
                         </div>
                         <Items currentItems={currentItems} />
                         <ReactPaginate

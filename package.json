@@ -18,7 +18,7 @@
     "saveModesToDb": "npx tsx scripts/api_data/saveModesToDb.ts",
     "savePlatformsToDb": "npx tsx scripts/api_data/savePlatformsToDb.ts",
     "allGameData": "npm run getTwitchAuthToken && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run saveGamesToDb",
-    "user_Relations": "npx tsx scripts/relations/user_relations.ts",
+    "dev_user_Relations": "npx tsx scripts/relations/dev_user_relations.ts",
     "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts"
   },
   "dependencies": {
