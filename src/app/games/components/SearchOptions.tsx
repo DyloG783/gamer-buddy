@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { ISearchState, ISearchableGameType } from "@/lib/custom_types";
-// import Select from 'react-select';
 import { Select, SelectItem } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -24,10 +23,10 @@ interface ISelectSearchProps {
 const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState, searchEmpty }) => {
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
-        const [categoryListSelection, setCategoryListSelection] = useState("default")
+        const [categoryListSelection, setCategoryListSelection] = useState("Default")
 
         useEffect(() => {
-            if (categoryListSelection !== "default") {
+            if (categoryListSelection !== "Default") {
                 if (categoryName === "Genre") {
                     setSearchState({
                         ...searchState,
@@ -52,8 +51,9 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
             }
         }, [categoryListSelection])
 
-        const handleSelect = (option: any) => {
-            setCategoryListSelection(option.label);
+        const handleSelect = (e: any) => {
+            console.log("handleSelect selected: ", e.target.value)
+            setCategoryListSelection(e.target.value);
         };
 
         return (
@@ -63,12 +63,17 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     label={categoryName === "Genre" && searchState.genre != null ? searchState.genre
                         : categoryName === "Platform" && searchState.platform != null ? searchState.platform
                             : categoryName === "Mode" && searchState.mode != null ? searchState.mode
-                                : ""}
-                    value={categoryListSelection}
+                                : categoryListSelection}
+                    // label={categoryName}
+                    placeholder={categoryName === "Genre" && searchState.genre != null ? searchState.genre
+                        : categoryName === "Platform" && searchState.platform != null ? searchState.platform
+                            : categoryName === "Mode" && searchState.mode != null ? searchState.mode
+                                : categoryName}
+                    // value={categoryListSelection}
+                    selectedKeys={[categoryListSelection]}
                     onChange={handleSelect}
                     size='lg'
                     className={`min-w-60 max-w-sm`}
-                // fullWidth
                 >
                     {categoryList.map((cat) =>
                         <SelectItem key={cat.label} value={cat.label}>

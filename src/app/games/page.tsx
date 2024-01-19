@@ -8,6 +8,10 @@ export default async function GamesPage() {
     const platformsDb = await prisma.platform.findMany();
     const modesdb = await prisma.mode.findMany();
 
+    // let genres = [{ value: "Default", label: "Default"}];
+    // let platforms = [{ value: "Default", label: "Default" }];
+    // let modes = [{ value: "Default", label: "Default"}];
+
     const genres = genresDb.map((g) => {
         return {
             value: g.id.toString(),

@@ -24,9 +24,9 @@ export type ISearchableGameType = {
 }
 
 export type ISearchState = {
-    genre: number | null;
-    platform: number | null;
-    mode: number | null;
+    genre: string | null;
+    platform: string | null;
+    mode: string | null;
     search: string | null;
     currentSelected: string | null;
 }
