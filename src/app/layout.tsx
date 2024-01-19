@@ -21,7 +21,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   return (
 
     <ClerkProvider>
-      <html lang="en" className={'bg-sky-50/50'}>
+      <html lang="en" className={``}>
         <body className='min-h-screen text-sm md:text-base lg:text-lg '>
           {/* <body className='min-h-screen text-sm md:text-base lg:text-lg dark text-foreground bg-background'> */}
           <Providers>

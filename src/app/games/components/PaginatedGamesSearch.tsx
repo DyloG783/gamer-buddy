@@ -107,9 +107,9 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
                     >
                         <div id="game_count" className="flex mx-auto pb-4 md:pb-28">
                             {searchedGames.length === 0 && searchState.currentSelected === null &&
-                                <p className="italic"> Currently showing lastest and upcoming games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
+                                <p className="italic tracking-wider pb-2 md:pb-0"> Currently showing lastest and upcoming games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
                                 ||
-                                <p className="italic">Currently showing searched games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
+                                <p className="italic tracking-wider pb-2 md:pb-0">Currently showing searched games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
                             }
                         </div>
                         <Items currentItems={currentItems} />

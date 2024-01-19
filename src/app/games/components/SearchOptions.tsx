@@ -2,7 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { ISearchState, ISearchableGameType } from "@/lib/custom_types";
-import Select from 'react-select';
+// import Select from 'react-select';
+import { Select, SelectItem } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/input";
 
 interface ISearchOptionsProps {
     genres: ISearchableGameType[];
@@ -57,24 +60,22 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
             <div className="flex flex-col gap-1 ">
                 <h2 className="font-semibold  text-blue-800">{categoryName}</h2>
                 <Select
-                    options={categoryList}
-                    // defaultValue={'all'}
-                    instanceId={`${categoryName}`}
+                    label={categoryName}
+                    value={categoryName === "Genre" && searchState.genre != null ? searchState.genre
+                        : categoryName === "Platform" && searchState.platform != null ? searchState.platform
+                            : categoryName === "Mode" && searchState.mode != null ? searchState.mode
+                                : ""}
                     onChange={handleSelect}
-                    value={{
-                        label: categoryName === "Genre" && searchState.genre != null ? searchState.genre
-                            : categoryName === "Platform" && searchState.platform != null ? searchState.platform
-                                : categoryName === "Mode" && searchState.mode != null ? searchState.mode
-                                    : ""
-                    }}
-                    styles={{
-                        control: (baseStyles) => ({
-                            ...baseStyles,
-                            width: 250,
-                        }),
-                        menu: provided => ({ ...provided, zIndex: 9999 })
-                    }}
-                />
+                    size='lg'
+                    className={`min-w-60 max-w-sm`}
+                // fullWidth
+                >
+                    {categoryList.map((cat) =>
+                        <SelectItem key={cat.label} value={cat.label}>
+                            {cat.label}
+                        </SelectItem>
+                    )}
+                </Select>
             </div>
         )
     }
@@ -103,15 +104,17 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
         return (
             <div className="flex flex-col gap-1">
                 <h2 className="font-semibold text-blue-800">Search</h2>
-                <input
+                <Input
                     name="input"
-                    placeholder={searchState.search ? searchState.search : "Search for game name"}
+                    label={searchState.search ? searchState.search : "Search for game name"}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleSubmit}
-                    className=" placeholder:italic w-64 h-10 text-sm  border-2 border-slate-100 px-2"
+                    isClearable
+                    onClear={() => setInput("")}
+                    size="lg"
                 >
-                </input>
+                </Input>
             </div>
         )
     }
@@ -121,22 +124,27 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
             className="flex flex-col "
         >
             {searchEmpty &&
-                <button
+                <Button
                     id="reset_search"
                     onClick={() => window.location.reload()}
-                    className="btn-primary ml-auto animate-bounce bg-amber-200 text-black"
+                    data-testid={'reset_search'}
+                    size='lg'
+                    className="text-sm tracking-wider ml-auto animate-bounce bg-amber-200 text-black"
                 >
                     Reset search
-                </button> ||
-                <button
+                </Button> ||
+                <Button
                     id="reset_search"
                     onClick={() => window.location.reload()}
-                    className="btn-primary ml-auto"
+                    color='primary'
+                    data-testid={'reset_search'}
+                    size='lg'
+                    className={`text-sm tracking-wider ml-auto`}
                 >
                     Reset search
-                </button>
+                </Button>
             }
-            <div className="flex flex-wrap gap-3 lg:gap-6 xl:gap-10 mb-4 md:mb-8"
+            <div className="flex  flex-wrap gap-3 lg:gap-6 xl:gap-10 mb-4 md:mb-8"
                 id="search_options"
             >
                 <SelectSearch categoryList={genres} categoryName="Genre" />
