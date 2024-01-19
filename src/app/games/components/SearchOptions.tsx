@@ -60,11 +60,11 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
             <div className="flex flex-col gap-1 ">
                 <h2 className="font-semibold  text-blue-800">{categoryName}</h2>
                 <Select
-                    label={categoryName}
-                    value={categoryName === "Genre" && searchState.genre != null ? searchState.genre
+                    label={categoryName === "Genre" && searchState.genre != null ? searchState.genre
                         : categoryName === "Platform" && searchState.platform != null ? searchState.platform
                             : categoryName === "Mode" && searchState.mode != null ? searchState.mode
                                 : ""}
+                    value={categoryListSelection}
                     onChange={handleSelect}
                     size='lg'
                     className={`min-w-60 max-w-sm`}
