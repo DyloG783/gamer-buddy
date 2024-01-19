@@ -56,7 +56,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
 
     }, [searchState]);
 
-    if (isLoading) return <Loading />
+    if (isLoading) return <Loading />;
 
     // the games to be displayed are either default, or what was returned from searching
     if (searchedGames.length === 0 && searchState.currentSelected === null) {
