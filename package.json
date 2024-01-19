@@ -8,7 +8,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "basicBuild": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma db push && prisma generate && prisma db seed  && next build && npm run allGameData",
