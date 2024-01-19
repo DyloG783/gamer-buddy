@@ -4,7 +4,7 @@ import getIGBdFilteredGameCount from '../helpers/getIGBdFilteredGameCount';
 async function saveGamesToDb() {
 
     // const gameCount = await getIGBdFilteredGameCount()
-    const gameCount = 2000;
+    const gameCount = 8000;
     const limit: number = 500;
     let offset: number = 0;
     let loopCount = 0;

@@ -31,21 +31,21 @@ export default async function ProfileStatus() {
             className="p-4 md:p-8 animate-pulse bg-yellow-50"
         >
             <Link href={`/user-profile/game-settings`}>
-                <h1 className="font-semibold text-center mb-4 text-blue-700 tracking-wide">Update your profile</h1>
+                <h1 className="font-semibold text-center mb-4 text-blue-700 tracking-wide text-xl">Update your profile</h1>
                 {!timezone &&
                     <div
                         id="timezone_status_unavailable"
-                        className="flex gap-2 pb-2"
+                        className="flex pb-2"
                     >
-                        <p className="text-sm italic">You still need to add your timezone in your profile. Without this we cannot show you how many others are available to game with</p>
+                        <p className="tracking-wide">You still need to add your timezone in your profile. Without this we cannot show you how many others are available to game with</p>
                     </div>
                 }
                 {!bio &&
                     <div
                         id="aboutYou_status_unavailable"
-                        className="flex gap-2 pb-2"
+                        className="flex  pb-2"
                     >
-                        <p className="text-sm italic">You need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
+                        <p className=" tracking-wide">You need to add your AboutYou section in your profile. Without this players wont know your preferences or any helpful information</p>
                     </div>
                 }
             </Link >
