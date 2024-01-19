@@ -33,6 +33,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
             </main>
           </Providers>
           <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider >
