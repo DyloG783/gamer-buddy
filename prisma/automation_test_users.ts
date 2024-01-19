@@ -1,6 +1,6 @@
 export const automation_users = [
     { // this user is permanent and needs to be synced with Clerk. Id below is not used
-        id: "auto1",
+        id: "user_2akaEri3dboquU8h0pJ4QCByLuN",
         email: "automation1@gbtestpermanent.com",
         userName: "auto1",
         games: [83563, 111258],

@@ -1,6 +1,6 @@
 "use client"
 
-import Profile from "@/app/game-profile/page";
+import Profile from "@/app/user-profile/game-profile/page";
 import { UserProfile } from "@clerk/nextjs";
 import { Docs } from "../../../../public/icons"; // find a better icon
 

@@ -1,12 +1,13 @@
 import OtherPlayers from "./components/OtherPlayers";
-import { SubmitButton } from "./components/SubmitButton";
 import { addGame, removeGame } from "@/lib/actions"
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { GameNotExist } from "@/lib/errors";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 import Link from "next/link";
-import { LinkButton } from "./components/LinkButton";
+import { LinkButton } from "@/app/components/LinkButton";
+import { RemoveButton } from "@/app/components/RemoveButton";
+import { SubmitButton } from "@/app/components/SubmitButton";
 
 export default async function GamePage({ params }: { params: { gameId: number } }) {
 
@@ -73,18 +74,18 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                                     {alreadyExists
                                         &&
                                         <form action={RemoveActionWithGameId}>
-                                            <SubmitButton text={`Remove game`} css={`cancel-color-bg`} />
+                                            <RemoveButton text={`Remove game`} />
 
                                         </form>
                                         ||
                                         <form action={AddActionWithGameId}>
-                                            <SubmitButton text={`Add game`} css={`primary-color-bg`} />
+                                            <SubmitButton text={`Add game`} />
                                         </form>
                                     }
                                 </div>
                                 <div>
                                     {alreadyExists &&
-                                        <LinkButton link={`/connect/${game.id}`} text="Chat" css="primary-color-bg" />
+                                        <LinkButton link={`/connect/${game.id}`} text="Chat" />
                                     }
                                 </div>
                             </div>

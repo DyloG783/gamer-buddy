@@ -4,8 +4,9 @@ import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import { UserNotExist } from "@/lib/errors";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
 import { currentUser } from "@clerk/nextjs";
-import Link from "next/link";
-import { ConnectButton } from "./ConnectButton";
+import { SubmitButton } from "@/app/components/SubmitButton";
+import { RemoveButton } from "@/app/components/RemoveButton";
+import { LinkButton } from "@/app/components/LinkButton";
 
 // 30 seconds auto update for all clients
 export const dynamic = 'force-dynamic';
@@ -62,24 +63,21 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                             &&
                             <>
                                 <form action={removeActionWithPlayer}>
-                                    <ConnectButton css={`cancel-color-bg`} text={`Remove player`} />
+                                    <RemoveButton text={`Remove player`} />
                                 </form>
-                                <Link href={`/connections/${user.id}/${player.id}`}
-                                >
-                                    <button id="chat_button" className="btn-primary">Chat</button>
-                                </Link>
+                                <LinkButton link={`/connections/${user.id}/${player.id}`} text="Chat" />
                             </>
                         }
                         {!weFollowThisPlayer
                             &&
                             <form action={addActionWithPlayer}>
-                                <ConnectButton css={`primary-color-bg`} text={`Add player`} />
+                                <SubmitButton text={`Add player`} />
                             </form>
                         }
                         {!usersAreConnected && weFollowThisPlayer
                             &&
                             <form action={removeActionWithPlayer}>
-                                <ConnectButton css={`bg-rose-400`} text={`Remove player`} />
+                                <RemoveButton text={`Remove player`} />
                             </form>
                         }
                     </div>

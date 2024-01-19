@@ -3,7 +3,7 @@ import AboutYouSelector from "./AboutYouSelector";
 
 export default function Profile() {
     return (
-        <div className="w-full shadow-sm p-1 md:p-5">
+        <div className="flex flex-col gap-2 md:gap-10 p-1 md:p-5">
             <TimezoneSelector />
             <AboutYouSelector />
         </div>
