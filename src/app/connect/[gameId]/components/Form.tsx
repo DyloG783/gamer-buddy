@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { sendMessageForum } from "@/lib/actions";
-import { Textarea } from "@nextui-org/react";
+import { Button, Textarea } from "@nextui-org/react";
 
 export default function Form({ gameRoomId }: { gameRoomId: string }) {
     const [message, setMessage] = useState("");
@@ -60,17 +60,21 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                 />
             </form>
             <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`} >
-                <button type="reset"
-                    onClick={closeInput}
-                    className={`btn-cancel `}
+                <Button type="button" onClick={closeInput} color="danger"
+                    data-testid='cancel_button'
+                    variant="solid"
+                    size='lg'
+                    className={`text-sm tracking-wider`}
                 >
                     Cancel
-                </button>
-                <button type="submit" form="message_form"
-                    className={`btn-primary ${inputValid ? '' : 'hidden'}`}
+                </Button>
+                <Button type="submit" form="message_form" color='primary'
+                    data-testid={`send`}
+                    size='lg'
+                    className={`text-sm tracking-wider ${inputValid ? '' : 'hidden'}`}
                 >
                     Send
-                </button>
+                </Button>
             </div>
         </>
 

@@ -59,10 +59,7 @@ export default function AboutYou() {
         <div className={`p-2 `} >
             <h1 className="text-xl font-semibold mb-2 text-blue-700">About You</h1>
 
-            <form
-                id="bioform"
-                onSubmit={handleSubmit}
-            >
+            <form id="bioform" onSubmit={handleSubmit}>
                 <Textarea
                     id="bio"
                     label={user?.unsafeMetadata.bio ? null : "Add something about yourself so others can know a little about you"}
@@ -82,9 +79,12 @@ export default function AboutYou() {
                         }
                     }}
                 />
-                <div className={`flex gap-2 mt-3 justify-end ${editing ? '' : 'hidden'}`} id="form_buttons">
-                    <span className={`${inputValid ? 'hidden' : ''} text-red-400 italic text-sm mr-auto my-auto
-                `}>No more than 500 characters friend!</span>
+                <div id="form_buttons" className={`flex gap-2 mt-3 justify-end ${editing ? '' : 'hidden'}`} >
+                    <span
+                        className={`${inputValid ? 'hidden' : ''} text-red-400 italic text-sm mr-auto my-auto`}
+                    >
+                        No more than 500 characters friend!
+                    </span>
                     <SubmitButton text="Submit" />
                     <Button
                         type="button"
