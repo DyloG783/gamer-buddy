@@ -12,7 +12,7 @@ const YourGames: React.FC = async () => {
         return (
             <Link href={`${process.env.CLERK_SIGNIN}`}
                 className=' flex justify-around text-purple-600 italic hover:underline
-                font-semibold tracking-wide mb-4'
+                font-semibold tracking-wide py-3'
             >
                 Sign in to see your games
             </Link>
@@ -28,7 +28,7 @@ const YourGames: React.FC = async () => {
     })
 
     return (
-        <div id="yourgames_container" className="flex flex-col ">
+        <div id="yourgames_container" className="flex flex-col px-2 md:pl-6 pt-6 md:pt-8">
             <h2 className="mb-4 font-bold text-blue-800 tracking-wider text-xl md:text-2xl">Your games</h2>
             <p className="text-sm font-semibold tracking-wider italic mb-4 md:mb-10">Games that you have <span className="text-teal-500">Saved</span> are displayed below</p>
             <div id="games_container" className="flex justify-around">

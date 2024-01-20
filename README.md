@@ -27,12 +27,12 @@ Update npm packages:
 alt accounts:
 Google(https://console.cloud.google.com/) 
 - dylantest679@gmail.com, 
-- dgdevelopment65@gmail.com, (Tr.....Development!)
+- dgdevelopment65@gmail.com, (T.....Development!)
     - dgdevelopment651@gmail.com 
 
     s
 Twitch:
-- dylangreenslade, (Tr.... Tr....)
+- dylangreenslade, (T.... T....)
 
 postman:
 dgdevelopment65@gmail.com
@@ -51,27 +51,16 @@ env per environment:
 dotenv -e .env.development -- npx prisma db pull
 
 deploy steps:
-Sadly Clerk prod wont work with free vercel domain so I need to share between dev & prod.
-- https://dashboard.clerk.com/apps/app_2ZqGHEqwCP0kbHCTu9d9rOAYcrx/instances/ins_2ZqGHBR10qDJFiWuVt7xHbCyXWu/paths
-- Switch between http://localhost:3000/ & https://gamer-buddy.vercel.app/
-- after deploy update user data to create a webhook update to populate prod db (need seed may work!)
 
-Prisma schema datasource needs switching befor deploy;
-// url       = env("DATABASE_URL") // local only
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connectionf
-
-  Follow vercel cli steps (seems to have got db running)
 
   
-Prod FYI:
-Clerk dev needs real domin, emails will besent to junk/spam
 
 Need help with:
 
 
 bg-gradient-to-bl from-blue-100 to-sky-50
 
+    "postinstall": "prisma db push && prisma generate && prisma db seed  && next build && npm run allGameData",
 
 
 

@@ -18,7 +18,7 @@ export default async function Home() {
 
       <div
         id="connectoin_updates_layout_container"
-        className=" grow p-4 shadow-md"
+        className=" grow p-4 shadow-sm"
       >
         <Suspense fallback={<Loading />}>
           <ConnectionUpdates />
