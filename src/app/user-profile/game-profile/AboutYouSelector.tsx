@@ -65,7 +65,7 @@ export default function AboutYou() {
             >
                 <Textarea
                     id="bio"
-                    label={user?.unsafeMetadata.bio ? null : "Add something about yourself here so others can know a little about you"}
+                    label={user?.unsafeMetadata.bio ? null : "Add something about yourself so others can know a little about you"}
                     className="w-full mt-2"
                     name="bioInputTextArea"
                     spellCheck="true"
@@ -74,6 +74,7 @@ export default function AboutYou() {
                     placeholder={user?.unsafeMetadata.bio ? user?.unsafeMetadata.bio as string : ""}
                     onChange={(e) => setInput(e.target.value)}
                     onClick={() => setEditing(true)}
+                    onFocus={() => setEditing(true)}
                     maxLength={500}
                     onKeyDown={async (e) => {
                         if (e.key === "Enter") {

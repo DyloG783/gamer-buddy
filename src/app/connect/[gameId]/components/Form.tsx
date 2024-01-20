@@ -46,6 +46,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onClick={() => setEditing(true)}
+                    onFocus={() => setEditing(true)}
                     maxLength={500}
                     onKeyDown={async (e) => {
                         if (e.key === "Enter") {

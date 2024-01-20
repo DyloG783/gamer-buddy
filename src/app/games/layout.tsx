@@ -6,7 +6,7 @@ export default function GamesLayout({ children }: { children: React.ReactNode })
 
     return (
         <div className="flex flex-col h-full" id="layout_games">
-            <div className="shadow-sm  ">
+            <div className="shadow-sm">
                 <YourGames />
             </div>
             <Suspense fallback={<Loading />}>
