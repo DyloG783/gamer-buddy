@@ -58,36 +58,18 @@
 }
 
 @layer components{
-    .btn-primary {
-        @apply  text-xs p-1 md:p-2 tracking-wider hover:shadow-xl text-white bg-emerald-500 rounded-2xl w-24 h-10 md:w-28 ;
-    }
-
-    .btn-cancel {
-        @apply  text-xs p-1 md:p-2 tracking-wider hover:shadow-xl text-white bg-rose-500 rounded-2xl w-24 h-10 md:w-28;
-    }
 
     .link {
         @apply text-purple-700 hover:italic;
     }
 
-        .primary-color-bg {
-            @apply bg-emerald-500;
-        }
-        
-        .cancel-color-bg {
-            @apply bg-rose-500;
-        }
-        .primary-color-font {
-            @apply text-emerald-500;
-        }
+    .primary-color-font {
+        @apply text-emerald-500;
+    }
     
-        .cancel-color-font {
-            @apply text-rose-500;
-        }
-
-    /* .first-section {
-        @apply 'bg-gradient-to-l from-emerald-50/50 to-emerald-00';
-    } */
+    .cancel-color-font {
+        @apply text-rose-500;
+    }
 }
 
 

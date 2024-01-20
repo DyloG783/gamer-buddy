@@ -11,9 +11,8 @@ export function LinkButton({ text, link }: { text: string, link: string }) {
         <Button
             type="button"
             color="primary"
-            // href={`${link}`}
             onClick={() => { router.push(`${link}`) }}
-            data-testid='chat_link_button'
+            data-testid='link'
             variant="solid"
             size='lg'
             className={`text-sm tracking-wider`}

@@ -22,7 +22,6 @@ export async function POST(request: Request) {
             orderBy: { firstReleaseDate: "desc" },
         })
 
-        // console.log("searched games API JSON:", searchedGames)
         return NextResponse.json({ searchedGames })
     } catch (error) {
         console.log("Failed to retreive searched games from db in client route", error)

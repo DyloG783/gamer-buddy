@@ -31,9 +31,7 @@ export default async function PlayerChat({ params }: { params: { userId: string,
 
         // Hash the input strings
         const hashedId1 = hashString(id1);
-        // console.log("H1", hashedId1)
         const hashedId2 = hashString(id2);
-        // console.log("H2", hashedId2)
 
         // Convert the hashed strings to numbers (you may need a custom conversion method)
         const num1 = parseInt(hashedId1.substring(0, 15), 16);
@@ -50,7 +48,6 @@ export default async function PlayerChat({ params }: { params: { userId: string,
     }
 
     const privateChatId = String(combineUniqueIds(userId, playerId)!)
-    // console.log("chat room id", privateChatId)
 
     // create private chat room if it not already exists
     await prisma.chatPrivateRoom.upsert({

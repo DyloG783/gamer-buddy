@@ -23,7 +23,7 @@ export async function getFollowing() {
         revalidatePath('/connections');
         return (connections);
     } catch (error) {
-        console.log("Failed to find the users which this user follows in 'query_helper': ", error)
+        console.log("Failed to find the users which this user follows (query helper): ", error)
     }
 
     return (null)
@@ -51,7 +51,7 @@ export async function getUsersConnectionRequests() {
         return connections;
 
     } catch (error) {
-        console.log("Failed to find 'following' users of this user in 'query_helper': ", error)
+        console.log("Failed to find 'following' users of this user (query helper): ", error)
     }
 
     return (null)
@@ -79,7 +79,7 @@ export async function getUsersConnections() {
         return connections;
 
     } catch (error) {
-        console.log("Failed to find 'connected' users of this user in 'query_helper': ", error)
+        console.log("Failed to find 'connected' users of this user (query helper): ", error)
     }
 
     return (null)
@@ -97,7 +97,7 @@ export async function checkGameExistsAndReturn(gameId: number) {
         const game = await prisma.game.findUnique({ where: { id: gameId } })
         return game;
     } catch (error) {
-        console.log("Game Check: try/catch fail retrieving game")
+        console.log("Game Check: try/catch fail retrieving game(query helper)")
         return null;
     }
 }
@@ -113,7 +113,7 @@ export async function checkUserExistsAndReturn(userId: string) {
         })
         return user;
     } catch (error) {
-        console.log("User Check: try/catch fail retrieving user")
+        console.log("User Check: try/catch fail retrieving user (query helper)")
         return null;
     }
 } 

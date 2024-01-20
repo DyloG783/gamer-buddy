@@ -12,12 +12,6 @@ export type IGame = {
     }
 }
 
-// this represents genres, platforms, and modes
-// export type IGameFilterType = {
-//     id: number;
-//     name: string;
-// }
-
 export type ISearchableGameType = {
     value: string;
     label: string;
@@ -47,9 +41,6 @@ export type IConnection = ({
     followedByUName: string;
     followingUName: string;
 })
-
-
-export type TUserId = ({ userId: string })
 
 export type TUnsafeMetadata = ({
     bio: string,

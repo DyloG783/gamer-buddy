@@ -11,7 +11,7 @@ export function RemoveButton({ text }: { text: string }) {
             type="submit"
             color='danger'
             aria-disabled={pending}
-            data-testid={text}
+            data-testid={`remove`}
             size='lg'
             className={`text-sm tracking-wider`}
         >

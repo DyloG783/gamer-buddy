@@ -36,7 +36,6 @@ export default function AboutYou() {
     }
 
     function handleSubmit(e: any) {
-
         e.preventDefault();
 
         if (!inputValid) {
@@ -52,9 +51,6 @@ export default function AboutYou() {
 
         setEditing(false);
     }
-
-
-
     return (
         <div className={`p-2 `} >
             <h1 className="text-xl font-semibold mb-2 text-blue-700">About You</h1>

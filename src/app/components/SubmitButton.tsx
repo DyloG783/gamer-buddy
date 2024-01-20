@@ -11,7 +11,7 @@ export function SubmitButton({ text }: { text: string }) {
             type="submit"
             color='primary'
             aria-disabled={pending}
-            data-testid={text}
+            data-testid={`submit`}
             size='lg'
             className={`text-sm tracking-wider`}
         >
