@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Key, useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IGame } from "@/lib/custom_types";
 import GameCard from "./GameCard";

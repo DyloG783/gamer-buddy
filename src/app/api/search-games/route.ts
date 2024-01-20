@@ -10,8 +10,6 @@ export async function POST(request: Request) {
     const platform: string = data.searchState.platform;
     const search: string = data.searchState.search;
 
-    // console.log("API values before db search:", genre, mode, platform, search)
-
     try {
         const searchedGames = await prisma.game.findMany({
             where: {
@@ -19,7 +17,9 @@ export async function POST(request: Request) {
                 modes: mode && { has: mode } || undefined,
                 platforms: platform && { has: platform } || undefined,
                 name: search && { startsWith: search, mode: 'insensitive' } || undefined
-            }
+            },
+            include: { _count: { select: { users: true } } },
+            orderBy: { firstReleaseDate: "desc" },
         })
 
         // console.log("searched games API JSON:", searchedGames)

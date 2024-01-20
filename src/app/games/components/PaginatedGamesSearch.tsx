@@ -24,7 +24,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
 
     let filteredGames: IGame[] = [];
 
-    const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    // const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
     // fetch games from the db andfilter based on the current search state
     useEffect(() => {
@@ -32,7 +32,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
         if (searchState.currentSelected) {
 
             setLoading(true);
-            fetch(`${apiUrl}/api/search-games`, {
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/search-games`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

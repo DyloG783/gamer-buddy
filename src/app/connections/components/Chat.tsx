@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react"
 import Pusher from "pusher-js"
 import { ScrollShadow } from "@nextui-org/react";
 
-type TMessage = ({
+type TMessage = {
     sentPrivateBy: {
         userName: string | null;
     };
     message: string;
     createdAt: Date;
-})
+};
 
 export default function Chat({ messages, privateRoomId }: { messages: TMessage[], privateRoomId: string }) {
 
@@ -19,7 +19,7 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
 
     useEffect(() => {
 
-        // Pusher channel setup get game for group chat
+        // Pusher channel setup get game for private chat
         var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
             cluster: 'ap1'
         });
@@ -35,7 +35,7 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
     }, [privateRoomId]);
 
     const scrollTobottom = () => {
-        messageEndRef.current?.scrollIntoView({ behavior: "instant" });
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {

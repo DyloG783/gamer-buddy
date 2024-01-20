@@ -4,20 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import Pusher from "pusher-js";
 import { ScrollShadow } from "@nextui-org/react";
 
-type TForumMessages = {
-    messages: {
-        id: string;
-        sentGameBy: {
-            userName: string | null;
-        };
-        message: string;
-        createdAt: Date;
-    }[];
-} | null
+type TForumMessage = {
+    sentGameBy: {
+        userName: string | null;
+    };
+    message: string;
+    createdAt: Date;
+};
 
-export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: TForumMessages, gameRoomId: string }) {
 
-    const [totalMessages, settotalMessages] = useState(roomMessages?.messages || [])
+export default function ChatForum({ messages, gameRoomId }: { messages: TForumMessage[], gameRoomId: string }) {
+
+    const [totalMessages, settotalMessages] = useState(messages || []);
     const messageEndRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -26,9 +24,7 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
         var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
             cluster: 'ap1'
         });
-
         var channel = pusher.subscribe(`${gameRoomId}`);
-
         channel.bind('game-room-post', function (data: any) {
             const parsedMessage = JSON.parse(data.message);
             settotalMessages((prev) => [...prev, parsedMessage]);
@@ -37,10 +33,10 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
         return () => {
             pusher.unsubscribe(`${gameRoomId}`);
         };
-    }, []);
+    }, [gameRoomId]);
 
     const scrollTobottom = () => {
-        messageEndRef.current?.scrollIntoView({ behavior: "instant" });
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
@@ -57,10 +53,8 @@ export default function ChatForum({ roomMessages, gameRoomId }: { roomMessages: 
     return (
         <div id="chat_container" className="flex flex-col">
             <ScrollShadow className="w-full h-[400px]">
-                {totalMessages && totalMessages.length > 0
-                    &&
+                {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
-                        // const date = Date(m.createdAt).getTime()
                         <div key={index} className="p-2">
                             <span className="text-emerald-600 tracking-wider">{m.sentGameBy.userName} </span>
                             <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>

@@ -53,7 +53,6 @@ export default async function Connect({ params }: { params: { gameId: number } }
         select: {
             messages: {
                 select: {
-                    id: true,
                     message: true,
                     createdAt: true,
                     sentGameBy: { select: { userName: true } }
@@ -103,7 +102,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
                     className="min-w-[66%] "
                 >
                     <h2 className="font-semibold mb-1 md:mb-6 ml-4 md:ml-2 tracking-wide text-blue-700">Chat Forum</h2>
-                    <ChatForum roomMessages={messages} gameRoomId={gameRoom.id} />
+                    <ChatForum messages={messages?.messages!} gameRoomId={gameRoom.id} />
                     <Form gameRoomId={gameRoom.id} />
                 </div>
 
