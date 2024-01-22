@@ -1,8 +1,5 @@
 'use client'
 
-import MainLinks from "./MainLinks";
-import UserMenu from "./UserMenu";
-// import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";

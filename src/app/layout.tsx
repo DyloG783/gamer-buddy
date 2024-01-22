@@ -1,5 +1,5 @@
 import './globals.css'
-import NavigationBar from "@/app/components/navigation/NavigationBar"
+import NavigationBar from "@/app/components/NavigationBar"
 import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from 'next/font/google';
 import { Providers } from "./providers";
