@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
-import Pusher from "pusher-js"
+import { useEffect, useRef, useState } from "react";
+import Pusher from "pusher-js";
 import { ScrollShadow } from "@nextui-org/react";
+// import AudioPlayer from "@/app/components/AudioPlayer";
 
 type TMessage = {
     sentPrivateBy: {
@@ -16,6 +17,8 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
 
     const [totalMessages, settotalMessages] = useState(messages || [])
     const messageEndRef = useRef<HTMLInputElement>(null);
+
+    // const audioSrc = "@/../public/sounds/ding.mp3";
 
     useEffect(() => {
 
@@ -55,8 +58,8 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
                 {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
                         <div key={index} className="p-2">
-                            <span className="text-emerald-600 tracking-wider">{m.sentPrivateBy.userName} </span>
-                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>
+                            <span className="text-emerald-600 tracking-wider">{m.sentPrivateBy.userName}</span>
+                            <span className="font-light text-sm italic" suppressHydrationWarning>{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>
                             <p>{`${m.message}`}</p>
                         </div>
                     ))}

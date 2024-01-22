@@ -24,11 +24,7 @@ export default async function Home() {
           <ConnectionUpdates />
         </Suspense>
       </div>
-      <div id="profile_status_container "
-        className="p-4 md:p-8 animate-pulse bg-yellow-50"
-      >
-        <ProfileStatus />
-      </div>
+      <ProfileStatus />
     </div>
   );
 }

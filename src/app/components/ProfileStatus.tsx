@@ -26,7 +26,7 @@ export default async function ProfileStatus() {
     }
 
     return (
-        <>
+        <div id="profile_status_container " className="p-4 md:p-8 animate-pulse bg-yellow-50">
             <Link href={`/user-profile/game-settings`}>
                 <h1 className="grow font-semibold text-center mb-4 text-blue-700 tracking-wide text-xl">Update your profile</h1>
                 {!timezone &&
@@ -52,6 +52,6 @@ export default async function ProfileStatus() {
                     </>
                 }
             </Link >
-        </>
+        </div>
     )
 }

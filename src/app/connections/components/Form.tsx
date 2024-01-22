@@ -3,24 +3,11 @@
 import { SubmitButton } from "@/app/components/SubmitButton"
 import { sendMessagePrivate } from "@/lib/actions"
 import { Button, Textarea } from "@nextui-org/react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function Form({ privateRoomId }: { privateRoomId: string }) {
     const [message, setMessage] = useState("")
     const [editing, setEditing] = useState(false)
-    const [inputValid, setInputvalid] = useState(false) // state for input validation
-
-    // use effect for validation on input change
-    useEffect(() => {
-        setInputvalid(false)
-
-        if (message.length > 0) {
-            if (message.length < 500) {
-                setInputvalid(true)
-            }
-        }
-    }, [message]);
-
 
     function closeInput() {
         setMessage("");

@@ -56,8 +56,8 @@ export default function ChatForum({ messages, gameRoomId }: { messages: TForumMe
                 {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
                         <div key={index} className="p-2">
-                            <span className="text-emerald-600 tracking-wider">{m.sentGameBy.userName} </span>
-                            <span className="font-light text-sm italic" suppressHydrationWarning >{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>
+                            <span className="text-emerald-600 tracking-wider">{m.sentGameBy.userName}</span>
+                            <span className="font-light text-sm italic" suppressHydrationWarning>{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>
                             <p>{`${m.message}`}</p>
                         </div>
                     ))

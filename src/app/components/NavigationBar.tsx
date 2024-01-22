@@ -59,7 +59,7 @@ export default function NavigationBar() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent justify="end">
+            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide">
                 <NavbarItem >
                     <SignedIn>
                         <UserButton
