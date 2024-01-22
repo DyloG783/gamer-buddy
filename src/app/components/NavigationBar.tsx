@@ -18,7 +18,7 @@ export default function NavigationBar() {
     ];
 
     return (
-        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen} className="shadow-sm">
+        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen} className="shadow-sm py-2">
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -80,7 +80,7 @@ export default function NavigationBar() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarMenu>
+            <NavbarMenu className="mt-4">
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link

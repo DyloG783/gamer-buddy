@@ -3,22 +3,11 @@
 import { useEffect, useState } from "react";
 import { sendMessageForum } from "@/lib/actions";
 import { Button, Textarea } from "@nextui-org/react";
+import { SubmitButton } from "@/app/components/SubmitButton";
 
 export default function Form({ gameRoomId }: { gameRoomId: string }) {
     const [message, setMessage] = useState("");
     const [editing, setEditing] = useState(false);
-    const [inputValid, setInputvalid] = useState(false) // state for input validation
-
-    // use effect for validation on input change
-    useEffect(() => {
-        setInputvalid(false)
-
-        if (message.length > 0) {
-            if (message.length < 500) {
-                setInputvalid(true)
-            }
-        }
-    }, [message]);
 
     const closeInput = () => {
         setEditing(false);
@@ -35,7 +24,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
 
     return (
         <>
-            <form id="message_form"
+            <form id="form_id"
                 action={(formData) => handleFormSubmit(formData)}
             >
                 <Textarea
@@ -58,24 +47,19 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                         }
                     }}
                 />
+                <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`} >
+                    <Button type="button" onClick={closeInput} color="danger"
+                        data-testid='cancel_button'
+                        variant="solid"
+                        size='lg'
+                        className={`text-sm tracking-wider`}
+                    >
+                        Cancel
+                    </Button>
+                    <SubmitButton text={`Send`} formId="form_id" />
+                </div>
             </form>
-            <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`} >
-                <Button type="button" onClick={closeInput} color="danger"
-                    data-testid='cancel_button'
-                    variant="solid"
-                    size='lg'
-                    className={`text-sm tracking-wider`}
-                >
-                    Cancel
-                </Button>
-                <Button type="submit" form="message_form" color='primary'
-                    data-testid={`send`}
-                    size='lg'
-                    className={`text-sm tracking-wider ${inputValid ? '' : 'hidden'}`}
-                >
-                    Send
-                </Button>
-            </div>
+
         </>
 
     )

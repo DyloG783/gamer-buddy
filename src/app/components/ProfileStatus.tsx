@@ -26,11 +26,9 @@ export default async function ProfileStatus() {
     }
 
     return (
-        <div id="profile_status_container "
-            className="p-4 md:p-8 animate-pulse bg-yellow-50"
-        >
+        <>
             <Link href={`/user-profile/game-settings`}>
-                <h1 className="font-semibold text-center mb-4 text-blue-700 tracking-wide text-xl">Update your profile</h1>
+                <h1 className="grow font-semibold text-center mb-4 text-blue-700 tracking-wide text-xl">Update your profile</h1>
                 {!timezone &&
                     <>
                         <div
@@ -39,7 +37,7 @@ export default async function ProfileStatus() {
                         >
                             <p className="tracking-wide">Add your timezone in your profile. Without this we cannot show you how many others are available to game with near you!</p>
                         </div>
-                        <hr />
+                        {!bio && <hr />}
                     </>
                 }
                 {!bio &&
@@ -50,10 +48,10 @@ export default async function ProfileStatus() {
                         >
                             <p className=" tracking-wide">Share someting about youself in the About You section in your profile</p>
                         </div>
-                        <hr />
+                        {!timezone && <hr />}
                     </>
                 }
             </Link >
-        </div >
+        </>
     )
 }

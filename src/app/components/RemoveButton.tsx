@@ -1,10 +1,10 @@
 'use client'
 
 import { useFormStatus } from 'react-dom'
-import { Button, ButtonGroup } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 
 export function RemoveButton({ text }: { text: string }) {
-    const { pending } = useFormStatus()
+    const { pending } = useFormStatus();
 
     return (
         <Button

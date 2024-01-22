@@ -1,10 +1,10 @@
 'use client'
 
-import { useFormStatus } from 'react-dom'
+import { useFormStatus } from 'react-dom';
 import { Button } from "@nextui-org/react";
 
-export function SubmitButton({ text }: { text: string }) {
-    const { pending } = useFormStatus()
+export function SubmitButton({ text, formId }: { text: string, formId?: string }) {
+    const { pending } = useFormStatus();
 
     return (
         <Button
@@ -14,6 +14,7 @@ export function SubmitButton({ text }: { text: string }) {
             data-testid={`submit`}
             size='lg'
             className={`text-sm tracking-wider`}
+            form={formId}
         >
             {pending ? '...' : `${text}`}
         </Button>

@@ -18,13 +18,17 @@ export default async function Home() {
 
       <div
         id="connectoin_updates_layout_container"
-        className=" grow p-4 shadow-sm"
+        className="grow p-4 shadow-sm"
       >
         <Suspense fallback={<Loading />}>
           <ConnectionUpdates />
         </Suspense>
       </div>
-      <ProfileStatus />
+      <div id="profile_status_container "
+        className="p-4 md:p-8 animate-pulse bg-yellow-50"
+      >
+        <ProfileStatus />
+      </div>
     </div>
   );
 }

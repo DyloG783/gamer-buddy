@@ -1,5 +1,6 @@
 "use client"
 
+import { SubmitButton } from "@/app/components/SubmitButton"
 import { sendMessagePrivate } from "@/lib/actions"
 import { Button, Textarea } from "@nextui-org/react"
 import { useEffect, useState } from "react"
@@ -37,7 +38,7 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
     return (
         <>
             <form
-                id="message_form"
+                id="form_id"
                 action={(formData) => handleFormSubmit(formData)}
             >
                 <Textarea
@@ -60,25 +61,19 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
                         }
                     }}
                 />
+                <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`}>
+                    <Button type="reset" color="danger"
+                        onClick={closeInput}
+                        data-testid='cancel_button'
+                        variant="solid"
+                        size='lg'
+                        className={`text-sm tracking-wider`}
+                    >
+                        Cancel
+                    </Button>
+                    <SubmitButton text={`Send`} formId="form_id" />
+                </div>
             </form>
-            <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`}>
-                <Button type="reset" color="danger"
-                    onClick={closeInput}
-                    data-testid='cancel_button'
-                    variant="solid"
-                    size='lg'
-                    className={`text-sm tracking-wider`}
-                >
-                    Cancel
-                </Button>
-                <Button type="submit" form="message_form" color='primary'
-                    data-testid={`send`}
-                    size='lg'
-                    className={`text-sm tracking-wider ${inputValid ? '' : 'hidden'}`}
-                >
-                    Send
-                </Button>
-            </div>
         </>
     )
 }
