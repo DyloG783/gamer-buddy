@@ -17,7 +17,14 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
     // adds gameRoomId to server action
     const updateWithForumId = sendMessageForum.bind(null, gameRoomId);
 
-    async function handleFormSubmit(formData: FormData) {
+    // keyboard 'enter' key submit should keep editing state open and only reset text
+    async function handleKeyFormSubmit(formData: FormData) {
+        await updateWithForumId(formData);
+        setMessage("");
+    }
+
+    // Click 'send' button submit should close editing and reset text
+    async function handleClickFormSubmit(formData: FormData) {
         await updateWithForumId(formData);
         closeInput();
     }
@@ -25,7 +32,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
     return (
         <>
             <form id="form_id"
-                action={(formData) => handleFormSubmit(formData)}
+                action={(formData) => handleClickFormSubmit(formData)}
             >
                 <Textarea
                     label="Enter your message"
@@ -43,7 +50,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                             if (message === "") return;
                             const formData = new FormData();
                             formData.append('message_input', message);
-                            handleFormSubmit(formData);
+                            handleKeyFormSubmit(formData);
                         }
                     }}
                 />
@@ -59,8 +66,6 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                     <SubmitButton text={`Send`} formId="form_id" />
                 </div>
             </form>
-
         </>
-
     )
 }

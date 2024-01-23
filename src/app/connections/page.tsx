@@ -1,10 +1,10 @@
-import { getFollowing, getUsersConnectionRequests, getUsersConnections } from "@/lib/query_helper";
-import { IConnection } from "@/lib/custom_types";
+import { getFollowing, getUnseenMessages, getUsersConnectionRequests, getUsersConnections } from "@/lib/query_helper";
+import { IConnection, TMessage } from "@/lib/custom_types";
 import PaginatedConnections from "./components/PaginatedConnections";
 import { Suspense } from "react";
 import Loading from "@/lib/loading";
 
-// 30 seconds auto update for all clients
+// 30 seconds auto update for all clients (after navigation?)
 export const dynamic = 'force-dynamic';
 
 const Connections = async () => {
@@ -12,6 +12,7 @@ const Connections = async () => {
     const userFollowing: IConnection[] | null = await getFollowing();
     const requests: IConnection[] | null = await getUsersConnectionRequests();
     const userConnections: IConnection[] | null = await getUsersConnections();
+    const unseenMessages: TMessage[] | null = await getUnseenMessages();
 
     return (
         <div id="page_container" className="flex flex-col h-full ">
@@ -27,7 +28,7 @@ const Connections = async () => {
                     <p className="font-light tracking-wide ml-4">Connections you can chat with</p>
                 </div>
                 <Suspense fallback={<Loading />}>
-                    <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connectedOrRequest"} />
+                    <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connected"} unseenMessages={unseenMessages} />
                 </Suspense>
             </div>
             <div id="connection_request_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm" >
@@ -40,7 +41,7 @@ const Connections = async () => {
                     <p className="font-light tracking-wide ml-4">People who follow you</p>
                 </div>
                 <Suspense fallback={<Loading />}>
-                    <PaginatedConnections connections={requests} itemsPerPage={5} option={"connectedOrRequest"} />
+                    <PaginatedConnections connections={requests} itemsPerPage={5} option={"requested"} />
                 </Suspense>
             </div>
             <div id="following_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm">

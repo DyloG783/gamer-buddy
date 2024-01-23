@@ -43,23 +43,27 @@ model PrivateMessage {
   createdAt         DateTime        @default(now())
   message           String          @db.VarChar(500)
   id                String          @id @default(cuid())
-  userId            String
   chatPrivateRoomId String
   privateRoom       ChatPrivateRoom @relation(fields: [chatPrivateRoomId], references: [id], onDelete: Cascade)
-  sentPrivateBy     User            @relation("sender", fields: [userId], references: [id], onDelete: Cascade)
+  sentPrivateBy     User            @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId          String
+  receivedPrivateBy User            @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  receiverId        String
+  seen              Boolean         @default(false)
 }
 
 model User {
-  id            String           @id
-  userName      String?
-  email         String           @unique
-  bio           String?
-  timezone      String?
-  followedBy    Follows[]        @relation("followedBy")
-  following     Follows[]        @relation("following")
-  sentGameBy    GameMessage[]    @relation("sender")
-  sentPrivateBy PrivateMessage[] @relation("sender")
-  games         Game[]           @relation("GameToUser")
+  id                String           @id
+  userName          String?
+  email             String           @unique
+  bio               String?
+  timezone          String?
+  followedBy        Follows[]        @relation("followedBy")
+  following         Follows[]        @relation("following")
+  sentGameBy        GameMessage[]    @relation("sender")
+  sentPrivateBy     PrivateMessage[] @relation("sender")
+  games             Game[]           @relation("GameToUser")
+  receivedPrivateBy PrivateMessage[] @relation("receiver")
 }
 
 model Follows {

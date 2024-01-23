@@ -54,11 +54,11 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
 
     return (
         <div id="chat_container" className="flex flex-col">
-            <ScrollShadow className="w-full h-[400px]">
+            <ScrollShadow className="w-full max-h-[600px]">
                 {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
                         <div key={index} className="p-2">
-                            <span className="text-emerald-600 tracking-wider">{m.sentPrivateBy.userName}</span>
+                            <span className="text-emerald-600 tracking-wider mr-2">{m.sentPrivateBy.userName}</span>
                             <span className="font-light text-sm italic" suppressHydrationWarning>{m.createdAt ? m.createdAt.toLocaleString(undefined, options) : new Date().toLocaleDateString(undefined, options)}</span>
                             <p>{`${m.message}`}</p>
                         </div>

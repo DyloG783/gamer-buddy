@@ -72,7 +72,7 @@ export async function getUsersConnections() {
                     }
                 }
             },
-            include: { followedBy: { select: { timezone: true } } }
+            include: { followedBy: { select: { timezone: true, id: true } } }
         });
 
         revalidatePath('/connections');
@@ -116,4 +116,28 @@ export async function checkUserExistsAndReturn(userId: string) {
         console.log("User Check: try/catch fail retrieving user (query helper)")
         return null;
     }
-} 
+}
+
+// get all unseen messages
+export async function getUnseenMessages() {
+
+    const user = await currentUser();
+
+    try {
+        const messages = await prisma.privateMessage.findMany({
+            where: {
+                AND: [
+                    { receiverId: user?.id, },
+                    { seen: false }
+                ],
+            },
+        });
+
+        // console.log("UNSEEN", messages)
+
+        return messages;
+    } catch (error) {
+        console.log("Failed retreiving 'unseen' messages (query helper): ", error)
+        return null;
+    }
+}

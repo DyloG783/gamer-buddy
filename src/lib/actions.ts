@@ -4,9 +4,14 @@ import prisma from '@/lib/db'
 import { auth, currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache'
 
-export async function sendMessagePrivate(privateRoomId: string, formData: FormData) {
+export async function sendMessagePrivate(bindData: {
+    privateRoomId: string,
+    playerId: string
+}, formData: FormData) {
     'use server'
 
+    const privateRoomId = bindData.privateRoomId;
+    const playerId = bindData.playerId;
     const message = formData.get('message_input') as string;
     const { userId } = auth();
     const Pusher = require("pusher");
@@ -21,7 +26,8 @@ export async function sendMessagePrivate(privateRoomId: string, formData: FormDa
             data: {
                 chatPrivateRoomId: privateRoomId,
                 message: message,
-                userId: userId!
+                senderId: userId!,
+                receiverId: playerId
             },
             select: {
                 message: true,

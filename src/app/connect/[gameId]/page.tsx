@@ -65,7 +65,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
 
     return (
         <div id="connect_container"
-            className=" h-full"
+            className="h-full shadow-sm"
         >
             <div id="title_link_container" className="mb-10 md:mb-20 pt-4 md:pt-10">
                 <Link href={`/game/${gameId}`}
@@ -79,7 +79,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
                 </Link>
             </div>
             <div id="players_and_chat_forum_container "
-                className="md:flex md:justify-between"
+                className="md:flex md:justify-between shadow-sm"
             >
                 <div id="other_players_container" className="px-4 pb-4 md:pb-0 min-w-[33%]">
                     <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Other Players</p>

@@ -34,6 +34,14 @@ export type IUser = {
 }
 
 export type IConnection = ({
+    followedBy?: {
+        timezone: string | null;
+    };
+} & {
+    following?: {
+        timezone: string | null;
+    };
+} & {
     followedByEmail: string;
     followingEmail: string;
     followedById: string;
@@ -46,3 +54,15 @@ export type TUnsafeMetadata = ({
     bio: string,
     timezone: string
 })
+
+export type TMessage = (
+    {
+        createdAt: Date;
+        message: string;
+        id: string;
+        chatPrivateRoomId: string;
+        senderId: string;
+        receiverId: string;
+        seen: boolean;
+    }
+)

@@ -5,7 +5,7 @@ import { sendMessagePrivate } from "@/lib/actions"
 import { Button, Textarea } from "@nextui-org/react"
 import { useState } from "react"
 
-export default function Form({ privateRoomId }: { privateRoomId: string }) {
+export default function Form({ privateRoomId, playerId }: { privateRoomId: string, playerId: string }) {
     const [message, setMessage] = useState("")
     const [editing, setEditing] = useState(false)
 
@@ -14,11 +14,23 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
         setEditing(false);
     }
 
-    // adds playerId to server action
-    const updateWithPrivateRoomId = sendMessagePrivate.bind(null, privateRoomId)
+    const bindData = {
+        privateRoomId: privateRoomId,
+        playerId: playerId
+    }
 
-    async function handleFormSubmit(formData: FormData) {
-        await updateWithPrivateRoomId(formData);
+    // adds playerId + private room to server action
+    const bindedAction = sendMessagePrivate.bind(null, bindData)
+
+    // keyboard 'enter' key submit should keep editing state open and only reset text
+    async function handleKeyFormSubmit(formData: FormData) {
+        await bindedAction(formData);
+        setMessage("");
+    }
+
+    // Click 'send' button submit should close editing and reset text
+    async function handleClickFormSubmit(formData: FormData) {
+        await bindedAction(formData);
         closeInput();
     }
 
@@ -26,7 +38,7 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
         <>
             <form
                 id="form_id"
-                action={(formData) => handleFormSubmit(formData)}
+                action={(formData) => handleClickFormSubmit(formData)}
             >
                 <Textarea
                     label="Enter your message"
@@ -44,7 +56,7 @@ export default function Form({ privateRoomId }: { privateRoomId: string }) {
                             if (message === "") return;
                             const formData = new FormData();
                             formData.append('message_input', message);
-                            handleFormSubmit(formData);
+                            handleKeyFormSubmit(formData);
                         }
                     }}
                 />
