@@ -90,11 +90,11 @@ export default async function PlayerChat({ params }: { params: { userId: string,
     }
 
     return (
-        <div id="player_chat_container" className="h-full shadow-sm">
+        <div id="player_chat_container" className="md:shadow-sm">
             <h1 className="text-2xl text-blue-600 tracking-wide pt-6 md:pt-16 ml-10 md:ml-20">
                 {`${user.userName} and ${player.userName} chat`}
             </h1>
-            <div id="layout-container_chat" className="p-8 md:p-20">
+            <div id="layout-container_chat" className="p-8 md:p-20 h-full">
                 <Chat messages={messages?.messages!} privateRoomId={privateChatId} />
                 <Form privateRoomId={privateChatId} playerId={params.playerId} />
             </div>

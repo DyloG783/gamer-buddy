@@ -65,7 +65,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
 
     return (
         <div id="connect_container"
-            className="h-full shadow-sm"
+            className="h-full md:shadow-sm"
         >
             <div id="title_link_container" className="mb-10 md:mb-20 pt-4 md:pt-10">
                 <Link href={`/game/${gameId}`}
@@ -79,10 +79,10 @@ export default async function Connect({ params }: { params: { gameId: number } }
                 </Link>
             </div>
             <div id="players_and_chat_forum_container "
-                className="md:flex md:justify-between shadow-sm"
+                className="flex flex-col md:flex-row md:justify-between "
             >
-                <div id="other_players_container" className="px-4 pb-4 md:pb-0 min-w-[33%]">
-                    <p className="font-semibold mb-1 md:mb-6 tracking-wide text-blue-700">Other Players</p>
+                <div id="other_players_container" className="px-4 pb-10 md:pb-0 md:min-w-[33%]">
+                    <p className="font-semibold text-lg md:text-xl mb-1 md:mb-6 tracking-wide text-blue-700">Other Players</p>
                     <ul id="player_list "
                         className="flex flex-col gap-2">
                         {otherPlayers.map(player => (
@@ -99,9 +99,9 @@ export default async function Connect({ params }: { params: { gameId: number } }
                     </ul>
                 </div>
                 <div id="chat_forum container"
-                    className="min-w-[66%] "
+                    className="md:min-w-[66%] "
                 >
-                    <h2 className="font-semibold mb-1 md:mb-6 ml-4 md:ml-2 tracking-wide text-blue-700">Chat Forum</h2>
+                    <h2 className="font-semibold text-lg md:text-xl mb-1 md:mb-6 ml-4 md:ml-2 tracking-wide text-blue-700">Chat Forum</h2>
                     <ChatForum messages={messages?.messages!} gameRoomId={gameRoom.id} />
                     <Form gameRoomId={gameRoom.id} />
                 </div>

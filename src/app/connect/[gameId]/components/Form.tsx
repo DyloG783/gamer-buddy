@@ -31,7 +31,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
 
     return (
         <>
-            <form id="form_id"
+            <form id="form_id" className="p-2"
                 action={(formData) => handleClickFormSubmit(formData)}
             >
                 <Textarea

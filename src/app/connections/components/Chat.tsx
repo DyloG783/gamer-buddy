@@ -54,7 +54,7 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
 
     return (
         <div id="chat_container" className="flex flex-col">
-            <ScrollShadow className="w-full max-h-[600px]">
+            <ScrollShadow className="w-full max-h-[400px] md:max-h-[600px]">
                 {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
                         <div key={index} className="p-2">

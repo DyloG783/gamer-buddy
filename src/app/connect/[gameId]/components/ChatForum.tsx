@@ -52,7 +52,7 @@ export default function ChatForum({ messages, gameRoomId }: { messages: TForumMe
 
     return (
         <div id="chat_container" className="">
-            <ScrollShadow className="w-full" >
+            <ScrollShadow className="w-full max-h-[400px] md:max-h-[600px]" >
                 {totalMessages && totalMessages.length > 0 &&
                     totalMessages.map((m, index) => (
                         <div key={index} className="p-2">
