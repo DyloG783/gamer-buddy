@@ -27,7 +27,7 @@ export default function GamesDisplay(props: IGamesDisplayProps) {
     const [searchEmpty, setSearchEmpty] = useState(false);
 
     return (
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between shadow-sm">
             <SearchOptions genres={props.genres} platforms={props.platforms} modes={props.modes} searchState={searchState} setSearchState={setSearchState} searchEmpty={searchEmpty} />
             <div id="games_container_all_games" className="flex justify-around">
                 <PaginatedGamesSearch defaultGames={props.defaultGames} itemsPerPage={8} searchState={searchState} setSearchEmpty={setSearchEmpty} />
