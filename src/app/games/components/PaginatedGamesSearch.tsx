@@ -24,9 +24,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
 
     let filteredGames: IGame[] = [];
 
-    // const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-    // fetch games from the db andfilter based on the current search state
+    // fetch games from the db and filter based on the current search state
     useEffect(() => {
 
         if (searchState.currentSelected) {
@@ -105,12 +103,13 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
                         id="paginated_Games_with_search"
                         className={`flex flex-col `}
                     >
-                        <div id="game_count" className="flex mx-auto pb-4 md:pb-28">
+                        <div id="game_count" className="flex flex-col mx-auto py-4 md:pb-16">
                             {searchedGames.length === 0 && searchState.currentSelected === null &&
                                 <p className="italic tracking-wider pb-2 md:pb-0"> Currently showing lastest and upcoming games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
                                 ||
                                 <p className="italic tracking-wider pb-2 md:pb-0">Currently showing searched games: <span className="primary-color-font not-italic">{filteredGames.length}</span></p>
                             }
+                            <hr />
                         </div>
                         <Items currentItems={currentItems} />
                         <ReactPaginate

@@ -12,7 +12,7 @@ const YourGames: React.FC = async () => {
         return (
             <Link href={`${process.env.CLERK_SIGNIN}`}
                 className=' flex justify-around text-purple-600 italic hover:underline
-                font-semibold tracking-wide py-3'
+                font-semibold tracking-wide py-10'
             >
                 Sign in to see your games
             </Link>

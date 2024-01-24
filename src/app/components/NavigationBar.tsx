@@ -18,7 +18,7 @@ export default function NavigationBar() {
     ];
 
     return (
-        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen} className="shadow-sm py-2">
+        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen} className=" py-2">
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -27,31 +27,31 @@ export default function NavigationBar() {
                 <NavbarBrand>
                     <Link href="/">
                         <h1 className="text-black text-3xl font-bold">
-                            Gamer<span className="text-teal-500">Buddy</span>
+                            Gamer<span className="primary-color-font">Buddy</span>
                         </h1>
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent className="hidden sm:flex gap-4 tracking-wide " justify="center">
+            <NavbarContent className="hidden sm:flex gap-8 tracking-wide" justify="center">
                 <NavbarItem >
                     <Link href="/games"
-                        className={`${pathname === '/games' || pathname.includes('game/') ? 'underline' : ''} 
-                        text-lg`}
+                        className={`${pathname === '/games' || pathname.includes('game/') ? 'text-blue-600' : 'text-black'} 
+                        text-lg `}
                     >
                         Games
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
                     <Link href="/connections"
-                        className={`${pathname === '/connections' || pathname.includes('connections/') ? 'underline' : ''}
+                        className={`${pathname === '/connections' || pathname.includes('connections/') ? 'text-blue-600' : 'text-black'}
                         text-lg`}
                     >
                         Connections
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link href="/about" className={`${pathname === '/about' || pathname.includes('about/') ? 'underline' : ''}
+                    <Link href="/about" className={`${pathname === '/about' ? 'text-blue-600' : 'text-black'}
                     text-lg`}
                     >
                         About
