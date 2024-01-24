@@ -11,7 +11,6 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma db push && prisma generate && next build",
-    "test:e2e": "playwright test",
     "getTwitchAuthToken": "npx tsx scripts/saveTwitchAuthToken.ts",
     "saveGamesToDb": "npx tsx scripts/api_data/saveGamesToDb.ts",
     "saveGenresToDb": "npx tsx scripts/api_data/saveGenresToDb.ts",
@@ -19,7 +18,8 @@
     "savePlatformsToDb": "npx tsx scripts/api_data/savePlatformsToDb.ts",
     "allGameData": "npm run getTwitchAuthToken && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run saveGamesToDb",
     "dev_user_Relations": "npx tsx scripts/relations/dev_user_relations.ts",
-    "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts"
+    "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts",
+    "test": "jest"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.2",
@@ -47,10 +47,14 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
+    "@testing-library/jest-dom": "^6.2.1",
+    "@testing-library/react": "^14.1.2",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "eslint-config-next": "^14.0.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"

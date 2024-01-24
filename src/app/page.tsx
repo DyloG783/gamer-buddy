@@ -7,7 +7,7 @@ import Loading from "@/lib/loading";
 // 30 seconds auto update for all clients
 export const dynamic = 'force-dynamic';
 
-export default async function Home() {
+export default function Home() {
   return (
     <div id="home_page_container" className="h-full flex flex-col">
       <div id="hero_layout_container"
