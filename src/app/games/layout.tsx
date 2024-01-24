@@ -10,9 +10,10 @@ export default function GamesLayout({ children }: { children: React.ReactNode })
                 <YourGames />
             </div>
             <Suspense fallback={<Loading />}>
-                <div id="games_layout_children_container" className="grow flex mx-auto px-4 pt-10 md:px-8 md:pt-10 "
+                <div id="games_layout_children_container" className="grow flex mx-auto"
                 >
                     {children}
+                    {/* <Loading /> */}
                 </div>
             </Suspense>
         </div >
