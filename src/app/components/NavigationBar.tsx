@@ -85,7 +85,7 @@ export default function NavigationBar() {
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
                             // color={
-                            //     index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                            //     index === 2 ? "primary" : index === menuItems.length - 1 ? "warning" : "foreground"
                             // }
                             className={`w-full tracking-wide`}
                             href={item === 'Games' ? '/games' : '' || item === 'Connections' ? '/connections' : '' || item === 'About' ? '/about' : ''}

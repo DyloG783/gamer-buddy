@@ -55,7 +55,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                     }}
                 />
                 <div id="form_buttons" className={`flex gap-2 mt-3 justify-end p-2 ${editing ? '' : 'hidden'}`} >
-                    <Button type="button" onClick={closeInput} color="danger"
+                    <Button type="button" onClick={closeInput} color="warning"
                         data-testid='cancel_button'
                         variant="solid"
                         size='lg'

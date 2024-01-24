@@ -85,7 +85,7 @@ export default function AboutYou() {
                     <Button
                         type="button"
                         onClick={() => cancelFormSubmission()}
-                        color="danger"
+                        color="warning"
                         data-testid='cancel_button'
                         variant="solid"
                         size='lg'

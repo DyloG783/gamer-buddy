@@ -1,7 +1,7 @@
 import './globals.css'
 import NavigationBar from "@/app/components/NavigationBar"
 import { ClerkProvider } from '@clerk/nextjs'
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import { Providers } from "./providers";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -28,7 +28,7 @@ export default async function RootLayout({ children, }: { children: React.ReactN
             <header className='max-w-screen-2xl mx-auto shadow-sm'>
               <NavigationBar />
             </header>
-            <main className='h-[calc(100vh-6rem)] max-w-screen-2xl mx-auto '>
+            <main className='h-[calc(100vh-5.5rem)] max-w-screen-2xl mx-auto '>
               {children}
             </main>
           </Providers>

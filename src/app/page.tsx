@@ -7,9 +7,12 @@ import Loading from "@/lib/loading";
 // 30 seconds auto update for all clients
 export const dynamic = 'force-dynamic';
 
-export default function Home() {
+export default async function Home() {
   return (
     <div id="home_page_container" className="h-full flex flex-col">
+      <div id="profile_status_container " className="p-4 md:p-8 animate-pulse bg-yellow-50">
+        <ProfileStatus />
+      </div>
       <div id="hero_layout_container"
         className="p-4 shadow-sm"
       >
@@ -24,7 +27,7 @@ export default function Home() {
           <ConnectionUpdates />
         </Suspense>
       </div>
-      <ProfileStatus />
+
     </div>
   );
 }

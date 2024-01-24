@@ -9,7 +9,7 @@ export function RemoveButton({ text }: { text: string }) {
     return (
         <Button
             type="submit"
-            color='danger'
+            color='warning'
             aria-disabled={pending}
             data-testid={`remove`}
             size='lg'
