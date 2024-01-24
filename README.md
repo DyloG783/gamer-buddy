@@ -50,12 +50,8 @@ Playwright:
 env per environment:
 dotenv -e .env.development -- npx prisma db pull
 
-deploy steps:
-
-
-  
-
-Need help with:
+prod sql:
+DELETE FROM "GameMessage" WHERE 'GameRoomId' = 'clrlofaz20001wm08ql6uhdv8';
 
 
 bg-gradient-to-bl from-blue-100 to-sky-50
