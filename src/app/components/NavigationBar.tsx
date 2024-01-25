@@ -18,7 +18,10 @@ export default function NavigationBar() {
     ];
 
     return (
-        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen} className="font-semibold py-2">
+        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen}
+            className="font-semibold py-2"
+            maxWidth="full"
+        >
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -85,9 +88,6 @@ export default function NavigationBar() {
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
-                            // color={
-                            //     index === 2 ? "primary" : index === menuItems.length - 1 ? "warning" : "foreground"
-                            // }
                             className={`w-full tracking-wide text-blue-800`}
                             href={item === 'Games' ? '/games' : '' || item === 'Connections' ? '/connections' : '' || item === 'About' ? '/about' : ''}
                             size="lg"
