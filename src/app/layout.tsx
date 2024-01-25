@@ -8,7 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: 'Gamer Buddy',
-  description: 'Team up with others on you favourate games'
+  description: 'Team up with others on your favourate games'
 }
 
 // const inter = Inter({

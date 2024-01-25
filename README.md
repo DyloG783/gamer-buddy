@@ -51,7 +51,8 @@ env per environment:
 dotenv -e .env.development -- npx prisma db pull
 
 prod sql:
-DELETE FROM "GameMessage" WHERE 'GameRoomId' = 'clrlofaz20001wm08ql6uhdv8';
+DELETE FROM "GameMessage" WHERE 'GameRoomId' = 'clrkjl0i40001pv3kgjgihs63';
+DELETE FROM "GameMessage" WHERE 'Id' = 'clrkjl8wx0003pv3kzklo94w4';
 
 
 bg-gradient-to-bl from-blue-100 to-sky-50
