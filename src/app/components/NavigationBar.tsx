@@ -63,7 +63,7 @@ export default function NavigationBar() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide">
+            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide text-blue-800">
                 <NavbarItem >
                     <SignedIn>
                         <UserButton
