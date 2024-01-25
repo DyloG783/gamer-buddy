@@ -52,7 +52,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
         }, [categoryListSelection])
 
         const handleSelect = (e: any) => {
-            console.log("handleSelect selected: ", e.target.value)
             setCategoryListSelection(e.target.value);
         };
 
@@ -64,14 +63,12 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                         : categoryName === "Platform" && searchState.platform != null ? searchState.platform
                             : categoryName === "Mode" && searchState.mode != null ? searchState.mode
                                 : categoryListSelection}
-                    // placeholder={categoryName === "Genre" && searchState.genre != null ? searchState.genre
-                    //     : categoryName === "Platform" && searchState.platform != null ? searchState.platform
-                    //         : categoryName === "Mode" && searchState.mode != null ? searchState.mode
-                    //             : categoryName}
+                    placeholder={`Select a ${categoryName}`}
+                    aria-label={categoryName}
                     value={categoryListSelection}
                     selectedKeys={[categoryListSelection]}
                     onChange={handleSelect}
-                    size='lg'
+                    // size='lg'
                     className={`min-w-60 max-w-sm`}
                 >
                     {categoryList.map((cat) =>
@@ -80,6 +77,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                         </SelectItem>
                     )}
                 </Select>
+                {/* <p className="text-small text-default-500">Selected: {categoryListSelection}</p> */}
             </div>
         )
     }

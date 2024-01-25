@@ -12,7 +12,10 @@ export default async function Home() {
     <div id="home_page_container" className="flex flex-col full-height-minus-nav 
     shadow-sm background-color"
     >
-      <ProfileStatus />
+      <Suspense fallback={<Loading />}>
+        <ProfileStatus />
+        {/* <Loading /> */}
+      </Suspense>
       <div id="hero_layout_container"
         className="p-4 shadow-sm"
       >
@@ -25,6 +28,7 @@ export default async function Home() {
       >
         <Suspense fallback={<Loading />}>
           <ConnectionUpdates />
+          {/* <Loading /> */}
         </Suspense>
       </div>
 

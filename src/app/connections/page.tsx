@@ -29,6 +29,7 @@ const Connections = async () => {
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connected"} unseenMessages={unseenMessages} />
+                    {/* <Loading /> */}
                 </Suspense>
             </div>
             <div id="connection_request_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm" >
@@ -42,6 +43,7 @@ const Connections = async () => {
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={requests} itemsPerPage={5} option={"requested"} />
+                    {/* <Loading /> */}
                 </Suspense>
             </div>
             <div id="following_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm">
@@ -55,6 +57,7 @@ const Connections = async () => {
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={userFollowing} itemsPerPage={5} option={"following"} />
+                    {/* <Loading /> */}
                 </Suspense>
             </div>
 

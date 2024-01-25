@@ -53,7 +53,14 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
 
     }, [searchState]);
 
-    if (isLoading) return <Loading />;
+    if (isLoading) {
+        return (
+            <div className="fixed top-3/4 left-1/2 ">
+                <Loading />
+            </div>
+
+        )
+    };
 
     // the games to be displayed are either default, or what was returned from searching
     if (searchedGames.length === 0 && searchState.currentSelected === null) {
@@ -125,7 +132,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
                         />
                     </div>
                     ||
-                    <div className="m-auto ">
+                    <div className="fixed top-3/4">
                         No games matched your search. Click <span className="text-teal-600">Reset search</span> to try again
                     </div>
                 }
