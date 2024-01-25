@@ -30,7 +30,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                     <>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold text-blue-700">Genre</h3>
+                            <h3 className="font-bold blue-font">Genre</h3>
                             {game.genres.map((genre: string) => (
                                 <span key={genre} className="">
                                     {genre + ", "}
@@ -39,7 +39,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                         </div>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold text-blue-700">Mode</h3>
+                            <h3 className="font-bold blue-font">Mode</h3>
                             {game.modes.map((mode: string) => (
                                 <span key={mode} className="">
                                     {mode + ", "}
@@ -48,7 +48,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                         </div>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold text-blue-700">Platform</h3>
+                            <h3 className="font-bold blue-font">Platform</h3>
                             {game.platforms.map((platform: string) => (
                                 <span key={platform} className="">
                                     {platform + ", "}

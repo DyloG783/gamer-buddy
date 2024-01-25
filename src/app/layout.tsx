@@ -21,14 +21,14 @@ export default async function RootLayout({ children, }: { children: React.ReactN
   return (
 
     <ClerkProvider>
-      <html lang="en" className={''}>
-        <body className='min-h-screen text-sm md:text-base lg:text-lg '>
+      <html lang="en" className={``}>
+        <body className='text-sm md:text-base lg:text-lg bg-slate-200'>
           {/* <body className='min-h-screen text-sm md:text-base lg:text-lg dark text-foreground bg-background'> */}
           <Providers>
             <header className='max-w-screen-2xl mx-auto shadow-sm'>
               <NavigationBar />
             </header>
-            <main className='h-[calc(100vh-5.5rem)] max-w-screen-2xl mx-auto '>
+            <main className='full-height-minus-nav max-w-screen-2xl mx-auto'>
               {children}
             </main>
           </Providers>

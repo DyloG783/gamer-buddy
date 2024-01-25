@@ -18,7 +18,7 @@ export default function NavigationBar() {
     ];
 
     return (
-        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen} className=" py-2">
+        <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen} className="font-semibold py-2">
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -36,23 +36,24 @@ export default function NavigationBar() {
             <NavbarContent className="hidden sm:flex gap-8 tracking-wide" justify="center">
                 <NavbarItem >
                     <Link href="/games"
-                        className={`${pathname === '/games' || pathname.includes('game/') ? 'text-blue-600' : 'text-black'} 
-                        text-lg `}
+                        className={`${pathname === '/games' || pathname.includes('game/') ? 'underline' : ''} 
+                        text-lg text-blue-800`}
                     >
                         Games
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
                     <Link href="/connections"
-                        className={`${pathname === '/connections' || pathname.includes('connections/') ? 'text-blue-600' : 'text-black'}
-                        text-lg`}
+                        className={`${pathname === '/connections' || pathname.includes('connections/') ? 'underline' : ''}
+                        text-lg text-blue-800`}
+                        color="primary"
                     >
                         Connections
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link href="/about" className={`${pathname === '/about' ? 'text-blue-600' : 'text-black'}
-                    text-lg`}
+                    <Link href="/about" className={`${pathname === '/about' ? 'underline' : ''}
+                    text-lg text-blue-800`}
                     >
                         About
                     </Link>
@@ -69,7 +70,7 @@ export default function NavigationBar() {
                             appearance={{
                                 elements: {
                                     userButtonBox: "",
-                                    userButtonOuterIdentifier: "md:text-lg font-semibold"
+                                    userButtonOuterIdentifier: "md:text-lg font-semibold text-blue-800"
                                 }
                             }}
                         />
@@ -87,7 +88,7 @@ export default function NavigationBar() {
                             // color={
                             //     index === 2 ? "primary" : index === menuItems.length - 1 ? "warning" : "foreground"
                             // }
-                            className={`w-full tracking-wide`}
+                            className={`w-full tracking-wide text-blue-800`}
                             href={item === 'Games' ? '/games' : '' || item === 'Connections' ? '/connections' : '' || item === 'About' ? '/about' : ''}
                             size="lg"
 

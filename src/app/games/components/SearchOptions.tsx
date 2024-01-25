@@ -126,7 +126,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
     return (
         <div id="search_options_and_reset_button"
-            className="flex flex-col "
+            className="flex flex-col p-2"
         >
             {searchEmpty &&
                 <Button
@@ -149,7 +149,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     Reset search
                 </Button>
             }
-            <div className="flex  flex-wrap gap-3 lg:gap-6 xl:gap-10 mb-4 md:mb-8"
+            <div className="flex flex-wrap gap-3 lg:gap-6 xl:gap-10 mb-4 md:mb-8 p-4"
                 id="search_options"
             >
                 <SelectSearch categoryList={genres} categoryName="Genre" />

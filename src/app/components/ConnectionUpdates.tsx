@@ -13,10 +13,9 @@ export default async function ConnectionUpdates() {
     // user is not logged in don't display this component
     if (!userId) {
         return (
-            <div id="no_session_container" className="flex h-full">
+            <div id="no_session_container" className="">
                 <Link href={`${process.env.CLERK_SIGNIN}`}
-                    className="text-purple-800 font-semibold tracking-wider italic m-auto
-                    p-10 hover:underline"
+                    className="text-purple-800 font-semibold tracking-wider italic hover:underline"
                 >
                     Sign in to see Messages, Connection requests, and more!</Link>
             </div>
@@ -27,15 +26,14 @@ export default async function ConnectionUpdates() {
     const unseenMessages = await getUnseenMessages();
 
     return (
-        <div id="connection_updates_container" className="flex flex-col md:flex-row gap-8 md:gap-0 justify-around h-full md:pt-20 ">
+        <div id="connection_updates_container" className="flex flex-col md:flex-row gap-8 md:gap-x-40 justify-around ">
             <div
                 id="connection_messages_container"
-
             >
-                <h2 className="font-semibold text-blue-800 text-xl mb-4 md:mb-10 tracking-wide">Messages</h2>
+                <h2 className="font-semibold blue-font text-xl mb-4 tracking-wide">Messages</h2>
                 {unseenMessages && unseenMessages.length > 0 &&
                     <Link href={`/connections`} >
-                        <div className="flex p-4  hover:cursor-pointer">
+                        <div className="flex hover:cursor-pointer">
                             <span >New messages: <span className="text-emerald-600 font-semibold">{unseenMessages.length}</span></span>
                             <span className="animate-ping ml-4">
                                 <Image src="/./bells.svg" height={0} width={0} alt="chat_icon"
@@ -45,17 +43,17 @@ export default async function ConnectionUpdates() {
                         </div>
                     </Link>
                     ||
-                    <p className="p-4">You have no new messages</p>
+                    <p >You have no new messages</p>
                 }
             </div>
             <div
                 id="connection_requests_container"
                 className=" "
             >
-                <h2 className="font-semibold text-blue-800 text-xl mb-4 md:mb-10 tracking-wide">Connection requests</h2>
+                <h2 className="font-semibold blue-font text-xl mb-4 tracking-wide">Connection requests</h2>
                 {requests && requests.length > 0 &&
                     <Link href={`/connections`} >
-                        <div className="flex p-4 hover:cursor-pointer">
+                        <div className="flex hover:cursor-pointer">
                             <span >Pending connection requests: <span className="text-emerald-600 font-semibold">{requests.length}</span></span>
                             <span className="animate-ping ml-4">
                                 <Image src="/./bells.svg" height={0} width={0} alt="chat_icon"
@@ -65,7 +63,7 @@ export default async function ConnectionUpdates() {
                         </div>
                     </Link>
                     ||
-                    <p className="p-4">You have no connection requests</p>
+                    <p >You have no connection requests</p>
                 }
             </div>
         </div>

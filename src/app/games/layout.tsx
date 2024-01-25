@@ -5,7 +5,7 @@ import YourGames from "./components/YourGames";
 export default function GamesLayout({ children }: { children: React.ReactNode }) {
 
     return (
-        <div className="flex flex-col h-full gap-10" id="layout_games">
+        <div className="flex flex-col full-height-minus-nav gap-10 background-color" id="layout_games">
             <div className="shadow-sm">
                 <YourGames />
             </div>

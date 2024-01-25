@@ -15,17 +15,17 @@ const Connections = async () => {
     const unseenMessages: TMessage[] | null = await getUnseenMessages();
 
     return (
-        <div id="page_container" className="flex flex-col h-full ">
+        <div id="page_container" className="flex flex-col full-height-minus-nav background-color ">
             <div id="connected_with_container"
                 className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm
                 ">
                 <div>
-                    <p className="text-blue-600 font-semibold text-xl md:text-2xl
+                    <p className="blue-font font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"
                     >
                         Connected With
                     </p>
-                    <p className="font-light tracking-wide ml-4">Connections you can chat with</p>
+                    <p className="font-light tracking-wide ml-4 mb-4 md:mb-0">Connections you can chat with</p>
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={userConnections} itemsPerPage={5} option={"connected"} unseenMessages={unseenMessages} />
@@ -33,12 +33,12 @@ const Connections = async () => {
             </div>
             <div id="connection_request_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm" >
                 <div>
-                    <p className="text-blue-600 font-semibold text-xl md:text-2xl
+                    <p className="blue-font font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"
                     >
                         Connection requests
                     </p>
-                    <p className="font-light tracking-wide ml-4">People who follow you</p>
+                    <p className="font-light tracking-wide ml-4 mb-4 md:mb-0">People who follow you</p>
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={requests} itemsPerPage={5} option={"requested"} />
@@ -46,12 +46,12 @@ const Connections = async () => {
             </div>
             <div id="following_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm">
                 <div>
-                    <p className="text-blue-600 font-semibold text-xl md:text-2xl
+                    <p className="blue-font font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"
                     >
                         Following
                     </p>
-                    <p className="font-light tracking-wide ml-4">People who you follow</p>
+                    <p className="font-light tracking-wide ml-4 mb-4 md:mb-0">People who you follow</p>
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={userFollowing} itemsPerPage={5} option={"following"} />

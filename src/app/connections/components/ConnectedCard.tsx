@@ -44,6 +44,7 @@ export default async function ConnectedCard({ connection, unseenMessages }:
                     showAnchorIcon
                     href={unseen ? `/connections/${connection.followingId}/${connection.followedById}` : `/connections/view-player/${connection.followedById}`}
                     className="text-sm"
+
                 >
                     {/* {unseen &&
                         `Chat with ${connection.followedByUName}` ||

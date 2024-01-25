@@ -65,7 +65,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
 
     return (
         <div id="connect_container"
-            className="h-full md:shadow-sm"
+            className="full-height-minus-nav background-color"
         >
             <div id="title_link_container" className="mb-10 md:mb-20 pt-4 md:pt-10">
                 <Link href={`/game/${gameId}`}

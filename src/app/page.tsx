@@ -9,7 +9,9 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   return (
-    <div id="home_page_container" className="h-full flex flex-col">
+    <div id="home_page_container" className="flex flex-col full-height-minus-nav 
+    shadow-sm background-color"
+    >
       <ProfileStatus />
       <div id="hero_layout_container"
         className="p-4 shadow-sm"
@@ -19,7 +21,7 @@ export default async function Home() {
 
       <div
         id="connectoin_updates_layout_container"
-        className="grow p-4 shadow-sm"
+        className="flex grow items-center justify-around p-4 my-4 md:p-0 md:my-0"
       >
         <Suspense fallback={<Loading />}>
           <ConnectionUpdates />

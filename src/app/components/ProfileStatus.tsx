@@ -29,7 +29,7 @@ export default async function ProfileStatus() {
         <div id="profile_status_container " className="p-4 md:p-8 animate-pulse bg-yellow-50">
             {/* <button>Dismiss</button> */}
             <Link href={`/user-profile/game-settings`} className="tracking-wide">
-                <h1 className="font-semibold text-center mb-4 text-blue-700 tracking-wide text-xl">Update your profile</h1>
+                <h1 className="font-semibold text-center mb-4 blue-font tracking-wide text-xl">Update your profile</h1>
                 {!timezone &&
                     <>
                         <div
@@ -47,7 +47,7 @@ export default async function ProfileStatus() {
                             id="aboutYou_status_unavailable"
                             className="py-2 "
                         >
-                            <p className="flex justify-around">Share someting about youself in the About You section in your profile</p>
+                            <p className="flex justify-around">Share someting about youself in the About You section in your profile so others can feel your vibes!</p>
                         </div>
                         {!timezone && <hr />}
                     </>
