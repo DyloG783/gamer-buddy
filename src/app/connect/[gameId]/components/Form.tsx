@@ -25,6 +25,10 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
 
     // Click 'send' button submit should close editing and reset text
     async function handleClickFormSubmit(formData: FormData) {
+        if (message === "") {
+            setEditing(false);
+            return;
+        };
         await updateWithForumId(formData);
         closeInput();
     }

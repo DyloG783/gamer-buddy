@@ -58,18 +58,17 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
         return (
             <div className="flex flex-col gap-1 ">
-                <h2 className="font-semibold  text-blue-800">{categoryName}</h2>
+                <h2 className="font-semibold blue-font">{categoryName}</h2>
                 <Select
                     label={categoryName === "Genre" && searchState.genre != null ? searchState.genre
                         : categoryName === "Platform" && searchState.platform != null ? searchState.platform
                             : categoryName === "Mode" && searchState.mode != null ? searchState.mode
                                 : categoryListSelection}
-                    // label={categoryName}
-                    placeholder={categoryName === "Genre" && searchState.genre != null ? searchState.genre
-                        : categoryName === "Platform" && searchState.platform != null ? searchState.platform
-                            : categoryName === "Mode" && searchState.mode != null ? searchState.mode
-                                : categoryName}
-                    // value={categoryListSelection}
+                    // placeholder={categoryName === "Genre" && searchState.genre != null ? searchState.genre
+                    //     : categoryName === "Platform" && searchState.platform != null ? searchState.platform
+                    //         : categoryName === "Mode" && searchState.mode != null ? searchState.mode
+                    //             : categoryName}
+                    value={categoryListSelection}
                     selectedKeys={[categoryListSelection]}
                     onChange={handleSelect}
                     size='lg'

@@ -30,6 +30,10 @@ export default function Form({ privateRoomId, playerId }: { privateRoomId: strin
 
     // Click 'send' button submit should close editing and reset text
     async function handleClickFormSubmit(formData: FormData) {
+        if (message === "") {
+            setEditing(false);
+            return;
+        };
         await bindedAction(formData);
         closeInput();
     }
