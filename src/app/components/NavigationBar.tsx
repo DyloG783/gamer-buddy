@@ -63,8 +63,8 @@ export default function NavigationBar() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide text-blue-800">
-                <NavbarItem >
+            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font">
+                <NavbarItem className="md:text-lg">
                     <SignedIn>
                         <UserButton
                             userProfileMode="navigation"
@@ -73,9 +73,10 @@ export default function NavigationBar() {
                             appearance={{
                                 elements: {
                                     userButtonBox: "",
-                                    userButtonOuterIdentifier: "md:text-lg font-semibold text-blue-800"
+                                    userButtonOuterIdentifier: "md:text-lg font-semibold blue-font"
                                 }
                             }}
+                            afterSignOutUrl={process.env.NEXT_PUBLIC_BASE_URL}
                         />
                     </SignedIn>
                     <SignedOut>
@@ -91,7 +92,6 @@ export default function NavigationBar() {
                             className={`w-full tracking-wide text-blue-800`}
                             href={item === 'Games' ? '/games' : '' || item === 'Connections' ? '/connections' : '' || item === 'About' ? '/about' : ''}
                             size="lg"
-
                         >
                             {item}
                         </Link>
