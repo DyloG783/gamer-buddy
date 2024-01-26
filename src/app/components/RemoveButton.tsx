@@ -13,7 +13,7 @@ export function RemoveButton({ text }: { text: string }) {
             aria-disabled={pending}
             data-testid={`remove`}
             size='lg'
-            className={`text-sm tracking-wider`}
+            className={`text-sm tracking-wider text-white`}
         >
             {pending ? '...' : `${text}`}
         </Button>

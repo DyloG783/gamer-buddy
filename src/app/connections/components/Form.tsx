@@ -70,7 +70,7 @@ export default function Form({ privateRoomId, playerId }: { privateRoomId: strin
                         data-testid='cancel_button'
                         variant="solid"
                         size='lg'
-                        className={`text-sm tracking-wider`}
+                        className={`text-sm tracking-wider text-white`}
                     >
                         Cancel
                     </Button>

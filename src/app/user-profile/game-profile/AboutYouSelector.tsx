@@ -89,7 +89,7 @@ export default function AboutYou() {
                         data-testid='cancel_button'
                         variant="solid"
                         size='lg'
-                        className={`text-sm tracking-wider`}
+                        className={`text-sm tracking-wider text-white`}
                     >
                         Cancel
                     </Button>

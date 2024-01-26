@@ -63,7 +63,7 @@ export default function Form({ gameRoomId }: { gameRoomId: string }) {
                         data-testid='cancel_button'
                         variant="solid"
                         size='lg'
-                        className={`text-sm tracking-wider`}
+                        className={`text-sm tracking-wider text-white`}
                     >
                         Cancel
                     </Button>
