@@ -1,28 +1,30 @@
-import './globals.css'
-import NavigationBar from "@/app/components/NavigationBar"
-import { ClerkProvider } from '@clerk/nextjs'
-// import { Inter } from 'next/font/google';
+import './globals.css';
+import NavigationBar from "@/app/components/NavigationBar";
+import { ClerkProvider } from '@clerk/nextjs';
+import { shadesOfPurple } from "@clerk/themes";
+import { Inter } from 'next/font/google';
 import { Providers } from "./providers";
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: 'Gamer Buddy',
   description: 'Team up with others on your favourate games'
 }
 
-// const inter = Inter({
-//   subsets: ['latin'],
-//   display: 'swap',
-// })
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
-export default async function RootLayout({ children, }: { children: React.ReactNode }) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
 
   return (
-
-    <ClerkProvider>
-      <html lang="en" className={``}>
-        <body className='text-sm md:text-base lg:text-lg bg-slate-200'>
+    <ClerkProvider appearance={{
+      baseTheme: shadesOfPurple
+    }}>
+      <html lang="en" className={`${inter.className}`}>
+        <body className='text-sm md:text-base lg:text-lg bg-slate-200 dark:bg-neutral-800'>
           {/* <body className='min-h-screen text-sm md:text-base lg:text-lg dark text-foreground bg-background'> */}
           <Providers>
             <header className='max-w-screen-2xl mx-auto shadow-sm'>

@@ -80,7 +80,7 @@ html, body {
     }
 
     .full-height-minus-nav {
-        @apply min-h-[calc(100vh-5.5rem)];
+        @apply min-h-[calc(100vh-5.1rem)];
     }
 }
 

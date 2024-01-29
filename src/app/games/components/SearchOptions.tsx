@@ -68,7 +68,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     value={categoryListSelection}
                     selectedKeys={[categoryListSelection]}
                     onChange={handleSelect}
-                    // size='lg'
+                    size='lg'
                     className={`min-w-60 max-w-sm`}
                 >
                     {categoryList.map((cat) =>

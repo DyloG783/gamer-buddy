@@ -58,7 +58,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
 
 
     return (
-        <div id="page_container" className="flex flex-col full-height-minus-nav shadow-sm background-color">
+        <div id="page_container" className="flex flex-col full-height-minus-nav shadow-sm background-color dark:bg-black">
             <div id="game_container" className={`flex flex-col justify-center p-8 md:p-16 `}>
                 <div id="game_info_container" className="p-1 md:p-4">
                     <div id="game_title_actions_container" className="mb-1 md:mb-4 flex  ">

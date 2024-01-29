@@ -50,7 +50,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
     const removeActionWithPlayer = removeUser.bind(null, player)
 
     return (
-        <div className="flex flex-col justify-between full-height-minus-nav background-color">
+        <div className="flex flex-col justify-between full-height-minus-nav background-color dark:bg-black">
             <div id="connect_with_player_container"
                 className=" p-4 shadow-sm"
             >

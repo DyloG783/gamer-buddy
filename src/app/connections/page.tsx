@@ -15,7 +15,7 @@ const Connections = async () => {
     const unseenMessages: TMessage[] | null = await getUnseenMessages();
 
     return (
-        <div id="page_container" className="flex flex-col full-height-minus-nav background-color ">
+        <div id="page_container" className="flex flex-col full-height-minus-nav background-color dark:bg-black">
             <div id="connected_with_container"
                 className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm
                 ">

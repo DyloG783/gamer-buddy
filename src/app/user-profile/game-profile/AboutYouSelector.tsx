@@ -53,7 +53,7 @@ export default function AboutYou() {
     }
     return (
         <div className={`p-2 `} >
-            <h1 className="text-xl font-semibold mb-2 text-blue-700">About You</h1>
+            <h1 className="text-xl font-semibold mb-2 text-white">About You</h1>
 
             <form id="bioform" onSubmit={handleSubmit}>
                 <Textarea

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
 import { useState } from "react";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function NavigationBar() {
 
@@ -29,7 +30,7 @@ export default function NavigationBar() {
                 />
                 <NavbarBrand>
                     <Link href="/">
-                        <h1 className="text-black text-3xl font-bold">
+                        <h1 className="text-black dark:text-white text-3xl font-bold">
                             Gamer<span className="primary-color-font">Buddy</span>
                         </h1>
                     </Link>
@@ -40,7 +41,7 @@ export default function NavigationBar() {
                 <NavbarItem >
                     <Link href="/games"
                         className={`${pathname === '/games' || pathname.includes('game/') ? 'underline' : ''} 
-                        text-lg text-blue-800`}
+                        text-lg text-blue-800 dark:text-white`}
                     >
                         Games
                     </Link>
@@ -48,7 +49,7 @@ export default function NavigationBar() {
                 <NavbarItem>
                     <Link href="/connections"
                         className={`${pathname === '/connections' || pathname.includes('connections/') ? 'underline' : ''}
-                        text-lg text-blue-800`}
+                        text-lg text-blue-800 dark:text-white`}
                         color="primary"
                     >
                         Connections
@@ -56,24 +57,30 @@ export default function NavigationBar() {
                 </NavbarItem>
                 <NavbarItem>
                     <Link href="/about" className={`${pathname === '/about' ? 'underline' : ''}
-                    text-lg text-blue-800`}
+                    text-lg text-blue-800 dark:text-white`}
                     >
                         About
                     </Link>
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font">
+
+
+
+            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font dark:text-white">
+                <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font dark:text-white">
+                    <ThemeSwitcher />
+                </NavbarContent>
                 <NavbarItem className="md:text-lg">
                     <SignedIn>
                         <UserButton
                             userProfileMode="navigation"
                             userProfileUrl="/user-profile/"
-                            showName
+                            // showName
                             appearance={{
                                 elements: {
                                     userButtonBox: "",
-                                    userButtonOuterIdentifier: "md:text-lg font-semibold blue-font"
+                                    userButtonOuterIdentifier: "md:text-lg font-semibold blue-font dark:text-white"
                                 }
                             }}
                             afterSignOutUrl={process.env.NEXT_PUBLIC_BASE_URL}
@@ -89,7 +96,7 @@ export default function NavigationBar() {
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
-                            className={`w-full tracking-wide text-blue-800`}
+                            className={`w-full tracking-wide text-blue-800 dark:text-white`}
                             href={item === 'Games' ? '/games' : '' || item === 'Connections' ? '/connections' : '' || item === 'About' ? '/about' : ''}
                             size="lg"
                         >

@@ -25,7 +25,7 @@ export default function TimezoneSelector() {
 
     return (
         <div className={`p-2 mt-2`} >
-            <h1 className="text-xl font-semibold mb-2 text-blue-700">Timezone</h1>
+            <h1 className="text-xl font-semibold mb-2 text-white">Timezone</h1>
             <Select
                 id="selectID"
                 label={user?.unsafeMetadata.timezone ? user?.unsafeMetadata.timezone as string : "Select a time-zone"}
