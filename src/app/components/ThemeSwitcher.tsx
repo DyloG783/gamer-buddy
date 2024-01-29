@@ -19,7 +19,7 @@ export function ThemeSwitcher() {
             <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
                 <Image src={theme === "light" ? "/./moon.svg" : "/./sun.svg"}
                     alt="dark-mode-theme-switcher"
-                    height={30} width={30}
+                    height={28} width={28}
                 />
             </button>
         </div>
