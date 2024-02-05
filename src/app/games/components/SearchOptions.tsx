@@ -77,7 +77,6 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                         </SelectItem>
                     )}
                 </Select>
-                {/* <p className="text-small text-default-500">Selected: {categoryListSelection}</p> */}
             </div>
         )
     }
