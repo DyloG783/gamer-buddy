@@ -10,9 +10,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
     const user = await currentUser();
 
     // if not logged in don't show component
-    if (!userId) {
-        return null
-    }
+    if (!userId) return null
 
     // extract custom user profile info out of Clerk
     const userBio: TUnsafeMetadata["bio"] = user?.unsafeMetadata.bio as string
@@ -28,26 +26,14 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
 
     // find all users who have also have this game saved by count 
     const usersWhoAlsoHaveThisGameCount = await prisma.user.count({
-        where: {
-            games: {
-                some: {
-                    id: gameId
-                }
-            },
-        },
+        where: { games: { some: { id: gameId } } }
     })
 
     // find other users who have also have this game saved
     const usersWhoAlsoHaveThisGame = await prisma.user.findMany({
         where: {
-            games: {
-                some: {
-                    id: gameId
-                }
-            },
-            NOT: {
-                id: userId
-            },
+            games: { some: { id: gameId } },
+            NOT: { id: userId },
         }
     })
 

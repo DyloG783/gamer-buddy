@@ -52,12 +52,11 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
     return (
         <div className="flex flex-col justify-between full-height-minus-nav background-color dark:bg-black">
             <div id="connect_with_player_container"
-                className=" p-4 shadow-sm"
+                className="p-4 shadow-sm"
             >
                 <div id="player_profile_container">
-
                     <div id="player_action_bar_container"
-                        className="w-full mb-10 flex justify-end gap-2"
+                        className="w-full mb-10 flex justify-evenly sm:justify-end gap-2"
                     >
                         {usersAreConnected
                             &&
@@ -117,19 +116,24 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                     </div>
                 </div>
             </div>
-            <div id="all_games" className="pl-4 md:pl-20">
-                <h1 className="font-semibold blue-font mt-3 mb-4 md:mb-16 md:mt-0 tracking-wider 
-                text-xl md:text-2xl"
+            <div id="players_games" className="">
+                <h1 className="font-semibold blue-font tracking-wider 
+                text-xl md:text-2xl p-4 md:pl-20"
                 >
                     All of {player?.userName}&apos;s games
                 </h1>
-                <div className="ml-4 md:ml-10">
-                    {player?.games.length > 0
-                        && <PaginatedGames games={player.games} itemsPerPage={3} />
-                        || <p className="tracking-wide">{player?.userName} has no games saved...</p>
-                    }
-                </div>
+                {player?.games.length > 0
+                    &&
+                    <div id="all_games" className="p-4 md:pl-20 ">
+                        <PaginatedGames games={player.games} itemsPerPage={3} />
+                    </div>
+                    ||
+                    <div id="no_games" className="flex justify-center ">
+                        <p className="tracking-wide mt-20 mb-40">{player?.userName} has no games saved...</p>
+                    </div>
+                }
             </div>
+
         </div>
     )
 } 

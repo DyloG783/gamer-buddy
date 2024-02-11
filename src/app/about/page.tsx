@@ -1,10 +1,11 @@
 export default function About() {
 
     return (
-        <div className="flex flex-col full-height-minus-nav tracking-wide shadow-sm background-color dark:bg-black">
+        <div className="flex flex-col full-height-minus-nav 
+        tracking-wide shadow-sm background-color dark:bg-black
+        p-4">
             <div className="grow flex flex-col">
                 <h1 className="flex justify-around text-3xl text-blue-700 mt-10 mb-6">About</h1>
-                <hr />
                 <p className="grow flex items-center justify-around">This website is a portfolio project. I have noticed international traffic and want to be transparent about the usage of this</p>
 
             </div>

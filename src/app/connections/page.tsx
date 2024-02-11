@@ -39,7 +39,7 @@ const Connections = async () => {
                     >
                         Connection requests
                     </p>
-                    <p className="font-light tracking-wide ml-4 mb-4 md:mb-0">People who follow you</p>
+                    <p className="font-light tracking-wide ml-4 mb-4 md:mb-0">People who follow you. Follow them back to connect with them!</p>
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={requests} itemsPerPage={5} option={"requested"} />
@@ -53,7 +53,7 @@ const Connections = async () => {
                     >
                         Following
                     </p>
-                    <p className="font-light tracking-wide ml-4 mb-4 md:mb-0">People who you follow</p>
+                    <p className="font-light tracking-wide ml-4 mb-4 md:mb-0">People who you follow. They will be notified that you wish to connect with them</p>
                 </div>
                 <Suspense fallback={<Loading />}>
                     <PaginatedConnections connections={userFollowing} itemsPerPage={5} option={"following"} />

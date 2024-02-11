@@ -64,7 +64,7 @@ html, body {
 @layer components{
 
     .link {
-        @apply text-purple-700 hover:italic;
+        @apply text-purple-700 dark:text-purple-400 hover:italic;
     }
 
     .primary-color-font {

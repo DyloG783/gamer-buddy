@@ -15,7 +15,7 @@ export default async function ConnectionUpdates() {
         return (
             <div id="no_session_container" className="">
                 <Link href={`${process.env.CLERK_SIGNIN}`}
-                    className="text-purple-800 font-semibold tracking-wider italic hover:underline"
+                    className="link tracking-wider"
                 >
                     Sign in to see Messages, Connection requests, and more!</Link>
             </div>

@@ -48,25 +48,18 @@ export default async function GamePage({ params }: { params: { gameId: number } 
     const AddActionWithGameId = addGame.bind(null, gameId)
 
     //convert game's release date from unix timestamp to readable
-
-
     const unix_timestamp = game.firstReleaseDate
     let date = null;
     if (unix_timestamp) {
         date = new Date(unix_timestamp * 1000)
     }
 
-
     return (
         <div id="page_container" className="flex flex-col full-height-minus-nav shadow-sm background-color dark:bg-black">
             <div id="game_container" className={`flex flex-col justify-center p-8 md:p-16 `}>
                 <div id="game_info_container" className="p-1 md:p-4">
                     <div id="game_title_actions_container" className="mb-1 md:mb-4 flex  ">
-                        <Link href={`${game?.url}`}
-                            target="_blank"
-                        >
-                            <h1 className="font-semibold text-xl md:text-4xl mb-2 hover:italic text-blue-700 hover:text-purple-700">{`${game?.name}`}</h1>
-                        </Link>
+                        <h1 className="font-semibold text-xl md:text-4xl mb-2 text-blue-700">{`${game?.name}`}</h1>
                         {userId &&
                             <div id="gameActionsBar"
                                 className="flex flex-col md:flex-row gap-2 ml-auto">
@@ -90,11 +83,10 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                                 </div>
                             </div>
                         }
-
                     </div>
-                    <p className="my-4 md:my-2 tracking-wide ">{`${game?.summary}`}</p>
-                    <div id="game_info_groups_container"
-                        className="flex flex-col my-8 gap-2 "
+                    <p className="my-4 md:my-2 tracking-wide">{`${game?.summary}`}</p>
+                    <div id="game_info_container"
+                        className="flex flex-col my-8 gap-2"
                     >
                         <div id="game_genre_group" className="mb-4">
                             <p className="font-semibold md:mb-2 primary-color-font">Genre</p>
@@ -117,6 +109,15 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                         <div id="release_date" className="mb-4">
                             <p className="font-semibold md:mb-2 primary-color-font">Release date</p>
                             {date != null && <p className="font-thin">{date.toLocaleDateString()}</p>}
+                        </div>
+                        <div id="view_on_igdb" className="">
+                            <Link href={`${game?.url}`}
+                                target="_blank"
+                                className="link"
+                            >
+                                <p className="mt-4">Click here to view more about this game on the IGDB gaming site</p>
+
+                            </Link>
                         </div>
                     </div>
                 </div>

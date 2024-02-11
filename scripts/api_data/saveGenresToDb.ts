@@ -1,17 +1,16 @@
-import prisma from "@/lib/db"
+import prisma from "@/lib/db";
 
 async function saveGameGenresToDb() {
 
-    const igdbBaseUrl = process.env.IGDB_BASE_URL
-    const twitchClientId = process.env.TWITCH_CLIENT_ID as string
+    const igdbBaseUrl = process.env.IGDB_BASE_URL;
+    const twitchClientId = process.env.TWITCH_CLIENT_ID as string;
     const twitchAuthTokenFromDb = await prisma.twitchAuthToken.findFirst({
         where: {
             type: 'token',
         }
-    })
+    });
 
     try {
-
         const response = await fetch(`${igdbBaseUrl}/genres`, {
             method: "POST",
             headers: {
@@ -22,12 +21,12 @@ async function saveGameGenresToDb() {
             body: `fields name; limit 500; sort id;`
         })
 
-        const genresJSON = await response.json()
-        await saveGenres(genresJSON)
+        const genresJSON = await response.json();
+        await saveGenres(genresJSON);
 
     } catch (error) {
         console.log("Something went wrong fetching genres:", error)
-    }
+    };
 
     async function saveGenres(genresJSON: any) {
         try {
@@ -37,9 +36,7 @@ async function saveGameGenresToDb() {
                     where: {
                         id: genre.id,
                     },
-                    update: {
-
-                    },
+                    update: {},
                     create: {
                         id: genre.id,
                         name: genre.name,
@@ -48,9 +45,9 @@ async function saveGameGenresToDb() {
             }
 
         } catch (error) {
-            console.log("Something went wrong saving genres:", error)
-        }
+            console.log("Something went wrong saving genres:", error);
+        };
     }
 }
 
-saveGameGenresToDb()
+saveGameGenresToDb();

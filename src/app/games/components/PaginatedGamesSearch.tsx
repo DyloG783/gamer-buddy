@@ -26,9 +26,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
 
     // fetch games from the db and filter based on the current search state
     useEffect(() => {
-
         if (searchState.currentSelected) {
-
             setLoading(true);
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/search-games`, {
                 method: 'POST',
@@ -58,7 +56,6 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
             <div className="fixed top-3/4 left-1/2 ">
                 <Loading />
             </div>
-
         )
     };
 
