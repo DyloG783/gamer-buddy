@@ -17,7 +17,7 @@ export default async function Home() {
         {/* <Loading /> */}
       </Suspense>
       <div id="hero_layout_container"
-        className="p-4 shadow-sm"
+        className="p-4"
       >
         <HeroContent />
       </div>

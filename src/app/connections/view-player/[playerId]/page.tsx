@@ -116,7 +116,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                     </div>
                 </div>
             </div>
-            <div id="players_games" className="">
+            <div id="players_games" >
                 <h1 className="font-semibold blue-font tracking-wider 
                 text-xl md:text-2xl p-4 md:pl-20"
                 >

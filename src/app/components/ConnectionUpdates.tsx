@@ -13,7 +13,7 @@ export default async function ConnectionUpdates() {
     // user is not logged in don't display this component
     if (!userId) {
         return (
-            <div id="no_session_container" className="">
+            <div id="no_session_container" >
                 <Link href={`${process.env.CLERK_SIGNIN}`}
                     className="link tracking-wider"
                 >
@@ -27,9 +27,7 @@ export default async function ConnectionUpdates() {
 
     return (
         <div id="connection_updates_container" className="flex flex-col md:flex-row gap-8 md:gap-x-40 justify-around ">
-            <div
-                id="connection_messages_container"
-            >
+            <div id="connection_messages_container">
                 <h2 className="font-semibold blue-font text-xl mb-4 tracking-wide">Messages</h2>
                 {unseenMessages && unseenMessages.length > 0 &&
                     <Link href={`/connections`} >

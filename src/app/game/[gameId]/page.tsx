@@ -110,7 +110,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                             <p className="font-semibold md:mb-2 primary-color-font">Release date</p>
                             {date != null && <p className="font-thin">{date.toLocaleDateString()}</p>}
                         </div>
-                        <div id="view_on_igdb" className="">
+                        <div id="view_on_igdb" >
                             <Link href={`${game?.url}`}
                                 target="_blank"
                                 className="link"

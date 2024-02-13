@@ -32,7 +32,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                         <div className="overflow-hidden">
                             <h3 className="font-bold blue-font">Genre</h3>
                             {game.genres.map((genre: string) => (
-                                <span key={genre} className="">
+                                <span key={genre} >
                                     {genre + ", "}
                                 </span>
                             ))}
@@ -41,7 +41,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                         <div className="overflow-hidden">
                             <h3 className="font-bold blue-font">Mode</h3>
                             {game.modes.map((mode: string) => (
-                                <span key={mode} className="">
+                                <span key={mode} >
                                     {mode + ", "}
                                 </span>
                             ))}
@@ -50,7 +50,7 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
                         <div className="overflow-hidden">
                             <h3 className="font-bold blue-font">Platform</h3>
                             {game.platforms.map((platform: string) => (
-                                <span key={platform} className="">
+                                <span key={platform} >
                                     {platform + ", "}
                                 </span>
                             ))}
