@@ -7,7 +7,7 @@ import Loading from "@/lib/loading";
 // 30 seconds auto update for all clients
 export const dynamic = 'force-dynamic';
 
-export default async function Home() {
+export default function Home() {
   return (
     <div id="home_page_container" className="flex flex-col full-height-minus-nav 
     shadow-sm background-color dark:bg-black"
@@ -31,7 +31,6 @@ export default async function Home() {
           {/* <Loading /> */}
         </Suspense>
       </div>
-
     </div>
   );
 }

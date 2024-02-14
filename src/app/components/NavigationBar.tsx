@@ -64,9 +64,6 @@ export default function NavigationBar() {
                 </NavbarItem>
             </NavbarContent>
 
-
-
-
             <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font dark:text-white">
                 <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font dark:text-white">
                     <ThemeSwitcher />
