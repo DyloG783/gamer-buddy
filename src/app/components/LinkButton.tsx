@@ -21,4 +21,3 @@ export function LinkButton({ text, link }: { text: string, link: string }) {
         </Button>
     )
 }
-

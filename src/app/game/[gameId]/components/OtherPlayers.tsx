@@ -65,7 +65,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
                 <p id="others_in_all_timezones"
                     className="p-6 tracking-wide"
                 >
-                    Players in all timezones playing this game: <span className="text-emerald-500 font-semibold">{usersWhoAlsoHaveThisGameCount}</span>
+                    Other players playing this game: <span className="text-emerald-500 font-semibold">{usersWhoAlsoHaveThisGameCount}</span>
                 </p>
             </div >
         </>

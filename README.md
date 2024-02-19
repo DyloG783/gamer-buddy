@@ -26,7 +26,8 @@ Current script flow:
 Update npm packages:
 
 1. npx npm-check-updates
-2. follow given prompts to update package.json, then npm install to install
+2. (update all) follow given prompts to update package.json, then npm install to install
+   - (update single) npm update [package] i.e. npm update @testing-library/jest-dom
 
 Jest:
 

@@ -14,9 +14,7 @@ test('Test Connected WITH test user is present', async ({ page }) => {
 
 test('Test Connected WITH link on click displays View Player page with Disconnect and chat buttons', async ({ page }) => {
   await page.goto(`/connections/view-player/${automation_users[3].id}`);
-  // const connection = page.locator("id=connected_with_container");
-  // await connection.getByRole('link', { name: automation_users[3].userName }).click();
-  // await expect(page).toHaveURL(`/connections/view-player/${automation_users[3].id}`)
+
   await expect(page.getByRole('button', { name: 'Remove player' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Chat' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Add player' })).not.toBeVisible();
@@ -32,11 +30,8 @@ test('Test Connection REQUESTS with test user is present', async ({ page }) => {
 });
 
 test('Test Connection REQUESTS link on click displays View Player page with Connect buttons', async ({ page }) => {
-  // await page.goto('/connections');
-  // const connection = page.locator("id=connection_request_container");
-  // await connection.getByRole('link', { name: automation_users[2].userName }).click();
   await page.goto(`/connections/view-player/${automation_users[2].id}`);
-  // await expect(page).toHaveURL(`/connections/view-player/${automation_users[2].id}`)
+
   await expect(page.getByRole('button', { name: 'Remove player' })).not.toBeVisible();
   await expect(page.getByRole('button', { name: 'Chat' })).not.toBeVisible();
   await expect(page.getByRole('button', { name: 'Add player' })).toBeVisible();
@@ -53,9 +48,7 @@ test('Test FOLLOWING with test user is present', async ({ page }) => {
 
 test('Test Following View Player page with Disconnect button', async ({ page }) => {
   await page.goto(`/connections/view-player/${automation_users[1].id}`);
-  // const connection = page.locator("id=following_container");
-  // await connection.getByRole('link', { name: automation_users[1].userName }).click();
-  // await expect(page).toHaveURL(`/connections/view-player/${automation_users[1].id}`)
+
   await expect(page.getByRole('button', { name: 'Remove player' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Chat' })).not.toBeVisible();
   await expect(page.getByRole('button', { name: 'Add player' })).not.toBeVisible();

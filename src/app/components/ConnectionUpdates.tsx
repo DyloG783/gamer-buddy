@@ -16,6 +16,7 @@ export default async function ConnectionUpdates() {
             <div id="no_session_container" >
                 <Link href={`${process.env.CLERK_SIGNIN}`}
                     className="link tracking-wider"
+                    data-testid='sign-in'
                 >
                     Sign in to see Messages, Connection requests, and more!</Link>
             </div>

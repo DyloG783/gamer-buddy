@@ -17,7 +17,7 @@ setup('delete follow relations', async ({ }) => {
     }
 
 
-    // remove games onto permanent test user
+    // remove games from permanent test user
     try {
         await prisma.user.update({
             where: { email: automation_users[0].email },

@@ -33,6 +33,23 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+  // assertion options
+  // expect: {
+  //   // Maximum time expect() should wait for the condition to be met.
+  //   timeout: 5000,
+
+  //   // toHaveScreenshot: {
+  //   //   // An acceptable amount of pixels that could be different, unset by default.
+  //   //   maxDiffPixels: 10,
+  //   // },
+
+  //   // toMatchSnapshot: {
+  //   //   // An acceptable ratio of pixels that are different to the
+  //   //   // total amount of pixels, between 0 and 1.
+  //   //   maxDiffPixelRatio: 0.1,
+  //   // },
+  // },
+
   /* Configure projects for major browsers */
   projects: [
 
@@ -67,25 +84,25 @@ export default defineConfig({
       dependencies: ['setup'],
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: {
-    //     ...devices['Desktop Firefox'],
-    //     // Use prepared auth state.
-    //     storageState: 'playwright/.auth/user.json',
-    //   },
-    //   dependencies: ['setup'],
-    // },
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        // Use prepared auth state.
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     // Use prepared auth state.
-    //     storageState: 'playwright/.auth/user.json',
-    //   },
-    //   dependencies: ['setup'],
-    // },
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        // Use prepared auth state.
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
 
     /* Test against mobile viewports. */
     // {
