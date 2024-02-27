@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma db push && prisma generate && next build",
+    "postinstall": "prisma db push && prisma generate && prisma db seed && next build && npm run allGameData",
     "getTwitchAuthToken": "npx tsx scripts/saveTwitchAuthToken.ts",
     "saveGamesToDb": "npx tsx scripts/api_data/saveGamesToDb.ts",
     "saveGenresToDb": "npx tsx scripts/api_data/saveGenresToDb.ts",
