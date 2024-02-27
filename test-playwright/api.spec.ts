@@ -41,7 +41,7 @@ test.describe("Test 'search-games' internal api filters and returns games", () =
         expect.soft(response.ok()).toBeTruthy();
 
         // this game ONLY has the genre of 'Fighting' ensuring it will only be returned if search state includes 'Fighting'
-        const expectedtitleReturned = 113104;
+        const expectedtitleReturned = 26759;
         let found = false;
 
         const data = await response.json();
@@ -66,7 +66,7 @@ test.describe("Test 'search-games' internal api filters and returns games", () =
         expect.soft(response.ok()).toBeTruthy();
 
         // this game returned under the title of 'Icarus'
-        const expectedtitleReturned = 134813;
+        const expectedtitleReturned = 62770;
         let found = false;
 
         const data = await response.json();

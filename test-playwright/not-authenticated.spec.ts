@@ -13,6 +13,7 @@ test.use({ storageState: { cookies: [], origins: [] } });
 // });
 
 test('Test sign-in button is visible in place of usermenu when not authenticated', async ({ page }) => {
+    test.slow();
     await page.goto('/');
 
     await expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();

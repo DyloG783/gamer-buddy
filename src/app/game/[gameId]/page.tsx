@@ -8,6 +8,10 @@ import Link from "next/link";
 import { LinkButton } from "@/app/components/LinkButton";
 import { RemoveButton } from "@/app/components/RemoveButton";
 import { SubmitButton } from "@/app/components/SubmitButton";
+import { Prisma } from "@prisma/client";
+type gameCover = {
+    url: string
+}
 
 export default async function GamePage({ params }: { params: { gameId: number } }) {
 
@@ -54,6 +58,12 @@ export default async function GamePage({ params }: { params: { gameId: number } 
         date = new Date(unix_timestamp * 1000)
     }
 
+    // game images from IGBD have dynamic sizes, default is small (t_thumb)
+    const gameCover = game.cover as Prisma.JsonArray;
+    // @ts-ignore (hide ts warning for 'url' below)
+    const gameImageUrl = gameCover[0]?.url as string;
+    const largeGameCoverURL = gameImageUrl.replace('t_thumb', 't_cover_big');
+
     return (
         <div id="page_container" className="flex flex-col full-height-minus-nav shadow-sm background-color dark:bg-black">
             <div id="game_container" className={`flex flex-col justify-center p-8 md:p-16 `}>
@@ -85,44 +95,48 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                         }
                     </div>
                     <p className="my-4 md:my-2 tracking-wide">{`${game?.summary}`}</p>
-                    <div id="game_info_container"
-                        className="flex flex-col my-8 gap-2"
-                    >
-                        <div id="game_genre_group" className="mb-4">
-                            <p className="font-semibold md:mb-2 primary-color-font">Genre</p>
-                            {game?.genres.map((genre: string, index) => (
-                                <span key={index} className=" font-light">{genre + ", "}</span>
-                            ))}
+                    <div id="game_info_container" className="flex py-8 ">
+
+                        <div className="flex flex-col  gap-2 ">
+                            <div id="game_genre_group" className="mb-4">
+                                <p className="font-semibold md:mb-2 primary-color-font">Genre</p>
+                                {game?.genres.map((genre: string, index) => (
+                                    <span key={index} className=" font-light">{genre + ", "}</span>
+                                ))}
+                            </div>
+                            <div id="game_mode_group" className="mb-4">
+                                <p className="font-semibold md:mb-2 primary-color-font">Mode</p>
+                                {game?.modes.map((mode: string, index) => (
+                                    <span key={index} className="font-light">{mode + ", "}</span>
+                                ))}
+                            </div>
+                            <div id="game_platform_group" className="mb-4">
+                                <p className="font-semibold md:mb-2 primary-color-font">Platform</p>
+                                {game?.platforms.map((plat: string, index) => (
+                                    <span key={index} className="font-light">{plat + ", "}</span>
+                                ))}
+                            </div>
+                            <div id="release_date" className="mb-4">
+                                <p className="font-semibold md:mb-2 primary-color-font">Release date</p>
+                                {date != null && <p className="font-light">{date.toLocaleDateString()}</p>}
+                            </div>
+                            <Link href={`${game?.url}`}
+                                target="_blank"
+                                className="link mt-4"
+                            >
+                                Click here to view more about this game on the IGDB gaming site
+                            </Link>
                         </div>
-                        <div id="game_mode_group" className="mb-4">
-                            <p className="font-semibold md:mb-2 primary-color-font">Mode</p>
-                            {game?.modes.map((mode: string, index) => (
-                                <span key={index} className="font-light">{mode + ", "}</span>
-                            ))}
+                        <div className="grow flex items-center justify-center">
+                            <img src={`https:${largeGameCoverURL}`} alt="game_cover"
+                                className=""
+                            />
                         </div>
-                        <div id="game_platform_group" className="mb-4">
-                            <p className="font-semibold md:mb-2 primary-color-font">Platform</p>
-                            {game?.platforms.map((plat: string, index) => (
-                                <span key={index} className="font-light">{plat + ", "}</span>
-                            ))}
-                        </div>
-                        <div id="release_date" className="mb-4">
-                            <p className="font-semibold md:mb-2 primary-color-font">Release date</p>
-                            {date != null && <p className="font-thin">{date.toLocaleDateString()}</p>}
-                        </div>
-                        <Link href={`${game?.url}`}
-                            target="_blank"
-                            className="link mt-4"
-                        >
-                            Click here to view more about this game on the IGDB gaming site
-                        </Link>
                     </div>
                 </div>
                 <hr />
             </div>
-            <div className="grow p-8 md:p-20 my-auto">
-                <OtherPlayers gameId={gameId} />
-            </div>
+            <OtherPlayers gameId={gameId} />
         </div>
     )
 }

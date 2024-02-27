@@ -6,14 +6,14 @@ const nextConfig = {
   //   serverActions: true,
   // },
 
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: 'https',
-  //       hostname: '**',
-  //     },
-  //   ],
-  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.igdb.com',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

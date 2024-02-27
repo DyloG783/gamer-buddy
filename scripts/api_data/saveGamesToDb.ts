@@ -4,7 +4,8 @@ import getIGBdFilteredGameCount from '../helpers/getIGBdFilteredGameCount';
 async function saveGamesToDb() {
 
     // const gameCount = await getIGBdFilteredGameCount()
-    const gameCount = 3000;
+    const gameCount = 10000;
+    // const gameCount = 10;
     const limit: number = 500;
     let offset: number = 0;
     let loopCount = 0;
@@ -32,8 +33,7 @@ async function saveGamesToDb() {
                     "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
                     "Accept": "application/json"
                 },
-                body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1262307600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${limit}; offset ${offset}; sort id;`
-                // body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 1577883600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${1000}; sort id;`
+                body: `fields name, url, summary, platforms, game_modes, genres, first_release_date; where game_modes = (2,3,4,5,6) & first_release_date > 946672469 & first_release_date < 1735653600 & platforms = (6, 34, 39, 48, 49, 130, 165, 167, 169, 386, 390, 471) & genres != null & summary != null; limit ${limit}; offset ${offset}; sort id;`
             })
             const gamesJSON = await response.json()
             await saveGames(gamesJSON)
@@ -97,6 +97,18 @@ async function saveGamesToDb() {
                     })
                     const gameModesJSON = await modesResponse.json()
 
+                    //get games cover image json object
+                    const gameCoverResponse = await fetch(`${igdbBaseUrl}/covers`, {
+                        method: "POST",
+                        headers: {
+                            "Client-ID": twitchClientId,
+                            "Authorization": `Bearer ${twitchAuthTokenFromDb?.twitchAuthToken}`,
+                            "Accept": "application/json"
+                        },
+                        body: `fields game,height,url,width; where game = ${game.id};`
+                    })
+                    const gameCoverJSON = await gameCoverResponse.json()
+
                     await prisma.game.upsert({
                         where: {
                             id: game.id,
@@ -111,6 +123,7 @@ async function saveGamesToDb() {
                             modes: gameModesJSON.map((i: any) => i.name),
                             genres: genresJSON.map((i: any) => i.name),
                             firstReleaseDate: game.first_release_date,
+                            cover: gameCoverJSON
                         },
                     })
                 }

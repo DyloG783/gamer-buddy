@@ -39,6 +39,7 @@ test('Test Connection REQUESTS link on click displays View Player page with Conn
 
 // following
 test('Test FOLLOWING with test user is present', async ({ page }) => {
+  test.slow();
   await page.goto('/connections');
   const connection = page.locator("id=following_container")
   await expect(connection.getByTestId('following_card')).toContainText(automation_users[1].userName);

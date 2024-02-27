@@ -2,10 +2,10 @@
 
 import { test, expect } from '@playwright/test';
 
-const unsavedGame = 116090;
-const savedGame = 83563;
-const mutableSavedGame = 111258;
-const mutableUnsavedGame = 127452;
+const unsavedGame = 10753;
+const savedGame = 16851;
+const mutableSavedGame = 9384;
+const mutableUnsavedGame = 2941;
 
 test.describe("Saved game", () => {
 
@@ -23,7 +23,7 @@ test.describe("Saved game", () => {
     await page.goto(`/game/${savedGame}`);
 
     await page.getByTestId('link').click();
-    await expect(page).toHaveURL(`/connect/83563`)
+    await expect(page).toHaveURL(`/connect/16851`)
   });
 
   // can't do this as test are asynchronous?

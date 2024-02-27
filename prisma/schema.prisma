@@ -90,6 +90,7 @@ model Game {
   platforms        String[]
   gameRoom         ChatGameRoom?
   users            User[]        @relation("GameToUser")
+  cover            Json?
 }
 
 model Platform {
