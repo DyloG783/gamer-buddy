@@ -6,8 +6,9 @@ export default function GamesLayout({ children }: { children: React.ReactNode })
 
     return (
         <div className="flex flex-col full-height-minus-nav gap-10 background-color dark:bg-black" id="layout_games">
-            <div className="shadow-sm">
+            <div className="">
                 <YourGames />
+                <hr />
             </div>
             <Suspense fallback={<Loading />}>
                 <div id="games_layout_children_container" className="grow flex mx-auto"

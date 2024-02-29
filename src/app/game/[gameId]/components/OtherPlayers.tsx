@@ -12,7 +12,7 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
 
     // if not logged in don't show component
     if (!userId) return (
-        <div className="grow flex justify-center items-center">
+        <div className="grow flex justify-center items-center p-8 md:p-16">
             <Link href={`${process.env.CLERK_SIGNIN}`}
                 className="link tracking-wider text-sm md:text-base lg:text-lg"
                 data-testid='sign-in'>Sign in to see information about others playing this game!</Link>

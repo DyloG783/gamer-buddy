@@ -97,7 +97,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                     <p className="my-4 md:my-2 tracking-wide">{`${game?.summary}`}</p>
                     <div id="game_info_container" className="flex py-8 ">
 
-                        <div className="flex flex-col  gap-2 ">
+                        <div className="flex flex-col gap-2">
                             <div id="game_genre_group" className="mb-4">
                                 <p className="font-semibold md:mb-2 primary-color-font">Genre</p>
                                 {game?.genres.map((genre: string, index) => (

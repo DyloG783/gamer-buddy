@@ -25,7 +25,8 @@ export default function GameCard({ game, type }: { game: IGame, type: string }) 
             </CardHeader>
             <Divider />
             <CardBody>
-                <p className="text-sm">Other players <span className="primary-color-font">{game._count?.users}</span></p>
+                <p className="text-sm">Other players: <span className="primary-color-font">{game._count?.users}</span>
+                </p>
                 {type === "all" &&
                     <>
                         <Divider className="my-2" />
