@@ -24,7 +24,7 @@ export default function About() {
                     Otherwise you can only search and view games.
                 </p>
                 <br />
-                <p>This app uses <Link href="https://clerk.com/" target="_blank" className="primary-color-font underline">Clerk Auth</Link> for authentication which is very safe so don't be worried about signing up and trying things out!</p>
+                <p>This app uses <Link href="https://clerk.com/" target="_blank" className="primary-color-font underline">Clerk Auth</Link> for authentication which is very safe so don&apos;t be worried about signing up and trying things out!</p>
                 <br />
                 <br />
             </div>
