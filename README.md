@@ -12,6 +12,10 @@ A user will be notified of a connection request, and can accept it to begin talk
 
 This completes the flow of the application. Users can go and play their games on whatever platform is relevant for them, now that they have found eachother!!
 
+# Demo login for an example of the intended experience!
+
+Login as x x to see the user experience with games, connections, requests, etc
+
 ## Deployed
 
 The production instance of Gamer Buddy is deployed to Vercel. Pushed to the main branch deploy a new version to Vercel, and post install scipts are run to update the production database instance.

@@ -11,15 +11,14 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma db push && prisma generate && prisma db seed && next build && npm run allGameData",
-    "getTwitchAuthToken": "npx tsx scripts/saveTwitchAuthToken.ts",
+    "saveTwitchAuthToken": "npx tsx scripts/saveTwitchAuthToken.ts",
     "saveGamesToDb": "npx tsx scripts/api_data/saveGamesToDb.ts",
     "saveGenresToDb": "npx tsx scripts/api_data/saveGenresToDb.ts",
     "saveModesToDb": "npx tsx scripts/api_data/saveModesToDb.ts",
     "savePlatformsToDb": "npx tsx scripts/api_data/savePlatformsToDb.ts",
-    "allGameData": "npm run getTwitchAuthToken && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run saveGamesToDb",
-    "dev_user_Relations": "npx tsx scripts/relations/dev_user_relations.ts",
-    "game_to_user_relations": "npx tsx scripts/relations/game_to_user_relations.ts",
-    "test": "jest"
+    "allGameData": "npm run saveTwitchAuthToken && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run saveGamesToDb",
+    "test": "playwright test",
+    "test_jest": "jest"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.2",

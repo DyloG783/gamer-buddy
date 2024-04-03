@@ -1,7 +1,14 @@
 import prisma from "@/lib/db";
 import { test_users } from "./test_users";
 
+/**
+* This script adds users, their games, and connection relations between test users
+*/
 async function main() {
+
+    /**
+     * Add test users and relate games
+     */
     for (const user of test_users) {
         try {
             await prisma.user.upsert({
@@ -18,13 +25,15 @@ async function main() {
             })
 
         } catch (error) {
-            console.log("Error seeding filler users into db: ", error)
+            console.log("Error seeding filler users into db: ", error);
         }
     }
 
-    console.log("Success seeding filler users into db in prisma seed!")
+    console.log("Success seeding filler users into db in prisma seed!");
 
-    // create follow realations between test users
+    /**
+     * Create follow (connection) relations between test users
+     */
     try {
         await prisma.follows.createMany({
             data: [
@@ -103,19 +112,19 @@ async function main() {
             ]
         })
 
-        console.log("Success setting up test connections in prisma seed!")
+        console.log("Success setting up test connections in prisma seed!");
 
     } catch (error) {
-        console.log("Fail setting up test connections in prisma seed:", error)
-    }
+        console.log("Fail setting up test connections in prisma seed:", error);
+    };
 }
 
 main()
     .then(async () => {
-        await prisma.$disconnect()
+        await prisma.$disconnect();
     })
     .catch(async (e) => {
-        console.error(e)
-        await prisma.$disconnect()
-        process.exit(1)
-    })
+        console.error(e);
+        await prisma.$disconnect();
+        process.exit(1);
+    });

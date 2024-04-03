@@ -18,17 +18,14 @@ export default async function GamePage({ params }: { params: { gameId: number } 
     const { userId } = auth();
 
     // this is required to convert string in params to number
-    const gameId = Number(params.gameId)
+    const gameId = Number(params.gameId);
 
     // if game doesnt exist retun null, or return game
     const game = await checkGameExistsAndReturn(gameId);
 
     // display 'game not exist' error on page (in case user enters incorrect url)
-    if (game === null) {
-        return (
-            <GameNotExist />
-        )
-    }
+    if (!game) return <GameNotExist />;
+
 
     // boolean for whether the user already has this game added to their account
     let alreadyExists = false;
@@ -45,18 +42,18 @@ export default async function GamePage({ params }: { params: { gameId: number } 
         if (hasGame && hasGame.games.length > 0) {
             alreadyExists = true;
         }
-    }
+    };
 
     // adds playerId to server action
-    const RemoveActionWithGameId = removeGame.bind(null, gameId)
-    const AddActionWithGameId = addGame.bind(null, gameId)
+    const RemoveActionWithGameId = removeGame.bind(null, gameId);
+    const AddActionWithGameId = addGame.bind(null, gameId);
 
     //convert game's release date from unix timestamp to readable
-    const unix_timestamp = game.firstReleaseDate
+    const unix_timestamp = game.firstReleaseDate;
     let date = null;
     if (unix_timestamp) {
-        date = new Date(unix_timestamp * 1000)
-    }
+        date = new Date(unix_timestamp * 1000);
+    };
 
     // game images from IGBD have dynamic sizes, default is small (t_thumb)
     const gameCover = game.cover as Prisma.JsonArray;

@@ -119,4 +119,13 @@ export const test_users = [
         "bio": "Dont even bother with me",
         "timezone": "(UTC+08:00) Perth"
     },
+
+    {
+        id: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+        email: "demo@demo.test",
+        name: "Demo",
+        games: [116090, 83563, 81753, 111258, 137217],
+        "bio": "Demo user bio",
+        "timezone": "(UTC+08:00) Perth"
+    },
 ]
