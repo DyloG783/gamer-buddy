@@ -1,47 +1,68 @@
+# About
+
+This application is firstly a passion, then secondly a portfolio project called Gamer Buddy. It is currently running in production and can be used by anyone at https://www.gamer-buddy.com/!
+
+Gamer Buddy is built on `NextJs`, `React`, `Postgres` / `Prisma`, integrating with `Pusher` for real time message updates, and `Clerk` auth to manage authentication and authorisation through classic credentials, or common social logins.
+
+The point of Gamer Buddy is for users to connect and be able to chat with other players of games that they have saved to their profile. Once you save a game to your profile you have access to a public game chat forum.
+
+Users can view other player's profiles through the public game chat forum, and request to connect with them privately.
+
+A user will be notified of a connection request, and can accept it to begin talking privately.
+
+This completes the flow of the application. Users can go and play their games on whatever platform is relevant for them, now that they have found eachother!!
+
+## Deployed
+
+The production instance of Gamer Buddy is deployed to Vercel. Pushed to the main branch deploy a new version to Vercel, and post install scipts are run to update the production database instance.
+
+## Testing
+
+### Jest:
+
+_Due to the NextJs's use of new async server components, Jest can't test components in isolation if they are async server rendered. It is mentioned in NextJs's documentation to rely on end-to-end tests for testing these new types of components. Due to this most testing is managed with Playwright in this project._
+
+Run tests with `npm run test`
+
+### Playwright:
+
+End-to-end tests need to use a dummy or mock account which exists in the test/dev instance of Clerk auth. When tests are run in this app temporary seed data is setup, and later torn down, which adds
+
+Run tests with `npx playwright test`
+
+- Need to have permanent user in both dev & production for authentication created in Clerk which is used for authentication and test data to be associated to for end-to-end tests (user: `automation1@gbtestpermanent.com`).
+- automation uses `automation_test_users.ts` seed file to create games, and other usrs/relations.
+
 ---
 
-View prisma dashboard in browser command:
+# Misc
 
-npx prisma studio /
+_Project related information for troubleshooting etc_
 
-Update Prisma after changing schema:
+### Prisma ORM
 
-1. npx prisma db push (or 'prisma migrate dev' to keep existing data)
-2. npx prisma generate
+- View local prisma dashboard in browser command: `npx prisma studio`.
 
-PSQL:
-view databases; \l
-connect to db; \c mydb
-view tables; \dt
-delete all data from table; DELETE FROM your_table_name;
-quit psql; \q
+- Update Prisma types, etc, after changing schema:
+  1.  `npx prisma db push` (or `prisma migrate dev` to keep existing data through migrations).
+  2.  `npx prisma generate`.
 
-Current script flow:
+### PSQL commands for psql terminal:
 
-1. saveTwitchAuthTokenToDb; fetches auth token from twitch api and saves it to db
-2. saveGamesToDb; fetches all multiplayer games and upserts them to db
-3. repeat above for 'savemodes...' 'saveGenres...' 'savePlatforms...'
-4. reun scripts to create relation connections for the above data
+view databases `\l`.
+connect to db `\c mydb`.
+view tables `\dt`.
+delete all data from table `DELETE FROM your_table_name`.
+quit psql `\q`.
 
-Update npm packages:
+### Vercel deployment
 
-1. npx npm-check-updates
-2. (update all) follow given prompts to update package.json, then npm install to install
-   - (update single) npm update [package] i.e. npm update @testing-library/jest-dom
+To keep things simple in this portfolio project, when a new deployment is made to production, the below post install script is run which re-runs all of the scripts required to add games, genres, relations, to the database. This allows the addition of games by loosening restrictions in the scripts which pull games, etc from the IGDB API. This means that prisma migrations are not used.
 
-Jest:
+scripts:
+_this script found in package.json is run in the production instance on each proudction deployment_
+`"postinstall": "prisma db push && prisma generate && prisma db seed && next build && npm run allGameData"`
 
-Run tests with; npm run test
+### if dotenv is used
 
-Playwright:
-
-Run tests with; npx playwright test
-
-- Need to have permanent user (per environment?) for authentication created in Clerk first (automation1@gbtest.com)
-- automation uses automation_test_data to create games, and other usrs/relations
-
-env per environment:
-dotenv -e .env.development -- npx prisma db pull
-
-Vercel deployment scripts:
-"postinstall": "prisma db push && prisma generate && prisma db seed && next build && npm run allGameData"
+env per environment example: `dotenv -e .env.development -- npx prisma db pull`
