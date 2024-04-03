@@ -38,17 +38,17 @@ async function main() {
         await prisma.follows.createMany({
             data: [
                 {
-                    followedById: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followedByEmail: "dylan.m.c.digby@gmail.com",
-                    followedByUName: "Dios",
+                    followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followedByEmail: "demo@demo.test",
+                    followedByUName: "Demo",
                     followingId: test_users[0].id,
                     followingUName: test_users[0].name,
                     followingEmail: test_users[0].email
                 },
                 {
-                    followedById: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followedByEmail: "dylan.m.c.digby@gmail.com",
-                    followedByUName: "Dios",
+                    followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followedByEmail: "demo@demo.test",
+                    followedByUName: "Demo",
                     followingId: test_users[2].id,
                     followingUName: test_users[2].name,
                     followingEmail: test_users[2].email
@@ -57,46 +57,46 @@ async function main() {
                     followedById: test_users[2].id,
                     followedByEmail: test_users[2].email,
                     followedByUName: test_users[2].name,
-                    followingId: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followingUName: "Dios",
-                    followingEmail: "dylan.m.c.digby@gmail.com"
+                    followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followingUName: "Demo",
+                    followingEmail: "demo@demo.test"
                 },
                 {
                     followedById: test_users[1].id,
                     followedByEmail: test_users[1].email,
                     followedByUName: test_users[1].name,
-                    followingId: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followingUName: "Dios",
-                    followingEmail: "dylan.m.c.digby@gmail.com"
+                    followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followingUName: "Demo",
+                    followingEmail: "demo@demo.test"
                 },
                 {
                     followedById: test_users[3].id,
                     followedByEmail: test_users[3].email,
                     followedByUName: test_users[3].name,
-                    followingId: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followingUName: "Dios",
-                    followingEmail: "dylan.m.c.digby@gmail.com"
+                    followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followingUName: "Demo",
+                    followingEmail: "demo@demo.test"
                 },
                 {
                     followedById: test_users[4].id,
                     followedByEmail: test_users[4].email,
                     followedByUName: test_users[4].name,
-                    followingId: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followingUName: "Dios",
-                    followingEmail: "dylan.m.c.digby@gmail.com"
+                    followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followingUName: "Demo",
+                    followingEmail: "demo@demo.test"
                 },
                 {
-                    followedById: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followedByEmail: "dylan.m.c.digby@gmail.com",
-                    followedByUName: "Dios",
+                    followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followedByEmail: "demo@demo.test",
+                    followedByUName: "Demo",
                     followingId: test_users[5].id,
                     followingUName: test_users[5].name,
                     followingEmail: test_users[5].email
                 },
                 {
-                    followedById: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followedByEmail: "dylan.m.c.digby@gmail.com",
-                    followedByUName: "Dios",
+                    followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followedByEmail: "demo@demo.test",
+                    followedByUName: "Demo",
                     followingId: test_users[6].id,
                     followingUName: test_users[6].name,
                     followingEmail: test_users[6].email
@@ -105,9 +105,9 @@ async function main() {
                     followedById: test_users[6].id,
                     followedByEmail: test_users[6].email,
                     followedByUName: test_users[6].name,
-                    followingId: "user_2b9N3RzGOY4iZgeeu4fCs6RhADU",
-                    followingUName: "Dios",
-                    followingEmail: "dylan.m.c.digby@gmail.com"
+                    followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
+                    followingUName: "Demo",
+                    followingEmail: "demo@demo.test"
                 }
             ]
         })

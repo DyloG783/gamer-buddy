@@ -1,12 +1,9 @@
 import prisma from '@/lib/db';
-import getIGBdFilteredGameCount from '../helpers/getIGBdFilteredGameCount';
 
 async function saveGamesToDb() {
 
-    // const gameCount = await getIGBdFilteredGameCount()
-    const gameCount = 18000;
-    // const gameCount = 10;
-    const limit: number = 500;
+    const gameCount = 1000;
+    const limit: number = 500; // igdb api rate limit per second
     let offset: number = 0;
     let loopCount = 0;
 
@@ -18,8 +15,8 @@ async function saveGamesToDb() {
         }
     })
 
-    // loop through fetching all games until the offset (increments 500) is > game count (~35,000)
-    while (offset < gameCount) {
+    // loop through fetching all games based upon the game count. IGDB rate limits require looping in groups of 500
+    while (offset <= gameCount) {
 
         console.log("Games processing...:", offset)
         console.log("Max game count:", gameCount)
@@ -40,7 +37,7 @@ async function saveGamesToDb() {
             offset += limit
 
         } catch (error) {
-            console.log("Something went wrong fetching games:", error)
+            console.log("Something went wrong fetching games: ", error)
         }
     }
 
@@ -134,4 +131,8 @@ async function saveGamesToDb() {
     }
 }
 
-saveGamesToDb()
+/**
+ * stopping new games being added while demo user is active for data consistency
+ */
+saveGamesToDb();
+

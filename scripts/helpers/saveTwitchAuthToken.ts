@@ -35,4 +35,6 @@ export default async function saveTwitchAuthToken() {
         console.log("Failed updating twitch auth token to db.", error)
     }
     return tkn;
-}
+};
+
+saveTwitchAuthToken();
