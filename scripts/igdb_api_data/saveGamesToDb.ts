@@ -32,10 +32,12 @@ async function saveGamesToDb() {
                 "Accept": "application/json"
             },
             body: postBody
-        })
+        });
         const gamesJSON = await response.json();
         // await saveGames(gamesJSON);
         // offset += limit;
+
+        console.log("Fetching and saving games...");
 
         // Loop through response and save each game
         try {
@@ -52,7 +54,7 @@ async function saveGamesToDb() {
                 }
                 else {
 
-                    console.log("New game: ", game.name);
+                    // console.log("New game: ", game.name);
 
                     // get game's genres
                     const genresResponse = await fetch(`${igdbBaseUrl}/genres`, {
@@ -120,7 +122,10 @@ async function saveGamesToDb() {
                         },
                     })
                 }
-            }
+            };
+
+            console.log("Finished saving games!");
+
         } catch (error) {
             console.log("Something went wrong saving games:", error)
         }
@@ -223,5 +228,5 @@ async function saveGamesToDb() {
 /**
  * stopping new games being added while demo user is active for data consistency
  */
-saveGamesToDb();
+// saveGamesToDb();
 

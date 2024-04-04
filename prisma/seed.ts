@@ -7,6 +7,22 @@ import { test_users } from "./test_users";
 async function main() {
 
     /**
+     * Delete test users and accosicated data to resfesh data on prod deploy for demo purposes
+     */
+    try {
+        await prisma.user.deleteMany({
+            where: {
+                email: {
+                    contains: '@test.com',
+                },
+            },
+        });
+
+    } catch (error) {
+        console.log("Error deleting test users from db: ", error);
+    }
+
+    /**
      * Add test users and relate games
      */
     for (const user of test_users) {
@@ -22,13 +38,11 @@ async function main() {
                     timezone: user.timezone,
                     games: { connect: user.games?.map(g => ({ id: g })) }
                 }
-            })
-
+            });
         } catch (error) {
             console.log("Error seeding filler users into db: ", error);
-        }
-    }
-
+        };
+    };
     console.log("Success seeding filler users into db in prisma seed!");
 
     /**
@@ -39,7 +53,7 @@ async function main() {
             data: [
                 {
                     followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
-                    followedByEmail: "demo@demo.test",
+                    followedByEmail: "demo@test.com",
                     followedByUName: "Demo",
                     followingId: test_users[0].id,
                     followingUName: test_users[0].name,
@@ -47,7 +61,7 @@ async function main() {
                 },
                 {
                     followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
-                    followedByEmail: "demo@demo.test",
+                    followedByEmail: "demo@test.com",
                     followedByUName: "Demo",
                     followingId: test_users[2].id,
                     followingUName: test_users[2].name,
@@ -59,7 +73,7 @@ async function main() {
                     followedByUName: test_users[2].name,
                     followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
                     followingUName: "Demo",
-                    followingEmail: "demo@demo.test"
+                    followingEmail: "demo@test.com"
                 },
                 {
                     followedById: test_users[1].id,
@@ -67,7 +81,7 @@ async function main() {
                     followedByUName: test_users[1].name,
                     followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
                     followingUName: "Demo",
-                    followingEmail: "demo@demo.test"
+                    followingEmail: "demo@test.com"
                 },
                 {
                     followedById: test_users[3].id,
@@ -75,7 +89,7 @@ async function main() {
                     followedByUName: test_users[3].name,
                     followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
                     followingUName: "Demo",
-                    followingEmail: "demo@demo.test"
+                    followingEmail: "demo@test.com"
                 },
                 {
                     followedById: test_users[4].id,
@@ -83,11 +97,11 @@ async function main() {
                     followedByUName: test_users[4].name,
                     followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
                     followingUName: "Demo",
-                    followingEmail: "demo@demo.test"
+                    followingEmail: "demo@test.com"
                 },
                 {
                     followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
-                    followedByEmail: "demo@demo.test",
+                    followedByEmail: "demo@test.com",
                     followedByUName: "Demo",
                     followingId: test_users[5].id,
                     followingUName: test_users[5].name,
@@ -95,7 +109,7 @@ async function main() {
                 },
                 {
                     followedById: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
-                    followedByEmail: "demo@demo.test",
+                    followedByEmail: "demo@test.com",
                     followedByUName: "Demo",
                     followingId: test_users[6].id,
                     followingUName: test_users[6].name,
@@ -107,10 +121,10 @@ async function main() {
                     followedByUName: test_users[6].name,
                     followingId: "user_2ea8umy8tA8uiqdqYuilBbcZCye",
                     followingUName: "Demo",
-                    followingEmail: "demo@demo.test"
+                    followingEmail: "demo@test.com"
                 }
             ]
-        })
+        });
 
         console.log("Success setting up test connections in prisma seed!");
 

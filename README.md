@@ -14,6 +14,8 @@ This completes the flow of the application. Users can go and play their games on
 
 # Demo login for an example of the intended experience!
 
+_For now there is a limited amount of game data as I want to lock the data down to a presentable set I can use for a demonstration purposes_
+
 Login as x x to see the user experience with games, connections, requests, etc
 
 ## Deployed
