@@ -18,11 +18,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
     const game = await checkGameExistsAndReturn(gameId);
 
     // display 'game not exist' error on page (in case user enters incorrect url)
-    if (game === null) {
-        return (
-            <GameNotExist />
-        )
-    }
+    if (game === null) return <GameNotExist />;
 
     // get all the users who also have this game saved
     const otherPlayers = await prisma.user.findMany({
@@ -36,7 +32,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
                 id: userId!
             }
         },
-    })
+    });
 
     // create game forum table if not already exists
     const gameRoom = await prisma.chatGameRoom.upsert({

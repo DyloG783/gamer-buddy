@@ -3,10 +3,9 @@ import { test_users } from "./test_users";
 import combineUniqueIds from "@/lib/hashIds";
 
 /**
-* This script adds users, their games, and connection relations between test users
+* This script adds users, their games, and connection relations between test users and the demo user
 */
 async function main() {
-
 
     /**
      * Delete test users and accosicated data to resfesh data on prod deploy for demo purposes
@@ -33,6 +32,16 @@ async function main() {
         console.log("Error deleting private chat rooms from db: ", error);
     };
     console.log("Success deleting private chat rooms from prisma seed!");
+
+    /**
+     * Delete public game chat room data to resfesh data on prod deploy for demo purposes
+     */
+    try {
+        await prisma.chatGameRoom.deleteMany({});
+    } catch (error) {
+        console.log("Error deleting public chat rooms from db: ", error);
+    };
+    console.log("Success deleting public chat rooms from prisma seed!");
 
     /**
      * Add test users and relate games
@@ -145,7 +154,7 @@ async function main() {
     };
 
     /**
-     * Create conversations and unread messages between test users
+     * Create conversations and unread messages between test users - private
      */
 
     // user[2] is connected with demo user
@@ -161,27 +170,76 @@ async function main() {
                 },
             ]
         });
-    } catch (error) {
-        console.log("Fail setting up private chat room in prisma seed:", error);
-    }
-    console.log("Success setting up private chat room in prisma seed!");
 
-    try {
-        await prisma.privateMessage.createMany({
-            data: [
-                {
-                    message: "Heya, do you want to chat on Steam and start a game?",
-                    chatPrivateRoomId: privateChatId_u2,
-                    receiverId: process.env.DEMO_USER_ID!,
-                    senderId: test_users[2].id!,
-                },
-            ]
-        });
+        try {
+            await prisma.privateMessage.createMany({
+                data: [
+                    {
+                        message: "Heya, do you want to chat on Steam and start a game?",
+                        chatPrivateRoomId: privateChatId_u2,
+                        receiverId: process.env.DEMO_USER_ID!,
+                        senderId: test_users[2].id!,
+                    },
+                ]
+            });
+        } catch (error) {
+            console.log("Fail setting up test conversations in prisma seed:", error);
+        }
+        console.log("Success setting up test conversations in prisma seed!");
     } catch (error) {
-        console.log("Fail setting up test conversations in prisma seed:", error);
+        console.log("Fail setting up private chat rooms in prisma seed:", error);
     }
-    console.log("Success setting up test conversations in prisma seed!");
-}
+    console.log("Success setting up private chat rooms in prisma seed!");
+
+
+
+    /**
+     * Create conversations and unread messages between test users - public
+     */
+
+    // create public game room and messages
+    try {
+        const gameRoom1 = await prisma.chatGameRoom.create({
+            data: {
+                gameId: 85245,
+            }
+        });
+
+        // create public game room messages
+        try {
+            await prisma.gameMessage.createMany({
+                data: [
+                    {
+                        message: "Hello fellow gamers!",
+                        userId: test_users[0].id!,
+                        gameRoomId: gameRoom1.id,
+                    },
+                    {
+                        message: "Hey! Anyone keen to join a group and try out the new DLC??",
+                        userId: test_users[1].id!,
+                        gameRoomId: gameRoom1.id,
+                    },
+                    {
+                        message: "Can do can do..",
+                        userId: test_users[2].id!,
+                        gameRoomId: gameRoom1.id,
+                    },
+                    {
+                        message: "I'd be keeeeeeen!",
+                        userId: test_users[0].id!,
+                        gameRoomId: gameRoom1.id,
+                    },
+                ]
+            });
+        } catch (error) {
+            console.log("Fail setting up test conversations in prisma seed:", error);
+        }
+        console.log("Success setting up test conversations in prisma seed!");
+    } catch (error) {
+        console.log("Fail setting up private chat rooms in prisma seed:", error);
+    }
+    console.log("Success setting up private chat rooms in prisma seed!");
+};
 
 main()
     .then(async () => {

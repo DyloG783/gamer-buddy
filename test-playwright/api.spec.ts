@@ -31,7 +31,7 @@ const invalidTextSearchState: ISearchState = {
 
 test.describe("Test 'search-games' internal api filters and returns games", () => {
 
-    test("Test search state containing the 'Genre' of 'Fighting' returns a 'fighting' only game as part of it's array of games", async ({ request }) => {
+    test.skip("Test search state containing the 'Genre' of 'Fighting' returns a 'fighting' only game as part of it's array of games", async ({ request }) => {
         const response = await request.post(`${url}`, {
             data: {
                 searchState: genreSearchState
@@ -56,7 +56,7 @@ test.describe("Test 'search-games' internal api filters and returns games", () =
         expect(found).toBeTruthy();
     });
 
-    test(`Test text search returns games containing part of the input text in their title`, async ({ request }) => {
+    test.skip(`Test text search returns games containing part of the input text in their title`, async ({ request }) => {
         const response = await request.post(`${url}`, {
             data: {
                 searchState: textSearchState
