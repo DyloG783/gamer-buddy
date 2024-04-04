@@ -1,3 +1,5 @@
+import DemoBanner from "../components/DemoBanner";
+
 export default function About() {
 
     return (
@@ -27,6 +29,9 @@ export default function About() {
                     This completes the flow of the application. Users can go and play their games on whatever platform is relevant for them, now that they have found eachother!!
                 </p>
             </div>
+
+            <DemoBanner />
+
             <hr className="mt-4 sm:mt-6" />
             <div className="grow flex flex-col justify-around px:2 sm:px-10 my-6 sm:my-0">
                 <p className="mx-auto font-semibold">

@@ -3,6 +3,7 @@ import ProfileStatus from "@/app/components/ProfileStatus";
 import HeroContent from "./components/HeroContent";
 import { Suspense } from 'react';
 import Loading from "@/lib/loading";
+import DemoBanner from "./components/DemoBanner";
 
 // 30 seconds auto update for all clients
 export const dynamic = 'force-dynamic';
@@ -16,6 +17,11 @@ export default function Home() {
         <ProfileStatus />
         {/* <Loading /> */}
       </Suspense>
+
+      <div id="demo_banner">
+        <DemoBanner />
+      </div>
+
       <div id="hero_layout_container"
         className="p-4"
       >

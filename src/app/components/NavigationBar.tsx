@@ -20,7 +20,7 @@ export default function NavigationBar() {
 
     return (
         <Navbar shouldHideOnScroll isBordered onMenuOpenChange={setIsMenuOpen}
-            className="font-semibold py-2"
+            className="font-semibold py-2 sm:py-6"
             maxWidth="full"
         >
             <NavbarContent>

@@ -64,7 +64,7 @@ html, body {
 @layer components{
 
     .link {
-        @apply text-purple-700 dark:text-purple-400 hover:italic;
+        @apply text-purple-700 dark:text-purple-400 underline underline-offset-4 hover:italic;
     }
 
     .primary-color-font {
@@ -80,7 +80,11 @@ html, body {
     }
 
     .full-height-minus-nav {
-        @apply min-h-[calc(100vh-5.1rem)];
+        @apply min-h-[calc(100vh-5.1rem)] sm:min-h-[calc(100vh-7.5rem)];
+    }
+
+    .banner{
+        @apply p-4 md:p-8 animate-pulse bg-yellow-100 dark:bg-yellow-600
     }
 }
 
