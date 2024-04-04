@@ -12,9 +12,9 @@ export default function DemoBanner() {
             You can <span className="primary-color-font dark:blue-font">login
                 as a demonstration user</span> with the
             <span className="primary-color-font dark:blue-font"> username </span>
-            of <span className="primary-color-font dark:blue-font">"demo1"</span>,
+            of <span className="primary-color-font dark:blue-font">&quot;demo1&quot;</span>,
             and <span className="primary-color-font dark:blue-font">password</span> of
-            <span className="primary-color-font dark:blue-font"> "demo1"</span>, to view the intended experience as a user with games, connections, requests, etc!
+            <span className="primary-color-font dark:blue-font"> &quot;demo1&quot;</span>, to view the intended experience as a user with games, connections, requests, etc!
         </div>
     )
 }
