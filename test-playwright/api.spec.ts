@@ -17,7 +17,7 @@ const textSearchState: ISearchState = {
     genre: null,
     platform: null,
     mode: null,
-    search: "Icarus",
+    search: "Leif",
     currentSelected: "textSearch"
 };
 
@@ -31,32 +31,7 @@ const invalidTextSearchState: ISearchState = {
 
 test.describe("Test 'search-games' internal api filters and returns games", () => {
 
-    test.skip("Test search state containing the 'Genre' of 'Fighting' returns a 'fighting' only game as part of it's array of games", async ({ request }) => {
-        const response = await request.post(`${url}`, {
-            data: {
-                searchState: genreSearchState
-            }
-        });
-
-        expect.soft(response.ok()).toBeTruthy();
-
-        // this game ONLY has the genre of 'Fighting' ensuring it will only be returned if search state includes 'Fighting'
-        const expectedtitleReturned = 26759;
-        let found = false;
-
-        const data = await response.json();
-
-        for (const game of data.searchedGames) {
-            if (game.id === expectedtitleReturned) {
-                found = true;
-                break;
-            };
-        }
-
-        expect(found).toBeTruthy();
-    });
-
-    test.skip(`Test text search returns games containing part of the input text in their title`, async ({ request }) => {
+    test(`Test text search returns games containing part of the input text in their title`, async ({ request }) => {
         const response = await request.post(`${url}`, {
             data: {
                 searchState: textSearchState
@@ -66,7 +41,7 @@ test.describe("Test 'search-games' internal api filters and returns games", () =
         expect.soft(response.ok()).toBeTruthy();
 
         // this game returned under the title of 'Icarus'
-        const expectedtitleReturned = 62770;
+        const expectedtitleReturned = 85245;
         let found = false;
 
         const data = await response.json();

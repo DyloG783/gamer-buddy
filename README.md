@@ -24,20 +24,13 @@ The production instance of Gamer Buddy is deployed to Vercel. Pushed to the main
 
 ## Testing
 
-### Jest:
-
-_Due to the NextJs's use of new async server components, Jest can't test components in isolation if they are async server rendered. It is mentioned in NextJs's documentation to rely on end-to-end tests for testing these new types of components. Due to this most testing is managed with Playwright in this project._
-
-Run tests with `npm run test`
+_Due to the NextJs's use of new async server components, Jest/vite (and other common unit/integration test tools) can't test components if they are async server rendered (which almost everything in this app is!). It is mentioned in NextJs's documentation to rely on end-to-end tests for testing these new types of components. Due to this most testing is managed with Playwright in this project._
 
 ### Playwright:
 
-End-to-end tests need to use a dummy or mock account which exists in the test/dev instance of Clerk auth. When tests are run in this app temporary seed data is setup, and later torn down, which adds
+End-to-end tests need to use a dummy or mock account which exists in the test/dev instance of Clerk auth. Setup, and tear down scripts, adds users, and relevant test data to allow browser based front end test as a real user.
 
-Run tests with `npx playwright test`
-
-- Need to have permanent user in both dev & production for authentication created in Clerk which is used for authentication and test data to be associated to for end-to-end tests (user: `automation1@gbtestpermanent.com`).
-- automation uses `automation_test_users.ts` seed file to create games, and other usrs/relations.
+Run tests with `npx playwright test`.
 
 ---
 

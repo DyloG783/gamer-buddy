@@ -42,8 +42,7 @@ export default function About() {
                     <span className="primary-color-font"> Prisma</span>,
                     <span className="primary-color-font"> Pusher</span>, and
                     <span className="primary-color-font"> Clerk auth</span>. Testing with
-                    <span className="primary-color-font"> Playwright </span> &
-                    <span className="primary-color-font"> Jest </span>
+                    <span className="primary-color-font"> Playwright </span>
                 </p>
             </div>
         </div>

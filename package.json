@@ -17,8 +17,7 @@
     "saveModesToDb": "npx tsx scripts/igdb_api_data/saveModesToDb.ts",
     "savePlatformsToDb": "npx tsx scripts/igdb_api_data/savePlatformsToDb.ts",
     "allGameData": "npm run saveTwitchAuthToken && npm run saveGenresToDb && npm run saveModesToDb && npm run savePlatformsToDb && npm run saveGamesToDb",
-    "test": "playwright test",
-    "test_jest": "jest"
+    "test": "playwright test"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.2",

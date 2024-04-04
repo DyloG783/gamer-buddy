@@ -6,12 +6,10 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenuToggle,
 import { useState } from "react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
-export default function NavigationBar() {
+export default function Navigation() {
 
     const pathname = usePathname();
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
     const menuItems = [
         "Games",
         "Connections",

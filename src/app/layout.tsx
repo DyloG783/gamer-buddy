@@ -1,5 +1,5 @@
 import './globals.css';
-import NavigationBar from "@/app/components/NavigationBar";
+import Navigation from "@/app/components/Navigation";
 import { ClerkProvider } from '@clerk/nextjs';
 import { shadesOfPurple } from "@clerk/themes";
 import { Inter } from 'next/font/google';
@@ -28,7 +28,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
           {/* <body className='min-h-screen text-sm md:text-base lg:text-lg dark text-foreground bg-background'> */}
           <Providers>
             <header className='max-w-screen-2xl mx-auto shadow-sm'>
-              <NavigationBar />
+              <Navigation />
             </header>
             <main className='full-height-minus-nav max-w-screen-2xl mx-auto'>
               {children}
