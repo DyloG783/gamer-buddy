@@ -121,9 +121,9 @@ export const test_users = [
     },
 
     {
-        id: "user_2ecFwd36OyHj0RBNGMH6ewZnvhJ",
+        id: process.env.DEMO_USER_ID,
         email: "demo@test.com",
-        name: "Demo",
+        name: "demo1",
         games: [85245, 57888, 92627, 59807, 72182],
         "bio": "Demo user bio",
         "timezone": "(UTC+08:00) Perth"

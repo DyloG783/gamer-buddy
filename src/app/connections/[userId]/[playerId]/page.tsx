@@ -3,7 +3,8 @@ import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import Chat from "../../components/Chat";
 import prisma from "@/lib/db";
 import Form from "../../components/Form";
-const crypto = require('crypto');
+import combineUniqueIds from "@/lib/hashIds";
+
 
 // stop page from caching (needed for real time chat (in prod))
 export const dynamic = "force-dynamic";
@@ -15,36 +16,10 @@ export default async function PlayerChat({ params }: { params: { userId: string,
 
     if (player === null || user === null) {
         return <UserNotExist />
-    }
+    };
 
     // create unique identifier from the user ids which is the same regardless of order
-    function combineUniqueIds(id1: string, id2: string) {
-
-        function hashString(inputString: string) {
-            const hash = crypto.createHash('sha256');
-            hash.update(inputString, 'utf-8');
-            return hash.digest('hex');
-        }
-
-        // Hash the input strings
-        const hashedId1 = hashString(id1);
-        const hashedId2 = hashString(id2);
-
-        // Convert the hashed strings to numbers (you may need a custom conversion method)
-        const num1 = parseInt(hashedId1.substring(0, 15), 16);
-        const num2 = parseInt(hashedId2.substring(0, 15), 16);
-
-        // Check if the conversion is successful
-        if (isNaN(num1) || isNaN(num2)) {
-            console.error("Invalid input. Unable to convert to numbers.");
-            return null;
-        }
-
-        // Perform addition on the converted numbers
-        return num1 + num2;
-    }
-
-    const privateChatId = String(combineUniqueIds(params.userId, params.playerId)!)
+    const privateChatId = String(combineUniqueIds(params.userId, params.playerId)!);
 
     // create private chat room if it not already exists
     await prisma.chatPrivateRoom.upsert({
