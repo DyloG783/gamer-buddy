@@ -17,10 +17,10 @@ async function main() {
                 },
             },
         });
-
     } catch (error) {
         console.log("Error deleting test users from db: ", error);
-    }
+    };
+    console.log("Success deleting test users in prisma seed!");
 
     /**
      * Add test users and relate games
