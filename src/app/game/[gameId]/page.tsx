@@ -23,9 +23,9 @@ export default async function GamePage({ params }: { params: { gameId: number } 
     // display 'game not exist' error on page (in case user enters incorrect url)
     if (!game) return <GameNotExist />;
 
-
     // boolean for whether the user already has this game added to their account
     let alreadyExists = false;
+
     // check whether user already has this game saved
     if (userId) {
 

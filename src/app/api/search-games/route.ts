@@ -1,8 +1,6 @@
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
-// import z from 'zod';
 import { SearchStateSchema } from '@/lib/zod_schemas';
-import { error } from "console";
 
 export async function POST(request: Request) {
 

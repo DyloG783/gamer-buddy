@@ -204,6 +204,22 @@ async function main() {
                 gameId: 85245,
             }
         });
+        const gameRoom2 = await prisma.chatGameRoom.create({
+            data: {
+                gameId: 57888,
+            }
+        });
+        const gameRoom3 = await prisma.chatGameRoom.create({
+            data: {
+                gameId: 59807,
+            }
+        });
+        const gameRoom4 = await prisma.chatGameRoom.create({
+            data: {
+                gameId: 72182,
+            }
+        });
+
 
         // create public game room messages
         try {
@@ -228,6 +244,36 @@ async function main() {
                         message: "I'd be keeeeeeen!",
                         userId: test_users[0].id!,
                         gameRoomId: gameRoom1.id,
+                    },
+                    {
+                        message: "Anyone playing this?",
+                        userId: test_users[3].id!,
+                        gameRoomId: gameRoom2.id,
+                    },
+                    {
+                        message: "Yo yo!!!",
+                        userId: test_users[5].id!,
+                        gameRoomId: gameRoom3.id,
+                    },
+                    {
+                        message: "Sign me up for some of this",
+                        userId: test_users[4].id!,
+                        gameRoomId: gameRoom3.id,
+                    },
+                    {
+                        message: "Anyone playing this?",
+                        userId: test_users[1].id!,
+                        gameRoomId: gameRoom3.id,
+                    },
+                    {
+                        message: "Need a group to start a clan",
+                        userId: test_users[2].id!,
+                        gameRoomId: gameRoom3.id,
+                    },
+                    {
+                        message: "Helooooooo",
+                        userId: test_users[0].id!,
+                        gameRoomId: gameRoom4.id,
                     },
                 ]
             });
