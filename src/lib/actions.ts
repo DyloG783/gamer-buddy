@@ -3,6 +3,8 @@
 import prisma from '@/lib/db'
 import { auth, currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache'
+import { StringSchema, NumberSchema, UserSchema } from './zod_schemas';
+import z from 'zod';
 
 export async function sendMessagePrivate(bindData: {
     privateRoomId: string,
@@ -10,24 +12,21 @@ export async function sendMessagePrivate(bindData: {
 }, formData: FormData) {
     'use server'
 
-    const privateRoomId = bindData.privateRoomId;
-    const playerId = bindData.playerId;
-    const message = formData.get('message_input') as string;
-    const { userId } = auth();
-    const Pusher = require("pusher");
+    const input = StringSchema.safeParse(formData.get('message_input') as string);
+    if (!input.success) return console.log("Input validation failed (zod)");
 
-    if (!auth) {
-        console.log("Send message server action, not authorised failure")
-        return
-    }
+    const { userId } = auth();
+    if (!userId) return console.log("Send message server action, not authorised failure");
+
+    const Pusher = require("pusher");
 
     try {
         const privMessage = await prisma.privateMessage.create({
             data: {
-                chatPrivateRoomId: privateRoomId,
-                message: message,
+                chatPrivateRoomId: bindData.privateRoomId,
+                message: input.data,
                 senderId: userId!,
-                receiverId: playerId
+                receiverId: bindData.playerId
             },
             select: {
                 message: true,
@@ -43,7 +42,7 @@ export async function sendMessagePrivate(bindData: {
             useTLS: true,
         });
 
-        await pusher.trigger(privateRoomId, "private-room-post", {
+        await pusher.trigger(bindData.privateRoomId, "private-room-post", {
             message: `${JSON.stringify(privMessage)}\n\n`,
         });
 
@@ -55,20 +54,19 @@ export async function sendMessagePrivate(bindData: {
 export async function sendMessageForum(gameRoomId: string, formData: FormData) {
     'use server'
 
-    const message = formData.get('message_input') as string;
-    const { userId } = auth();
-    const Pusher = require("pusher");
+    const input = StringSchema.safeParse(formData.get('message_input') as string);
+    if (!input.success) return console.log("Input validation failed (zod)");
 
-    if (!auth) {
-        console.log("Send message server action, not authorised failure")
-        return
-    }
+    const { userId } = auth();
+    if (!userId) return console.log("Send message server action, not authorised failure");
+
+    const Pusher = require("pusher");
 
     try {
         const newMessage = await prisma.gameMessage.create({
             data: {
-                userId: userId!,
-                message: message,
+                userId: userId,
+                message: input.data,
                 gameRoomId: gameRoomId,
 
             },
@@ -102,16 +100,20 @@ export async function addGame(gameId: number) {
     'use server'
 
     const { userId } = auth();
+    if (!userId) return console.log("Send message server action, not authorised failure");
+
+    const input = NumberSchema.safeParse(gameId);
+    if (!input.success) return console.log("Input validation failed (zod)");
 
     try {
         await prisma.user.update({
             where: {
-                id: userId!
+                id: userId
             },
             data: {
                 games: {
                     connect: {
-                        id: gameId
+                        id: input.data
                     }
                 }
             }
@@ -126,16 +128,20 @@ export async function removeGame(gameId: number) {
     'use server'
 
     const { userId } = auth();
+    if (!userId) return console.log("Send message server action, not authorised failure");
+
+    const input = NumberSchema.safeParse(gameId);
+    if (!input.success) return console.log("Input validation failed (zod)");
 
     try {
         await prisma.user.update({
             where: {
-                id: userId!
+                id: userId
             },
             data: {
                 games: {
                     disconnect: {
-                        id: gameId
+                        id: input.data
                     }
                 }
             }
@@ -147,7 +153,14 @@ export async function removeGame(gameId: number) {
 
 }
 
-export async function addUser(player: any) {
+export async function followUser(player: z.infer<typeof UserSchema>) {
+
+    const { userId } = auth();
+    if (!userId) return console.log("Send message server action, not authorised failure");
+
+    const input = UserSchema.safeParse(player);
+    if (!input.success) return console.log("Input validation failed (zod)");
+
     const user = await currentUser();
 
     try {
@@ -156,18 +169,25 @@ export async function addUser(player: any) {
                 followedById: user?.id!,
                 followedByEmail: user?.emailAddresses[0].emailAddress!,
                 followedByUName: user?.username!,
-                followingId: player.id,
-                followingEmail: player.email!,
-                followingUName: player.userName!
+                followingId: input.data.id,
+                followingEmail: input.data.email!,
+                followingUName: input.data.userName!
             }
         })
-        revalidatePath(`/view-player/${player.id}`)
+        revalidatePath(`/view-player/${input.data.id}`)
     } catch (error) {
         console.log("Failed to create following relation - server action", error)
     }
 }
 
-export async function removeUser(player: any) {
+export async function unFollowUser(player: z.infer<typeof UserSchema>) {
+
+    const { userId } = auth();
+    if (!userId) return console.log("Send message server action, not authorised failure");
+
+    const input = UserSchema.safeParse(player);
+    if (!input.success) return console.log("Input validation failed (zod)");
+
     const user = await currentUser();
 
     try {
@@ -175,11 +195,11 @@ export async function removeUser(player: any) {
             where: {
                 followingEmail_followedByEmail: {
                     followedByEmail: user?.emailAddresses[0].emailAddress!,
-                    followingEmail: player.email!,
+                    followingEmail: input.data.email!,
                 }
             }
         })
-        revalidatePath(`/view-player/${player.id}`)
+        revalidatePath(`/view-player/${input.data.id}`)
     } catch (error) {
         console.log("Failed to remove following relation - server action", error)
     }

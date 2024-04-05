@@ -28,7 +28,8 @@ test.describe("Saved game", () => {
 
   // can't do this as test are asynchronous?
   test('Remove game button updates buttons as expected', async ({ page, browserName }) => {
-    // test.slow();
+    test.slow();
+
     test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')
     test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome')
 
@@ -51,7 +52,7 @@ test.describe("Unsaved game", () => {
   });
 
   test('Add game button updates buttons as expected', async ({ page, browserName }) => {
-    // test.slow();
+    test.slow();
 
     test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')
     test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome')

@@ -2,20 +2,20 @@
 
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IConnection, TMessage } from "@/lib/custom_types";
+import { TConnection, TMessage } from "@/lib/custom_types";
 import FollowingCard from "./FollowingCard";
 import RequestedCard from "./RequestedCard";
 import ConnectedCard from "./ConnectedCard";
 
 interface IPaginatedConnectionsProps {
-    connections: IConnection[] | null
+    connections: TConnection[] | null
     itemsPerPage: number
     option: string,
     unseenMessages?: TMessage[] | null
 }
 
 interface IItems {
-    currentItems: IConnection[]
+    currentItems: TConnection[]
 }
 
 const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage, option, unseenMessages }) => {
@@ -28,7 +28,7 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
         return (
             <ul className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-6">
                 {currentItems &&
-                    currentItems.map((connection: IConnection, index) => (
+                    currentItems.map((connection: TConnection, index) => (
                         <div id="card_key_wrapper" key={index} className="flex justify-around">
                             {option === 'connected' && <ConnectedCard connection={connection} unseenMessages={unseenMessages} />}
                             {option === 'requested' && <RequestedCard connection={connection} />}

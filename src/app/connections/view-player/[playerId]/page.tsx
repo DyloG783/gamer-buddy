@@ -1,5 +1,5 @@
 import prisma from "@/lib/db";
-import { addUser, removeUser } from "@/lib/actions"
+import { followUser, unFollowUser } from "@/lib/actions"
 import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import { UserNotExist } from "@/lib/errors";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
@@ -46,8 +46,8 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
     }
 
     // adds playerId to server action
-    const addActionWithPlayer = addUser.bind(null, player)
-    const removeActionWithPlayer = removeUser.bind(null, player)
+    const addActionWithPlayer = followUser.bind(null, player)
+    const removeActionWithPlayer = unFollowUser.bind(null, player)
 
     return (
         <div className="flex flex-col justify-between full-height-minus-nav background-color dark:bg-black">

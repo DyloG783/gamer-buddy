@@ -2,7 +2,8 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import prisma from '@/lib/db'
-import { TUnsafeMetadata } from '@/lib/custom_types'
+import { UnsafeMetadataSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 
 export async function POST(req: Request) {
 
@@ -54,8 +55,8 @@ export async function POST(req: Request) {
         const userName = evt.data.username;
         const email = evt.data.email_addresses[0];
         const userId = evt.data.id;
-        const bio: TUnsafeMetadata["bio"] = evt.data.unsafe_metadata.bio as string;
-        const timezone: TUnsafeMetadata["timezone"] = evt.data.unsafe_metadata.timezone as string;
+        const bio: z.infer<typeof UnsafeMetadataSchema>["bio"] = evt.data.unsafe_metadata.bio as string;
+        const timezone: z.infer<typeof UnsafeMetadataSchema>["timezone"] = evt.data.unsafe_metadata.timezone as string;
 
         try {
             await prisma.user.upsert({
@@ -81,8 +82,8 @@ export async function POST(req: Request) {
         const userName = evt.data.username;
         const email = evt.data.email_addresses[0];
         const userId = evt.data.id;
-        const bio: TUnsafeMetadata["bio"] = evt.data.unsafe_metadata.bio as string;
-        const timezone: TUnsafeMetadata["timezone"] = evt.data.unsafe_metadata.timezone as string;
+        const bio: z.infer<typeof UnsafeMetadataSchema>["bio"] = evt.data.unsafe_metadata.bio as string;
+        const timezone: z.infer<typeof UnsafeMetadataSchema>["timezone"] = evt.data.unsafe_metadata.timezone as string;
 
         try {
             await prisma.user.upsert({

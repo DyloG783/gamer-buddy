@@ -1,14 +1,20 @@
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
+// import z from 'zod';
+import { SearchStateSchema } from '@/lib/zod_schemas';
+import { error } from "console";
 
 export async function POST(request: Request) {
 
     const data = await request.json();
 
-    const genre: string = data.searchState.genre;
-    const mode: string = data.searchState.mode;
-    const platform: string = data.searchState.platform;
-    const search: string = data.searchState.search;
+    const input = SearchStateSchema.safeParse(data.searchState);
+    if (!input.success) return NextResponse.json({ error: "Input validation failed (zod)" }, { status: 403 });
+
+    const genre = input.data.genre;
+    const mode = input.data.mode;
+    const platform = input.data.platform;
+    const search = input.data.search;
 
     try {
         const searchedGames = await prisma.game.findMany({

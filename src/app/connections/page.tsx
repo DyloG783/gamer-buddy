@@ -1,5 +1,7 @@
 import { getFollowing, getUnseenMessages, getUsersConnectionRequests, getUsersConnections } from "@/lib/query_helper";
-import { IConnection, TMessage } from "@/lib/custom_types";
+import { TConnection } from "@/lib/custom_types";
+import { MessageSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 import PaginatedConnections from "./components/PaginatedConnections";
 import { Suspense } from "react";
 import Loading from "@/lib/loading";
@@ -9,10 +11,10 @@ export const dynamic = 'force-dynamic';
 
 const Connections = async () => {
 
-    const userFollowing: IConnection[] | null = await getFollowing();
-    const requests: IConnection[] | null = await getUsersConnectionRequests();
-    const userConnections: IConnection[] | null = await getUsersConnections();
-    const unseenMessages: TMessage[] | null = await getUnseenMessages();
+    const userFollowing: TConnection[] | null = await getFollowing();
+    const requests: TConnection[] | null = await getUsersConnectionRequests();
+    const userConnections: TConnection[] | null = await getUsersConnections();
+    const unseenMessages: z.infer<typeof MessageSchema>[] | null = await getUnseenMessages();
 
     return (
         <div id="page_container" className="flex flex-col full-height-minus-nav background-color dark:bg-black">

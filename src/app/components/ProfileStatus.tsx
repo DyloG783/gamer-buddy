@@ -1,6 +1,7 @@
 import { auth, currentUser } from "@clerk/nextjs";
-import { TUnsafeMetadata } from "@/lib/custom_types";
 import Link from "next/link";
+import { UnsafeMetadataSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 
 export default async function ProfileStatus() {
 
@@ -12,8 +13,8 @@ export default async function ProfileStatus() {
 
 
     // extract custom user profile info out of Clerk
-    const bio: TUnsafeMetadata["bio"] = user?.unsafeMetadata.bio as string
-    const timezone: TUnsafeMetadata["timezone"] = user?.unsafeMetadata.timezone as string
+    const bio: z.infer<typeof UnsafeMetadataSchema>["bio"] = user?.unsafeMetadata.bio as string
+    const timezone: z.infer<typeof UnsafeMetadataSchema>["timezone"] = user?.unsafeMetadata.timezone as string
 
     // This works for hiding the component completely if the user has completed setting their timezone, and about-you profile info
     if (bio && timezone) {

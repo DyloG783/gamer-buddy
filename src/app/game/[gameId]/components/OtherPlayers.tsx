@@ -1,9 +1,10 @@
-import { TUnsafeMetadata } from "@/lib/custom_types";
 import prisma from "@/lib/db";
 import { GameNotExist } from "@/lib/errors";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { auth, currentUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { UnsafeMetadataSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 
 export default async function OtherPlayers({ gameId }: { gameId: number }) {
 
@@ -20,8 +21,8 @@ export default async function OtherPlayers({ gameId }: { gameId: number }) {
     )
 
     // extract custom user profile info out of Clerk
-    const userBio: TUnsafeMetadata["bio"] = user?.unsafeMetadata.bio as string
-    const userTimezone: TUnsafeMetadata["timezone"] = user?.unsafeMetadata.timezone as string
+    const userBio: z.infer<typeof UnsafeMetadataSchema>["bio"] = user?.unsafeMetadata.bio as string
+    const userTimezone: z.infer<typeof UnsafeMetadataSchema>["timezone"] = user?.unsafeMetadata.timezone as string
 
     // return game or null if exists
     const game = await checkGameExistsAndReturn(gameId);

@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
-import { IConnection, TMessage } from "@/lib/custom_types";
+import { TConnection, TMessage } from "@/lib/custom_types";
 
 export default async function ConnectedCard({ connection, unseenMessages }:
-    { connection: IConnection, unseenMessages?: TMessage[] | null }) {
+    { connection: TConnection, unseenMessages?: TMessage[] | null }) {
 
     let unseen = false;
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
-import { IConnection } from "@/lib/custom_types";
+import { TConnection } from "@/lib/custom_types";
 
-export default function FollowingCard({ connection }: { connection: IConnection }) {
+export default function FollowingCard({ connection }: { connection: TConnection }) {
     return (
         <Card className="w-[250px] md:w-[300px]" data-testid='following_card'>
             <CardHeader className="flex gap-3">

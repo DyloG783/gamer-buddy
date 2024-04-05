@@ -2,27 +2,28 @@
 
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame, ISearchState } from "@/lib/custom_types";
+import z from 'zod';
+import { SearchStateSchema, GameSchema } from '@/lib/zod_schemas';
 import Loading from "@/lib/loading";
 import GameCard from "./GameCard";
 
 interface IPaginatedGamesProps {
-    defaultGames: IGame[]
+    defaultGames: z.infer<typeof GameSchema>[]
     itemsPerPage: number
-    searchState: ISearchState
+    searchState: z.infer<typeof SearchStateSchema>
     setSearchEmpty: any
 }
 
 interface IPageGames {
-    currentItems: IGame[]
+    currentItems: z.infer<typeof GameSchema>[]
 }
 
 const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, itemsPerPage, searchState, setSearchEmpty }) => {
 
-    const [searchedGames, setSearchedGames] = useState<IGame[]>([]);
+    const [searchedGames, setSearchedGames] = useState<z.infer<typeof GameSchema>[]>([]);
     const [isLoading, setLoading] = useState(false);
 
-    let filteredGames: IGame[] = [];
+    let filteredGames: z.infer<typeof GameSchema>[] = [];
 
     // fetch games from the db and filter based on the current search state
     useEffect(() => {
@@ -39,6 +40,12 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
             })
                 .then((res) => res.json())
                 .then((data) => {
+                    if (data.error) {
+                        setSearchedGames([])
+                        setLoading(false)
+                        return
+                    };
+
                     setSearchedGames(data.searchedGames)
                     setLoading(false)
                     filteredGames = searchedGames
@@ -73,7 +80,7 @@ const PaginatedGamesSearch: React.FC<IPaginatedGamesProps> = ({ defaultGames, it
             <div id="games_grid_view"
                 className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-6 text-sm text-nowrap ">
                 {currentItems &&
-                    currentItems.map((game: IGame) => (
+                    currentItems.map((game: z.infer<typeof GameSchema>) => (
                         <div id="card_key_wrapper" key={game.id} className="flex justify-around">
                             <GameCard game={game} type="all" />
                         </div>

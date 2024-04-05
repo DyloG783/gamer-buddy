@@ -3,19 +3,19 @@
 import PaginatedGamesSearch from "@/app/games/components/PaginatedGamesSearch";
 import SearchOptions from "./SearchOptions";
 import { useState } from "react";
-import { IGame, ISearchState, ISearchableGameType } from "@/lib/custom_types";
+import z from 'zod';
+import { SearchableGameSchema, SearchStateSchema, GameSchema } from '@/lib/zod_schemas';
 
 type IGamesDisplayProps = {
-    genres: ISearchableGameType[],
-    platforms: ISearchableGameType[],
-    modes: ISearchableGameType[],
-    defaultGames: IGame[],
+    genres: z.infer<typeof SearchableGameSchema>[],
+    platforms: z.infer<typeof SearchableGameSchema>[],
+    modes: z.infer<typeof SearchableGameSchema>[],
+    defaultGames: z.infer<typeof GameSchema>[],
 }
-
 
 export default function GamesDisplay(props: IGamesDisplayProps) {
 
-    const defaultSearchState: ISearchState = {
+    const defaultSearchState: z.infer<typeof SearchStateSchema> = {
         genre: null,
         platform: null,
         mode: null,

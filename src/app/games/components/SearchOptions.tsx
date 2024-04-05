@@ -1,22 +1,23 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import { ISearchState, ISearchableGameType } from "@/lib/custom_types";
+import { SearchableGameSchema, SearchStateSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 import { Select, SelectItem } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 
 interface ISearchOptionsProps {
-    genres: ISearchableGameType[];
-    platforms: ISearchableGameType[];
-    modes: ISearchableGameType[];
-    searchState: ISearchState;
+    genres: z.infer<typeof SearchableGameSchema>[];
+    platforms: z.infer<typeof SearchableGameSchema>[];
+    modes: z.infer<typeof SearchableGameSchema>[];
+    searchState: z.infer<typeof SearchStateSchema>;
     setSearchState: any;
     searchEmpty: boolean;
 }
 
 interface ISelectSearchProps {
-    categoryList: ISearchableGameType[];
+    categoryList: z.infer<typeof SearchableGameSchema>[];
     categoryName: string;
 }
 
