@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
-import { TConnection, TMessage } from "@/lib/custom_types";
+import { TConnection } from "@/lib/custom_types";
+import { MessageSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 import FollowingCard from "./FollowingCard";
 import RequestedCard from "./RequestedCard";
 import ConnectedCard from "./ConnectedCard";
@@ -11,7 +13,7 @@ interface IPaginatedConnectionsProps {
     connections: TConnection[] | null
     itemsPerPage: number
     option: string,
-    unseenMessages?: TMessage[] | null
+    unseenMessages?: z.infer<typeof MessageSchema>[] | null
 }
 
 interface IItems {

@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Pusher from "pusher-js";
 import { ScrollShadow } from "@nextui-org/react";
-// import AudioPlayer from "@/app/components/AudioPlayer";
 
 type TMessage = {
     sentPrivateBy: {
@@ -17,8 +16,6 @@ export default function Chat({ messages, privateRoomId }: { messages: TMessage[]
 
     const [totalMessages, settotalMessages] = useState(messages || [])
     const messageEndRef = useRef<HTMLInputElement>(null);
-
-    // const audioSrc = "@/../public/sounds/ding.mp3";
 
     useEffect(() => {
 

@@ -1,10 +1,11 @@
-import { IGame } from "@/lib/custom_types";
+import { GameSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
 
 
 // type "your" means you already have this game, type "all" means you don't have this game saved
 // they will display different information and link to other places
-export default function GameCard({ game, type }: { game: IGame, type: string }) {
+export default function GameCard({ game, type }: { game: z.infer<typeof GameSchema>, type: string }) {
 
     const unixTimestamp = game.firstReleaseDate;
     const timestamp = unixTimestamp! * 1000;

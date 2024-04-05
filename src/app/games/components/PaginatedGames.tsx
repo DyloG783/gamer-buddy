@@ -2,16 +2,17 @@
 
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
-import { IGame } from "@/lib/custom_types";
+import { GameSchema } from '@/lib/zod_schemas';
+import z from 'zod';
 import GameCard from "./GameCard";
 
 interface IPaginatedGamesProps {
-    games: IGame[]
+    games: z.infer<typeof GameSchema>[]
     itemsPerPage: number
 }
 
 interface IPageGames {
-    currentItems: IGame[]
+    currentItems: z.infer<typeof GameSchema>[]
 }
 
 const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage }) => {
@@ -20,7 +21,7 @@ const PaginatedGames: React.FC<IPaginatedGamesProps> = ({ games, itemsPerPage })
         return (
             <div className="flex flex-col flex-wrap md:flex-row gap-2 md:gap-6 ">
                 {currentItems &&
-                    currentItems.map((game: IGame) => (
+                    currentItems.map((game: z.infer<typeof GameSchema>) => (
                         <div id="card_key_wrapper" key={game.id}>
                             <GameCard game={game} type="your" />
                         </div>
