@@ -18,9 +18,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
 
     // other player this user wants to connect with
     const player = await checkUserExistsAndReturn(playerId);
-    if (!player || !user) {
-        return <UserNotExist />
-    }
+    if (!player || !user) return <UserNotExist />;
 
     // see whether we already follow this player
     const weFollowThisPlayer = await prisma.follows.findUnique({

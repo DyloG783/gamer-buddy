@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * Client component needed to be imported into client components
+ */
+
 import { useRouter } from 'next/navigation';
 import { Button } from "@nextui-org/react";
 

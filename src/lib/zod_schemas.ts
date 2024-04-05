@@ -35,7 +35,7 @@ export const GameSchema = z.object({
     modes: z.array(z.string().regex(inputSanitzationRegex, { message: "Security sanitation failed. No special characters except ',.+-'" })),
     _count: z.object({
         users: z.number(),
-    }).nullable(),
+    }).optional(),
 });
 
 export const MessageSchema = z.object({

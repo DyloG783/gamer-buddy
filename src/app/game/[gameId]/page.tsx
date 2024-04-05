@@ -9,9 +9,6 @@ import { LinkButton } from "@/app/components/LinkButton";
 import { RemoveButton } from "@/app/components/RemoveButton";
 import { SubmitButton } from "@/app/components/SubmitButton";
 import { Prisma } from "@prisma/client";
-type gameCover = {
-    url: string
-}
 
 export default async function GamePage({ params }: { params: { gameId: number } }) {
 

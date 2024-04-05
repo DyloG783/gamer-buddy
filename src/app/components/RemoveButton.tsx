@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * Client component needed to be imported into client components
+ */
+
 import { useFormStatus } from 'react-dom'
 import { Button } from "@nextui-org/react";
 

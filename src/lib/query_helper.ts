@@ -107,7 +107,10 @@ export async function checkUserExistsAndReturn(userId: string) {
 
     try {
         const user = await prisma.user.findUnique({
-            where: { id: userId }, include: {
+            where: {
+                id: userId
+            },
+            include: {
                 games: true
             }
         })
