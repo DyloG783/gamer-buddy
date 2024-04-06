@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export default function Home() {
   return (
     <div id="home_page_container" className="flex flex-col full-height-minus-nav 
-    shadow-sm background-color dark:bg-black"
+    shadow-sm bg-white dark:bg-black"
     >
       <Suspense fallback={<Loading />}>
         <ProfileStatus />

@@ -62,8 +62,8 @@ export default function Navigation() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font dark:text-white">
-                <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide blue-font dark:text-white">
+            <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide secondary-color-font dark:text-white">
+                <NavbarContent justify="end" className="md:text-lg font-semibold tracking-wide secondary-color-font dark:text-white">
                     <ThemeSwitcher />
                 </NavbarContent>
                 <NavbarItem className="md:text-lg">
@@ -75,7 +75,7 @@ export default function Navigation() {
                             appearance={{
                                 elements: {
                                     userButtonBox: "",
-                                    userButtonOuterIdentifier: "md:text-lg font-semibold blue-font dark:text-white"
+                                    userButtonOuterIdentifier: "md:text-lg font-semibold secondary-color-font dark:text-white"
                                 }
                             }}
                             afterSignOutUrl={process.env.NEXT_PUBLIC_BASE_URL}

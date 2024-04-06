@@ -27,7 +27,7 @@ export default async function ProfileStatus() {
         <div id="profile_status_container " className="banner">
             {/* <button>Dismiss</button> */}
             <Link href={`/user-profile/game-settings`} className="tracking-wide">
-                <h1 className="font-semibold text-center mb-4 blue-font tracking-wide text-xl">Update your profile</h1>
+                <h1 className="font-semibold text-center mb-4 secondary-color-font tracking-wide text-xl">Update your profile</h1>
                 {!timezone &&
                     <>
                         <div

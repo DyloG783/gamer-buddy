@@ -71,12 +71,8 @@ html, body {
         @apply text-emerald-500;
     }
 
-    .blue-font{
+    .secondary-color-font{
         @apply text-blue-800
-    }
-
-    .background-color {
-        @apply bg-white;
     }
 
     .full-height-minus-nav {
@@ -84,7 +80,7 @@ html, body {
     }
 
     .banner{
-        @apply p-4 md:p-8 animate-pulse bg-yellow-100 dark:bg-yellow-600
+        @apply p-8 sm:p-16 animate-pulse bg-yellow-100 dark:bg-slate-400
     }
 }
 

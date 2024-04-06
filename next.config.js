@@ -6,6 +6,11 @@ const nextConfig = {
   //   serverActions: true,
   // },
 
+  compiler: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
+
   images: {
     remotePatterns: [
       {

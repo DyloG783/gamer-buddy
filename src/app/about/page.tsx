@@ -4,7 +4,7 @@ export default function About() {
 
     return (
         <div className="flex flex-col full-height-minus-nav 
-        tracking-wide shadow-sm background-color dark:bg-black
+        tracking-wide shadow-sm bg-white dark:bg-black
         p-4">
 
             <div className=" p-4 sm:p-16 max-w-3xl mx-auto shadow-sm dark:shadow-white ">
@@ -30,9 +30,14 @@ export default function About() {
                 </p>
             </div>
 
-            <DemoBanner />
+            {/* <div className="">
+                <DemoBanner />
+            </div> */}
+
+
 
             <hr className="mt-4 sm:mt-6" />
+            <DemoBanner />
             <div className="grow flex flex-col justify-around px:2 sm:px-10 my-6 sm:my-0">
                 <p className="mx-auto font-semibold">
                     Built on

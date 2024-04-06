@@ -29,7 +29,7 @@ export default async function ConnectionUpdates() {
     return (
         <div id="connection_updates_container" className="flex flex-col md:flex-row gap-8 md:gap-x-40 justify-around ">
             <div id="connection_messages_container">
-                <h2 className="font-semibold blue-font text-xl mb-4 tracking-wide">Messages</h2>
+                <h2 className="font-semibold secondary-color-font text-xl mb-4 tracking-wide">Messages</h2>
                 {unseenMessages && unseenMessages.length > 0 &&
                     <Link href={`/connections`} >
                         <div className="flex hover:cursor-pointer">
@@ -49,7 +49,7 @@ export default async function ConnectionUpdates() {
                 id="connection_requests_container"
                 className=" "
             >
-                <h2 className="font-semibold blue-font text-xl mb-4 tracking-wide">Connection requests</h2>
+                <h2 className="font-semibold secondary-color-font text-xl mb-4 tracking-wide">Connection requests</h2>
                 {requests && requests.length > 0 &&
                     <Link href={`/connections`} >
                         <div className="flex hover:cursor-pointer">

@@ -16,12 +16,12 @@ const Connections = async () => {
     const unseenMessages: z.infer<typeof MessageSchema>[] | null = await getUnseenMessages();
 
     return (
-        <div id="page_container" className="flex flex-col full-height-minus-nav background-color dark:bg-black">
+        <div id="page_container" className="flex flex-col full-height-minus-nav bg-white dark:bg-black">
             <div id="connected_with_container"
                 className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm
                 ">
                 <div>
-                    <p className="blue-font font-semibold text-xl md:text-2xl
+                    <p className="secondary-color-font font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"
                     >
                         Connected With
@@ -35,7 +35,7 @@ const Connections = async () => {
             </div>
             <div id="connection_request_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm" >
                 <div>
-                    <p className="blue-font font-semibold text-xl md:text-2xl
+                    <p className="secondary-color-font font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"
                     >
                         Connection requests
@@ -49,7 +49,7 @@ const Connections = async () => {
             </div>
             <div id="following_container" className="grow flex flex-col justify-between pl-4 md:pl-10 shadow-sm">
                 <div>
-                    <p className="blue-font font-semibold text-xl md:text-2xl
+                    <p className="secondary-color-font font-semibold text-xl md:text-2xl
                     tracking-wider mt-4 pb-2"
                     >
                         Following

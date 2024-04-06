@@ -30,7 +30,6 @@ export default function GamesDisplay(props: IGamesDisplayProps) {
         <div className="flex flex-col justify-between">
             <SearchOptions genres={props.genres} platforms={props.platforms} modes={props.modes} searchState={searchState} setSearchState={setSearchState} searchEmpty={searchEmpty} />
             <div id="games_container_all_games" className="p-6">
-                {/* <PaginatedGamesSearch defaultGames={props.defaultGames} itemsPerPage={4} searchState={searchState} setSearchEmpty={setSearchEmpty} /> */}
                 <PaginatedGames defaultGames={props.defaultGames} itemsPerPage={4} searchState={searchState} setSearchEmpty={setSearchEmpty} />
             </div>
         </div>

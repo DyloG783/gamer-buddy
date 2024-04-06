@@ -2,7 +2,7 @@ export default function HeroContent() {
 
     return (
         <div id="hero_container">
-            <h1 className="font-bold text-center mt-6 md:mt-12 mb-10 md:mb-14 blue-font text-xl md:text-4xl tracking-wide">
+            <h1 className="font-bold text-center mt-6 md:mt-12 mb-10 md:mb-14 secondary-color-font text-xl md:text-4xl tracking-wide">
                 Bringing Gamers Together
             </h1>
             {/* <div className="grid grid-flow-row auto-rows-fr gap-4 md:gap-14 max-w-5xl mx-auto "> */}

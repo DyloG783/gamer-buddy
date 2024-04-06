@@ -48,7 +48,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
     const removeActionWithPlayer = unFollowUser.bind(null, player)
 
     return (
-        <div className="flex flex-col justify-between full-height-minus-nav background-color dark:bg-black">
+        <div className="flex flex-col justify-between full-height-minus-nav bg-white dark:bg-black">
             <div id="connect_with_player_container"
                 className="p-4 shadow-sm"
             >
@@ -79,12 +79,12 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                         }
                     </div>
                     <div className="pl-4 md:pl-20">
-                        <h1 className="font-semibold blue-font text-xl md:text-4xl tracking-wider mb-10 md:mb-20">
+                        <h1 className="font-semibold secondary-color-font text-xl md:text-4xl tracking-wider mb-10 md:mb-20">
                             {player?.userName}&apos;s Profile
                         </h1>
                         <div id="players_bio_container"
                             className="ml-4 md:ml-10 mb-4 md:mb-10 ">
-                            <h2 className="font-semibold blue-font mb-4 md:mb-6 text-lg md:text-xl tracking-wide">About {player?.userName}</h2>
+                            <h2 className="font-semibold secondary-color-font mb-4 md:mb-6 text-lg md:text-xl tracking-wide">About {player?.userName}</h2>
                             {player?.bio
                                 &&
                                 <div id="players_bio" className={'ml-2'}>
@@ -99,7 +99,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                         <div id="players_timezone_containter"
                             className="ml-4 md:ml-10 mb-4 md:mb-10"
                         >
-                            <h2 className="font-semibold blue-font mb-4 md:mb-6 text-lg md:text-xl tracking-wide">{player?.userName}&apos;s Timezone</h2>
+                            <h2 className="font-semibold secondary-color-font mb-4 md:mb-6 text-lg md:text-xl tracking-wide">{player?.userName}&apos;s Timezone</h2>
                             {player?.timezone
                                 &&
                                 <div id="players_timezone" className={'ml-2'}>
@@ -115,7 +115,7 @@ export default async function ViewPlayer({ params }: { params: { playerId: strin
                 </div>
             </div>
             <div id="players_games" >
-                <h1 className="font-semibold blue-font tracking-wider 
+                <h1 className="font-semibold secondary-color-font tracking-wider 
                 text-xl md:text-2xl p-4 md:pl-20"
                 >
                     All of {player?.userName}&apos;s games

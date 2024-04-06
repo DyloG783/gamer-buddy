@@ -24,10 +24,10 @@ interface ISelectSearchProps {
 const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes, searchState, setSearchState, searchEmpty }) => {
     const SelectSearch: React.FC<ISelectSearchProps> = ({ categoryList, categoryName }) => {
 
-        const [categoryListSelection, setCategoryListSelection] = useState("Default")
+        const [categoryListSelection, setCategoryListSelection] = useState("");
 
         useEffect(() => {
-            if (categoryListSelection !== "Default") {
+            if (categoryListSelection !== "") {
                 if (categoryName === "Genre") {
                     setSearchState({
                         ...searchState,
@@ -50,7 +50,7 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
                     })
                 }
             }
-        }, [categoryListSelection])
+        }, [categoryListSelection]);
 
         const handleSelect = (e: any) => {
             setCategoryListSelection(e.target.value);
@@ -58,15 +58,16 @@ const SearchOptions: React.FC<ISearchOptionsProps> = ({ genres, platforms, modes
 
         return (
             <div className="flex flex-col gap-1 ">
-                <h2 className="font-semibold blue-font">{categoryName}</h2>
+                <h2 className="font-semibold secondary-color-font">{categoryName}</h2>
                 <Select
                     label={categoryName === "Genre" && searchState.genre != null ? searchState.genre
                         : categoryName === "Platform" && searchState.platform != null ? searchState.platform
                             : categoryName === "Mode" && searchState.mode != null ? searchState.mode
-                                : categoryListSelection}
-                    placeholder={`Select a ${categoryName}`}
+                                : ""}
+                    // placeholder={`Select a ${categoryName}`}
                     aria-label={categoryName}
                     value={categoryListSelection}
+                    // defaultSelectedKeys={["Default"]}
                     selectedKeys={[categoryListSelection]}
                     onChange={handleSelect}
                     size='lg'

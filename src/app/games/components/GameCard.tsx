@@ -30,7 +30,7 @@ export default function GameCard({ game, type }: { game: z.infer<typeof GameSche
                     <div className='text-sm'>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold blue-font text-base">Genre</h3>
+                            <h3 className="font-bold secondary-color-font text-base">Genre</h3>
                             {game.genres.map((genre: string) => (
                                 <span key={genre} >
                                     {genre + ", "}
@@ -39,7 +39,7 @@ export default function GameCard({ game, type }: { game: z.infer<typeof GameSche
                         </div>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold blue-font text-base">Mode</h3>
+                            <h3 className="font-bold secondary-color-font text-base">Mode</h3>
                             {game.modes.map((mode: string) => (
                                 <span key={mode} >
                                     {mode + ", "}
@@ -48,7 +48,7 @@ export default function GameCard({ game, type }: { game: z.infer<typeof GameSche
                         </div>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold blue-font text-base">Platform</h3>
+                            <h3 className="font-bold secondary-color-font text-base">Platform</h3>
                             {game.platforms.map((platform: string) => (
                                 <span key={platform} >
                                     {platform + ", "}
