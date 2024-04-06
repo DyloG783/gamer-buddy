@@ -1,10 +1,10 @@
 "use client"
 
-import PaginatedGamesSearch from "@/app/games/components/PaginatedGamesSearch";
 import SearchOptions from "./SearchOptions";
 import { useState } from "react";
-import z from 'zod';
-import { SearchableGameSchema, SearchStateSchema, GameSchema } from '@/lib/zod_schemas';
+
+import z, { SearchableGameSchema, SearchStateSchema, GameSchema } from '@/lib/zod_schemas';
+import PaginatedGames from "./PaginatedGames";
 
 type IGamesDisplayProps = {
     genres: z.infer<typeof SearchableGameSchema>[],
@@ -29,8 +29,9 @@ export default function GamesDisplay(props: IGamesDisplayProps) {
     return (
         <div className="flex flex-col justify-between">
             <SearchOptions genres={props.genres} platforms={props.platforms} modes={props.modes} searchState={searchState} setSearchState={setSearchState} searchEmpty={searchEmpty} />
-            <div id="games_container_all_games" className="flex justify-around">
-                <PaginatedGamesSearch defaultGames={props.defaultGames} itemsPerPage={4} searchState={searchState} setSearchEmpty={setSearchEmpty} />
+            <div id="games_container_all_games" className="p-6">
+                {/* <PaginatedGamesSearch defaultGames={props.defaultGames} itemsPerPage={4} searchState={searchState} setSearchEmpty={setSearchEmpty} /> */}
+                <PaginatedGames defaultGames={props.defaultGames} itemsPerPage={4} searchState={searchState} setSearchEmpty={setSearchEmpty} />
             </div>
         </div>
     )

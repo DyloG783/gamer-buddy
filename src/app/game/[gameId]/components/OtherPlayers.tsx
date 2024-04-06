@@ -3,8 +3,8 @@ import { GameNotExist } from "@/lib/errors";
 import { checkGameExistsAndReturn } from "@/lib/query_helper";
 import { auth, currentUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { UnsafeMetadataSchema } from '@/lib/zod_schemas';
-import z from 'zod';
+import z, { UnsafeMetadataSchema } from '@/lib/zod_schemas';
+
 
 export default async function OtherPlayers({ gameId }: { gameId: number }) {
 

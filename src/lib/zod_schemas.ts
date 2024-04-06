@@ -55,3 +55,20 @@ export const UnsafeMetadataSchema = z.object({
     bio: z.string().min(5).max(1000).regex(inputSanitzationRegex, { message: "Security sanitation failed. No special characters except ',.+-'" }),
     timezone: z.string().min(5).max(1000).regex(inputSanitzationRegex, { message: "Security sanitation failed. No special characters except ',.+-'" }),
 });
+
+export const ConnectionWithTimezone = z.object({
+    followedByEmail: StringSchema,
+    followingEmail: StringSchema,
+    followedById: StringSchema,
+    followingId: StringSchema,
+    followedByUName: StringSchema,
+    followingUName: StringSchema,
+    followedBy: z.object({
+        timezone: StringSchema.nullable(),
+    }).optional(),
+    following: z.object({
+        timezone: StringSchema.nullable(),
+    }).optional(),
+});
+
+export default z;

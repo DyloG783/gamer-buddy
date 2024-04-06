@@ -3,8 +3,8 @@
 import prisma from '@/lib/db'
 import { auth, currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache'
-import { StringSchema, NumberSchema, UserSchema } from './zod_schemas';
-import z from 'zod';
+import z, { StringSchema, NumberSchema, UserSchema } from './zod_schemas';
+
 
 export async function sendMessagePrivate(bindData: {
     privateRoomId: string,

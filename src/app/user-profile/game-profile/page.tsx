@@ -1,5 +1,5 @@
-import TimezoneSelector from "./TimezoneSelector";
-import AboutYouSelector from "./AboutYouSelector";
+import TimezoneSelector from "./components/TimezoneSelector";
+import AboutYouSelector from "./components/AboutYouSelector";
 
 export default function Profile() {
     return (

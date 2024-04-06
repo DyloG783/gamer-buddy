@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { sendMessageForum } from "@/lib/actions";
 import { Button, Textarea } from "@nextui-org/react";
-import { SubmitButton } from "@/app/components/SubmitButton";
+import { SubmitButton } from "@/app/components/buttons/SubmitButton";
 
 export default function Form({ gameRoomId }: { gameRoomId: string }) {
     const [message, setMessage] = useState("");

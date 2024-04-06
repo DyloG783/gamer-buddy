@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Client component needed to be imported into client components
+ * Client component needed to be imported into server components
  */
 
 import { useRouter } from 'next/navigation';

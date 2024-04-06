@@ -5,9 +5,9 @@ import { GameNotExist } from "@/lib/errors";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 import Link from "next/link";
-import { LinkButton } from "@/app/components/LinkButton";
-import { RemoveButton } from "@/app/components/RemoveButton";
-import { SubmitButton } from "@/app/components/SubmitButton";
+import { LinkButton } from "@/app/components/buttons/LinkButton";
+import { RemoveButton } from "@/app/components/buttons/RemoveButton";
+import { SubmitButton } from "@/app/components/buttons/SubmitButton";
 import { Prisma } from "@prisma/client";
 
 export default async function GamePage({ params }: { params: { gameId: number } }) {

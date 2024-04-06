@@ -2,24 +2,25 @@
 
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
-import { TConnection } from "@/lib/custom_types";
-import { MessageSchema } from '@/lib/zod_schemas';
-import z from 'zod';
-import FollowingCard from "./FollowingCard";
-import RequestedCard from "./RequestedCard";
-import ConnectedCard from "./ConnectedCard";
+import z, { MessageSchema, ConnectionWithTimezone } from '@/lib/zod_schemas';
+import ConnectionCard from "./ConnectionCard";
+
 
 interface IPaginatedConnectionsProps {
-    connections: TConnection[] | null
+    connections: z.infer<typeof ConnectionWithTimezone>[] | null
     itemsPerPage: number
     option: string,
     unseenMessages?: z.infer<typeof MessageSchema>[] | null
 }
 
 interface IItems {
-    currentItems: TConnection[]
+    currentItems: z.infer<typeof ConnectionWithTimezone>[]
 }
 
+/**
+ * 
+ * Options string either: connected, requested, following
+ */
 const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connections, itemsPerPage, option, unseenMessages }) => {
 
     if (connections === null) {
@@ -30,11 +31,11 @@ const PaginatedConnections: React.FC<IPaginatedConnectionsProps> = ({ connection
         return (
             <ul className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-6">
                 {currentItems &&
-                    currentItems.map((connection: TConnection, index) => (
+                    currentItems.map((connection: z.infer<typeof ConnectionWithTimezone>, index) => (
                         <div id="card_key_wrapper" key={index} className="flex justify-around">
-                            {option === 'connected' && <ConnectedCard connection={connection} unseenMessages={unseenMessages} />}
-                            {option === 'requested' && <RequestedCard connection={connection} />}
-                            {option === 'following' && <FollowingCard connection={connection} />}
+                            {option === 'connected' && <ConnectionCard typeFlag={option} connection={connection} unseenMessages={unseenMessages} />}
+                            {option === 'requested' && <ConnectionCard typeFlag={option} connection={connection} />}
+                            {option === 'following' && <ConnectionCard typeFlag={option} connection={connection} />}
                         </div>
                     ))}
             </ul>

@@ -1,6 +1,6 @@
 "use client"
 
-import { SubmitButton } from "@/app/components/SubmitButton"
+import { SubmitButton } from "@/app/components/buttons/SubmitButton"
 import { sendMessagePrivate } from "@/lib/actions"
 import { Button, Textarea } from "@nextui-org/react"
 import { useState } from "react"

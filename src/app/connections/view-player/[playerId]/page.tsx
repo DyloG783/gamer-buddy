@@ -4,9 +4,9 @@ import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import { UserNotExist } from "@/lib/errors";
 import PaginatedGames from "@/app/games/components/PaginatedGames";
 import { currentUser } from "@clerk/nextjs";
-import { SubmitButton } from "@/app/components/SubmitButton";
-import { RemoveButton } from "@/app/components/RemoveButton";
-import { LinkButton } from "@/app/components/LinkButton";
+import { SubmitButton } from "@/app/components/buttons/SubmitButton";
+import { RemoveButton } from "@/app/components/buttons/RemoveButton";
+import { LinkButton } from "@/app/components/buttons/LinkButton";
 
 // 30 seconds auto update for all clients
 export const dynamic = 'force-dynamic';

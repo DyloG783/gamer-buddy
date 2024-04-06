@@ -1,7 +1,5 @@
-import { GameSchema } from '@/lib/zod_schemas';
-import z from 'zod';
+import z, { GameSchema } from '@/lib/zod_schemas';
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
-
 
 // type "your" means you already have this game, type "all" means you don't have this game saved
 // they will display different information and link to other places
@@ -29,10 +27,10 @@ export default function GameCard({ game, type }: { game: z.infer<typeof GameSche
                 <p className="text-sm">Other players: <span className="primary-color-font">{game._count?.users}</span>
                 </p>
                 {type === "all" &&
-                    <>
+                    <div className='text-sm'>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold blue-font">Genre</h3>
+                            <h3 className="font-bold blue-font text-base">Genre</h3>
                             {game.genres.map((genre: string) => (
                                 <span key={genre} >
                                     {genre + ", "}
@@ -41,7 +39,7 @@ export default function GameCard({ game, type }: { game: z.infer<typeof GameSche
                         </div>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold blue-font">Mode</h3>
+                            <h3 className="font-bold blue-font text-base">Mode</h3>
                             {game.modes.map((mode: string) => (
                                 <span key={mode} >
                                     {mode + ", "}
@@ -50,7 +48,7 @@ export default function GameCard({ game, type }: { game: z.infer<typeof GameSche
                         </div>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold blue-font">Platform</h3>
+                            <h3 className="font-bold blue-font text-base">Platform</h3>
                             {game.platforms.map((platform: string) => (
                                 <span key={platform} >
                                     {platform + ", "}
@@ -59,10 +57,10 @@ export default function GameCard({ game, type }: { game: z.infer<typeof GameSche
                         </div>
                         <Divider className="my-2" />
                         <div className="overflow-hidden">
-                            <h3 className="font-bold text-blue-700">Release date</h3>
+                            <h3 className="font-bold text-blue-700 text-base">Release date</h3>
                             <span suppressHydrationWarning>{releaseDate.toLocaleString(undefined, options)}</span>
                         </div>
-                    </>
+                    </div>
                 }
             </CardBody>
             <Divider />

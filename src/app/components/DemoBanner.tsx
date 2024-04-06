@@ -3,8 +3,6 @@ import { auth } from "@clerk/nextjs";
 export default function DemoBanner() {
 
     const { userId } = auth();
-
-    // user is logged in don't display this component
     if (userId) return null;
 
     return (

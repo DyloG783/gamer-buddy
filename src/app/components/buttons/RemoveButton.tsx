@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Client component needed to be imported into client components
+ * Client component needed to be imported into server components
  */
 
 import { useFormStatus } from 'react-dom'
@@ -15,7 +15,7 @@ export function RemoveButton({ text }: { text: string }) {
             type="submit"
             color='warning'
             aria-disabled={pending}
-            data-testid={`remove`}
+            data-testid="remove"
             size='lg'
             className={`text-sm tracking-wider text-white`}
         >

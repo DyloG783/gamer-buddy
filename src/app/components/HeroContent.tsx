@@ -1,7 +1,3 @@
-// import { defaultInternalTheme } from '@clerk/themes/dist/clerk-js/src/ui/foundations';
-// import { ThemeProvider } from 'next-themes';
-// import Image from 'next/image';
-
 export default function HeroContent() {
 
     return (

@@ -2,8 +2,8 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import prisma from '@/lib/db'
-import { UnsafeMetadataSchema } from '@/lib/zod_schemas';
-import z from 'zod';
+import z, { UnsafeMetadataSchema } from '@/lib/zod_schemas';
+
 
 export async function POST(req: Request) {
 

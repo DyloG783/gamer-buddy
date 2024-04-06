@@ -1,7 +1,6 @@
 import { getFollowing, getUnseenMessages, getUsersConnectionRequests, getUsersConnections } from "@/lib/query_helper";
-import { TConnection } from "@/lib/custom_types";
-import { MessageSchema } from '@/lib/zod_schemas';
-import z from 'zod';
+import z, { MessageSchema, ConnectionWithTimezone } from '@/lib/zod_schemas';
+
 import PaginatedConnections from "./components/PaginatedConnections";
 import { Suspense } from "react";
 import Loading from "@/lib/loading";
@@ -11,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 const Connections = async () => {
 
-    const userFollowing: TConnection[] | null = await getFollowing();
-    const requests: TConnection[] | null = await getUsersConnectionRequests();
-    const userConnections: TConnection[] | null = await getUsersConnections();
+    const userFollowing: z.infer<typeof ConnectionWithTimezone>[] | null = await getFollowing();
+    const requests: z.infer<typeof ConnectionWithTimezone>[] | null = await getUsersConnectionRequests();
+    const userConnections: z.infer<typeof ConnectionWithTimezone>[] | null = await getUsersConnections();
     const unseenMessages: z.infer<typeof MessageSchema>[] | null = await getUnseenMessages();
 
     return (

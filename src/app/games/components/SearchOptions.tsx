@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import { SearchableGameSchema, SearchStateSchema } from '@/lib/zod_schemas';
-import z from 'zod';
+import z, { SearchableGameSchema, SearchStateSchema } from '@/lib/zod_schemas';
+
 import { Select, SelectItem } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";

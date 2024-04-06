@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useUser } from "@clerk/nextjs"
 import { Button, Textarea } from "@nextui-org/react"
-import { SubmitButton } from "@/app/components/SubmitButton"
+import { SubmitButton } from "@/app/components/buttons/SubmitButton"
 
 // export default function AboutYou({ bio }: { bio: string | null | undefined }) {
 export default function AboutYou() {
