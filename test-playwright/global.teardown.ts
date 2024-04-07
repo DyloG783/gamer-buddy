@@ -30,7 +30,6 @@ setup('delete follow relations', async ({ }) => {
     } catch (error) {
         console.log("Fail removing games from permanent test user in playwright global setup:", error)
     }
-
 });
 
 // Test user 1 - sally, test1@test.com(password), user_2ZtEUw0s5N5aRXYNV27MWPKbLUB

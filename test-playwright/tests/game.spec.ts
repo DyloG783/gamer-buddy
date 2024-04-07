@@ -1,6 +1,8 @@
 // @ts-check
 
+import prisma from '@/lib/db';
 import { test, expect } from '@playwright/test';
+import { automation_users } from '../../prisma/automation_test_users';
 
 const unsavedGame = 25581;
 const savedGame = 85245;
@@ -8,6 +10,36 @@ const mutableSavedGame = 77752;
 const mutableUnsavedGame = 105680;
 
 test.describe("Viewing a game /game/[game id]", () => {
+  // reset game data
+  test.beforeEach(async () => {
+    // remove games from permanent test user
+    try {
+      await prisma.user.update({
+        where: { email: automation_users[0].email },
+        data: {
+          games: {
+            set: [],
+          }
+        },
+      })
+    } catch (error) {
+      console.log("Fail removing games from permanent test user in playwright global setup:", error)
+    }
+
+    // push games onto permanent test user
+    try {
+      await prisma.user.update({
+        where: { email: automation_users[0].email },
+        data: {
+          games: {
+            connect: automation_users[0].games?.map(g => ({ id: g })) || [],
+          }
+        },
+      })
+    } catch (error) {
+      console.log("Fail adding games to permanent test user in playwright global setup:", error)
+    }
+  });
 
   test.describe("Saved game state", () => {
 
@@ -23,8 +55,8 @@ test.describe("Viewing a game /game/[game id]", () => {
     test('Remove game button updates buttons as expected', async ({ page, browserName }) => {
       // test.slow();
 
-      test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')
-      test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome')
+      // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')
+      // test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome')
 
       await page.goto(`/game/${mutableSavedGame}`);
 
@@ -48,8 +80,8 @@ test.describe("Viewing a game /game/[game id]", () => {
     test('Add game button onclick: Page displays remove, and chat buttons only', async ({ page, browserName }) => {
       // test.slow();
 
-      test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')
-      test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome')
+      // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')
+      // test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome')
 
       await page.goto(`/game/${mutableUnsavedGame}`);
 

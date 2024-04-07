@@ -5,7 +5,7 @@ import { automation_users } from '../prisma/automation_test_users';
 setup('create follow relations', async ({ }) => {
 
     // create test users
-    async function createUsers() {
+    try {
         for (let user of automation_users) {
             await prisma.user.upsert({
                 where: {
@@ -24,9 +24,6 @@ setup('create follow relations', async ({ }) => {
                 }
             })
         }
-    }
-    try {
-        await createUsers()
 
     } catch (error) {
         console.log("Fail creating test users in playwright global setup:", error)
@@ -45,7 +42,6 @@ setup('create follow relations', async ({ }) => {
     } catch (error) {
         console.log("Fail adding games to permanent test user in playwright global setup:", error)
     }
-
 
     // create follow realations between test users
     try {
