@@ -96,7 +96,7 @@ test.describe(`View player profile page tests /connections/view-player/[player i
       await page.goto(`/connections/view-player/${automation_users[3].id}`);
     });
 
-    test('View Player page(connected with) - displays Disconnect & Chat buttons only', async ({ page, browserName }) => {
+    test('View Player page(connected with) - displays Disconnect & Chat buttons only', async ({ page }) => {
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome');
       // test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome');
 
@@ -106,7 +106,7 @@ test.describe(`View player profile page tests /connections/view-player/[player i
     });
 
     // Chrome only test to run data mutations without effecting other browsers
-    test('Remove player button updates buttons as expected', async ({ page, browserName }) => {
+    test('Remove player button updates buttons as expected', async ({ page }) => {
       // test.slow();
 
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome');
@@ -124,7 +124,7 @@ test.describe(`View player profile page tests /connections/view-player/[player i
       await page.goto(`/connections/view-player/${automation_users[2].id}`);
     });
 
-    test('View Player page(following us) - displays Connect button only', async ({ page, browserName }) => {
+    test('View Player page(following us) - displays Connect button only', async ({ page }) => {
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome');
       // test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome');
 
@@ -134,7 +134,7 @@ test.describe(`View player profile page tests /connections/view-player/[player i
     });
 
     // Chrome only test to run data mutations without effecting other browsers
-    test('Add player button updates buttons as expected', async ({ page, browserName }) => {
+    test('Add player button updates buttons as expected', async ({ page }) => {
       // test.slow();
 
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome');

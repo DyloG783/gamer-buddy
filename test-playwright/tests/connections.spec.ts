@@ -94,7 +94,7 @@ test.describe(`View connections page tests /connections`, () => {
   });
 
   test.describe(`Connected with Connections`, () => {
-    test('Test Connected WITH test user is present /connections', async ({ page, browserName }) => {
+    test('Test Connected WITH test user is present /connections', async ({ page }) => {
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome');
       // test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome');
 
@@ -107,7 +107,7 @@ test.describe(`View connections page tests /connections`, () => {
   });
 
   test.describe(`Request Connections tests (requested to connect with us)`, () => {
-    test('Test Connection REQUESTS with test user is present /connections', async ({ page, browserName }) => {
+    test('Test Connection REQUESTS with test user is present /connections', async ({ page }) => {
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome');
       // test.skip(browserName === 'webkit', 'mutating tests only to run on Chrome');
 

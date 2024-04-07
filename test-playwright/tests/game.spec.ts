@@ -52,7 +52,7 @@ test.describe("Viewing a game /game/[game id]", () => {
     });
 
     // Chrome only test to run data mutations without effecting other browsers
-    test('Remove game button updates buttons as expected', async ({ page, browserName }) => {
+    test('Remove game button updates buttons as expected', async ({ page }) => {
       // test.slow();
 
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')
@@ -77,7 +77,7 @@ test.describe("Viewing a game /game/[game id]", () => {
     });
 
     // Chrome only test to run data mutations without effecting other browsers
-    test('Add game button onclick: Page displays remove, and chat buttons only', async ({ page, browserName }) => {
+    test('Add game button onclick: Page displays remove, and chat buttons only', async ({ page }) => {
       // test.slow();
 
       // test.skip(browserName === 'firefox', 'mutating tests only to run on Chrome')

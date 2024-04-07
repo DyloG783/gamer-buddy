@@ -24,7 +24,7 @@ test.describe(`Navigation link tests`, () => {
       await page.goto(`/connections/view-player/${automation_users[3].id}`);
     });
 
-    test('Test link button (Chat) takes user to private chat page', async ({ page, browserName }) => {
+    test('Test link button (Chat) takes user to private chat page', async ({ page }) => {
       // test.slow();
 
       await page.getByTestId('link').click();
