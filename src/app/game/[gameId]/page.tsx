@@ -9,16 +9,18 @@ import { LinkButton } from "@/app/components/buttons/LinkButton";
 import { RemoveButton } from "@/app/components/buttons/RemoveButton";
 import { SubmitButton } from "@/app/components/buttons/SubmitButton";
 import { Prisma } from "@prisma/client";
+import z, { NumberSchema } from '@/lib/zod_schemas';
 
 export default async function GamePage({ params }: { params: { gameId: number } }) {
 
     const { userId } = auth();
 
-    // this is required to convert string in params to number
-    const gameId = Number(params.gameId);
+    // parse game id passed into params
+    const gameId = NumberSchema.safeParse(Number(params.gameId));
+    if (!gameId.success) return console.log("Input validation failed (zod) - gameId params: ", gameId.error.errors);
 
     // if game doesnt exist retun null, or return game
-    const game = await checkGameExistsAndReturn(gameId);
+    const game = await checkGameExistsAndReturn(gameId.data);
 
     // display 'game not exist' error on page (in case user enters incorrect url)
     if (!game) return <GameNotExist />;
@@ -30,7 +32,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
     if (userId) {
 
         const hasGame = await prisma.user.findUnique({
-            select: { games: { where: { id: gameId } } },
+            select: { games: { where: { id: gameId.data } } },
             where: {
                 id: userId
             },
@@ -42,8 +44,8 @@ export default async function GamePage({ params }: { params: { gameId: number } 
     };
 
     // adds playerId to server action
-    const RemoveActionWithGameId = removeGame.bind(null, gameId);
-    const AddActionWithGameId = addGame.bind(null, gameId);
+    const RemoveActionWithGameId = removeGame.bind(null, gameId.data);
+    const AddActionWithGameId = addGame.bind(null, gameId.data);
 
     //convert game's release date from unix timestamp to readable
     const unix_timestamp = game.firstReleaseDate;
@@ -130,7 +132,7 @@ export default async function GamePage({ params }: { params: { gameId: number } 
                 </div>
                 <hr />
             </div>
-            <OtherPlayers gameId={gameId} />
+            <OtherPlayers gameId={gameId.data} />
         </div>
     )
 }

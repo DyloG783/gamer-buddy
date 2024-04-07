@@ -2,6 +2,7 @@ import { UserNotExist } from "@/lib/errors";
 import { checkUserExistsAndReturn } from "@/lib/query_helper";
 import Chat from "../../components/Chat";
 import prisma from "@/lib/db";
+import z, { UserIdSchema } from '@/lib/zod_schemas';
 import Form from "../../components/Form";
 import combineUniqueIds from "@/lib/hashIds";
 
@@ -11,9 +12,15 @@ export const dynamic = "force-dynamic";
 
 export default async function PlayerChat({ params }: { params: { userId: string, playerId: string } }) {
 
+    // parse params
+    const param_userId = UserIdSchema.safeParse(params.userId);
+    if (!param_userId.success) return console.log("Input validation failed (zod) - user id params: ", param_userId.error.errors);
+    const param_playerId = UserIdSchema.safeParse(params.playerId);
+    if (!param_playerId.success) return console.log("Input validation failed (zod) - player id params: ", param_playerId.error.errors);
+
+    // get user & player data
     const player = await checkUserExistsAndReturn(params.playerId);
     const user = await checkUserExistsAndReturn(params.userId);
-
     if (player === null || user === null) {
         return <UserNotExist />
     };

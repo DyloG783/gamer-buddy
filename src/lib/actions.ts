@@ -159,7 +159,7 @@ export async function followUser(player: z.infer<typeof UserSchema>) {
     if (!userId) return console.log("Send message server action, not authorised failure");
 
     const input = UserSchema.safeParse(player);
-    if (!input.success) return console.log("Input validation failed (zod)");
+    if (!input.success) return console.log(`Input validation failed (zod"), `, input.error.errors);
 
     const user = await currentUser();
 
@@ -186,7 +186,7 @@ export async function unFollowUser(player: z.infer<typeof UserSchema>) {
     if (!userId) return console.log("Send message server action, not authorised failure");
 
     const input = UserSchema.safeParse(player);
-    if (!input.success) return console.log("Input validation failed (zod)");
+    if (!input.success) return console.log("Input validation failed (zod)", input.error.errors);
 
     const user = await currentUser();
 

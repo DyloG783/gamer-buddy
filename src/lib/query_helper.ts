@@ -106,7 +106,7 @@ export async function checkGameExistsAndReturn(gameId: number) {
 export async function checkUserExistsAndReturn(userId: string) {
 
     try {
-        const user = await prisma.user.findUnique({
+        const userWithGames = await prisma.user.findUnique({
             where: {
                 id: userId
             },
@@ -114,7 +114,7 @@ export async function checkUserExistsAndReturn(userId: string) {
                 games: true
             }
         })
-        return user;
+        return userWithGames;
     } catch (error) {
         console.log("User Check: try/catch fail retrieving user (query helper)")
         return null;
@@ -135,9 +135,6 @@ export async function getUnseenMessages() {
                 ],
             },
         });
-
-        // console.log("UNSEEN", messages)
-
         return messages;
     } catch (error) {
         console.log("Failed retreiving 'unseen' messages (query helper): ", error)

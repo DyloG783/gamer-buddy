@@ -21,7 +21,7 @@ export default async function ConnectionUpdates() {
                     Sign in to see Messages, Connection requests, and more!</Link>
             </div>
         )
-    }
+    };
 
     const requests = await getUsersConnectionRequests();
     const unseenMessages = await getUnseenMessages();

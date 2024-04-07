@@ -1,11 +1,11 @@
 // @ts-check
 
 import { test, expect } from '@playwright/test';
-import { ISearchState } from "@/lib/custom_types";
+import z, { SearchStateSchema } from "@/lib/zod_schemas";
 
 const url = "http://localhost:3000/api/search-games";
 
-const genreSearchState: ISearchState = {
+const genreSearchState: z.infer<typeof SearchStateSchema> = {
     genre: "Fighting",
     platform: null,
     mode: null,
@@ -13,7 +13,7 @@ const genreSearchState: ISearchState = {
     currentSelected: "genre"
 };
 
-const textSearchState: ISearchState = {
+const textSearchState: z.infer<typeof SearchStateSchema> = {
     genre: null,
     platform: null,
     mode: null,
@@ -21,7 +21,7 @@ const textSearchState: ISearchState = {
     currentSelected: "textSearch"
 };
 
-const invalidTextSearchState: ISearchState = {
+const invalidTextSearchState: z.infer<typeof SearchStateSchema> = {
     genre: null,
     platform: null,
     mode: null,

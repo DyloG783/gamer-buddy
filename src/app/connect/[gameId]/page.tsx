@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import z, { NumberSchema } from '@/lib/zod_schemas';
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { GameNotExist } from "@/lib/errors";
@@ -11,11 +12,14 @@ export const dynamic = "force-dynamic";
 
 export default async function Connect({ params }: { params: { gameId: number } }) {
 
-    const gameId = Number(params.gameId) // this id passed in params is the game's id
+    // parse game id passed into params
+    const input = NumberSchema.safeParse(Number(params.gameId));
+    if (!input.success) return console.log("Input validation failed (zod) - gameId params: ", input.error.errors);
+
     const { userId } = auth();
 
     // if game doesnt exist retun null, or return game
-    const game = await checkGameExistsAndReturn(gameId);
+    const game = await checkGameExistsAndReturn(input.data);
 
     // display 'game not exist' error on page (in case user enters incorrect url)
     if (game === null) return <GameNotExist />;
@@ -25,7 +29,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
         where: {
             games: {
                 some: {
-                    id: gameId
+                    id: input.data
                 }
             },
             NOT: {
@@ -36,10 +40,10 @@ export default async function Connect({ params }: { params: { gameId: number } }
 
     // create game forum table if not already exists
     const gameRoom = await prisma.chatGameRoom.upsert({
-        where: { gameId: gameId },
+        where: { gameId: input.data },
         update: {},
         create: {
-            gameId: gameId
+            gameId: input.data
         }
     })
 
@@ -64,7 +68,7 @@ export default async function Connect({ params }: { params: { gameId: number } }
             className="full-height-minus-nav bg-white dark:bg-black"
         >
             <div id="title_link_container" className="mb-10 md:mb-20 pt-4 md:pt-10">
-                <Link href={`/game/${gameId}`}
+                <Link href={`/game/${input.data}`}
                 >
                     <h1 className="text-center tracking-wider text-blue-700 
                     font-semibold text-xl md:text-4xl hover:text-purple-700 

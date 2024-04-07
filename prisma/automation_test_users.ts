@@ -3,7 +3,7 @@ export const automation_users = [
         id: "user_2akaEri3dboquU8h0pJ4QCByLuN",
         email: "automation1@gbtestpermanent.com",
         userName: "auto1",
-        games: [85245, 57888],
+        games: [85245, 57888, 77752],
         bio: "I'm available to play in other timezones too!",
         timezone: "(UTC-12:00) International Date Line West"
     },

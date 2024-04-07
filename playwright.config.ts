@@ -14,11 +14,11 @@ dotenv.config();
 export default defineConfig({
   testDir: './test-playwright',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 2,
+  retries: process.env.CI ? 2 : 1,
   // retries: 3,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
@@ -66,8 +66,6 @@ export default defineConfig({
       dependencies: ['global setup'],
     },
 
-
-
     // tear down test data
     {
       name: 'global teardown',
@@ -94,15 +92,15 @@ export default defineConfig({
       dependencies: ['setup'],
     },
 
-    // {
-    //   name: 'webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     // Use prepared auth state.
-    //     storageState: 'playwright/.auth/user.json',
-    //   },
-    //   dependencies: ['setup'],
-    // },
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        // Use prepared auth state.
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
 
     /* Test against mobile viewports. */
     // {

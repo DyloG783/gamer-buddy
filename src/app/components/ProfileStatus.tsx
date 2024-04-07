@@ -11,17 +11,12 @@ export default async function ProfileStatus() {
     // user is not logged in don't display this component
     if (!userId) return null;
 
-
     // extract custom user profile info out of Clerk
     const bio: z.infer<typeof UnsafeMetadataSchema>["bio"] = user?.unsafeMetadata.bio as string
     const timezone: z.infer<typeof UnsafeMetadataSchema>["timezone"] = user?.unsafeMetadata.timezone as string
 
     // This works for hiding the component completely if the user has completed setting their timezone, and about-you profile info
-    if (bio && timezone) {
-        return (
-            null
-        )
-    }
+    if (bio && timezone) return null;
 
     return (
         <div id="profile_status_container " className="banner">
