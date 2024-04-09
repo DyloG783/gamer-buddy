@@ -1,6 +1,6 @@
 # About
 
-This application is firstly a passion, then secondly a portfolio project called Gamer Buddy. It is currently running in production and can be used by anyone at https://www.gamer-buddy.com/!
+This application is a passion, portfolio project called Gamer Buddy. It is currently running in production and can be used by anyone at https://www.gamer-buddy.com/!
 
 Gamer Buddy is built on `NextJs`, `React`, `Postgres` / `Prisma`, integrating with `Pusher` for real time message updates, and `Clerk` auth to manage authentication and authorisation through classic credentials, or common social logins.
 
