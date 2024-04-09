@@ -64,4 +64,4 @@ _this script found in package.json is run in the production instance on each pro
 
 ### if dotenv is used
 
-env per environment example: `dotenv -e .env.development -- npx prisma db pull`
+env per environment example:`dotenv -e .env.development -- npx prisma db pull`
