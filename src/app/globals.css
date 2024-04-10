@@ -80,7 +80,7 @@ html, body {
     }
 
     .banner{
-        @apply p-8 sm:p-16 animate-pulse bg-yellow-100 dark:bg-slate-400 font-serif
+        @apply p-8 sm:px-16 animate-pulse bg-yellow-100 dark:bg-slate-400 
     }
 }
 
