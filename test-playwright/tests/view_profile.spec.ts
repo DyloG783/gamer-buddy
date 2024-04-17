@@ -15,7 +15,6 @@ test.describe(`View player profile page tests /connections/view-player/[player i
           email: { endsWith: 'gbtest.com' },
         }
       })
-      console.log("Success deleting users during global tear down Playwright")
     } catch (error) {
       console.log("Failed to deleting users during global tear down Playwright:", error)
     }
@@ -82,9 +81,6 @@ test.describe(`View player profile page tests /connections/view-player/[player i
           },
         ]
       })
-
-      console.log("Success setting up test connections in playwright global setup!")
-
     } catch (error) {
       console.log("Fail setting up test connections in playwright global setup:", error)
     }
