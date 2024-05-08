@@ -62,6 +62,13 @@ scripts:
 _this script found in package.json is run in the production instance on each proudction deployment_
 `"postinstall": "prisma db push && prisma generate && prisma db seed && next build && npm run allGameData"`
 
-### if dotenv is used
+### local setup
 
-env per environment example:`dotenv -e .env.development -- npx prisma db pull`
+1. install node.js.
+2. install postgres.
+3. configure local .env (requires several api keys and database connection strings).
+4. install packages.
+5. run prisma migration & generate client.
+6. create permanent test user in clerk auth dev and add user creds to prisma seed scripts & automated test user data.
+7. run 'postinstall' script to fetch game data and store in database.
+
